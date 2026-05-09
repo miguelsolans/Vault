@@ -1,0 +1,23 @@
+//
+//  Dev.xcconfig
+//  Vault
+//
+//  Created by Miguel Solans on 28/04/2026.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://developer.apple.com/documentation/xcode/adding-a-build-configuration-file-to-your-project
+
+SIMPLE_SLASH=/
+
+// App marketing version
+APP_VERSION=1.0.0
+
+// App build version
+APP_BUILD=20260412.1
+
+// App name
+APP_NAME=Vault
+
+// Base endpoint for private API
+APP_BASE_API=http:${SIMPLE_SLASH}/localhost:3000
