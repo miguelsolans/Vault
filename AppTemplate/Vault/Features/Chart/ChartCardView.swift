@@ -133,18 +133,15 @@ struct ChartView: View {
                 description: Text("Redefine the filter criteria or add data in Operations")
             )
         } else {
-            if viewModel.items.count > 8 {
-                if viewModel.chartType == .pie {
-                    CategoryPieChartView(viewModel: viewModel)
-                } else {
+            
+            if viewModel.chartType == .pie {
+                CategoryPieChartView(viewModel: viewModel)
+            } else {
+                if viewModel.items.count > 4 {
                     BarMarkChartView(viewModel: viewModel)
                         .frame(height: 300)
                         .chartScrollableAxes(.horizontal)
                         .scaledToFill()
-                }
-            } else {
-                if viewModel.chartType == .pie {
-                    CategoryPieChartView(viewModel: viewModel)
                 } else {
                     BarMarkChartView(viewModel: viewModel)
                         .frame(height: 300)
@@ -175,6 +172,12 @@ struct BarMarkChartView: View {
         .chartYScale(
             type: .symmetricLog
         )
+        .chartXAxis {
+            AxisMarks { _ in
+                AxisValueLabel()
+                AxisTick()
+            }
+        }
     }
 }
 

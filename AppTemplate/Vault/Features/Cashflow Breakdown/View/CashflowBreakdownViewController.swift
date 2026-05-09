@@ -39,6 +39,14 @@ final class CashflowBreakdownViewController: BaseViewController {
         return stack
     }()
     
+    private lazy var amountHeaderView: AmountStatusHeaderView = {
+        let view = AmountStatusHeaderView()
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
     private lazy var plotCardView: ChartCardView = {
         let view = ChartCardView()
         
@@ -103,6 +111,7 @@ extension CashflowBreakdownViewController {
     }
     
     private func setupStackItems() {
+        contentStack.addArrangedSubview(amountHeaderView)
         contentStack.addArrangedSubview(plotCardView)
         contentStack.addArrangedSubview(categoriesSummaryView)
     }
@@ -110,6 +119,14 @@ extension CashflowBreakdownViewController {
 
 extension CashflowBreakdownViewController {
     private func updateUI() {
+        
+        if let viewModel = viewModel.amountHeaderViewModel {
+            amountHeaderView.configure(with: viewModel)
+            
+            amountHeaderView.isHidden = false
+        } else {
+            amountHeaderView.isHidden = true
+        }
         
         if let viewModel = viewModel.plotViewModel {
             plotCardView.configure(

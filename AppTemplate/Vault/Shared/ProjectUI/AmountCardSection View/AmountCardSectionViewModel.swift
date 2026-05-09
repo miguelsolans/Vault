@@ -10,27 +10,27 @@ import VaultCore
 
 public final class AmountCardItemViewModel: ActionableCardBaseViewModel {
     
+    let emoji: String?
+    
     let amount: Double
     
     let type: OperationType?
-    
-    let budgetAmount: Double?
     
     let bottomText: String?
     
     let bottomAttributedText: AttributedString?
     
     init(
+        emoji: String? = nil,
         title: String,
         amount: Double,
         type: OperationType?,
-        budgetAmount: Double?,
         bottomText: String? = nil,
         bottomAttributedText: AttributedString? = nil
     ) {
+        self.emoji = emoji
         self.amount = amount
         self.type = type
-        self.budgetAmount = budgetAmount
         self.bottomText = bottomText
         self.bottomAttributedText = bottomAttributedText
         super.init(title: title)

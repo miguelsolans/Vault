@@ -39,6 +39,8 @@ final class CashflowBreakdownViewModel: NSObject {
     
     public var subtitle: String? = nil
     
+    private(set) var amountHeaderViewModel: AmountStatusHeaderViewModel?
+    
     private(set) var plotViewModel: ChartViewModel?
     
     private(set) var categoriesViewModel: AmountCardSectionViewModel?
@@ -60,6 +62,14 @@ extension CashflowBreakdownViewModel {
         do {
             let response = try useCase.execute(request)
             
+            let total = filter.type == .income ?
+                response.dashboardMetrics.cashFlow.income :
+                response.dashboardMetrics.netSpending.netExpenses
+            
+            let percentage = filter.type == .income ?
+                response.dashboardMetrics.cashFlow.incomeChangeFromPreviousMonth :
+                response.dashboardMetrics.cashFlow.expensesChangeFromPreviousMonth
+            
             let items = filter.type == .income ?
                 response.dashboardMetrics.categories.income :
                 response.dashboardMetrics.categories.netExpenses
@@ -67,6 +77,13 @@ extension CashflowBreakdownViewModel {
             let average = filter.type == .income ?
                 response.dashboardMetrics.cashFlow.averageIncome :
                 response.dashboardMetrics.cashFlow.averageExpense
+            
+            amountHeaderViewModel = AmountStatusHeaderViewModel(
+                amount: total,
+                percentage: percentage?.value ?? 0.00,
+                operationType: filter.type ?? .income,
+                period: filter.period
+            )
             
             plotViewModel = ChartViewModel(
                 title: "",
@@ -100,8 +117,7 @@ extension CashflowBreakdownViewModel {
                 .init(
                     title: category.title,
                     amount: category.amount,
-                    type: filter.type,
-                    budgetAmount: nil
+                    type: filter.type
                 )
             )
         }

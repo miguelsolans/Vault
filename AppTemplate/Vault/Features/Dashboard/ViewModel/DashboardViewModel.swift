@@ -184,44 +184,33 @@ private extension DashboardViewModel {
     
     func updateReimbursementsWarning(metrics: ReimbursementMetrics) {
         
+        let titleText = "Pending Reimbursements"
         let formattedAmount = currencyFormatter.string(from: metrics.expected) ?? "\(metrics.expected)"
+        let bodyText = "You are currently expecting reimbursements with a total value of \(formattedAmount)"
         
-        feedbackViewModel.title = "Pending Reimbursements"
-        feedbackViewModel.subtitle = "You are currently expecting reimbursements with a total value of \(formattedAmount).";
+        feedbackViewModel.title = titleText
+        feedbackViewModel.subtitle = bodyText;
+        feedbackViewModel.subtitleAttributed = bodyText.styled(
+            baseAttributes: [
+                .font: FeedbackStyles.informativeFeedback.subtitleFont,
+                .foregroundColor: FeedbackStyles.informativeFeedback.subtitleColor
+            ],
+            highlights: [
+                TextHighlight(text: formattedAmount, attributes: [
+                    .font: AppFonts.feedbackBodyBold
+                ])
+            ]
+        )
+        
         feedbackViewModel.feedbackType = .warning
     }
 
     func makeGeneralSummary(metrics: DashboardMetrics) -> AmountCardSectionViewModel {
         
-        var incomeBottomText: String?
-        var expenseBottomText: String?
-        
-        /*if let previousMonth = metrics.cashFlow.incomeChangeFromPreviousMonth,
-           let percentage = previousMonth.roundPercentage {
-            
-            if percentage >= 0 {
-                incomeBottomText = "\(percentage) % vs last month"
-            } else if (percentage < 0) {
-                incomeBottomText = "Less than previous month"
-            }
-        }
-        
-        if let previousMonth = metrics.cashFlow.expensesChangeFromPreviousMonth,
-           let percentage = previousMonth.roundPercentage {
-            
-            if percentage >= 0 {
-                expenseBottomText = "\(percentage) % vs last month"
-            } else if (percentage < 0) {
-                expenseBottomText = "Less than previous month"
-            }
-        }*/
-        
         let incomeViewModel = AmountCardItemViewModel(
             title: "Income",
             amount: metrics.cashFlow.income,
-            type: .income,
-            budgetAmount: nil,
-            bottomText: incomeBottomText
+            type: .income
         )
         
         incomeViewModel.onTap = { [weak self] in
@@ -233,9 +222,7 @@ private extension DashboardViewModel {
         let expenseViewModel = AmountCardItemViewModel(
             title: "Expenses",
             amount: metrics.netSpending.netExpenses,
-            type: .expense,
-            budgetAmount: nil,
-            bottomText: expenseBottomText
+            type: .expense
         )
         
         expenseViewModel.onTap = { [weak self] in
@@ -285,16 +272,17 @@ private extension DashboardViewModel {
     }
     
     func makeSummaryItem(
+        emoji: String? = nil,
         title: String,
         amount: Double,
         type: OperationType?,
         budgetAmount: Double?
     ) -> AmountCardItemViewModel {
         let item = AmountCardItemViewModel(
+            emoji: emoji,
             title: title,
             amount: amount,
-            type: type,
-            budgetAmount: budgetAmount
+            type: type
         )
         
         return item
@@ -316,6 +304,7 @@ extension DashboardViewModel {
             startDate: filter.startDate,
             endDate: filter.endDate,
             type: .income,
+            period: filter.period,
             vault: vault
         )
         
@@ -327,6 +316,7 @@ extension DashboardViewModel {
             startDate: filter.startDate,
             endDate: filter.endDate,
             type: .expense,
+            period: filter.period,
             vault: vault
         )
         

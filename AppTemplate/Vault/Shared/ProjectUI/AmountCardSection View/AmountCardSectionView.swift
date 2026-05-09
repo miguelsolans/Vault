@@ -83,10 +83,10 @@ final class AmountCardSectionView: ActionableCardBaseView {
 
 #Preview("SummaryHeaderView") {
     let viewModel = AmountCardSectionViewModel(monthTitle: "Section title", items: [
-        .init(title: "Card title", amount: 10000, type: nil, budgetAmount:nil),
-        .init(title: "Card title", amount: 10000000, type: .income, budgetAmount:nil),
-        .init(title: "Card title", amount: 10, type: .income, budgetAmount:nil),
-        .init(title: "Card title", amount: 1000000, type: .expense, budgetAmount:nil)
+        .init(title: "Card title", amount: 10000, type: nil),
+        .init(title: "Card title", amount: 10000000, type: .income),
+        .init(title: "Card title", amount: 10, type: .income),
+        .init(title: "Card title", amount: 1000000, type: .expense)
     ], gridFormat: false)
     
     let view = AmountCardSectionView()

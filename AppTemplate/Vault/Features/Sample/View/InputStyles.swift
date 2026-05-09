@@ -295,8 +295,11 @@ final class AppFonts {
     
     static let feedbackBody = UIFont.systemFont(ofSize: 14, weight: .regular)
     
+    static let feedbackBodyBold = UIFont.systemFont(ofSize: 14, weight: .bold)
+    
     static let operationHeaderTitle = UIFont.monospacedDigitSystemFont(ofSize: 28, weight: .semibold)
     
     static let operationHeaderAmount = UIFont.monospacedDigitSystemFont(ofSize: 28, weight: .bold)
     
+    static let percentageHighlight = UIFont.monospacedDigitSystemFont(ofSize: 17.0, weight: .semibold)
 }

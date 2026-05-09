@@ -47,6 +47,8 @@ final class CashflowBreakdownCoordinator: BaseCoordinator {
         
         let viewController = CashflowBreakdownViewController(viewModel: viewModel)
         
+        viewController.hidesBottomBarWhenPushed = true
+        
         return viewController
     }()
     

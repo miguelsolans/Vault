@@ -100,6 +100,8 @@
 		8B81F1CD2FAE3F4000ECA9F4 /* CashflowBreakdownCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B81F1CC2FAE3F4000ECA9F4 /* CashflowBreakdownCoordinator.swift */; };
 		8B81F1CF2FAE43A300ECA9F4 /* CashflowBreakdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B81F1CE2FAE43A300ECA9F4 /* CashflowBreakdownViewController.swift */; };
 		8B81F1D12FAE444500ECA9F4 /* CashflowBreakdownViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B81F1D02FAE444500ECA9F4 /* CashflowBreakdownViewModel.swift */; };
+		8B81F1D72FAF7EAB00ECA9F4 /* AmountStatusHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B81F1D62FAF7EAB00ECA9F4 /* AmountStatusHeaderView.swift */; };
+		8B81F1D92FAF7EB500ECA9F4 /* AmountStatusHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B81F1D82FAF7EB500ECA9F4 /* AmountStatusHeaderViewModel.swift */; };
 		8B9B09B52F83F48D0042840E /* ImportOperationsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B09B42F83F48D0042840E /* ImportOperationsCoordinator.swift */; };
 		8B9B09B72F83F49B0042840E /* ImportOperationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B09B62F83F49B0042840E /* ImportOperationsViewModel.swift */; };
 		8B9B09B92F83F4B60042840E /* ImportOperationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B09B82F83F4B60042840E /* ImportOperationsViewController.swift */; };
@@ -242,6 +244,8 @@
 		8B81F1CC2FAE3F4000ECA9F4 /* CashflowBreakdownCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashflowBreakdownCoordinator.swift; sourceTree = "<group>"; };
 		8B81F1CE2FAE43A300ECA9F4 /* CashflowBreakdownViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashflowBreakdownViewController.swift; sourceTree = "<group>"; };
 		8B81F1D02FAE444500ECA9F4 /* CashflowBreakdownViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashflowBreakdownViewModel.swift; sourceTree = "<group>"; };
+		8B81F1D62FAF7EAB00ECA9F4 /* AmountStatusHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountStatusHeaderView.swift; sourceTree = "<group>"; };
+		8B81F1D82FAF7EB500ECA9F4 /* AmountStatusHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountStatusHeaderViewModel.swift; sourceTree = "<group>"; };
 		8B9B09B42F83F48D0042840E /* ImportOperationsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportOperationsCoordinator.swift; sourceTree = "<group>"; };
 		8B9B09B62F83F49B0042840E /* ImportOperationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportOperationsViewModel.swift; sourceTree = "<group>"; };
 		8B9B09B82F83F4B60042840E /* ImportOperationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportOperationsViewController.swift; sourceTree = "<group>"; };
@@ -711,6 +715,7 @@
 		8B539C2B2F7B39B600977A6C /* ProjectUI */ = {
 			isa = PBXGroup;
 			children = (
+				8B81F1D52FAF7E8500ECA9F4 /* AmountStatusHeader View */,
 				8BD0F7472F930F89007C2E59 /* Base ViewController */,
 				8B7436E02F8001BF00E2760E /* Pin View */,
 				8B7D6FE42FAB8CEB004866D8 /* ActionableCard View */,
@@ -1058,6 +1063,15 @@
 				8B81F1CC2FAE3F4000ECA9F4 /* CashflowBreakdownCoordinator.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		8B81F1D52FAF7E8500ECA9F4 /* AmountStatusHeader View */ = {
+			isa = PBXGroup;
+			children = (
+				8B81F1D62FAF7EAB00ECA9F4 /* AmountStatusHeaderView.swift */,
+				8B81F1D82FAF7EB500ECA9F4 /* AmountStatusHeaderViewModel.swift */,
+			);
+			path = "AmountStatusHeader View";
 			sourceTree = "<group>";
 		};
 		8B9B09AA2F83F3B80042840E /* Import */ = {
@@ -1574,9 +1588,11 @@
 				8B539BFB2F7B251B00977A6C /* OperationsCoordinator.swift in Sources */,
 				8B539C782F7C015E00977A6C /* OnboardingItemViewModel.swift in Sources */,
 				8B2C30F72F86F54600126BA8 /* VaultTableViewCell.swift in Sources */,
+				8B81F1D72FAF7EAB00ECA9F4 /* AmountStatusHeaderView.swift in Sources */,
 				8B36E0922FA3A5E2007D0E07 /* AddReimbursementViewModel.swift in Sources */,
 				8B539C7A2F7C018D00977A6C /* OnboardingCollectionViewCell.swift in Sources */,
 				8BD0F7492F930F98007C2E59 /* VaultBaseViewController.swift in Sources */,
+				8B81F1D92FAF7EB500ECA9F4 /* AmountStatusHeaderViewModel.swift in Sources */,
 				8B36E0902FA3A5B7007D0E07 /* AddReimbursementViewController.swift in Sources */,
 				8B6185342F7F12ED008986A8 /* SettingsViewController.swift in Sources */,
 				8B539C012F7B25A500977A6C /* ListOperationsViewModel.swift in Sources */,
