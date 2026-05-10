@@ -220,7 +220,7 @@ extension OperationDetailViewController: UITableViewDataSource, UITableViewDeleg
         return configuration
     }
     
-    private func configureValueCell(_ cell: UITableViewCell, with row: OperationDetailInfoRow) {
+    private func configureValueCell(_ cell: UITableViewCell, with row: SimpleDetailInfoRow) {
         var content = UIListContentConfiguration.valueCell()
         content.text = row.title
         content.secondaryText = row.value

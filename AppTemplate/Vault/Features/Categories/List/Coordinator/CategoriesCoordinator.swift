@@ -20,7 +20,11 @@ class CategoriesCoordinator: BaseCoordinator {
     
     fileprivate let vault: VaultDTO
 
-    init(navigationController: UINavigationController, dependencies: DependenciesContainer, vault: VaultDTO) {
+    init(
+        navigationController: UINavigationController,
+        dependencies: DependenciesContainer,
+        vault: VaultDTO
+    ) {
         self.navigationController = navigationController
         self.dependencies = dependencies
         self.vault = vault
@@ -29,8 +33,8 @@ class CategoriesCoordinator: BaseCoordinator {
     // MARK: - Lifecycles
 
     override func start() {
-        rootViewController = tableViewController
-        self.navigationController.viewControllers = [tableViewController]
+        rootViewController = listViewController
+        self.navigationController.viewControllers = [listViewController]
     }
 
     override func finish() {
@@ -39,7 +43,7 @@ class CategoriesCoordinator: BaseCoordinator {
     
     // MARK: - ViewController's
 
-    lazy var tableViewController: ListCategoriesViewController = {
+    lazy var listViewController: ListCategoriesViewController = {
         
         let viewModel = self.dependencies.getListCategoriesViewModel(with: vault)
         
@@ -52,15 +56,19 @@ class CategoriesCoordinator: BaseCoordinator {
 }
 
 // MARK: - ListCategoriesViewModel delegates
-extension CategoriesCoordinator: ListCategoriesViewModelProtocol {
-    func listCategoriesDidTapAddCategory(to vault: VaultDTO) {
-        goToAddCategoryWithVault(vault)
+extension CategoriesCoordinator: ListCategoriesViewModelDelegate {
+    func didTapCategory(_ viewModel: ListCategoriesViewModel, category: CategoryDTO) {
+        goToCategoryDetail(category)
     }
     
-    func listCategoriesDidTapEditCategory(_ category: CategoryDTO) {
+    func didTapAddCategory(_ viewModel: ListCategoriesViewModel) {
+        goToAddCategoryWithVault(viewModel.vault)
+    }
+    
+    func didTapEditCategory(_ viewModel: ListCategoriesViewModel, category: VaultCore.CategoryDTO) {
         goToEditCategoryWithCategory(category)
     }
-
+    
     func goToAddCategoryWithVault(_ vault: VaultDTO) {
         let viewModel = dependencies.getAddCategoryViewModel(with: vault)
 
@@ -84,6 +92,33 @@ extension CategoriesCoordinator: ListCategoriesViewModelProtocol {
         viewController.hidesBottomBarWhenPushed = true
         
         navigationController.pushViewController(viewController, animated: true)
+    }
+}
+
+extension CategoriesCoordinator: CategoryDetailViewModelDelegate {
+    
+    private func goToCategoryDetail(_ category: CategoryDTO) {
+        let viewModel = dependencies.getCategoryDetailViewModel(with: category)
+        
+        viewModel.delegate = self
+        
+        let viewController = CategoryDetailViewController(
+            viewModel: viewModel
+        )
+        
+        viewController.hidesBottomBarWhenPushed = true
+        
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func didTapEditCategory(_ viewModel: CategoryDetailViewModel) {
+        navigationController.popViewController(animated: true)
+        
+        goToEditCategoryWithCategory(viewModel.category)
+    }
+    
+    func didDeleteCategory(_ viewModel: CategoryDetailViewModel) {
+        navigationController.popViewController(animated: true)
     }
 }
 

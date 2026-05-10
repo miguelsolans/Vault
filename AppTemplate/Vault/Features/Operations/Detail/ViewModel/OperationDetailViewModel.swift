@@ -36,9 +36,9 @@ final class OperationDetailViewModel {
     // MARK: - Table Model
     
     enum Section {
-        case operationDetail([OperationDetailInfoRow])
+        case operationDetail([SimpleDetailInfoRow])
         case reimbursements([OperationDetailReimbursementRow])
-        case summary([OperationDetailInfoRow])
+        case summary([SimpleDetailInfoRow])
         
         var title: String? {
             switch self {
@@ -79,7 +79,7 @@ final class OperationDetailViewModel {
     
     // MARK: - State
     
-    var detailOperation: [OperationDetailInfoRow] {
+    var detailOperation: [SimpleDetailInfoRow] {
         [
             .init(title: "Type", value: operation.operationType.localized, systemImageName: nil),
             .init(title: "Notes", value: operation.title, systemImageName: nil)
@@ -92,7 +92,7 @@ final class OperationDetailViewModel {
         }
     }
     
-    var summaryRows: [OperationDetailInfoRow] {
+    var summaryRows: [SimpleDetailInfoRow] {
         [
             .init(title: "Operation amount", value: currencyFormatter.string(from: operation.amount) ?? "", systemImageName: nil),
             .init(title: "Total reimbursed", value: currencyFormatter.string(from: operation.totalReimbursed) ?? "", systemImageName: nil),
@@ -206,9 +206,11 @@ extension OperationDetailViewModel {
 }
 
 
-struct OperationDetailInfoRow {
+struct SimpleDetailInfoRow {
     let title: String
+    
     let value: String
+    
     let systemImageName: String?
 }
 

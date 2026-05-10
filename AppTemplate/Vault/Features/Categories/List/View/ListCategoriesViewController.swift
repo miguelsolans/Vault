@@ -7,8 +7,9 @@
 
 import UIKit
 import AppUIKit
+import CoreKit
 
-class ListCategoriesViewController: UIViewController {
+final class ListCategoriesViewController: BaseViewController {
     
     private(set) var viewModel: ListCategoriesViewModel
     
@@ -20,6 +21,8 @@ class ListCategoriesViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - UI
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -36,20 +39,44 @@ class ListCategoriesViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         viewModel.getData()
     }
     
-    private func setupUI() {
+    override func setupUI() {
         view.backgroundColor = .systemBackground
-        title = NSLocalizedString("list_categories_title", tableName: "ListCategories", comment: "")
+        title = viewModel.title
         navigationItem.subtitle = viewModel.subtitle
         
         setupTableView()
         setupBarButtonItems()
+        setupConstraints()
     }
     
-    private func setupTableView() {
-        view.addSubview(tableView)
+    override func setupBindings() {
+        viewModel.updateUI = { [weak self] in
+            DispatchQueue.main.async {
+                
+                guard let self = self else { return }
+                
+                self.setupContentUnavailable()
+                
+                self.tableView.reloadData()
+                
+            }
+        }
+        
+        viewModel.onErrorAlert = { [weak self] message in
+            guard let self = self else { return }
+            
+            self.presentAlert(with: "Error", and: message)
+        }
+    }
+}
+
+// MARK: - UI Setup -
+extension ListCategoriesViewController {
+    private func setupConstraints() {
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -57,6 +84,10 @@ class ListCategoriesViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+    
+    private func setupTableView() {
+        view.addSubview(tableView)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -76,9 +107,8 @@ class ListCategoriesViewController: UIViewController {
         navigationItem.rightBarButtonItem = addButton
     }
     
-    func setupContentUnavailable() {
+    private func setupContentUnavailable() {
         setNeedsUpdateContentUnavailableConfiguration()
-        
     }
     
     override func updateContentUnavailableConfiguration(using state: UIContentUnavailableConfigurationState) {
@@ -93,12 +123,16 @@ class ListCategoriesViewController: UIViewController {
         }
         contentUnavailableConfiguration = config
     }
-    
+}
+
+// MARK: - Actions -
+extension ListCategoriesViewController {
     @objc private func didTapAddCategory() {
         viewModel.didTapAddCategory()
     }
 }
 
+// MARK: - UITableView Delegates & DataSource -
 extension ListCategoriesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.numberOfRows
@@ -125,6 +159,7 @@ extension ListCategoriesViewController: UITableViewDataSource, UITableViewDelega
         didSelectRowAt indexPath: IndexPath
     ) {
         tableView.deselectRow(at: indexPath, animated: true)
+        viewModel.didTapCategory(at: indexPath)
     }
     
     func tableView(
@@ -160,18 +195,21 @@ extension ListCategoriesViewController: UITableViewDataSource, UITableViewDelega
     }
 }
 
+// MARK: - Alert -
 extension ListCategoriesViewController {
-    func setupBindings() {
-        viewModel.updateUI = { [weak self] in
-            DispatchQueue.main.async {
-                
-                guard let self = self else { return }
-                
-                self.setupContentUnavailable()
-                
-                self.tableView.reloadData()
-                
-            }
+    private func presentAlert(with title: String, and message: String) {
+        let alert = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+        
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            alert.dismiss(animated: true)
         }
+        
+        alert.addAction(okAction);
+        
+        present(alert, animated: true)
     }
 }

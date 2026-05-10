@@ -133,6 +133,12 @@ final class CategoryFormViewController: BaseViewController {
             self.colorInputView.isHidden = !viewModel.isShowInDashboardOn
         }
         
+        viewModel.onSuccess = { [weak self] in
+            guard let self = self else { return }
+            
+            self.notifyFeedback(.success)
+        }
+        
         viewModel.onError = { [weak self] in
             guard let self = self else { return }
             

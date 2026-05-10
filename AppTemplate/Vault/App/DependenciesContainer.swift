@@ -142,6 +142,14 @@ extension DependenciesContainer {
         )
     }
     
+    // MARK: - Category Detail Module
+    func getCategoryDetailViewModel(with category: CategoryDTO) -> CategoryDetailViewModel {
+        return CategoryDetailViewModel(
+            deleteUseCase: getDeleteCategoryUseCase(),
+            category: category
+        )
+    }
+    
     // MARK: Add Category Module
     func getAddCategoryViewModel(with vault: VaultDTO, categoryToEdit: CategoryDTO? = nil) -> CategoryFormViewModel {
         return CategoryFormViewModel(

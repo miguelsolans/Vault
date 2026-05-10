@@ -101,6 +101,8 @@
 		8B81F1D12FAE444500ECA9F4 /* CashflowBreakdownViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B81F1D02FAE444500ECA9F4 /* CashflowBreakdownViewModel.swift */; };
 		8B81F1D72FAF7EAB00ECA9F4 /* AmountStatusHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B81F1D62FAF7EAB00ECA9F4 /* AmountStatusHeaderView.swift */; };
 		8B81F1D92FAF7EB500ECA9F4 /* AmountStatusHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B81F1D82FAF7EB500ECA9F4 /* AmountStatusHeaderViewModel.swift */; };
+		8B81F1E02FB1190000ECA9F4 /* CategoryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B81F1DF2FB1190000ECA9F4 /* CategoryDetailViewController.swift */; };
+		8B81F1E22FB1194A00ECA9F4 /* CategoryDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B81F1E12FB1194A00ECA9F4 /* CategoryDetailViewModel.swift */; };
 		8B9B09B52F83F48D0042840E /* ImportOperationsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B09B42F83F48D0042840E /* ImportOperationsCoordinator.swift */; };
 		8B9B09B72F83F49B0042840E /* ImportOperationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B09B62F83F49B0042840E /* ImportOperationsViewModel.swift */; };
 		8B9B09B92F83F4B60042840E /* ImportOperationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B09B82F83F4B60042840E /* ImportOperationsViewController.swift */; };
@@ -244,6 +246,8 @@
 		8B81F1D02FAE444500ECA9F4 /* CashflowBreakdownViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashflowBreakdownViewModel.swift; sourceTree = "<group>"; };
 		8B81F1D62FAF7EAB00ECA9F4 /* AmountStatusHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountStatusHeaderView.swift; sourceTree = "<group>"; };
 		8B81F1D82FAF7EB500ECA9F4 /* AmountStatusHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountStatusHeaderViewModel.swift; sourceTree = "<group>"; };
+		8B81F1DF2FB1190000ECA9F4 /* CategoryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailViewController.swift; sourceTree = "<group>"; };
+		8B81F1E12FB1194A00ECA9F4 /* CategoryDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailViewModel.swift; sourceTree = "<group>"; };
 		8B9B09B42F83F48D0042840E /* ImportOperationsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportOperationsCoordinator.swift; sourceTree = "<group>"; };
 		8B9B09B62F83F49B0042840E /* ImportOperationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportOperationsViewModel.swift; sourceTree = "<group>"; };
 		8B9B09B82F83F4B60042840E /* ImportOperationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportOperationsViewController.swift; sourceTree = "<group>"; };
@@ -1071,6 +1075,31 @@
 			path = "AmountStatusHeader View";
 			sourceTree = "<group>";
 		};
+		8B81F1DC2FB117CE00ECA9F4 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				8B81F1DD2FB118A400ECA9F4 /* View */,
+				8B81F1DE2FB118A900ECA9F4 /* ViewModel */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		8B81F1DD2FB118A400ECA9F4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8B81F1DF2FB1190000ECA9F4 /* CategoryDetailViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8B81F1DE2FB118A900ECA9F4 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8B81F1E12FB1194A00ECA9F4 /* CategoryDetailViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		8B9B09AA2F83F3B80042840E /* Import */ = {
 			isa = PBXGroup;
 			children = (
@@ -1245,6 +1274,7 @@
 			children = (
 				8B078C132F7DD9D200075CC1 /* List */,
 				8B078C182F7DD9E900075CC1 /* Add */,
+				8B81F1DC2FB117CE00ECA9F4 /* Detail */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -1502,6 +1532,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B7D6FEC2FABA577004866D8 /* AmountCardSectionView.swift in Sources */,
+				8B81F1E22FB1194A00ECA9F4 /* CategoryDetailViewModel.swift in Sources */,
 				8B1123322F81C3B600A2AF28 /* InputStyles.swift in Sources */,
 				8B539C822F7C14A800977A6C /* TabBarViewModel.swift in Sources */,
 				8B61853F2F7F1701008986A8 /* MenuOptionTableViewCell.swift in Sources */,
@@ -1570,6 +1601,7 @@
 				8B00F3452F8D301F008C8777 /* ChatMessage.swift in Sources */,
 				8B00F3462F8D301F008C8777 /* ChatViewController.swift in Sources */,
 				8BC2E5042BFD3841007FAF4C /* SceneDelegate.swift in Sources */,
+				8B81F1E02FB1190000ECA9F4 /* CategoryDetailViewController.swift in Sources */,
 				8B9B09B72F83F49B0042840E /* ImportOperationsViewModel.swift in Sources */,
 				8B7D6FE62FAB8CFE004866D8 /* ActionableCardBaseViewModel.swift in Sources */,
 				8B539BFD2F7B258300977A6C /* ListOperationsViewController.swift in Sources */,

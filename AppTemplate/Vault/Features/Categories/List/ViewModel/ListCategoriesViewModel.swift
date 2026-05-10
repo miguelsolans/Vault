@@ -9,14 +9,15 @@ import Foundation
 import AppUIKit
 import VaultCore
 
-protocol ListCategoriesViewModelProtocol: AnyObject {
-    func listCategoriesDidTapAddCategory(to vault: VaultDTO)
-    func listCategoriesDidTapEditCategory(_ category: CategoryDTO)
+protocol ListCategoriesViewModelDelegate: AnyObject {
+    func didTapAddCategory(_ viewModel: ListCategoriesViewModel)
+    func didTapEditCategory(_ viewModel: ListCategoriesViewModel, category: CategoryDTO)
+    func didTapCategory(_ viewModel: ListCategoriesViewModel, category: CategoryDTO)
 }
 
 final class ListCategoriesViewModel: NSObject {
     
-    weak var delegate: ListCategoriesViewModelProtocol?
+    weak var delegate: ListCategoriesViewModelDelegate?
     
     // MARK: - Dependencies
 
@@ -24,7 +25,7 @@ final class ListCategoriesViewModel: NSObject {
     
     private let deleteUseCase: DeleteCategoryUseCase
     
-    private var vault: VaultDTO
+    private(set) var vault: VaultDTO
 
     init(listUseCase: ListCategoriesUseCase, deleteUseCase: DeleteCategoryUseCase, vault: VaultDTO) {
         self.listUseCase = listUseCase
@@ -32,53 +33,51 @@ final class ListCategoriesViewModel: NSObject {
         self.vault = vault
         super.init()
     }
+    
+    // MARK: - Data state
+    
+    private var categories: [CategoryDTO] = [] {
+        didSet {
+            updateUI?()
+        }
+    }
+    
+    private var categoriesCell: [CategoryTableViewModel] = [] {
+        didSet {
+            updateUI?()
+        }
+    }
 
-    // MARK: - State
+    // MARK: - UI State
     
-    private(set) var categoriesCell: [CategoryTableViewModel] = [] {
-        didSet {
-            updateUI?()
-        }
-    }
-    
-    private(set) var categories: [CategoryDTO] = [] {
-        didSet {
-            updateUI?()
-        }
-    }
+    public var title: String { "Categories" }
     
     public var subtitle: String { vault.name }
-
-    var numberOfRows: Int {
+    
+    public var numberOfRows: Int {
         categoriesCell.count
     }
 
-    func category(at indexPath: IndexPath) -> CategoryTableViewModel {
+    public func category(at indexPath: IndexPath) -> CategoryTableViewModel {
         categoriesCell[indexPath.row]
     }
 
-    func titleForCategory(at indexPath: IndexPath) -> String {
+    public func titleForCategory(at indexPath: IndexPath) -> String {
         category(at: indexPath).title
     }
 
-    func subtitleForCategory(at indexPath: IndexPath) -> String {
+    public func subtitleForCategory(at indexPath: IndexPath) -> String {
         category(at: indexPath).subtitle
     }
     
     // MARK: - Bindings
     
-    var updateUI: (() -> Void)?
+    public var updateUI: (() -> Void)?
+    
+    public var onErrorAlert: ((String) -> Void)?
 }
 
-// MARK: - Actions
-extension ListCategoriesViewModel {
-    func didTapAddCategory() {
-        
-        delegate?.listCategoriesDidTapAddCategory(to: vault)
-    }
-}
-
-// MARK: - Data
+// MARK: - Data -
 extension ListCategoriesViewModel {
     
     func getData() {
@@ -93,7 +92,7 @@ extension ListCategoriesViewModel {
             categoriesCell = makeListViewModel(with: categories)
             
         } catch {
-            // TODO: Present error?
+            onErrorAlert?("An error ocurred while trying to fetch categories")
         }
     }
 
@@ -107,25 +106,46 @@ extension ListCategoriesViewModel {
             
             getData()
         } catch {
-            // TODO: Present error?
+            onErrorAlert?("An error ocurred while trying to delete category")
         }
     }
 
     func editCategory(at indexPath: IndexPath) {
         let category = categories[indexPath.row]
-        delegate?.listCategoriesDidTapEditCategory(category)
+        
+        delegate?.didTapEditCategory(self, category: category)
     }
 }
 
+// MARK: - Actions -
+extension ListCategoriesViewModel {
+    func didTapAddCategory() {
+        
+        delegate?.didTapAddCategory(self)
+    }
+    
+    func didTapCategory(at index: IndexPath) {
+        let category = categories[index.row]
+        
+        delegate?.didTapCategory(self, category: category)
+    }
+}
 
+// MARK: - Helpers -
 extension ListCategoriesViewModel {
     fileprivate func makeListViewModel(with categories: [CategoryDTO]) -> [CategoryTableViewModel] {
         return categories.map { category in
+            
+            let typeLocalized = category.operationType.localized
+            let subtitleText = category.numberOfOperations == 0
+                ? typeLocalized
+                : "\(typeLocalized) • \(category.numberOfOperations) operation(s)"
+            
             return CategoryTableViewModel(
                 color: category.color,
                 emoji: category.emoji,
                 title: category.title,
-                subtitle: category.operationType == .income ? "Income" : "Expense",
+                subtitle: subtitleText,
                 canDelete: !category.hasOperations
             )
         }

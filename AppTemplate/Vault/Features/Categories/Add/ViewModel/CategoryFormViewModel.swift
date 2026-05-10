@@ -137,6 +137,8 @@ final class CategoryFormViewModel: NSObject {
     public var updateUI: (() -> Void)?
     
     public var onError: (() -> Void)?
+    
+    public var onSuccess: (() -> Void)?
 }
 
 // MARK: - Actions -
@@ -183,7 +185,9 @@ extension CategoryFormViewModel {
             
             let _ = try editUseCase.execute(request)
             
+            onSuccess?()
             delegate?.didUpdateCategory(self)
+            
         } catch CategoryError.categoryAlreadyExists {
             categoryNameInputViewModel.feedback = .error("Category with name \(name) already exists")
             onError?()
@@ -206,6 +210,7 @@ extension CategoryFormViewModel {
             
             let _ = try addUseCase.execute(request)
             
+            onSuccess?()
             delegate?.didAddCategory(self)
             
         } catch CategoryError.categoryAlreadyExists {
