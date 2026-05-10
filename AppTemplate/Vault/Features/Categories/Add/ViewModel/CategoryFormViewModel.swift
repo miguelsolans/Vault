@@ -1,5 +1,5 @@
 //
-//  AddCategoryViewModel.swift
+//  CategoryFormViewModel.swift
 //  Vault
 //
 //  Created by Miguel Solans on 02/04/2026.
@@ -10,15 +10,15 @@ import AppUIKit
 import UIKit
 import VaultCore
 
-protocol AddCategoryViewModelProtocol: AnyObject {
-    func didAddCategory(_ viewModel: AddCategoryViewModel)
-    func didUpdateCategory(_ viewModel: AddCategoryViewModel)
+protocol CategoryFormViewModelDelegate: AnyObject {
+    func didAddCategory(_ viewModel: CategoryFormViewModel)
+    func didUpdateCategory(_ viewModel: CategoryFormViewModel)
 }
 
-class AddCategoryViewModel: NSObject {
+final class CategoryFormViewModel: NSObject {
     private static let operationTypesInDisplayOrder: [OperationType] = [.expense, .income]
 
-    weak var delegate: AddCategoryViewModelProtocol?
+    weak var delegate: CategoryFormViewModelDelegate?
     
     // MARK: Dependencies
     
@@ -30,7 +30,12 @@ class AddCategoryViewModel: NSObject {
     
     private var categoryToEdit: CategoryDTO?
 
-    init(addUseCase: AddCategoryUseCase, editUseCase: EditCategoryUseCase, vault: VaultDTO, categoryToEdit: CategoryDTO? = nil) {
+    init(
+        addUseCase: AddCategoryUseCase,
+        editUseCase: EditCategoryUseCase,
+        vault: VaultDTO,
+        categoryToEdit: CategoryDTO? = nil
+    ) {
         self.addUseCase = addUseCase
         self.editUseCase = editUseCase
         self.vault = vault
@@ -39,7 +44,22 @@ class AddCategoryViewModel: NSObject {
         setupBindings()
     }
     
-    // MARK: - Input fields
+    // MARK: - UI State
+    
+    public var title: String {
+        if categoryToEdit != nil {
+            return NSLocalizedString("edit_category_title", tableName: "AddCategory", comment: "")
+        }
+        return NSLocalizedString("add_category_title", tableName: "AddCategory", comment: "")
+    }
+    
+    public var subtitle: String {
+        if categoryToEdit != nil {
+            return categoryToEdit?.title ?? ""
+        }
+        
+        return vault.name
+    }
     
     lazy var operationTypeInputViewModel: SegmentedInputViewModel = {
         let selectedValue = selectedIndex(for: categoryToEdit?.operationType ?? .expense)
@@ -65,7 +85,8 @@ class AddCategoryViewModel: NSObject {
             subtitle: nil,
             inputText: categoryToEdit?.emoji ?? "",
             textType: .text,
-            isMandatory: false
+            isMandatory: false,
+            maxCharacters: 1
         )
     }()
     
@@ -103,87 +124,23 @@ class AddCategoryViewModel: NSObject {
         )
     }()
     
-    lazy var budgetSwitchInputViewModel: SwitchInputViewModel = {
-        SwitchInputViewModel(
-            title: "Budget",
-            isOn: categoryToEdit?.hasMonthlyBudget ?? false,
-            isEditable: true,
-            placeholder: "Set monthly budget",
-            subtitle: "",
-            isMandatory: false
-        )
-    }()
-    
-    lazy var budgetInputViewModel: TextFieldInputViewModel = {
-        
-        var amountText = "";
-        
-        if let categoryToEdit,
-            let budget = categoryToEdit.monthlyBudget {
-            
-            amountText = LocalizedDecimalFormatter(numberStyle: .currency)
-                .string(from: budget) ?? ""
-        }
-        
-        return TextFieldInputViewModel(
-            title: "Budget",
-            isEditable: true,
-            placeholder: "Monthly budget",
-            subtitle: nil,
-            inputText: amountText,
-            textType: .currency("EUR"),
-            isMandatory: true
-        )
-    }()
-    
-    // MARK: - State
-
-    public var subtitle: String {
-        if categoryToEdit != nil {
-            return categoryToEdit?.title ?? ""
-        }
-        
-        return vault.name
-    }
-
-    public var screenTitle: String {
-        if categoryToEdit != nil {
-            return NSLocalizedString("edit_category_title", tableName: "AddCategory", comment: "")
-        }
-        return NSLocalizedString("add_category_title", tableName: "AddCategory", comment: "")
-    }
-    
     public var isShowInDashboardOn: Bool {
         return plotSwitchInputViewModel.isOn
-    }
-    
-    public var isBudgetOn: Bool {
-        return budgetSwitchInputViewModel.isOn
     }
     
     public var isBudgetSectionVisible: Bool {
         return selectedOperationType() == .expense
     }
     
-    var updateUI: (() -> Void)?
-}
+    // MARK: - Bindings
 
-extension AddCategoryViewModel {
-    private func selectedIndex(for operationType: OperationType) -> Int {
-        Self.operationTypesInDisplayOrder.firstIndex(of: operationType) ?? 0
-    }
+    public var updateUI: (() -> Void)?
     
-    private func selectedOperationType() -> OperationType? {
-        guard let selectedIndex = operationTypeInputViewModel.selectedIndex,
-              Self.operationTypesInDisplayOrder.indices.contains(selectedIndex) else {
-            return nil
-        }
-        
-        return Self.operationTypesInDisplayOrder[selectedIndex]
-    }
+    public var onError: (() -> Void)?
 }
 
-extension AddCategoryViewModel {
+// MARK: - Actions -
+extension CategoryFormViewModel {
     func didTapSave() {
         
         guard validateInputs() else { return }
@@ -196,12 +153,10 @@ extension AddCategoryViewModel {
 
         let colorHex = colorInputViewModel.selectedColor.toHexString()
         let visibleInPlot = plotSwitchInputViewModel.isOn
-        let budget = LocalizedDecimalFormatter()
-            .decimal(from: budgetInputViewModel.inputText)
         let emoji = emojiInputViewModel.inputText.isEmpty ? nil : emojiInputViewModel.inputText
         
         if let existingCategory = categoryToEdit {
-            updateCategory(existingCategory, name: trimmedName, emoji: emoji, color: colorHex, type: type, visibleInPlot: visibleInPlot, budget: budget)
+            updateCategory(existingCategory, name: trimmedName, emoji: emoji, color: colorHex, type: type, visibleInPlot: visibleInPlot)
             return
         }
         
@@ -210,12 +165,11 @@ extension AddCategoryViewModel {
             emoji: emoji,
             color: colorHex,
             type: type,
-            visibleInPlot: visibleInPlot,
-            budget: budget
+            visibleInPlot: visibleInPlot
         )
     }
     
-    func updateCategory(_ category: CategoryDTO, name: String, emoji: String? = nil, color: String?, type: OperationType, visibleInPlot: Bool, budget: NSDecimalNumber?) {
+    private func updateCategory(_ category: CategoryDTO, name: String, emoji: String? = nil, color: String?, type: OperationType, visibleInPlot: Bool) {
         do {
             let request = EditCategoryRequest(
                 vaultID: vault.id,
@@ -224,20 +178,21 @@ extension AddCategoryViewModel {
                 newEmoji: emoji,
                 newColor: color,
                 newType: type,
-                newVisibleInPlot: visibleInPlot,
-                newBudget: budget
+                newVisibleInPlot: visibleInPlot
             )
             
             let _ = try editUseCase.execute(request)
             
             delegate?.didUpdateCategory(self)
+        } catch CategoryError.categoryAlreadyExists {
+            categoryNameInputViewModel.feedback = .error("Category with name \(name) already exists")
+            onError?()
         } catch {
-            // TODO: Present error?
+            
         }
     }
     
-    func saveCategory(name: String, emoji: String? = nil, color: String?, type: OperationType, visibleInPlot: Bool, budget: NSDecimalNumber?) {
-        
+    private func saveCategory(name: String, emoji: String? = nil, color: String?, type: OperationType, visibleInPlot: Bool) {
         
         do {
             let request = AddCategoryRequest(
@@ -246,23 +201,26 @@ extension AddCategoryViewModel {
                 emoji: emoji,
                 color: color,
                 type: type,
-                visibleInPlot: visibleInPlot,
-                budget: budget
+                visibleInPlot: visibleInPlot
             )
             
             let _ = try addUseCase.execute(request)
             
             delegate?.didAddCategory(self)
             
+        } catch CategoryError.categoryAlreadyExists {
+            categoryNameInputViewModel.feedback = .error("Category with name \(name) already exists")
+            onError?()
         } catch {
             
         }
+
     }
 }
 
-// MARK: - Form validations
+// MARK: - Validations -
 
-extension AddCategoryViewModel {
+extension CategoryFormViewModel {
     
     fileprivate func validateInputs() -> Bool {
         
@@ -288,32 +246,20 @@ extension AddCategoryViewModel {
         
         return true
     }
-    
-    /*private func categoryExists() -> Bool {
-        
-     .error(NSLocalizedString("add_category_name_already_exists_error", tableName: "AddCategory", comment: ""))
-    }*/
 }
 
-extension AddCategoryViewModel {
+// MARK: - Bindings -
+extension CategoryFormViewModel {
     private func setupBindings() {
         setupOperationTypeBindings()
         setupEmojiBindings()
         setupCategoryBindings()
         setupPlottingBindings()
-        setupBudgetBindings()
-        setupAmountBindings()
     }
     
     private func setupOperationTypeBindings() {
         operationTypeInputViewModel.onSelectionChanged = { [weak self] _ in
             guard let self = self else { return }
-            
-            let isIncome = self.selectedOperationType() == .income
-            
-            if isIncome {
-                self.budgetSwitchInputViewModel.isOn = false
-            }
             
             updateUI?()
         }
@@ -333,6 +279,12 @@ extension AddCategoryViewModel {
             
             self.categoryNameInputViewModel.feedback = .none
         }
+        
+        categoryNameInputViewModel.onTextChanged = { [weak self] _ in
+            guard let self = self else { return }
+            
+            self.categoryNameInputViewModel.feedback = .none
+        }
     }
     
     private func setupPlottingBindings() {
@@ -342,21 +294,21 @@ extension AddCategoryViewModel {
             updateUI?()
         }
     }
-    
-    private func setupBudgetBindings() {
-        budgetSwitchInputViewModel.onValueChanged = { [weak self] on in
-            guard let self = self else { return }
-            
-            updateUI?()
-        }
-    }
-    
-    private func setupAmountBindings() {
-        budgetInputViewModel.onBeginEditing = { [weak self] in
-            guard let self = self else { return }
-            
-            self.budgetInputViewModel.feedback = .none
-        }
-    }
 }
 
+
+// MARK: - Helper -
+extension CategoryFormViewModel {
+    private func selectedIndex(for operationType: OperationType) -> Int {
+        Self.operationTypesInDisplayOrder.firstIndex(of: operationType) ?? 0
+    }
+    
+    private func selectedOperationType() -> OperationType? {
+        guard let selectedIndex = operationTypeInputViewModel.selectedIndex,
+              Self.operationTypesInDisplayOrder.indices.contains(selectedIndex) else {
+            return nil
+        }
+        
+        return Self.operationTypesInDisplayOrder[selectedIndex]
+    }
+}

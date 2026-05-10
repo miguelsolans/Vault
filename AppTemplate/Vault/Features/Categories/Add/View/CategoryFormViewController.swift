@@ -1,5 +1,5 @@
 //
-//  AddCategoryViewController.swift
+//  CategoryFormViewController.swift
 //  Vault
 //
 //  Created by Miguel Solans on 01/04/2026.
@@ -9,11 +9,11 @@ import UIKit
 import AppUIKit
 import CoreKit
 
-class AddCategoryViewController: BaseViewController {
+final class CategoryFormViewController: BaseViewController {
 
-    var viewModel: AddCategoryViewModel
+    private(set)var viewModel: CategoryFormViewModel
     
-    init(viewModel: AddCategoryViewModel) {
+    init(viewModel: CategoryFormViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -22,8 +22,24 @@ class AddCategoryViewController: BaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private let scrollView = UIScrollView()
-    private let stackView = UIStackView()
+    // MARK: - UI
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return scrollView
+    }()
+    
+    private let stackView: UIStackView = {
+        let stackView = UIStackView()
+        
+        stackView.axis = .vertical
+        stackView.spacing = 16
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return stackView
+    }()
 
     private lazy var categoryNameInputView: TextFieldInputView = {
         let inputView = TextFieldInputView(
@@ -78,36 +94,14 @@ class AddCategoryViewController: BaseViewController {
         return view;
     }()
     
-    private lazy var budgetSwitchInputView: SwitchInputView = {
-        let view = SwitchInputView(
-            viewModel: viewModel.budgetSwitchInputViewModel,
-            style: InputStyles.switchStyle
-        )
-        
-        view.translatesAutoresizingMaskIntoConstraints = false
-        
-        return view
-    }()
-    
-    private lazy var budgetInputView: TextFieldInputView = {
-        let view = TextFieldInputView(
-            viewModel: viewModel.budgetInputViewModel,
-            style: InputStyles.textFieldStyle)
-        
-        view.translatesAutoresizingMaskIntoConstraints = false
-        
-        return view
-    }()
-
     private let saveButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle(NSLocalizedString("add_category_save", tableName: "AddCategory", comment: ""), for: .normal)
-        button.titleLabel?.font = .boldSystemFont(ofSize: 18)
-        button.backgroundColor = .systemBlue
-        button.tintColor = .white
-        button.layer.cornerRadius = 8
-        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        button.apply(
+            style: ButtonStyles.primary,
+            title: "Save"
+        )
+        
         return button
     }()
 
@@ -118,31 +112,40 @@ class AddCategoryViewController: BaseViewController {
     }
 
     override func setupUI() {
-        title = viewModel.screenTitle
-        navigationItem.subtitle = viewModel.subtitle;
         view.backgroundColor = .systemBackground
+        title = viewModel.title
+        navigationItem.subtitle = viewModel.subtitle;
 
-        setupScrollView()
+        view.addSubview(scrollView)
+        
         setupStackView()
         setupConstraints()
 
         saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
         
-        budgetInputView.isHidden = !viewModel.isBudgetOn
         colorInputView.isHidden = !viewModel.isShowInDashboardOn
         
     }
 
-    private func setupScrollView() {
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(scrollView)
+    override func setupBindings() {
+        viewModel.updateUI = { [weak self] in
+            guard let self = self else { return }
+            self.colorInputView.isHidden = !viewModel.isShowInDashboardOn
+        }
+        
+        viewModel.onError = { [weak self] in
+            guard let self = self else { return }
+            
+            self.notifyFeedback(.error)
+        }
     }
+    
+}
 
+extension CategoryFormViewController {
+    
     private func setupStackView() {
-        stackView.axis = .vertical
-        stackView.spacing = 16
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-
+        
         scrollView.addSubview(stackView)
         
         stackView.addArrangedSubview(operationTypeInputView)
@@ -150,8 +153,6 @@ class AddCategoryViewController: BaseViewController {
         stackView.addArrangedSubview(categoryNameInputView)
         stackView.addArrangedSubview(plotSwitchInputView)
         stackView.addArrangedSubview(colorInputView)
-        stackView.addArrangedSubview(budgetSwitchInputView)
-        stackView.addArrangedSubview(budgetInputView)
         stackView.addArrangedSubview(saveButton)
     }
 
@@ -170,25 +171,11 @@ class AddCategoryViewController: BaseViewController {
             stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -32)
         ])
     }
-
-    
-    override func setupBindings() {
-        viewModel.updateUI = { [weak self] in
-            guard let self = self else { return }
-            
-            self.budgetSwitchInputView.isHidden = !viewModel.isBudgetSectionVisible
-            
-            self.colorInputView.isHidden = !viewModel.isShowInDashboardOn
-            
-            self.budgetInputView.isHidden = !viewModel.isBudgetOn
-        }
-    }
-    
 }
 
 // MARK: - Actions
 
-extension AddCategoryViewController {
+extension CategoryFormViewController {
     @objc private func saveTapped() {
         viewModel.didTapSave()
     }

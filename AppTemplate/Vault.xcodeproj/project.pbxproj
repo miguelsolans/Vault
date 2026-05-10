@@ -17,9 +17,8 @@
 		8B078C1C2F7DDA2600075CC1 /* CategoriesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B078C1B2F7DDA2600075CC1 /* CategoriesCoordinator.swift */; };
 		8B078C202F7DDA6400075CC1 /* ListCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B078C1F2F7DDA6400075CC1 /* ListCategoriesViewController.swift */; };
 		8B078C222F7DDA7B00075CC1 /* ListCategoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B078C212F7DDA7B00075CC1 /* ListCategoriesViewModel.swift */; };
-		8B078C242F7DDAB500075CC1 /* AddCategory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B078C232F7DDAB500075CC1 /* AddCategory.storyboard */; };
-		8B078C262F7DDACA00075CC1 /* AddCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B078C252F7DDAC900075CC1 /* AddCategoryViewController.swift */; };
-		8B078C282F7DDAFC00075CC1 /* AddCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B078C272F7DDAFC00075CC1 /* AddCategoryViewModel.swift */; };
+		8B078C262F7DDACA00075CC1 /* CategoryFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B078C252F7DDAC900075CC1 /* CategoryFormViewController.swift */; };
+		8B078C282F7DDAFC00075CC1 /* CategoryFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B078C272F7DDAFC00075CC1 /* CategoryFormViewModel.swift */; };
 		8B1123132F816DDB00A2AF28 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1123122F816DDB00A2AF28 /* LoginCoordinator.swift */; };
 		8B1123152F816DEA00A2AF28 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1123142F816DEA00A2AF28 /* LoginViewController.swift */; };
 		8B1123172F816DFC00A2AF28 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1123162F816DFC00A2AF28 /* LoginViewModel.swift */; };
@@ -161,9 +160,8 @@
 		8B078C1B2F7DDA2600075CC1 /* CategoriesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCoordinator.swift; sourceTree = "<group>"; };
 		8B078C1F2F7DDA6400075CC1 /* ListCategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCategoriesViewController.swift; sourceTree = "<group>"; };
 		8B078C212F7DDA7B00075CC1 /* ListCategoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCategoriesViewModel.swift; sourceTree = "<group>"; };
-		8B078C232F7DDAB500075CC1 /* AddCategory.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddCategory.storyboard; sourceTree = "<group>"; };
-		8B078C252F7DDAC900075CC1 /* AddCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryViewController.swift; sourceTree = "<group>"; };
-		8B078C272F7DDAFC00075CC1 /* AddCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryViewModel.swift; sourceTree = "<group>"; };
+		8B078C252F7DDAC900075CC1 /* CategoryFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFormViewController.swift; sourceTree = "<group>"; };
+		8B078C272F7DDAFC00075CC1 /* CategoryFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFormViewModel.swift; sourceTree = "<group>"; };
 		8B078C8D2F7E9ED800075CC1 /* AppIntents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppIntents.framework; path = System/Library/Frameworks/AppIntents.framework; sourceTree = SDKROOT; };
 		8B1123122F816DDB00A2AF28 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		8B1123142F816DEA00A2AF28 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -431,7 +429,7 @@
 		8B078C192F7DD9F400075CC1 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				8B078C272F7DDAFC00075CC1 /* AddCategoryViewModel.swift */,
+				8B078C272F7DDAFC00075CC1 /* CategoryFormViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -439,8 +437,7 @@
 		8B078C1A2F7DD9F800075CC1 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8B078C232F7DDAB500075CC1 /* AddCategory.storyboard */,
-				8B078C252F7DDAC900075CC1 /* AddCategoryViewController.swift */,
+				8B078C252F7DDAC900075CC1 /* CategoryFormViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1489,7 +1486,6 @@
 				8B11233E2F81D25000A2AF28 /* LoginPin.xcstrings in Resources */,
 				8BCF15E52F82D12100B483BD /* ListOperations.xcstrings in Resources */,
 				8B1123422F81D27300A2AF28 /* CreateVault.xcstrings in Resources */,
-				8B078C242F7DDAB500075CC1 /* AddCategory.storyboard in Resources */,
 				8B539C6C2F7BE8AE00977A6C /* CreateVault.storyboard in Resources */,
 				8BC2E5112BFD3842007FAF4C /* Base in Resources */,
 				8B1123442F81D28100A2AF28 /* Dashboard.xcstrings in Resources */,
@@ -1526,7 +1522,7 @@
 				8B1123152F816DEA00A2AF28 /* LoginViewController.swift in Sources */,
 				8B1123242F81AF3D00A2AF28 /* LoginPinCoordinator.swift in Sources */,
 				8B7D6FB82FAA36ED004866D8 /* OperationDetailHeaderViewModel.swift in Sources */,
-				8B078C282F7DDAFC00075CC1 /* AddCategoryViewModel.swift in Sources */,
+				8B078C282F7DDAFC00075CC1 /* CategoryFormViewModel.swift in Sources */,
 				8B539C0A2F7B2F0000977A6C /* OperationSectionHeaderViewModel.swift in Sources */,
 				8B2C30F02F86D10E00126BA8 /* ListVaultViewModel.swift in Sources */,
 				8B11232E2F81B4D200A2AF28 /* AppCoordinator+Login.swift in Sources */,
@@ -1541,7 +1537,7 @@
 				8B539C752F7BFD3C00977A6C /* IntroViewModel.swift in Sources */,
 				8B078C222F7DDA7B00075CC1 /* ListCategoriesViewModel.swift in Sources */,
 				8B5365642C09379400B3144C /* Constants.swift in Sources */,
-				8B078C262F7DDACA00075CC1 /* AddCategoryViewController.swift in Sources */,
+				8B078C262F7DDACA00075CC1 /* CategoryFormViewController.swift in Sources */,
 				8B078BD32F7D224C00075CC1 /* DashboardViewModel.swift in Sources */,
 				8BC2E5022BFD3841007FAF4C /* AppDelegate.swift in Sources */,
 				8B11232C2F81B48F00A2AF28 /* AppCoordinator+Onboarding.swift in Sources */,

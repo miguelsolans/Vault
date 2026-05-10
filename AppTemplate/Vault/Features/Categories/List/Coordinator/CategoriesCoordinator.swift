@@ -66,7 +66,7 @@ extension CategoriesCoordinator: ListCategoriesViewModelProtocol {
 
         viewModel.delegate = self
 
-        let viewController = AddCategoryViewController(viewModel: viewModel)
+        let viewController = CategoryFormViewController(viewModel: viewModel)
         
         viewController.hidesBottomBarWhenPushed = true
         
@@ -79,7 +79,7 @@ extension CategoriesCoordinator: ListCategoriesViewModelProtocol {
 
         viewModel.delegate = self
 
-        let viewController = AddCategoryViewController(viewModel: viewModel)
+        let viewController = CategoryFormViewController(viewModel: viewModel)
         
         viewController.hidesBottomBarWhenPushed = true
         
@@ -88,13 +88,13 @@ extension CategoriesCoordinator: ListCategoriesViewModelProtocol {
 }
 
 // MARK: - AddCategoryViewModel delegates
-extension CategoriesCoordinator: AddCategoryViewModelProtocol {
+extension CategoriesCoordinator: CategoryFormViewModelDelegate {
     
-    func didAddCategory(_ viewModel: AddCategoryViewModel) {
+    func didAddCategory(_ viewModel: CategoryFormViewModel) {
         navigationController.popViewController(animated: true)
     }
     
-    func didUpdateCategory(_ viewModel: AddCategoryViewModel) {
+    func didUpdateCategory(_ viewModel: CategoryFormViewModel) {
         navigationController.popViewController(animated: true)
     }
 }

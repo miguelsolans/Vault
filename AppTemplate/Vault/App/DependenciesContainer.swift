@@ -143,8 +143,8 @@ extension DependenciesContainer {
     }
     
     // MARK: Add Category Module
-    func getAddCategoryViewModel(with vault: VaultDTO, categoryToEdit: CategoryDTO? = nil) -> AddCategoryViewModel {
-        return AddCategoryViewModel(
+    func getAddCategoryViewModel(with vault: VaultDTO, categoryToEdit: CategoryDTO? = nil) -> CategoryFormViewModel {
+        return CategoryFormViewModel(
             addUseCase: getAddCategoryUseCase(),
             editUseCase: getEditCategoryUseCase(),
             vault: vault,
