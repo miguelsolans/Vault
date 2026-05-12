@@ -256,4 +256,24 @@ extension ListOperationsViewController: UITableViewDataSource, UITableViewDelega
         let configuration = UISwipeActionsConfiguration(actions: [editAction, deleteAction])
         return configuration
     }
+    
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        
+        let deleteAction = makeConfirmedMenuAction(
+            title: "Delete",
+            image: UIImage(systemName: "trash")
+        ) { [weak self] in
+            guard let self = self else { return }
+            self.viewModel.didTapDeleteOperation(at: indexPath)
+        }
+        
+        let editAction = UIAction(title: "Edit", image: UIImage(systemName: "pencil")) { [weak self] _ in
+            guard let self = self else { return }
+            self.viewModel.didTapEditOperation(at: indexPath)
+        }
+        
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+            return UIMenu(title: "", children: [editAction, deleteAction])
+        }
+    }
 }

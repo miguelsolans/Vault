@@ -1,5 +1,5 @@
 //
-//  AddOperationViewController.swift
+//  OperationFormViewController.swift
 //  Vault
 //
 //  Created by Miguel Solans on 31/03/2026.
@@ -9,11 +9,11 @@ import UIKit
 import AppUIKit
 import CoreKit
 
-final class AddOperationViewController: BaseViewController {
+final class OperationFormViewController: BaseViewController {
     
-    private(set) var viewModel: AddOperationViewModel
+    private(set) var viewModel: OperationFormViewModel
     
-    init(viewModel: AddOperationViewModel) {
+    init(viewModel: OperationFormViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -22,8 +22,14 @@ final class AddOperationViewController: BaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - UI Elements
-    private let scrollView = UIScrollView()
+    // MARK: - UI
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return scrollView
+    }()
     
     private lazy var stackView: UIStackView = {
         let view = UIStackView()
@@ -49,8 +55,6 @@ final class AddOperationViewController: BaseViewController {
         return view
     }()
     
-    // MARK: - Operation fields
-    
     private lazy var ocrFeedbackView: FeedbackView = {
         let view = FeedbackView(viewModel: viewModel.ocrFeedback, style: FeedbackStyles.informativeFeedback)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -59,7 +63,9 @@ final class AddOperationViewController: BaseViewController {
     
     private lazy var operationTypeInputView: SegmentedInputView = {
         let view = SegmentedInputView(viewModel: viewModel.operationTypeInputViewModel, style: InputStyles.segmentedStyle)
+        
         view.translatesAutoresizingMaskIntoConstraints = false
+        
         return view
     }()
     
@@ -71,24 +77,27 @@ final class AddOperationViewController: BaseViewController {
     
     private lazy var amountInputView: TextFieldInputView = {
         let view = TextFieldInputView(viewModel: viewModel.amountInputViewModel, style: InputStyles.textFieldStyle)
+        
         view.translatesAutoresizingMaskIntoConstraints = false
+        
         return view
     }()
     
     private lazy var titleInputView: TextFieldInputView = {
         let view = TextFieldInputView(viewModel: viewModel.titleInputViewModel, style: InputStyles.textFieldStyle)
+        
         view.translatesAutoresizingMaskIntoConstraints = false
+        
         return view
     }();
     
     private lazy var dateInputView: DatePickerInputView = {
         let view = DatePickerInputView(viewModel: viewModel.dateInputViewModel, style: InputStyles.datePickerStyle)
+        
         view.translatesAutoresizingMaskIntoConstraints = false
+        
         return view
     }()
-    
-    
-    // MARK: - Reimbursement fields
     
     private lazy var reimbursementSwitchView: SwitchInputView = {
         let view = SwitchInputView(viewModel: viewModel.reimbursementViewModel, style: InputStyles.switchStyle)
@@ -122,8 +131,6 @@ final class AddOperationViewController: BaseViewController {
         return button
     }()
 
-    private var reimbursementTableViewHeightConstraint: NSLayoutConstraint?
-
     private let saveButton: UIButton = {
         let button = UIButton(type: .system)
         
@@ -137,15 +144,14 @@ final class AddOperationViewController: BaseViewController {
         return button
     }()
     
+    private var reimbursementTableViewHeightConstraint: NSLayoutConstraint?
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
         setupBindings()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        setupUI()
+        setupGestures()
     }
     
     override func viewDidLayoutSubviews() {
@@ -160,7 +166,8 @@ final class AddOperationViewController: BaseViewController {
         title = viewModel.title
         navigationItem.subtitle = viewModel.subtitle
         
-        setupScrollView()
+        view.addSubview(scrollView)
+        
         setupStackView()
         setupReimbursementTableView()
         setupConstraints()
@@ -172,10 +179,19 @@ final class AddOperationViewController: BaseViewController {
         refreshReimbursementViews()
     }
     
-    private func setupScrollView() {
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(scrollView)
+    override func setupBindings() {
+        setupEventBindings()
+        setupOperationTypeBindings()
+        setupCategoryBindings()
+        setupDateBindings()
+        setupAmountBindings()
+        setupTitleBindings()
+        setupReimbursementBindings()
     }
+}
+
+// MARK: UI Setup
+extension OperationFormViewController {
     
     private func setupStackView() {
         
@@ -198,14 +214,14 @@ final class AddOperationViewController: BaseViewController {
         stackView.addArrangedSubview(reimbursementStackView)
         stackView.addArrangedSubview(saveButton)
     }
-
+    
     private func setupReimbursementTableView() {
         reimbursementTableView.dataSource = self
         reimbursementTableView.delegate = self
 
         reimbursementTableView.register(
-            TransferMoneyTableViewCell.self,
-            forCellReuseIdentifier: TransferMoneyTableViewCell.identifier
+            ReimbursementTableViewCell.self,
+            forCellReuseIdentifier: ReimbursementTableViewCell.identifier
         )
 
         reimbursementTableViewHeightConstraint = reimbursementTableView.heightAnchor.constraint(equalToConstant: 0)
@@ -228,17 +244,16 @@ final class AddOperationViewController: BaseViewController {
         ])
     }
     
-    override func setupBindings() {
-        viewModel.updateUI = { [weak self] in
-            guard let self = self else { return }
-            
-            self.refreshReimbursementViews()
-        }
+    private func setupGestures() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleOutsideTap))
+        
+        tap.cancelsTouchesInView = false
+        
+        view.addGestureRecognizer(tap)
     }
-    
 }
 
-extension AddOperationViewController {
+extension OperationFormViewController {
     private func refreshReimbursementViews() {
         reimbursementStackView.isHidden = viewModel.isReimbursementHidden
         reimbursementTableView.isHidden = !viewModel.isReimbursementOn
@@ -265,31 +280,42 @@ extension AddOperationViewController {
 
 // MARK: - Actions
 
-extension AddOperationViewController {
+extension OperationFormViewController {
     @objc private func saveTapped() {
+        endEditingAndDismissExpandedInputs()
         viewModel.didTapSave()
-        
-        triggerFeedback(
-            .notification(.success)
-        )
     }
     
     @objc private func addReimbursementTapped() {
+        endEditingAndDismissExpandedInputs()
         viewModel.didTapAddReimbursement()
     }
     
+    @objc private func handleOutsideTap() {
+        endEditingAndDismissExpandedInputs()
+    }
+    
+    private func dismissExpandedInputs() {
+        categoryInputView.dismiss()
+        dateInputView.dismiss()
+    }
+    
+    private func endEditingAndDismissExpandedInputs() {
+        view.endEditing(true)
+        dismissExpandedInputs()
+    }
 }
 
-extension AddOperationViewController: UITableViewDataSource, UITableViewDelegate {
+extension OperationFormViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.numberOfReimbursements
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: TransferMoneyTableViewCell.identifier,
+            withIdentifier: ReimbursementTableViewCell.identifier,
             for: indexPath
-        ) as! TransferMoneyTableViewCell
+        ) as! ReimbursementTableViewCell
 
         cell.configure(with: viewModel.reimbursementTableViewModel(at: indexPath))
         cell.selectionStyle = .none
@@ -298,6 +324,7 @@ extension AddOperationViewController: UITableViewDataSource, UITableViewDelegate
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        endEditingAndDismissExpandedInputs()
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -356,5 +383,100 @@ extension AddOperationViewController: UITableViewDataSource, UITableViewDelegate
         }
         
         return UISwipeActionsConfiguration(actions: actions)
+    }
+}
+
+// MARK: - Bindings
+extension OperationFormViewController {
+    
+    private func setupEventBindings() {
+        viewModel.updateUI = { [weak self] in
+            guard let self = self else { return }
+            
+            self.refreshReimbursementViews()
+        }
+        
+        viewModel.onSuccess = { [weak self] in
+            guard let self = self else { return }
+            
+            self.notifyFeedback(.success)
+        }
+        
+        viewModel.onError = { [weak self] message in
+            guard let self = self else { return }
+            
+            self.notifyFeedback(.error)
+            
+            presentAlert(with: "Error", and: message)
+        }
+    }
+    
+    private func setupOperationTypeBindings() {
+        let existingOperationTypeSelectionChanged = viewModel.operationTypeInputViewModel.onSelectionChanged
+        viewModel.operationTypeInputViewModel.onSelectionChanged = { [weak self] selectedIndex in
+            self?.endEditingAndDismissExpandedInputs()
+            existingOperationTypeSelectionChanged?(selectedIndex)
+        }
+    }
+    
+    private func setupCategoryBindings() {
+        let existingCategoryBeginChoosing = viewModel.categoryInputViewModel.onBeginChoosing
+        viewModel.categoryInputViewModel.onBeginChoosing = { [weak self] in
+            self?.view.endEditing(true)
+            self?.dateInputView.dismiss()
+            existingCategoryBeginChoosing?()
+        }
+    }
+    
+    private func setupDateBindings() {
+        let existingDateBeginChoosing = viewModel.dateInputViewModel.onBeginChoosing
+        viewModel.dateInputViewModel.onBeginChoosing = { [weak self] in
+            self?.view.endEditing(true)
+            self?.categoryInputView.dismiss()
+            existingDateBeginChoosing?()
+        }
+    }
+    
+    private func setupAmountBindings() {
+        let existingAmountBeginEditing = viewModel.amountInputViewModel.onBeginEditing
+        viewModel.amountInputViewModel.onBeginEditing = { [weak self] in
+            self?.dismissExpandedInputs()
+            existingAmountBeginEditing?()
+        }
+    }
+    
+    private func setupTitleBindings() {
+        let existingTitleBeginEditing = viewModel.titleInputViewModel.onBeginEditing
+        viewModel.titleInputViewModel.onBeginEditing = { [weak self] in
+            self?.dismissExpandedInputs()
+            existingTitleBeginEditing?()
+        }
+    }
+    
+    private func setupReimbursementBindings() {
+        let existingReimbursementValueChanged = viewModel.reimbursementViewModel.onValueChanged
+        viewModel.reimbursementViewModel.onValueChanged = { [weak self] isOn in
+            self?.endEditingAndDismissExpandedInputs()
+            existingReimbursementValueChanged?(isOn)
+        }
+    }
+}
+
+extension OperationFormViewController {
+    
+    private func presentAlert(with title: String, and message: String) {
+        let alert = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+        
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            alert.dismiss(animated: true)
+        }
+        
+        alert.addAction(okAction);
+        
+        present(alert, animated: true)
     }
 }

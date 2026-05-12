@@ -91,7 +91,7 @@ extension OperationsCoordinator: ListOperationsViewModelProtocol {
     
     public func goToAddOperationWithVault(_ vault: VaultDTO, operationToEdit: OperationDTO? = nil) {
         
-        let coordinator = AddOperationCoordinator(
+        let coordinator = OperationFormCoordinator(
             navigationController: navigationController,
             dependencies: self.dependencies,
             vault: vault,
@@ -105,7 +105,7 @@ extension OperationsCoordinator: ListOperationsViewModelProtocol {
     
     public func goToAddOperationWithVault(_ vault: VaultDTO, of type: OperationType) {
         
-        let coordinator = AddOperationCoordinator(
+        let coordinator = OperationFormCoordinator(
             navigationController: navigationController,
             dependencies: self.dependencies,
             vault: vault,
@@ -119,7 +119,7 @@ extension OperationsCoordinator: ListOperationsViewModelProtocol {
     
     public func goToAddOperationWithReceipt(_ vault: VaultDTO, receipt: ReceiptOutput) {
         
-        let coordinator = AddOperationCoordinator(
+        let coordinator = OperationFormCoordinator(
             navigationController: navigationController,
             dependencies: dependencies,
             vault: vault,

@@ -45,7 +45,7 @@
 		8B2C30FA2F87000C00126BA8 /* CreateVaultCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2C30F92F87000C00126BA8 /* CreateVaultCoordinator.swift */; };
 		8B36E0902FA3A5B7007D0E07 /* AddReimbursementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B36E08F2FA3A5B7007D0E07 /* AddReimbursementViewController.swift */; };
 		8B36E0922FA3A5E2007D0E07 /* AddReimbursementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B36E0912FA3A5E2007D0E07 /* AddReimbursementViewModel.swift */; };
-		8B36E0F72FA412E1007D0E07 /* AddOperationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B36E0F62FA412E1007D0E07 /* AddOperationCoordinator.swift */; };
+		8B36E0F72FA412E1007D0E07 /* OperationFormCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B36E0F62FA412E1007D0E07 /* OperationFormCoordinator.swift */; };
 		8B5365642C09379400B3144C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5365632C09379400B3144C /* Constants.swift */; };
 		8B539B692F784A6E00977A6C /* CoreKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8B539B682F784A6E00977A6C /* CoreKit */; };
 		8B539BE12F7ADBDA00977A6C /* SampleCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539BE02F7ADBDA00977A6C /* SampleCoordinator.swift */; };
@@ -69,8 +69,8 @@
 		8B539C7A2F7C018D00977A6C /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539C792F7C018D00977A6C /* OnboardingCollectionViewCell.swift */; };
 		8B539C7C2F7C08ED00977A6C /* CreateVaultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539C7B2F7C08ED00977A6C /* CreateVaultViewModel.swift */; };
 		8B539C822F7C14A800977A6C /* TabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539C812F7C14A800977A6C /* TabBarViewModel.swift */; };
-		8B539CBA2F7C285F00977A6C /* AddOperationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539CB92F7C285F00977A6C /* AddOperationViewModel.swift */; };
-		8B539CBC2F7C286F00977A6C /* AddOperationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539CBB2F7C286F00977A6C /* AddOperationViewController.swift */; };
+		8B539CBA2F7C285F00977A6C /* OperationFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539CB92F7C285F00977A6C /* OperationFormViewModel.swift */; };
+		8B539CBC2F7C286F00977A6C /* OperationFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539CBB2F7C286F00977A6C /* OperationFormViewController.swift */; };
 		8B539CC12F7C710600977A6C /* MonthSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539CC02F7C710600977A6C /* MonthSelectorView.swift */; };
 		8B539CC32F7C711E00977A6C /* MonthSelectorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539CC22F7C711E00977A6C /* MonthSelectorViewModel.swift */; };
 		8B6185342F7F12ED008986A8 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6185332F7F12ED008986A8 /* SettingsViewController.swift */; };
@@ -190,7 +190,7 @@
 		8B2C30F92F87000C00126BA8 /* CreateVaultCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateVaultCoordinator.swift; sourceTree = "<group>"; };
 		8B36E08F2FA3A5B7007D0E07 /* AddReimbursementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReimbursementViewController.swift; sourceTree = "<group>"; };
 		8B36E0912FA3A5E2007D0E07 /* AddReimbursementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReimbursementViewModel.swift; sourceTree = "<group>"; };
-		8B36E0F62FA412E1007D0E07 /* AddOperationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOperationCoordinator.swift; sourceTree = "<group>"; };
+		8B36E0F62FA412E1007D0E07 /* OperationFormCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationFormCoordinator.swift; sourceTree = "<group>"; };
 		8B5365602C09362600B3144C /* AppStore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppStore.xcconfig; sourceTree = "<group>"; };
 		8B5365632C09379400B3144C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8B539BE02F7ADBDA00977A6C /* SampleCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleCoordinator.swift; sourceTree = "<group>"; };
@@ -214,8 +214,8 @@
 		8B539C792F7C018D00977A6C /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
 		8B539C7B2F7C08ED00977A6C /* CreateVaultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateVaultViewModel.swift; sourceTree = "<group>"; };
 		8B539C812F7C14A800977A6C /* TabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewModel.swift; sourceTree = "<group>"; };
-		8B539CB92F7C285F00977A6C /* AddOperationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOperationViewModel.swift; sourceTree = "<group>"; };
-		8B539CBB2F7C286F00977A6C /* AddOperationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOperationViewController.swift; sourceTree = "<group>"; };
+		8B539CB92F7C285F00977A6C /* OperationFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationFormViewModel.swift; sourceTree = "<group>"; };
+		8B539CBB2F7C286F00977A6C /* OperationFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationFormViewController.swift; sourceTree = "<group>"; };
 		8B539CC02F7C710600977A6C /* MonthSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthSelectorView.swift; sourceTree = "<group>"; };
 		8B539CC22F7C711E00977A6C /* MonthSelectorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthSelectorViewModel.swift; sourceTree = "<group>"; };
 		8B6185332F7F12ED008986A8 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -610,7 +610,7 @@
 		8B36E0F52FA412CA007D0E07 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
-				8B36E0F62FA412E1007D0E07 /* AddOperationCoordinator.swift */,
+				8B36E0F62FA412E1007D0E07 /* OperationFormCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -864,7 +864,7 @@
 		8B539CB42F7C27AB00977A6C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8B539CBB2F7C286F00977A6C /* AddOperationViewController.swift */,
+				8B539CBB2F7C286F00977A6C /* OperationFormViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -872,7 +872,7 @@
 		8B539CB52F7C27AF00977A6C /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				8B539CB92F7C285F00977A6C /* AddOperationViewModel.swift */,
+				8B539CB92F7C285F00977A6C /* OperationFormViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1585,10 +1585,10 @@
 				8BABC0012FA2000000D00101 /* OperationDetailViewController.swift in Sources */,
 				8BABC0032FA2000000D00101 /* OperationDetailViewModel.swift in Sources */,
 				8BABC0102FA300000D00101 /* TransferMoneyTableViewCell.swift in Sources */,
-				8B36E0F72FA412E1007D0E07 /* AddOperationCoordinator.swift in Sources */,
+				8B36E0F72FA412E1007D0E07 /* OperationFormCoordinator.swift in Sources */,
 				8BABC0122FA300000D00101 /* TransferMoneyTableViewModel.swift in Sources */,
 				8B078C202F7DDA6400075CC1 /* ListCategoriesViewController.swift in Sources */,
-				8B539CBC2F7C286F00977A6C /* AddOperationViewController.swift in Sources */,
+				8B539CBC2F7C286F00977A6C /* OperationFormViewController.swift in Sources */,
 				8B6185412F7F1715008986A8 /* MenuOptionTableViewModel.swift in Sources */,
 				8B7D6FB62FAA36DD004866D8 /* OperationDetailHeaderView.swift in Sources */,
 				8BEFE4432F8EA72400A9D1DD /* ChartCardView.swift in Sources */,
@@ -1643,7 +1643,7 @@
 				8B6185362F7F12FE008986A8 /* SettingsCoordinator.swift in Sources */,
 				8B2C30F52F86F52600126BA8 /* VaultTableViewModel.swift in Sources */,
 				8B00F34B2F8D345A008C8777 /* ChatViewModel.swift in Sources */,
-				8B539CBA2F7C285F00977A6C /* AddOperationViewModel.swift in Sources */,
+				8B539CBA2F7C285F00977A6C /* OperationFormViewModel.swift in Sources */,
 				8B539CC32F7C711E00977A6C /* MonthSelectorViewModel.swift in Sources */,
 				8B539C072F7B2A5400977A6C /* OperationTableViewModel.swift in Sources */,
 				8B539C112F7B334100977A6C /* AmountCardSectionViewModel.swift in Sources */,

@@ -16,6 +16,7 @@ protocol CategoryFormViewModelDelegate: AnyObject {
 }
 
 final class CategoryFormViewModel: NSObject {
+    
     private static let operationTypesInDisplayOrder: [OperationType] = [.expense, .income]
 
     weak var delegate: CategoryFormViewModelDelegate?
@@ -53,13 +54,7 @@ final class CategoryFormViewModel: NSObject {
         return NSLocalizedString("add_category_title", tableName: "AddCategory", comment: "")
     }
     
-    public var subtitle: String {
-        if categoryToEdit != nil {
-            return categoryToEdit?.title ?? ""
-        }
-        
-        return vault.name
-    }
+    public var subtitle: String { vault.name }
     
     lazy var operationTypeInputViewModel: SegmentedInputViewModel = {
         let selectedValue = selectedIndex(for: categoryToEdit?.operationType ?? .expense)

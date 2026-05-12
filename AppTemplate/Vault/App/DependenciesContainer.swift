@@ -115,13 +115,12 @@ extension DependenciesContainer {
     }
     
     // MARK: Add Operation Module
-    func getAddOperationViewModel(with vault: VaultDTO, operationToEdit: OperationDTO? = nil, operationType: OperationType? = nil, receipt: ReceiptOutput? = nil) -> AddOperationViewModel {
+    func getAddOperationViewModel(with vault: VaultDTO, operationToEdit: OperationDTO? = nil, operationType: OperationType? = nil, receipt: ReceiptOutput? = nil) -> OperationFormViewModel {
         
-        return AddOperationViewModel(
+        return OperationFormViewModel(
             addOperationUseCase: getAddOperationUseCase(),
             editOperationUseCase: getEditOperationUseCase(),
             listCategoryUseCase: getListCategoryUseCase(),
-            listVaultUseCase: getListVaultUseCase(),
             addReimbursementUseCase: getAddReimbursementUseCase(),
             updateReimbursementUseCase: getUpdateReimbursementStatusUseCase(),
             deleteReimbursementUseCase: getDeleteReimbursementUseCase(),

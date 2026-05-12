@@ -1,5 +1,5 @@
 //
-//  AddOperationViewModel.swift
+//  OperationFormViewModel.swift
 //  Vault
 //
 //  Created by Miguel Solans on 31/03/2026.
@@ -9,17 +9,17 @@ import Foundation
 import AppUIKit
 import VaultCore
 
-protocol AddOperationViewModelProtocol: AnyObject {
-    func didAddOperation(_ viewModel: AddOperationViewModel);
-    func didEditOperation(_ viewModel: AddOperationViewModel);
-    func didTapAddReimbursement(_ viewModel: AddOperationViewModel);
+protocol OperationFormViewModelDelegate: AnyObject {
+    func didAddOperation(_ viewModel: OperationFormViewModel)
+    func didEditOperation(_ viewModel: OperationFormViewModel)
+    func didTapAddReimbursement(_ viewModel: OperationFormViewModel)
 }
 
-final class AddOperationViewModel: NSObject {
+final class OperationFormViewModel: NSObject {
     
     private static let operationTypesInDisplayOrder: [OperationType] = [.expense, .income]
     
-    weak var delegate: AddOperationViewModelProtocol?
+    weak var delegate: OperationFormViewModelDelegate?
     
     // MARK: - Dependencies
     
@@ -29,27 +29,24 @@ final class AddOperationViewModel: NSObject {
     
     private let listCategoryUseCase: ListCategoriesUseCase
     
-    private let listVaultUseCase: ListVaultUseCase
-    
     private let addReimbursementUseCase: AddReimbursementUseCase
     
     private let updateReimbursementUseCase: UpdateReimbursementStatusUseCase
     
     private let deleteReimbursementUseCase: DeleteReimbursementUseCase
     
-    private(set) var vault: VaultDTO
+    private var vault: VaultDTO
     
-    private(set) var operationToEdit: OperationDTO?
+    private var operationToEdit: OperationDTO?
     
-    private(set) var operationType: OperationType?
+    private var operationType: OperationType?
     
-    private(set) var receipt: ReceiptOutput?
+    private var receipt: ReceiptOutput?
     
     init(
         addOperationUseCase: AddOperationsUseCase,
         editOperationUseCase: EditOperationUseCase,
         listCategoryUseCase: ListCategoriesUseCase,
-        listVaultUseCase: ListVaultUseCase,
         addReimbursementUseCase: AddReimbursementUseCase,
         updateReimbursementUseCase: UpdateReimbursementStatusUseCase,
         deleteReimbursementUseCase: DeleteReimbursementUseCase,
@@ -61,7 +58,6 @@ final class AddOperationViewModel: NSObject {
         self.addOperationUseCase = addOperationUseCase
         self.editOperationUseCase = editOperationUseCase
         self.listCategoryUseCase = listCategoryUseCase
-        self.listVaultUseCase = listVaultUseCase
         self.addReimbursementUseCase = addReimbursementUseCase
         self.updateReimbursementUseCase = updateReimbursementUseCase
         self.deleteReimbursementUseCase = deleteReimbursementUseCase
@@ -88,7 +84,10 @@ final class AddOperationViewModel: NSObject {
     public var subtitle: String { vault.name }
     
     public lazy var ocrFeedback: FeedbackViewModel = {
-        let viewModel = FeedbackViewModel(title: "Review data", subtitle: "You read a receipt from camera.\nImage to text recognition may provide inacurate data.", feedbackType: .informative)
+        let viewModel = FeedbackViewModel(
+            title: "Review data",
+            subtitle: "Information has been automatically populated from the receipt. Review data before saving.",
+            feedbackType: .informative)
         
         return viewModel
     }()
@@ -226,13 +225,13 @@ final class AddOperationViewModel: NSObject {
     
     // MARK: - State
     
-    public var categories: [CategoryDTO] {
+    private var categories: [CategoryDTO] {
         didSet {
             updateCategoriesForSelectedOperationType()
         }
     }
     
-    public var reimbursements: [ReimbursementDTO] = []
+    private var reimbursements: [ReimbursementDTO] = []
     
     private var isOperationTypeEditable: Bool {
         get {
@@ -323,15 +322,13 @@ final class AddOperationViewModel: NSObject {
         reimbursements.count
     }
     
-    public func reimbursementTableViewModel(at indexPath: IndexPath) -> TransferMoneyTableViewModel {
+    public func reimbursementTableViewModel(at indexPath: IndexPath) -> ReimbursementTableViewModel {
         let reimbursement = reimbursements[indexPath.row]
 
-        return TransferMoneyTableViewModel(
-            amount: LocalizedDecimalFormatter(numberStyle: .currency)
-                .string(from: reimbursement.amount) ?? "\(reimbursement.amount)",
-            sourceVaultName: reimbursement.sourceVault.name,
-            destinationVaultName: reimbursement.destinationVault.name,
-            status: reimbursement.status
+        return ReimbursementTableViewModel(
+            status: reimbursement.status,
+            title: reimbursement.notes,
+            amount: reimbursement.amount
         )
     }
     
@@ -353,11 +350,15 @@ final class AddOperationViewModel: NSObject {
     // MARK: - Bindings
     
     public var updateUI: (() -> Void)?
+    
+    public var onError: ((String) -> Void)?
+    
+    public var onSuccess: (() -> Void)?
 }
 
 // MARK: - Data
 
-extension AddOperationViewModel {
+extension OperationFormViewModel {
     
     public func getData() {
         getCategories()
@@ -378,7 +379,7 @@ extension AddOperationViewModel {
             self.categories = response.categories
             
         } catch {
-            // TODO: Present error?
+            onError?("There was an error while fetching categories")
         }
     }
     
@@ -434,7 +435,7 @@ extension AddOperationViewModel {
             reimbursements[index.row] = response.reimbursement
             updateUI?()
         } catch {
-            // TODO: Present error?
+            onError?("There was an error updating the reimbursement status")
         }
     }
     
@@ -473,10 +474,12 @@ extension AddOperationViewModel {
                 try createReimbursement(operation: result.operation)
             }
             
+            onSuccess?()
+            
             delegate?.didAddOperation(self)
             
         } catch {
-            // TODO: Present error?
+            onError?("There was an error creating the operation.")
         }
     }
     
@@ -534,10 +537,13 @@ extension AddOperationViewModel {
         do {
             
             let _ = try editOperationUseCase.execute(request)
+            
+            onSuccess?()
+            
             delegate?.didEditOperation(self)
             
         } catch {
-            // TODO: Present error?
+            onError?("An error occurred while updating the operation.")
         }
         
     }
@@ -549,9 +555,9 @@ extension AddOperationViewModel {
     }
 }
 
-// MARK: - Actions
+// MARK: - Actions -
 
-extension AddOperationViewModel {
+extension OperationFormViewModel {
     public func didTapSave() {
         
         guard validateInputs() else { return }
@@ -564,13 +570,20 @@ extension AddOperationViewModel {
         createOperation()
     }
     
-    func didTapAddReimbursement() {
+    public func didTapAddReimbursement() {
         delegate?.didTapAddReimbursement(self)
     }
     
-    func didTapDeleteReimbursement(at index: IndexPath) {
-        
+    public func didTapDeleteReimbursement(at index: IndexPath) {
         let reimbursement = reimbursements[index.row]
+        
+        if operationToEdit == nil {
+            reimbursements.remove(at: index.row)
+            
+            updateState()
+            
+            return
+        }
         
         let request = DeleteReimbursementRequest(id: reimbursement.id)
         
@@ -581,51 +594,29 @@ extension AddOperationViewModel {
             reimbursements.remove(at: index.row)
             
         } catch {
-            
-            reimbursements.remove(at: index.row)
-            print("Got error: \(error.localizedDescription)")
-            
+            onError?("An error ocurred while trying to delete reimbursement.")
         }
         
         updateState()
     }
     
-    func didTapReceivedReimbursementStatus(at index: IndexPath) {
+    public func didTapReceivedReimbursementStatus(at index: IndexPath) {
         updateReimbursementStatus(at: index, to: .received)
     }
     
-    func didTapCancelledReimbursementStatus(at index: IndexPath) {
+    public func didTapCancelledReimbursementStatus(at index: IndexPath) {
         updateReimbursementStatus(at: index, to: .cancelled)
     }
     
-    func didTapExpectedReimbursementStatus(at index: IndexPath) {
+    public func didTapExpectedReimbursementStatus(at index: IndexPath) {
         updateReimbursementStatus(at: index, to: .expected)
     }
 }
 
-// MARK: - Selection
-
-extension AddOperationViewModel {
-    
-    private func selectedIndex(for operationType: OperationType) -> Int {
-        Self.operationTypesInDisplayOrder.firstIndex(of: operationType) ?? 0
-    }
-    
-    private func selectedOperationType() -> OperationType? {
-        guard let selectedIndex = operationTypeInputViewModel.selectedIndex,
-              Self.operationTypesInDisplayOrder.indices.contains(selectedIndex) else {
-            return nil
-        }
-        
-        return Self.operationTypesInDisplayOrder[selectedIndex]
-    }
-}
-
-
 // MARK: - Validations
 
-extension AddOperationViewModel {
-    fileprivate func validateInputs() -> Bool {
+extension OperationFormViewModel {
+    private func validateInputs() -> Bool {
         var isValid = true
         
         if !validateCategory() {
@@ -681,7 +672,7 @@ extension AddOperationViewModel {
 
 // MARK: - Bindings
 
-extension AddOperationViewModel {
+extension OperationFormViewModel {
     private func setupBindings() {
         setupOperationTypeBindings()
         setupCategoryBindings()
@@ -735,8 +726,6 @@ extension AddOperationViewModel {
         reimbursementViewModel.onValueChanged = { [weak self] isOn in
             guard let self = self else { return }
             
-            // self.amountInputViewModel.isEditable = self.isAmountEditable
-            
             self.reimbursements = []
             
             updateState()
@@ -744,11 +733,27 @@ extension AddOperationViewModel {
     }
 }
 
-extension AddOperationViewModel {
+// MARK: - Helper -
+
+extension OperationFormViewModel {
+    
     private func updateState() {
         amountInputViewModel.isEditable = isAmountEditable
         reimbursementViewModel.isEditable = isReimbursementEditable
         
         updateUI?()
+    }
+    
+    private func selectedIndex(for operationType: OperationType) -> Int {
+        Self.operationTypesInDisplayOrder.firstIndex(of: operationType) ?? 0
+    }
+    
+    private func selectedOperationType() -> OperationType? {
+        guard let selectedIndex = operationTypeInputViewModel.selectedIndex,
+              Self.operationTypesInDisplayOrder.indices.contains(selectedIndex) else {
+            return nil
+        }
+        
+        return Self.operationTypesInDisplayOrder[selectedIndex]
     }
 }

@@ -1,5 +1,5 @@
 //
-//  AddOperationCoordinator.swift
+//  OperationFormCoordinator.swift
 //  Vault
 //
 //  Created by Miguel Solans on 30/04/2026.
@@ -9,7 +9,7 @@ import UIKit
 import CoreKit
 import VaultCore
 
-final class AddOperationCoordinator: BaseCoordinator {
+final class OperationFormCoordinator: BaseCoordinator {
     
     // MARK: - Dependencies
     
@@ -53,7 +53,7 @@ final class AddOperationCoordinator: BaseCoordinator {
         navigationController.popViewController(animated: true)
     }
     
-    private lazy var viewModel: AddOperationViewModel = {
+    private lazy var viewModel: OperationFormViewModel = {
         
         let viewModel = self.dependencies.getAddOperationViewModel(
             with: vault,
@@ -67,9 +67,9 @@ final class AddOperationCoordinator: BaseCoordinator {
         return viewModel
     }()
     
-    lazy var viewController: AddOperationViewController = {
+    private lazy var viewController: OperationFormViewController = {
         
-        let viewController = AddOperationViewController(viewModel: viewModel)
+        let viewController = OperationFormViewController(viewModel: viewModel)
         
         viewController.hidesBottomBarWhenPushed = true
         
@@ -77,23 +77,22 @@ final class AddOperationCoordinator: BaseCoordinator {
     }()
 }
 
-extension AddOperationCoordinator: AddOperationViewModelProtocol {
+extension OperationFormCoordinator: OperationFormViewModelDelegate {
     
-    func didAddOperation(_ viewModel: AddOperationViewModel) {
+    func didAddOperation(_ viewModel: OperationFormViewModel) {
         finish()
     }
     
-    func didEditOperation(_ viewModel: AddOperationViewModel) {
+    func didEditOperation(_ viewModel: OperationFormViewModel) {
         finish()
     }
     
-    func didTapAddReimbursement(_ viewModel: AddOperationViewModel) {
+    func didTapAddReimbursement(_ viewModel: OperationFormViewModel) {
         navigateToAddReimbursement(with: viewModel.maximumReimbursementAvailable)
     }
 }
 
-extension AddOperationCoordinator: AddReimbursementViewModelDelegate {
-    
+extension OperationFormCoordinator: AddReimbursementViewModelDelegate {
     
     private func navigateToAddReimbursement(with maximumAmount: Double) {
         let viewModel = dependencies.getAddReimbursementViewModel(with: vault, and: maximumAmount)
