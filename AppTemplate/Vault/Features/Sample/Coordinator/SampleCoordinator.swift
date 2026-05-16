@@ -23,9 +23,16 @@ class SampleCoordinator: BaseCoordinator {
     
     fileprivate let dependencies: DependenciesContainer
     
-    init(navigationController: UINavigationController, dependencies: DependenciesContainer) {
+    private let navigationMode: CoordinatorNavigationMode
+    
+    init(
+        navigationController: UINavigationController,
+        dependencies: DependenciesContainer,
+        navigationMode: CoordinatorNavigationMode = .root
+    ) {
         self.navigationController = navigationController
         self.dependencies = dependencies
+        self.navigationMode = navigationMode
         super.init()
     }
     
@@ -33,7 +40,12 @@ class SampleCoordinator: BaseCoordinator {
     
     override func start() {
         rootViewController = sampleViewController
-        self.navigationController.viewControllers = [sampleViewController];
+        
+        if case .root = navigationMode {
+            navigationController.delegate = self
+        }
+        
+        navigationController.showInitialViewController(sampleViewController, using: navigationMode)
     }
     
     override func finish() {
@@ -57,4 +69,21 @@ class SampleCoordinator: BaseCoordinator {
 
 extension SampleCoordinator: SampleViewModelDelegate {
     
+}
+
+extension SampleCoordinator: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        if viewController == rootViewController {
+            cleanUpFinishedCoordinators()
+        }
+    }
+    
+    private func cleanUpFinishedCoordinators() {
+        removeFinishedChildren(from: self)
+    }
+    
+    private func removeFinishedChildren(from coordinator: BaseCoordinator) {
+        
+        coordinator.removeAllChildCoordinators()
+    }
 }

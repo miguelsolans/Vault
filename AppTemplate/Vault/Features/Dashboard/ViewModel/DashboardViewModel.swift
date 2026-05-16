@@ -20,6 +20,7 @@ protocol DashboardViewModelDelegate: AnyObject {
     func didTapVaultSelector(_ viewModel: DashboardViewModel)
     func didTapAgent(_ viewModel: DashboardViewModel)
     func didTapOperationGroup(_ viewModel: DashboardViewModel, with filter: OperationsFilter)
+    func didTapFeedback(_ viewModel: DashboardViewModel)
 }
 
 public final class DashboardViewModel: NSObject {
@@ -321,6 +322,11 @@ extension DashboardViewModel {
         )
         
         delegate?.didTapOperationGroup(self, with: filter)
+    }
+    
+    func didTapFeedback() {
+        
+        delegate?.didTapFeedback(self)
     }
 }
 

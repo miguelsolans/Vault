@@ -1,15 +1,6 @@
 {
-  "originHash" : "2583ff076a4b44abd5067b09c8252c67146467d7e08c3f2350d59a4babd47ad5",
+  "originHash" : "b5594b5da6fdd2ad35efef2753b654f822bf075aa59854effbf96dff49eaf2b6",
   "pins" : [
-    {
-      "identity" : "appcorekit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/miguelsolans/AppCoreKit",
-      "state" : {
-        "branch" : "Core/Bindings",
-        "revision" : "cf783ff899a612266db27b99ef7e7909ed2cdde8"
-      }
-    },
     {
       "identity" : "iqkeyboardcore",
       "kind" : "remoteSourceControl",

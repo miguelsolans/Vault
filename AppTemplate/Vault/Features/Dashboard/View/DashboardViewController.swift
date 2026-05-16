@@ -26,7 +26,6 @@ final class DashboardViewController: UIViewController {
     lazy var feedbackView: FeedbackView = {
         let view = FeedbackView(viewModel: viewModel.feedbackViewModel, style: FeedbackStyles.informativeFeedback)
         
-        
         view.translatesAutoresizingMaskIntoConstraints = false
         view.isHidden = true
         
@@ -99,6 +98,7 @@ final class DashboardViewController: UIViewController {
         setupScrollStack()
         setupStackItems()
         setupBindings()
+        setupGestures()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -107,13 +107,20 @@ final class DashboardViewController: UIViewController {
         viewModel.getData()
     }
     
+    private func setupGestures() {
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapFeedback))
+        
+        feedbackView.addGestureRecognizer(tapGesture)
+    }
+    
     // MARK: - Setup ScrollView + Stack
     func setupScrollStack() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentStack)
         
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -194,6 +201,10 @@ final class DashboardViewController: UIViewController {
     
     private func didTapFilter() {
         
+    }
+    
+    @objc private func didTapFeedback() {
+        viewModel.didTapFeedback()
     }
     
     // MARK: - Summary UI

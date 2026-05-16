@@ -7,13 +7,15 @@
 
 import UIKit
 
-class ListOperationsViewController: VaultBaseViewController {
+final class ListOperationsViewController: VaultBaseViewController {
     
     // MARK: - Dependencies
     
     private(set) var viewModel: ListOperationsViewModel
     
-    init(viewModel: ListOperationsViewModel) {
+    init(
+        viewModel: ListOperationsViewModel
+    ) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -22,17 +24,19 @@ class ListOperationsViewController: VaultBaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - UI Elements
+    // MARK: - UI
     
-    lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .grouped)
+    private lazy var stackView: UIStackView = {
+        let view = UIStackView()
         
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+        view.axis = .vertical
+        view.spacing = 8
+        view.translatesAutoresizingMaskIntoConstraints = false
         
-        return tableView
-    }();
+        return view
+    }()
     
-    lazy var monthSelectorView: MonthSelectorView = {
+    private lazy var monthSelectorView: MonthSelectorView = {
         let view = MonthSelectorView(viewModel: viewModel.monthSelectorViewModel)
         
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -40,7 +44,13 @@ class ListOperationsViewController: VaultBaseViewController {
         return view;
     }();
     
-    // MARK: - Lifecycles
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .grouped)
+        
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return tableView
+    }();
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +67,7 @@ class ListOperationsViewController: VaultBaseViewController {
     override func setupUI() {
         title = viewModel.title
         navigationItem.subtitle = viewModel.subtitle
+        setupStackView()
         setupMonthSelector()
         setupTableView()
         setupBarButtonItems()
@@ -70,35 +81,42 @@ class ListOperationsViewController: VaultBaseViewController {
             
             self.tableView.reloadData()
         }
+        
+        viewModel.onError = { [weak self] message in
+            guard let self = self else { return }
+            
+            self.presentAlert(with: "Error", and: message);
+        }
     }
 }
 
 // MARK: - UI Setup
 
 extension ListOperationsViewController {
-    func setupMonthSelector() {
-        view.addSubview(monthSelectorView)
+    
+    private func setupStackView() {
+        stackView.addArrangedSubview(monthSelectorView)
+        stackView.addArrangedSubview(tableView)
+        view.addSubview(stackView)
         
         NSLayoutConstraint.activate([
-            monthSelectorView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            monthSelectorView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            monthSelectorView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+    
+    private func setupMonthSelector() {
+        
+        NSLayoutConstraint.activate([
             monthSelectorView.heightAnchor.constraint(equalToConstant: 40)
         ])
         
         monthSelectorView.isHidden = !viewModel.canFilter
     }
     
-    func setupTableView() {
-        
-        view.addSubview(self.tableView)
-        
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: monthSelectorView.bottomAnchor, constant: 8),
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-        ])
+    private func setupTableView() {
         
         tableView.delegate = self;
         tableView.dataSource = self
@@ -107,14 +125,14 @@ extension ListOperationsViewController {
             OperationTableViewCell.self,
             forCellReuseIdentifier: OperationTableViewCell.identifier
         )
-
+        
         tableView.register(
             OperationSectionHeaderView.self,
             forHeaderFooterViewReuseIdentifier: OperationSectionHeaderView.identifier
         )
     }
     
-    func setupBarButtonItems() {
+    private func setupBarButtonItems() {
         
         guard viewModel.canAddOperation else { return }
         
@@ -153,7 +171,7 @@ extension ListOperationsViewController {
         navigationItem.rightBarButtonItem = addBarButtonItem
     }
     
-    func setupContentUnavailable() {
+    private func setupContentUnavailable() {
         setNeedsUpdateContentUnavailableConfiguration()
     }
     
@@ -172,33 +190,14 @@ extension ListOperationsViewController {
             
             emptyView = UIContentUnavailableView(configuration: config)
             
-            
         }
         
         tableView.backgroundView = emptyView
     }
 }
 
-// MARK: - Actions
-extension ListOperationsViewController {
-    @objc func didTapAddOperation() {
-        viewModel.didTapAddOperation()
-    }
-    
-    @objc func didTapAddIncome() {
-        viewModel.didTapAddOperation(of: .income)
-    }
-    
-    @objc func didTapAddExpense() {
-        viewModel.didTapAddOperation(of: .expense)
-    }
-    
-    @objc func didTapAddFromCamera() {
-        viewModel.didTapAddFromCamera()
-    }
-}
+// MARK: - UITableView delegates -
 
-// MARK: - UITableView delegates
 extension ListOperationsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -275,5 +274,45 @@ extension ListOperationsViewController: UITableViewDataSource, UITableViewDelega
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
             return UIMenu(title: "", children: [editAction, deleteAction])
         }
+    }
+}
+
+// MARK: - Actions -
+
+extension ListOperationsViewController {
+    @objc private func didTapAddOperation() {
+        viewModel.didTapAddOperation()
+    }
+    
+    @objc private func didTapAddIncome() {
+        viewModel.didTapAddOperation(of: .income)
+    }
+    
+    @objc private func didTapAddExpense() {
+        viewModel.didTapAddOperation(of: .expense)
+    }
+    
+    @objc private func didTapAddFromCamera() {
+        viewModel.didTapAddFromCamera()
+    }
+}
+
+// MARK: - Alert -
+
+extension ListOperationsViewController {
+    private func presentAlert(with title: String, and message: String) {
+        let alert = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+        
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            alert.dismiss(animated: true)
+        }
+        
+        alert.addAction(okAction);
+        
+        present(alert, animated: true)
     }
 }

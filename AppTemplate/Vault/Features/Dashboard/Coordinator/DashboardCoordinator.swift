@@ -85,6 +85,7 @@ extension DashboardCoordinator: ListVaultCoordinatorDelegate {
 
 // MARK: - DashboardViewControllerDelegate
 extension DashboardCoordinator: DashboardViewModelDelegate {
+    
     func didTapVaultSelector(_ viewModel: DashboardViewModel) {
         let navigation = UINavigationController()
         
@@ -121,6 +122,26 @@ extension DashboardCoordinator: DashboardViewModelDelegate {
         coordinator.start()
         
         addChildCoordinator(coordinator)
+    }
+    
+    func didTapFeedback(_ viewModel: DashboardViewModel) {
+        
+        let filter = OperationsFilter(
+            reimbursementStatus: .expected,
+            vault: vault
+        )
+        
+        let coordinator = OperationsCoordinator(
+            navigationController: navigationController,
+            dependencies: dependencies,
+            filter: filter,
+            navigationMode: .push(animated: true, hidesBottomBarWhenPushed: true),
+            canAddOperation: false,
+            canFilter: false
+        )
+        
+        addChildCoordinator(coordinator)
+        coordinator.start()
     }
 }
 

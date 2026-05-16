@@ -47,7 +47,6 @@
 		8B36E0922FA3A5E2007D0E07 /* AddReimbursementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B36E0912FA3A5E2007D0E07 /* AddReimbursementViewModel.swift */; };
 		8B36E0F72FA412E1007D0E07 /* OperationFormCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B36E0F62FA412E1007D0E07 /* OperationFormCoordinator.swift */; };
 		8B5365642C09379400B3144C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5365632C09379400B3144C /* Constants.swift */; };
-		8B539B692F784A6E00977A6C /* CoreKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8B539B682F784A6E00977A6C /* CoreKit */; };
 		8B539BE12F7ADBDA00977A6C /* SampleCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539BE02F7ADBDA00977A6C /* SampleCoordinator.swift */; };
 		8B539BE52F7ADBF600977A6C /* SampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539BE42F7ADBF600977A6C /* SampleViewController.swift */; };
 		8B539BE72F7ADC1D00977A6C /* SampleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539BE62F7ADC1D00977A6C /* SampleViewModel.swift */; };
@@ -103,6 +102,7 @@
 		8B81F1D92FAF7EB500ECA9F4 /* AmountStatusHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B81F1D82FAF7EB500ECA9F4 /* AmountStatusHeaderViewModel.swift */; };
 		8B81F1E02FB1190000ECA9F4 /* CategoryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B81F1DF2FB1190000ECA9F4 /* CategoryDetailViewController.swift */; };
 		8B81F1E22FB1194A00ECA9F4 /* CategoryDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B81F1E12FB1194A00ECA9F4 /* CategoryDetailViewModel.swift */; };
+		8B8338BB2FB9191800EDC242 /* CoreKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8B8338BA2FB9191800EDC242 /* CoreKit */; };
 		8B9B09B52F83F48D0042840E /* ImportOperationsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B09B42F83F48D0042840E /* ImportOperationsCoordinator.swift */; };
 		8B9B09B72F83F49B0042840E /* ImportOperationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B09B62F83F49B0042840E /* ImportOperationsViewModel.swift */; };
 		8B9B09B92F83F4B60042840E /* ImportOperationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B09B82F83F4B60042840E /* ImportOperationsViewController.swift */; };
@@ -300,8 +300,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B539B692F784A6E00977A6C /* CoreKit in Frameworks */,
 				8B2748CC2F98EB5D0029ED84 /* AppUIKit in Frameworks */,
+				8B8338BB2FB9191800EDC242 /* CoreKit in Frameworks */,
 				8BD0F7442F930DA6007C2E59 /* NVActivityIndicatorView in Frameworks */,
 				8B539C312F7B413500977A6C /* CoreData.framework in Frameworks */,
 				8BF3B9012FACC43100DAFA1D /* VaultCore in Frameworks */,
@@ -983,13 +983,6 @@
 			path = "Pin View";
 			sourceTree = "<group>";
 		};
-		8B7436E62F80031400E2760E /* Biometric Activation */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Biometric Activation";
-			sourceTree = "<group>";
-		};
 		8B7436E82F80032800E2760E /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -1252,7 +1245,6 @@
 				8BD0F72F2F92D5A8007C2E59 /* OCR */,
 				8BCF15E62F82D13900B483BD /* Categories */,
 				8B61852F2F7F12C3008986A8 /* Settings */,
-				8B7436E62F80031400E2760E /* Biometric Activation */,
 				8B539BDC2F7ADB9100977A6C /* Sample */,
 			);
 			path = Features;
@@ -1445,12 +1437,12 @@
 			);
 			name = Vault;
 			packageProductDependencies = (
-				8B539B682F784A6E00977A6C /* CoreKit */,
 				8B9B09BD2F8421860042840E /* IQKeyboardManagerSwift */,
 				8BD0F7432F930DA6007C2E59 /* NVActivityIndicatorView */,
 				8BD0F7452F930DA6007C2E59 /* NVActivityIndicatorViewExtended */,
 				8B2748CB2F98EB5D0029ED84 /* AppUIKit */,
 				8BF3B9002FACC43100DAFA1D /* VaultCore */,
+				8B8338BA2FB9191800EDC242 /* CoreKit */,
 			);
 			productName = AppTemplate;
 			productReference = 8BC2E4FE2BFD3841007FAF4C /* Vault.app */;
@@ -1482,11 +1474,11 @@
 			);
 			mainGroup = 8BC2E4F52BFD3841007FAF4C;
 			packageReferences = (
-				8B539B672F784A6E00977A6C /* XCRemoteSwiftPackageReference "AppCoreKit" */,
 				8B9B09BC2F8421860042840E /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				8BD0F7422F930DA6007C2E59 /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */,
 				8B2748CA2F98EB5D0029ED84 /* XCLocalSwiftPackageReference "../../AppUIKit" */,
 				8BF3B8FF2FACC43100DAFA1D /* XCLocalSwiftPackageReference "../../VaultCore/VaultCore" */,
+				8B8338B92FB9191800EDC242 /* XCLocalSwiftPackageReference "../../AppCoreKit" */,
 			);
 			productRefGroup = 8BC2E4FF2BFD3841007FAF4C /* Products */;
 			projectDirPath = "";
@@ -2066,6 +2058,10 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../../AppUIKit;
 		};
+		8B8338B92FB9191800EDC242 /* XCLocalSwiftPackageReference "../../AppCoreKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../AppCoreKit;
+		};
 		8BF3B8FF2FACC43100DAFA1D /* XCLocalSwiftPackageReference "../../VaultCore/VaultCore" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../../VaultCore/VaultCore;
@@ -2073,14 +2069,6 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8B539B672F784A6E00977A6C /* XCRemoteSwiftPackageReference "AppCoreKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/miguelsolans/AppCoreKit";
-			requirement = {
-				branch = Core/Bindings;
-				kind = branch;
-			};
-		};
 		8B9B09BC2F8421860042840E /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
@@ -2104,9 +2092,8 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = AppUIKit;
 		};
-		8B539B682F784A6E00977A6C /* CoreKit */ = {
+		8B8338BA2FB9191800EDC242 /* CoreKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8B539B672F784A6E00977A6C /* XCRemoteSwiftPackageReference "AppCoreKit" */;
 			productName = CoreKit;
 		};
 		8B9B09BD2F8421860042840E /* IQKeyboardManagerSwift */ = {

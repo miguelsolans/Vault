@@ -9,7 +9,38 @@ import UIKit
 import CoreKit
 import VaultCore
 
-class OperationsCoordinator: BaseCoordinator {
+public struct OperationsFilter {
+    public var startDate: Date?
+    
+    public var endDate: Date?
+    
+    public var type: OperationType?
+    
+    public var period: Period
+    
+    public var reimbursementStatus: ReimbursementStatus?
+    
+    public let vault: VaultDTO
+    
+    public init(
+        startDate: Date? = nil,
+        endDate: Date? = nil,
+        type: OperationType? = nil,
+        period: Period = .yearly,
+        reimbursementStatus: ReimbursementStatus? = nil,
+        vault: VaultDTO
+    ) {
+        self.startDate = startDate
+        self.endDate = endDate
+        self.type = type
+        self.period = period
+        self.reimbursementStatus = reimbursementStatus
+        self.vault = vault
+    }
+}
+
+
+final class OperationsCoordinator: BaseCoordinator {
 
     // MARK: - Dependencies
     
@@ -17,24 +48,40 @@ class OperationsCoordinator: BaseCoordinator {
     
     let dependencies: DependenciesContainer
     
-    fileprivate let vault: VaultDTO
+    fileprivate let filter: OperationsFilter
+
+    private let navigationMode: CoordinatorNavigationMode
+
+    private let canAddOperation: Bool
+
+    private let canFilter: Bool
     
     init(
         navigationController: UINavigationController,
         dependencies: DependenciesContainer,
-        vault: VaultDTO
+        filter: OperationsFilter,
+        navigationMode: CoordinatorNavigationMode = .root,
+        canAddOperation: Bool = true,
+        canFilter: Bool = true
     ) {
         self.navigationController = navigationController
         self.dependencies = dependencies
-        self.vault = vault
+        self.filter = filter
+        self.navigationMode = navigationMode
+        self.canAddOperation = canAddOperation
+        self.canFilter = canFilter
     }
     
     // MARK: - Lifecycles
     
     override func start() {
         rootViewController = viewController
-        self.navigationController.delegate = self
-        self.navigationController.viewControllers = [ viewController ];
+
+        if case .root = navigationMode {
+            navigationController.delegate = self
+        }
+
+        navigationController.showInitialViewController(viewController, using: navigationMode)
     }
     
     override func finish() {
@@ -45,16 +92,10 @@ class OperationsCoordinator: BaseCoordinator {
     
     lazy var viewController: ListOperationsViewController = {
         
-        let filter = OperationsFilter(
-            startDate: Date().monthStart(),
-            endDate: Date().monthEnd(),
-            vault: vault
-        )
-        
         let viewModel = self.dependencies.getListOperationsViewModel(
             with: filter,
-            canAddOperation: true,
-            canFilter: true
+            canAddOperation: canAddOperation,
+            canFilter: canFilter
         )
         
         viewModel.delegate = self
@@ -153,7 +194,7 @@ extension OperationsCoordinator: OperationDetailViewModelDelegate {
         navigationController.popViewController(animated: true)
         
         goToAddOperationWithVault(
-            vault,
+            filter.vault,
             operationToEdit: viewModel.operation
         )
     }
@@ -161,7 +202,7 @@ extension OperationsCoordinator: OperationDetailViewModelDelegate {
     func viewModelDidTapEditReimbursement(_ viewModel: OperationDetailViewModel, reimbursement: ReimbursementDTO) {
         
         let viewModel = dependencies.getAddReimbursementViewModel(
-            with: vault,
+            with: filter.vault,
             and: 10000,
             reimbursementToEdit: reimbursement
         )
@@ -214,7 +255,7 @@ extension OperationsCoordinator: OCRCoordinatorDelegate {
                 
                 let categoriesUseCase = self.dependencies.getListCategoryUseCase()
                 
-                let request = ListCategoriesRequest(vaultID: vault.id, operationType: .expense)
+                let request = ListCategoriesRequest(vaultID: filter.vault.id, operationType: .expense)
                 
                 let response = try categoriesUseCase.execute(request)
                 
@@ -224,7 +265,7 @@ extension OperationsCoordinator: OCRCoordinatorDelegate {
                     .decodeReceipt(from: text) as ReceiptOutput
                 
                 await MainActor.run {
-                    self.goToAddOperationWithReceipt(self.vault, receipt: receipt)
+                    self.goToAddOperationWithReceipt(self.filter.vault, receipt: receipt)
                     self.viewController.stopLoading()
                 }
                 

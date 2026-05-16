@@ -87,7 +87,17 @@ extension AppCoordinator {
     func setupOperationsCoordinator(for vault: VaultDTO) -> OperationsCoordinator {
         let navigationController = UINavigationController();
         
-        let coordinator = OperationsCoordinator(navigationController: navigationController, dependencies: self.dependencies, vault: vault);
+        let filter = OperationsFilter(
+            startDate: Date().monthStart(),
+            endDate: Date().monthEnd(),
+            vault: vault
+        )
+        
+        let coordinator = OperationsCoordinator(
+            navigationController: navigationController,
+            dependencies: dependencies,
+            filter: filter
+        );
         
         self.addChildCoordinator(coordinator);
         

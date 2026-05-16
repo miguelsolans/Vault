@@ -11,6 +11,8 @@ import CoreKit
 
 final class ListCategoriesViewController: BaseViewController {
     
+    // MARK: - Dependencies
+    
     private(set) var viewModel: ListCategoriesViewModel
     
     init(viewModel: ListCategoriesViewModel) {
@@ -75,14 +77,15 @@ final class ListCategoriesViewController: BaseViewController {
 }
 
 // MARK: - UI Setup -
+
 extension ListCategoriesViewController {
     private func setupConstraints() {
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
     
@@ -192,6 +195,39 @@ extension ListCategoriesViewController: UITableViewDataSource, UITableViewDelega
         actions.append(editAction)
         
         return UISwipeActionsConfiguration(actions: actions)
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
+        contextMenuConfigurationForRowAt indexPath: IndexPath,
+        point: CGPoint) -> UIContextMenuConfiguration? {
+            
+        var menu: [UIMenuElement] = []
+            
+        let category = viewModel.category(at: indexPath)
+            
+        let editAction = UIAction(title: "Edit", image: UIImage(systemName: "pencil")) { [weak self] _ in
+            guard let self = self else { return }
+            self.viewModel.editCategory(at: indexPath)
+        }
+            
+        menu.append(editAction)
+            
+        if category.canDelete {
+            let deleteAction = makeConfirmedMenuAction(
+                title: "Delete",
+                image: UIImage(systemName: "trash")
+            ) { [weak self] in
+                guard let self = self else { return }
+                self.viewModel.deleteCategory(at: indexPath)
+            }
+                
+            menu.append(deleteAction)
+        }
+            
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+            return UIMenu(title: "", children: menu)
+        }
     }
 }
 

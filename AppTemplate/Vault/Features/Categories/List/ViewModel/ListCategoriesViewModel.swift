@@ -27,7 +27,11 @@ final class ListCategoriesViewModel: NSObject {
     
     private(set) var vault: VaultDTO
 
-    init(listUseCase: ListCategoriesUseCase, deleteUseCase: DeleteCategoryUseCase, vault: VaultDTO) {
+    init(
+        listUseCase: ListCategoriesUseCase,
+        deleteUseCase: DeleteCategoryUseCase,
+        vault: VaultDTO
+    ) {
         self.listUseCase = listUseCase
         self.deleteUseCase = deleteUseCase
         self.vault = vault

@@ -10,32 +10,6 @@ import Foundation
 import CoreData
 import VaultCore
 
-struct OperationsFilter {
-    var startDate: Date?
-    
-    var endDate: Date?
-    
-    var type: OperationType?
-    
-    var period: Period
-    
-    let vault: VaultDTO
-    
-    init(
-        startDate: Date? = nil,
-        endDate: Date? = nil,
-        type: OperationType? = nil,
-        period: Period = .yearly,
-        vault: VaultDTO
-    ) {
-        self.startDate = startDate
-        self.endDate = endDate
-        self.type = type
-        self.period = period
-        self.vault = vault
-    }
-}
-
 protocol ListOperationsViewModelProtocol: AnyObject {
     func listOperationsDidTapAddOperation(of type: OperationType?, to vault: VaultDTO);
     func listOperationsDidTapEditOperation(_ operation: OperationDTO, in vault: VaultDTO)
@@ -97,23 +71,26 @@ public final class ListOperationsViewModel: NSObject {
         }
     }
     
-    private(set) var operations: [OperationsTableViewModel] = []
+    private var operations: [OperationsTableViewModel] = []
     
-    private(set) var groupedOperations: [GroupedOperationsDTO] = []
+    private var groupedOperations: [GroupedOperationsDTO] = []
     
-    var numberOfSections: Int { operations.count }
+    public var numberOfSections: Int { operations.count }
     
-    func numberOfRows(at index: Int) -> Int { operations[index].items.count }
+    public func numberOfRows(at index: Int) -> Int { operations[index].items.count }
     
-    func cellViewModel(at indexPath: IndexPath) -> OperationTableViewModel { operations[indexPath.section].items[indexPath.row] }
+    public func cellViewModel(at indexPath: IndexPath) -> OperationTableViewModel { operations[indexPath.section].items[indexPath.row] }
     
-    func headerViewModel(at index: Int) -> OperationSectionHeaderViewModel { operations[index].section }
+    public func headerViewModel(at index: Int) -> OperationSectionHeaderViewModel { operations[index].section }
     
     // MARK: - Bindings
-    var updateUI: (() -> Void)?
+    public var updateUI: (() -> Void)?
+    
+    public var onError: ((String) -> Void)?
 }
 
-// MARK: - Get Data
+// MARK: - Get Data -
+
 extension ListOperationsViewModel {
     
     func getData() {
@@ -126,7 +103,7 @@ extension ListOperationsViewModel {
             self.operations = try loadGroupedOperations()
             
         } catch {
-            // TODO: Present error?
+            onError?("There was an error fetching operations.")
         }
         
         updateUI?()
@@ -142,7 +119,7 @@ extension ListOperationsViewModel {
             
             getData()
         } catch {
-            print("Failed to delete operation: \(error)")
+            onError?("There was an error deleting the operation.")
         }
     }
     
@@ -151,7 +128,8 @@ extension ListOperationsViewModel {
             vaultID: filter.vault.id,
             startDate: filter.startDate,
             endDate: filter.endDate,
-            operationType: filter.type
+            operationType: filter.type,
+            reimbursementStatus: filter.reimbursementStatus
         )
         
         let response = try listUseCase.execute(request)
@@ -187,7 +165,8 @@ extension ListOperationsViewModel {
     }
 }
 
-// MARK: - Actions
+// MARK: - Actions -
+
 extension ListOperationsViewModel {
     
     public func didTapAddOperation(of type: OperationType? = nil) {
@@ -214,7 +193,8 @@ extension ListOperationsViewModel {
     }
 }
 
-// MARK: - Bindings
+// MARK: - Bindings -
+
 extension ListOperationsViewModel {
     private func setupBindings() {
         monthSelectorViewModel.onMonthChanged = { [weak self] _ in
