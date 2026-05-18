@@ -15,7 +15,7 @@ protocol ListVaultViewModelDelegate: AnyObject {
     func viewModel(_ viewModel: ListVaultViewModel, didTapExportVault vault: VaultDTO, csvContent: String, suggestedFilename: String)
 }
 
-class ListVaultViewModel: NSObject {
+final class ListVaultViewModel: NSObject {
     
     weak var delegate: ListVaultViewModelDelegate?
     
@@ -31,7 +31,13 @@ class ListVaultViewModel: NSObject {
     
     public let canManageVaults: Bool
     
-    init(listUseCase: ListVaultUseCase, deleteUseCase: DeleteVaultUseCase, exportUseCase: ExportOperationsUseCase, userDefaults: UserDefaultsManager, canManageVaults: Bool) {
+    init(
+        listUseCase: ListVaultUseCase,
+        deleteUseCase: DeleteVaultUseCase,
+        exportUseCase: ExportOperationsUseCase,
+        userDefaults: UserDefaultsManager,
+        canManageVaults: Bool
+    ) {
         self.listUseCase = listUseCase
         self.deleteUseCase = deleteUseCase
         self.exportUseCase = exportUseCase
@@ -39,20 +45,19 @@ class ListVaultViewModel: NSObject {
         self.canManageVaults = canManageVaults
     }
     
-    // MARK: - State
+    // MARK: - UI State
 
-    // TODO: Localizable strings
-    let screenTitle: String = "List of vaults"
+    public let title: String = "List of vaults"
     
-    let screenSubtitle: String = "Choose a vault"
-    
-    var vaults: [VaultDTO] = [] {
-        didSet {
-            updateUI?()
+    public lazy var subtitle: String = {
+        
+        if canManageVaults {
+           return ""
         }
-    }
+        
+        return "Choose a vault"
+    }()
     
-    // MARK: - TableView
     var numberOfRows: Int {
         vaults.count
     }
@@ -76,9 +81,39 @@ class ListVaultViewModel: NSObject {
         return vault.id.uuidString == favorite
     }
     
+    // MARK: - Data
+    
+    private var vaults: [VaultDTO] = [] {
+        didSet {
+            updateUI?()
+        }
+    }
+    
+    public var isEditAvailable: Bool {
+        return canManageVaults
+    }
+    
+    public var isExportAvailable: Bool {
+        return false
+    }
+    
+    public func isDeleteAvailable(cell: VaultTableViewModel) -> Bool {
+        return !cell.isFavorite
+    }
+    
+    public func isFavoriteAvailable(cell: VaultTableViewModel) -> Bool {
+        return !cell.isFavorite
+    }
+    
+    public var isAddVaultAvailable: Bool {
+        return canManageVaults
+    }
+    
     // MARK: - Bindings
     
-    var updateUI: (() -> Void)?
+    public var updateUI: (() -> Void)?
+    
+    public var onError: ((String) -> Void)?
     
 }
 
@@ -92,7 +127,7 @@ extension ListVaultViewModel {
             vaults = response.vaults
             
         } catch {
-            // TODO: Present error?
+            onError?("There was an error fetching Vaults")
         }
     }
     
@@ -107,7 +142,7 @@ extension ListVaultViewModel {
             
             getData()
         } catch {
-            // TODO: Present error?
+             onError?("There was an error deleting Vault")
         }
     }
     
@@ -141,19 +176,21 @@ extension ListVaultViewModel {
             delegate?.viewModel(self, didTapExportVault: vault, csvContent: response.content, suggestedFilename: response.suggestedFilename)
             
         } catch {
-            // TODO: Present error?
-            print("Export failed: \(error.localizedDescription)")
+            
+            onError?("There was an error exporting Vault")
         }
     }
 }
 
+// MARK: - Actions
+
 extension ListVaultViewModel {
-    func didTapCreateVault() {
+    public func didTapCreateVault() {
         
         delegate?.viewModelDidTapCreateVault(self)
     }
     
-    func didSelectVault(at indexPath: IndexPath) {
+    public func didSelectVault(at indexPath: IndexPath) {
         let selectedVault = vaults[indexPath.row]
         
         delegate?.viewModel(self, didSelectVault: selectedVault)

@@ -7,7 +7,9 @@
 
 import UIKit
 
-final class ListVaultViewController: UIViewController {
+final class ListVaultViewController: VaultBaseViewController {
+    
+    // MARK: - Dependencies
     
     private(set) var viewModel: ListVaultViewModel
     
@@ -20,15 +22,18 @@ final class ListVaultViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - UI
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        
         return tableView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupUI()
     }
     
@@ -37,16 +42,28 @@ final class ListVaultViewController: UIViewController {
         viewModel.getData()
     }
     
-    private func setupUI() {
+    override func setupUI() {
         view.backgroundColor = .systemBackground
-        title = viewModel.screenTitle
-        navigationItem.subtitle = viewModel.screenSubtitle
+        title = viewModel.title
+        navigationItem.subtitle = viewModel.subtitle
         
         setupTableView()
         setupBarButtonItems()
         setupBindings()
     }
     
+    override func setupBindings() {
+        viewModel.updateUI = { [weak self] in
+            guard let self = self else { return }
+            
+            self.tableView.reloadData()
+        }
+    }
+}
+
+// MARK: - UI Setup
+
+extension ListVaultViewController {
     private func setupTableView() {
         view.addSubview(tableView)
         
@@ -66,7 +83,7 @@ final class ListVaultViewController: UIViewController {
     
     func setupBarButtonItems() {
         
-        guard viewModel.canManageVaults else { return }
+        guard viewModel.isAddVaultAvailable else { return }
         
         let addOperationButtonItem = UIBarButtonItem(
             barButtonSystemItem: .add,
@@ -75,29 +92,6 @@ final class ListVaultViewController: UIViewController {
         )
         
         navigationItem.rightBarButtonItem = addOperationButtonItem
-    }
-    
-    @objc private func didTapCreateVault() {
-        viewModel.didTapCreateVault()
-    }
-    
-    func presentExportFileDialog(csvContent: String, suggestedFilename: String) {
-        let tempURL = FileManager.default.temporaryDirectory.appendingPathComponent(suggestedFilename)
-
-        try? FileManager.default.removeItem(at: tempURL)
-
-        do {
-            try csvContent.write(to: tempURL, atomically: true, encoding: .utf8)
-        } catch {
-            let alert = UIAlertController(title: "Export Error", message: "Unable to prepare CSV file for export.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
-            present(alert, animated: true)
-            return
-        }
-
-        let documentPicker = UIDocumentPickerViewController(forExporting: [tempURL], asCopy: true)
-        documentPicker.modalPresentationStyle = .formSheet
-        present(documentPicker, animated: true)
     }
 }
 
@@ -132,7 +126,10 @@ extension ListVaultViewController: UITableViewDataSource, UITableViewDelegate {
         viewModel.didSelectVault(at: indexPath)
     }
     
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
         
         guard viewModel.canManageVaults else { return nil }
         
@@ -140,19 +137,21 @@ extension ListVaultViewController: UITableViewDataSource, UITableViewDelegate {
         
         var actions: [UIContextualAction] = []
         
-        let editAction = UIContextualAction(style: .normal, title: "Edit") { [weak self] _, _, completion in
-            guard let self = self else { return }
+        if viewModel.isEditAvailable {
+            let editAction = UIContextualAction(style: .normal, title: "Edit") { [weak self] _, _, completion in
+                guard let self = self else { return }
+                
+                self.viewModel.editVault(at: indexPath)
+                
+                completion(true)
+            }
             
-            self.viewModel.editVault(at: indexPath)
+            editAction.backgroundColor = .systemBlue
             
-            completion(true)
+            actions.append(editAction)
         }
         
-        editAction.backgroundColor = .systemBlue
-        
-        actions.append(editAction)
-        
-        if !vault.isFavorite {
+        if viewModel.isDeleteAvailable(cell: vault) {
             let deleteAction = makeConfirmedContextualAction(title: "Delete") { [weak self] in
                 self?.viewModel.deleteVault(at: indexPath)
             }
@@ -167,14 +166,17 @@ extension ListVaultViewController: UITableViewDataSource, UITableViewDelegate {
         return configuration
     }
     
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    func tableView(
+        _ tableView: UITableView,
+        leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
         guard viewModel.canManageVaults else { return nil }
         
         let vault = viewModel.cellViewModel(at: indexPath)
         
         var actions: [UIContextualAction] = []
         
-        if !vault.isFavorite {
+        if viewModel.isFavoriteAvailable(cell: vault) {
             let favoriteAction = UIContextualAction(style: .normal, title: "Favorite") { [weak self] _, _, completion in
                 guard let self = self else { return }
                 
@@ -188,15 +190,17 @@ extension ListVaultViewController: UITableViewDataSource, UITableViewDelegate {
             actions.append(favoriteAction)
         }
         
-        let exportAction = UIContextualAction(style: .normal, title: "Export") { [weak self] _, _, completion in
-            guard let self = self else { return }
+        if viewModel.isExportAvailable {
+            let exportAction = UIContextualAction(style: .normal, title: "Export") { [weak self] _, _, completion in
+                guard let self = self else { return }
+                
+                self.viewModel.exportVault(at: indexPath)
+                
+                completion(true)
+            }
             
-            self.viewModel.exportVault(at: indexPath)
-            
-            completion(true)
+            actions.append(exportAction)
         }
-        
-        actions.append(exportAction)
         
         let configuration = UISwipeActionsConfiguration(actions: actions)
         
@@ -204,14 +208,110 @@ extension ListVaultViewController: UITableViewDataSource, UITableViewDelegate {
         
         return configuration
     }
+    
+    func tableView(
+        _ tableView: UITableView,
+        contextMenuConfigurationForRowAt indexPath: IndexPath,
+        point: CGPoint
+    ) -> UIContextMenuConfiguration? {
+        
+        guard viewModel.canManageVaults else { return nil }
+        
+        let vault = viewModel.cellViewModel(at: indexPath)
+        
+        var children: [UIMenuElement] = []
+        
+        if viewModel.isEditAvailable {
+            
+            let action = UIAction(
+                title: "Edit",
+                image: UIImage(systemName: "pencil")
+            ) { [weak self] _ in
+                guard let self = self else { return }
+                self.viewModel.editVault(at: indexPath)
+            }
+            
+            children.append(action)
+        }
+        
+        if viewModel.isFavoriteAvailable(cell: vault) {
+            
+            let action = UIAction(
+                title: "Favorite",
+                image: UIImage(systemName: "star")
+            ) { [weak self] _ in
+                guard let self = self else { return }
+                self.viewModel.favoriteVault(at: indexPath)
+            }
+            
+            children.append(action)
+            
+        }
+        
+        if viewModel.isDeleteAvailable(cell: vault) {
+            
+            let action = makeConfirmedMenuAction(
+                title: "Delete",
+                image: UIImage(systemName: "trash")
+            ) { [weak self] in
+                guard let self = self else { return }
+                self.viewModel.deleteVault(at: indexPath)
+            }
+            
+            children.append(action)
+        }
+        
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+            return UIMenu(title: "", children: children)
+        }
+        
+    }
 }
 
+// MARK: - Actions
+
 extension ListVaultViewController {
-    fileprivate func setupBindings() {
-        viewModel.updateUI = { [weak self] in
-            guard let self = self else { return }
+    @objc private func didTapCreateVault() {
+        viewModel.didTapCreateVault()
+    }
+}
+
+// MARK: - Dialogs
+
+extension ListVaultViewController {
+    public func presentExportFileDialog(csvContent: String, suggestedFilename: String) {
+        let tempURL = FileManager.default.temporaryDirectory.appendingPathComponent(suggestedFilename)
+
+        try? FileManager.default.removeItem(at: tempURL)
+
+        do {
+            try csvContent.write(to: tempURL, atomically: true, encoding: .utf8)
+        } catch {
+            let alert = UIAlertController(
+                title: "Export Error",
+                message: "Unable to prepare CSV file for export.",
+                preferredStyle: .alert
+            )
             
-            self.tableView.reloadData()
+            let okAction = UIAlertAction(
+                title: "OK",
+                style: .default
+            )
+            
+            alert.addAction(okAction)
+            
+            present(alert, animated: true)
+            
+            return
         }
+
+        let documentPicker = UIDocumentPickerViewController(
+            forExporting: [tempURL],
+            asCopy: true
+        )
+        
+        documentPicker.modalPresentationStyle = .formSheet
+        
+        present(documentPicker, animated: true)
     }
 }

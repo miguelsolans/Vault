@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AppUIKit
 
 final class VaultTableViewCell: UITableViewCell {
     
@@ -20,15 +21,6 @@ final class VaultTableViewCell: UITableViewCell {
         view.layer.cornerRadius = 16
         view.clipsToBounds = true
         return view
-    }()
-    
-    private let favoriteImageView: UIImageView = {
-        let iv = UIImageView()
-        iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.contentMode = .scaleAspectFit
-        iv.image = UIImage(systemName: "star.fill")
-        iv.tintColor = .systemYellow
-        return iv
     }()
     
     private let titleLabel: UILabel = {
@@ -54,9 +46,6 @@ final class VaultTableViewCell: UITableViewCell {
         return label
     }()
     
-    private var titleLeadingToFavoriteConstraint: NSLayoutConstraint!
-    private var titleLeadingToCardConstraint: NSLayoutConstraint!
-    
     // MARK: - Init
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -77,13 +66,9 @@ final class VaultTableViewCell: UITableViewCell {
         selectionStyle = .none
         
         contentView.addSubview(cardView)
-        cardView.addSubview(favoriteImageView)
         cardView.addSubview(titleLabel)
         cardView.addSubview(balanceLabel)
         cardView.addSubview(initialDepositLabel)
-        
-        titleLeadingToFavoriteConstraint = titleLabel.leadingAnchor.constraint(equalTo: favoriteImageView.trailingAnchor, constant: 8)
-        titleLeadingToCardConstraint = titleLabel.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 16)
         
         NSLayoutConstraint.activate([
             
@@ -93,14 +78,9 @@ final class VaultTableViewCell: UITableViewCell {
             cardView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             cardView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -6),
             
-            // Favorite icon
-            favoriteImageView.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 16),
-            favoriteImageView.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
-            favoriteImageView.widthAnchor.constraint(equalToConstant: 16),
-            favoriteImageView.heightAnchor.constraint(equalToConstant: 16),
-            
             // Title
             titleLabel.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 16),
+            titleLabel.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 16),
             titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: balanceLabel.leadingAnchor, constant: -12),
             
             // Balance
@@ -113,26 +93,40 @@ final class VaultTableViewCell: UITableViewCell {
             initialDepositLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
             initialDepositLabel.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -16)
         ])
-        
-        titleLeadingToCardConstraint.isActive = true
     }
-    
-    // MARK: - Configure
-    
+}
+
+extension VaultTableViewCell {
     func configure(with viewModel: VaultTableViewModel) {
-        titleLabel.text = viewModel.title
+        configureTitle(viewModel.title, isFavorite: viewModel.isFavorite)
         balanceLabel.text = viewModel.formattedCurrentBalance
         initialDepositLabel.text = viewModel.initialDepositText
+    }
+    
+    private func configureTitle(_ title: String, isFavorite: Bool) {
         
-        favoriteImageView.isHidden = !viewModel.isFavorite
-        titleLeadingToFavoriteConstraint.isActive = viewModel.isFavorite
-        titleLeadingToCardConstraint.isActive = !viewModel.isFavorite
+        guard isFavorite else {
+            titleLabel.text = title
+            return
+        }
+        
+        titleLabel.setTextWithSystemImage(
+            systemName: "star.fill",
+            text: title,
+            tintColor: .systemYellow
+        )
     }
 }
 
 
 #Preview("VaultTableViewCell") {
-    let viewModel = VaultTableViewModel(title: "Title", initialDeposit: 2500, currentBalance: 10000, isFavorite: true)
+    let viewModel = VaultTableViewModel(
+        title: "Title",
+        initialDeposit: 2500,
+        currentBalance: 10000,
+        isFavorite: true
+    )
+    
     let view = VaultTableViewCell()
     
     view.configure(with: viewModel)
