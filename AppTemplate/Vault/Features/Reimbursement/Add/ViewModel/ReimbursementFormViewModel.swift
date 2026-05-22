@@ -1,28 +1,29 @@
 //
-//  AddReimbursementViewModel.swift
+//  ReimbursementFormViewModel.swift
 //  Vault
 //
 //  Created by Miguel Solans on 30/04/2026.
 //
 
 import UIKit
+import CoreKit
 import AppUIKit
 import VaultCore
 
-protocol AddReimbursementViewModelDelegate: AnyObject {
-    func didAddReimbursement(_ viewModel: AddReimbursementViewModel, reimbursement: ReimbursementDTO)
-    func didUpdateReimbursement(_ viewModel: AddReimbursementViewModel, reimbursement: ReimbursementDTO)
+protocol ReimbursementFormViewModelDelegate: AnyObject {
+    func didAddReimbursement(_ viewModel: ReimbursementFormViewModel, reimbursement: ReimbursementDTO)
+    func didUpdateReimbursement(_ viewModel: ReimbursementFormViewModel, reimbursement: ReimbursementDTO)
 }
 
-final class AddReimbursementViewModel: NSObject {
+final class ReimbursementFormViewModel: NSObject {
     
-    weak var delegate: AddReimbursementViewModelDelegate?
+    weak var delegate: ReimbursementFormViewModelDelegate?
     
     // MARK: - Dependencies
     
-    private(set) var vault: VaultDTO
+    private var vault: VaultDTO
     
-    private(set) var reimbursementToEdit: ReimbursementDTO?
+    private var reimbursementToEdit: ReimbursementDTO?
     
     private(set) var maximumAmount: Double
     
@@ -51,28 +52,48 @@ final class AddReimbursementViewModel: NSObject {
         getData()
     }
     
-    // MARK: - Data State
-    
-    private var vaults: [VaultDTO] = []
-    
-    private var categories: [CategoryDTO] = []
-    
     // MARK: - UI State
     
     public var title: String {
-        "Add Reimbursement"
+        
+        if reimbursementToEdit != nil {
+            return "Edit Reimbursement"
+        }
+        
+        return "Add Reimbursement"
     }
     
-    public var subtitle: String {
-        ""
-    }
+    public var subtitle: String { "" }
+    
+    public lazy var amountFeedbackViewModel: FeedbackViewModel = {
+        
+        let formattedAmount = currencyFormatter.string(from: maximumAmount) ?? "\(maximumAmount)"
+        let bodyText = "You can add a reimbursement up to \(formattedAmount)"
+        let attributedBody = bodyText.styled(
+            baseAttributes: [
+                .font: FeedbackStyles.informativeFeedback.subtitleFont,
+                .foregroundColor: FeedbackStyles.informativeFeedback.subtitleColor
+            ],
+            highlights: [
+                TextHighlight(text: formattedAmount, attributes: [
+                    .font: AppFonts.feedbackBodyBold
+                ])
+            ]
+        )
+        
+        return FeedbackViewModel(
+            title: "Maximum reimbursement allowed",
+            subtitleAttributed: attributedBody,
+            feedbackType: .informative
+        )
+    }()
     
     public lazy var statusInputViewModel: SegmentedInputViewModel = {
         
         let viewModel = SegmentedInputViewModel(
             title: "Status",
             options: ["Expected", "Received", "Cancelled"],
-            selectedIndex: 1,
+            selectedIndex: 0,
             isEditable: isStatusEditable,
             placeholder: nil,
             subtitle: nil,
@@ -135,6 +156,22 @@ final class AddReimbursementViewModel: NSObject {
         );
     }()
     
+    public lazy var depositFeedbackViewModel: FeedbackViewModel = {
+        return FeedbackViewModel(
+            title: "Deposit Vault different from source Vault",
+            subtitle: "You selected a different Vault for the deposit. You will receive an income operation in the selected deposit Vault.",
+            feedbackType: .informative
+        )
+    }()
+    
+    public var depositFeedbackHidden: Bool {
+        guard let depositVault else {
+            return true
+        }
+        
+        return depositVault.id == vault.id
+    }
+    
     public lazy var depositCategoryViewModel: OptionInputViewModel = {
         
         var selectedOption: String?
@@ -194,11 +231,125 @@ final class AddReimbursementViewModel: NSObject {
         }
     }
     
+    private var currencyFormatter: LocalizedDecimalFormatter {
+        LocalizedDecimalFormatter(numberStyle: .currency)
+    }
+    
+    // MARK: - State
+    
+    private var vaults: [VaultDTO] = []
+    
+    private var categories: [CategoryDTO] = []
+    
     // MARK: - Bindings
+    
     public var updateUI: (() -> Void)?
+    
+    public var onSuccess: ((ViewModelFeedback) -> Void)?
+    
+    public var onError: ((ViewModelFeedback) -> Void)?
 }
 
-extension AddReimbursementViewModel {
+// MARK: - Data
+
+extension ReimbursementFormViewModel {
+    public func getData() {
+        getVaults()
+    }
+    
+    private func getVaults() {
+        
+        depositVaultViewModel.options = []
+        
+        do {
+            
+            let request = ListVaultRequest()
+            
+            let response = try listVaultUseCase.execute(request)
+            
+            self.vaults = response.vaults
+            
+            var vaultLabels: [String] = []
+            
+            for vault in response.vaults {
+                vaultLabels.append(vault.name)
+            }
+            
+            depositVaultViewModel.options = vaultLabels
+            
+            depositVaultViewModel.isEditable = true
+            
+            if let reimbursementToEdit {
+                depositVaultViewModel.selectedOption = reimbursementToEdit.destinationVault.name
+            }
+            
+        } catch {
+            onError?(.showAlert(message: "There was an error while fetching your Vaults. Please try again."))
+        }
+    }
+    
+    private func getCategories() {
+        
+        depositCategoryViewModel.options = []
+        
+        guard let depositVault = depositVault else {
+            return
+        }
+        
+        do {
+            
+            let request = ListCategoriesRequest(
+                vaultID: depositVault.id,
+                operationType: .income
+            )
+            
+            let response = try listCategoryUseCase.execute(request)
+            
+            var categoryLabels: [String] = []
+            
+            for category in response.categories {
+                categoryLabels.append(category.title)
+            }
+            
+            depositCategoryViewModel.options = categoryLabels
+            
+            depositCategoryViewModel.isEditable = true
+            
+            self.categories = response.categories
+
+            if let reimbursementToEdit {
+                depositCategoryViewModel.selectedOption = reimbursementToEdit.destinationCategory?.title
+            }
+            
+        } catch {
+            onError?(.showAlert(message: "There was an error while fetching categories from Vault \(depositVault.name). Please try again."))
+        }
+    }
+}
+
+
+// MARK: - Actions
+
+extension ReimbursementFormViewModel {
+    public func saveTapped() {
+        
+        guard validate() else {
+            onError?(.silent)
+            return
+        }
+        
+        guard reimbursementToEdit != nil else {
+            createReimbursement()
+            return
+        }
+        
+        saveReimbursement()
+    }
+}
+
+// MARK: - Validations
+
+extension ReimbursementFormViewModel {
     
     private func validateAmount() -> Bool {
         
@@ -256,20 +407,6 @@ extension AddReimbursementViewModel {
         return valid
     }
     
-    public func saveTapped() {
-        
-        guard validate() else {
-            return
-        }
-        
-        guard reimbursementToEdit != nil else {
-            createReimbursement()
-            return
-        }
-        
-        saveReimbursement()
-    }
-    
     private func createReimbursement() {
         guard let depositVault = depositVault,
               let depositCategory = depositCategory,
@@ -291,6 +428,8 @@ extension AddReimbursementViewModel {
             destinationCategory: depositCategory
         )
         
+        onSuccess?(.silent)
+        
         delegate?.didAddReimbursement(self, reimbursement: reimbursement)
     }
     
@@ -298,8 +437,6 @@ extension AddReimbursementViewModel {
         guard let reimbursementToEdit,
                 let category = depositCategory
         else { return }
-        
-        
         
         let request = UpdateReimbursementRequest(
             id: reimbursementToEdit.id,
@@ -309,25 +446,19 @@ extension AddReimbursementViewModel {
         
         do {
             _ = try updateReimbursementUseCase.execute(request)
+            
+            onSuccess?(.silent)
+            
             delegate?.didUpdateReimbursement(self, reimbursement: reimbursementToEdit)
         } catch {
-            // TODO: Present error
+            onError?(.showAlert(message: "An error ocurred saving the Reimbursement"))
         }
     }
 }
 
-extension AddReimbursementViewModel {
-    
-    private func selectedStatus() -> ReimbursementStatus? {
-        guard let selectedIndex = statusInputViewModel.selectedIndex else {
-            return nil
-        }
-        
-        return ReimbursementStatus(rawValue: Int16(selectedIndex))
-    }
-}
+// MARK: - Bindings
 
-extension AddReimbursementViewModel {
+extension ReimbursementFormViewModel {
     private func setupBindings() {
         setupAmountBindings()
         setupDepositVaultBindings()
@@ -353,11 +484,13 @@ extension AddReimbursementViewModel {
             guard let self = self else { return }
             self.depositVaultViewModel.feedback = .none
             self.getCategories()
+            self.updateUI?()
         }
         
         depositVaultViewModel.onEndChoosing = { [weak self] in
             guard let self = self else { return }
             self.depositVaultViewModel.feedback = .none
+            self.updateUI?()
         }
     }
     
@@ -380,7 +513,8 @@ extension AddReimbursementViewModel {
     }
 }
 
-extension AddReimbursementViewModel {
+// MARK. - Helper
+extension ReimbursementFormViewModel {
     private func updateCategories() {
         var labels = [String]()
         
@@ -390,79 +524,12 @@ extension AddReimbursementViewModel {
         
         depositCategoryViewModel.options = labels
     }
-}
-
-extension AddReimbursementViewModel {
-    public func getData() {
-        getVaults()
-    }
     
-    private func getVaults() {
-        
-        depositVaultViewModel.options = []
-        
-        do {
-            
-            let request = ListVaultRequest()
-            
-            let response = try listVaultUseCase.execute(request)
-            
-            self.vaults = response.vaults
-            
-            var vaultLabels: [String] = []
-            
-            for vault in response.vaults {
-                vaultLabels.append(vault.name)
-            }
-            
-            depositVaultViewModel.options = vaultLabels
-            
-            depositVaultViewModel.isEditable = true
-            
-            if let reimbursementToEdit {
-                depositVaultViewModel.selectedOption = reimbursementToEdit.destinationVault.name
-            }
-            
-        } catch {
-            // TODO: Present error?
+    private func selectedStatus() -> ReimbursementStatus? {
+        guard let selectedIndex = statusInputViewModel.selectedIndex else {
+            return nil
         }
-    }
-    
-    private func getCategories() {
         
-        depositCategoryViewModel.options = []
-        
-        do {
-            
-            guard let depositVault = depositVault else {
-                return
-            }
-            
-            let request = ListCategoriesRequest(
-                vaultID: depositVault.id,
-                operationType: .income
-            )
-            
-            let response = try listCategoryUseCase.execute(request)
-            
-            var categoryLabels: [String] = []
-            
-            for category in response.categories {
-                categoryLabels.append(category.title)
-            }
-            
-            depositCategoryViewModel.options = categoryLabels
-            
-            depositCategoryViewModel.isEditable = true
-            
-            self.categories = response.categories
-
-            if let reimbursementToEdit {
-                depositCategoryViewModel.selectedOption = reimbursementToEdit.destinationCategory?.title
-            }
-            
-        } catch {
-            // TODO: Present error?
-        }
+        return ReimbursementStatus(rawValue: Int16(selectedIndex))
     }
 }

@@ -92,25 +92,25 @@ extension OperationFormCoordinator: OperationFormViewModelDelegate {
     }
 }
 
-extension OperationFormCoordinator: AddReimbursementViewModelDelegate {
+extension OperationFormCoordinator: ReimbursementFormViewModelDelegate {
     
     private func navigateToAddReimbursement(with maximumAmount: Double) {
         let viewModel = dependencies.getAddReimbursementViewModel(with: vault, and: maximumAmount)
         
         viewModel.delegate = self
         
-        let viewController = AddReimbursementViewController(viewModel: viewModel)
+        let viewController = ReimbursementFormViewController(viewModel: viewModel)
         
         self.navigationController.pushViewController(viewController, animated: true)
     }
     
-    func didAddReimbursement(_ viewModel: AddReimbursementViewModel, reimbursement: ReimbursementDTO) {
+    func didAddReimbursement(_ viewModel: ReimbursementFormViewModel, reimbursement: ReimbursementDTO) {
         self.viewModel.addReimbursement(reimbursement)
         
         navigationController.popViewController(animated: true)
     }
     
-    func didUpdateReimbursement(_ viewModel: AddReimbursementViewModel, reimbursement: ReimbursementDTO) {
+    func didUpdateReimbursement(_ viewModel: ReimbursementFormViewModel, reimbursement: ReimbursementDTO) {
         
         navigationController.popViewController(animated: true)
     }

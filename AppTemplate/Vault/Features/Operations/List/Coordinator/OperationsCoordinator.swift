@@ -209,7 +209,7 @@ extension OperationsCoordinator: OperationDetailViewModelDelegate {
         
         viewModel.delegate = self
         
-        let viewController = AddReimbursementViewController(viewModel: viewModel)
+        let viewController = ReimbursementFormViewController(viewModel: viewModel)
         
         viewController.hidesBottomBarWhenPushed = true
         
@@ -217,10 +217,10 @@ extension OperationsCoordinator: OperationDetailViewModelDelegate {
     }
 }
 
-extension OperationsCoordinator: AddReimbursementViewModelDelegate {
-    func didAddReimbursement(_ viewModel: AddReimbursementViewModel, reimbursement: ReimbursementDTO) { }
+extension OperationsCoordinator: ReimbursementFormViewModelDelegate {
+    func didAddReimbursement(_ viewModel: ReimbursementFormViewModel, reimbursement: ReimbursementDTO) { }
     
-    func didUpdateReimbursement(_ viewModel: AddReimbursementViewModel, reimbursement: ReimbursementDTO) {
+    func didUpdateReimbursement(_ viewModel: ReimbursementFormViewModel, reimbursement: ReimbursementDTO) {
         navigationController.popToRootViewController(animated: true)
     }
 }

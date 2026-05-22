@@ -1,5 +1,5 @@
 //
-//  AddReimbursementViewController.swift
+//  ReimbursementFormViewController.swift
 //  Vault
 //
 //  Created by Miguel Solans on 30/04/2026.
@@ -9,11 +9,11 @@ import UIKit
 import CoreKit
 import AppUIKit
 
-final class AddReimbursementViewController: BaseViewController {
+final class ReimbursementFormViewController: VaultBaseViewController {
 
-    private(set) var viewModel: AddReimbursementViewModel
+    private(set) var viewModel: ReimbursementFormViewModel
     
-    init(viewModel: AddReimbursementViewModel) {
+    init(viewModel: ReimbursementFormViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -22,14 +22,33 @@ final class AddReimbursementViewController: BaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - UI Elements
-    private let scrollView = UIScrollView()
+    // MARK: - UI
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return scrollView
+    }()
     
     private lazy var stackView: UIStackView = {
         let view = UIStackView()
+        
         view.axis = .vertical
         view.spacing = 16
         view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    private lazy var amountFeedbackView: FeedbackView = {
+        let view = FeedbackView(
+            viewModel: viewModel.amountFeedbackViewModel,
+            style: FeedbackStyles.informativeFeedback
+        )
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
         return view
     }()
     
@@ -77,6 +96,19 @@ final class AddReimbursementViewController: BaseViewController {
         return view
     }()
     
+    private lazy var depositFeedbackView: FeedbackView = {
+        let view = FeedbackView(
+            viewModel: viewModel.depositFeedbackViewModel,
+            style: FeedbackStyles.informativeFeedback
+        )
+        
+        view.isHidden = viewModel.depositFeedbackHidden
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
     private lazy var categoryInputView: OptionPickerInputView = {
         let view = OptionPickerInputView(
             viewModel: viewModel.depositCategoryViewModel,
@@ -101,12 +133,13 @@ final class AddReimbursementViewController: BaseViewController {
         return button
     }()
     
-    // MARK: - Lifecycles
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupUI()
+        setupBindings()
     }
     
     override func setupUI() {
@@ -121,33 +154,57 @@ final class AddReimbursementViewController: BaseViewController {
         saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
     }
     
+    private func updateUI() {
+        
+        depositFeedbackView.isHidden = viewModel.depositFeedbackHidden
+    }
+    
     override func setupBindings() {
+        
         viewModel.updateUI = { [weak self] in
-            guard let self = self else { return }
+            guard let self else { return }
             
+            self.updateUI()
+        }
+        
+        viewModel.onSuccess = { [weak self] _ in
+            guard let self else { return }
+            
+            self.notifyFeedback(.success)
+        }
+        
+        viewModel.onError = { [weak self] error in
+            guard let self else { return }
+            
+            switch error {
+            case .showAlert(let message):
+                self.presentAlert(with:"Error", and: message)
+
+            case .silent:
+                break
+            }
+            
+            self.notifyFeedback(.error)
         }
     }
 }
 
-extension AddReimbursementViewController {
-    @objc private func saveButtonTapped() {
-        viewModel.saveTapped()
-    }
-}
+// MARK: - UI Setup
 
-extension AddReimbursementViewController {
+extension ReimbursementFormViewController {
     private func setupScrollView() {
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)
     }
     
     private func setupStackView() {
         scrollView.addSubview(stackView)
         
+        stackView.addArrangedSubview(amountFeedbackView)
         stackView.addArrangedSubview(statusSegmentedView)
         stackView.addArrangedSubview(amountInputView)
         stackView.addArrangedSubview(notesInputView)
         stackView.addArrangedSubview(vaultInputView)
+        stackView.addArrangedSubview(depositFeedbackView)
         stackView.addArrangedSubview(categoryInputView)
         stackView.addArrangedSubview(saveButton)
     }
@@ -166,5 +223,13 @@ extension AddReimbursementViewController {
             
             stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -32)
         ])
+    }
+}
+
+// MARK: - Actions
+
+extension ReimbursementFormViewController {
+    @objc private func saveButtonTapped() {
+        viewModel.saveTapped()
     }
 }

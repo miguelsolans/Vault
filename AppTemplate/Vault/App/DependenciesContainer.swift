@@ -233,8 +233,8 @@ extension DependenciesContainer {
     
     // MARK: - Reimbursement
     
-    func getAddReimbursementViewModel(with vault: VaultDTO, and maximumAmount: Double, reimbursementToEdit: ReimbursementDTO? = nil) -> AddReimbursementViewModel {
-        AddReimbursementViewModel(
+    func getAddReimbursementViewModel(with vault: VaultDTO, and maximumAmount: Double, reimbursementToEdit: ReimbursementDTO? = nil) -> ReimbursementFormViewModel {
+        ReimbursementFormViewModel(
             vault: vault,
             maximumAmount: maximumAmount,
             listVaultUseCase: getListVaultUseCase(),
