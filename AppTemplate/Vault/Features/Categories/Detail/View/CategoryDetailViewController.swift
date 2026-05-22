@@ -8,7 +8,7 @@
 import UIKit
 import CoreKit
 
-final class CategoryDetailViewController: BaseViewController {
+final class CategoryDetailViewController: VaultBaseViewController {
     
     private static let detailCellIdentifier = "OperationDetailCell"
     
@@ -219,23 +219,4 @@ extension CategoryDetailViewController: UITableViewDelegate, UITableViewDataSour
 // MARK: - Actions -
 extension CategoryDetailViewController {
     
-}
-
-extension CategoryDetailViewController {
-    
-    private func presentAlert(with title: String, and message: String) {
-        let alert = UIAlertController(
-            title: title,
-            message: message,
-            preferredStyle: .alert
-        )
-        
-        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-            alert.dismiss(animated: true)
-        }
-        
-        alert.addAction(okAction);
-        
-        present(alert, animated: true)
-    }
 }

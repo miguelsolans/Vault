@@ -53,13 +53,13 @@ final class OnboardingCoordinator: BaseCoordinator {
         return viewController;
     }();
 
-    lazy var createVaultViewController: CreateVaultViewController = {
+    lazy var createVaultViewController: VaultFormViewController = {
         
         let viewModel = self.dependencies.getCreateVaultViewModel()
         
         viewModel.delegate = self;
         
-        let viewController = CreateVaultViewController(viewModel: viewModel)
+        let viewController = VaultFormViewController(viewModel: viewModel)
         
         return viewController;
     }();
@@ -72,11 +72,9 @@ extension OnboardingCoordinator: IntroViewModelProtocol {
     }
 }
 
-// MARK: - CreateVaultViewModel delegates
-extension OnboardingCoordinator: CreateVaultViewModelDelegate {
-    
-    func didCreateVault(_ vault: VaultDTO, andFileURL fileURL: URL?) {
-        
+// MARK: - VaultFormViewModel delegates
+extension OnboardingCoordinator: VaultFormViewModelDelegate {
+    func didCreateVault(_ viewModel: VaultFormViewModel, vault: VaultCore.VaultDTO, with fileURL: URL?) {
         finish()
         
         guard let fileURL = fileURL else {
@@ -87,8 +85,8 @@ extension OnboardingCoordinator: CreateVaultViewModelDelegate {
         goToImportOperations(with: vault, andFileURL: fileURL)
     }
     
-    func didUpdateVault(_ vault: VaultDTO) {
-        
+    func didUpdateVault(_ viewModel: VaultFormViewModel, vault: VaultCore.VaultDTO) {
+        finish()
     }
     
     func goToCreateVault() {

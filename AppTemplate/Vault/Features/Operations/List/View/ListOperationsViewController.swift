@@ -296,23 +296,3 @@ extension ListOperationsViewController {
         viewModel.didTapAddFromCamera()
     }
 }
-
-// MARK: - Alert -
-
-extension ListOperationsViewController {
-    private func presentAlert(with title: String, and message: String) {
-        let alert = UIAlertController(
-            title: title,
-            message: message,
-            preferredStyle: .alert
-        )
-        
-        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-            alert.dismiss(animated: true)
-        }
-        
-        alert.addAction(okAction);
-        
-        present(alert, animated: true)
-    }
-}

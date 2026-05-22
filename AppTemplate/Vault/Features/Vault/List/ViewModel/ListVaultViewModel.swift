@@ -47,7 +47,7 @@ final class ListVaultViewModel: NSObject {
     
     // MARK: - UI State
 
-    public let title: String = "List of vaults"
+    public let title: String = "List of Vaults"
     
     public lazy var subtitle: String = {
         

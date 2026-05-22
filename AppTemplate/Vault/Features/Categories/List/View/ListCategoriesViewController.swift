@@ -9,7 +9,7 @@ import UIKit
 import AppUIKit
 import CoreKit
 
-final class ListCategoriesViewController: BaseViewController {
+final class ListCategoriesViewController: VaultBaseViewController {
     
     // MARK: - Dependencies
     
@@ -228,24 +228,5 @@ extension ListCategoriesViewController: UITableViewDataSource, UITableViewDelega
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
             return UIMenu(title: "", children: menu)
         }
-    }
-}
-
-// MARK: - Alert -
-extension ListCategoriesViewController {
-    private func presentAlert(with title: String, and message: String) {
-        let alert = UIAlertController(
-            title: title,
-            message: message,
-            preferredStyle: .alert
-        )
-        
-        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-            alert.dismiss(animated: true)
-        }
-        
-        alert.addAction(okAction);
-        
-        present(alert, animated: true)
     }
 }

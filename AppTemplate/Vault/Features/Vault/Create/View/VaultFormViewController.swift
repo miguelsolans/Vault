@@ -1,5 +1,5 @@
 //
-//  CreateVaultViewController.swift
+//  VaultFormViewController.swift
 //  Vault
 //
 //  Created by Miguel Solans on 31/03/2026.
@@ -7,12 +7,16 @@
 
 import UIKit
 import AppUIKit
+import CoreKit
 
-class CreateVaultViewController: UIViewController {
+final class VaultFormViewController: VaultBaseViewController {
     
-    var viewModel: CreateVaultViewModel
+    // MARK: - Dependencies
+    private(set) var viewModel: VaultFormViewModel
     
-    init(viewModel: CreateVaultViewModel) {
+    init(
+        viewModel: VaultFormViewModel
+    ) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -21,15 +25,32 @@ class CreateVaultViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - UI Elements
-    private let scrollView = UIScrollView()
-    private let stackView = UIStackView()
+    // MARK: - UI
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return scrollView
+    }()
+    
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        
+        stackView.axis = .vertical
+        stackView.spacing = 16
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return stackView
+    }()
     
     private lazy var nameInputView: TextFieldInputView = {
+        let view = TextFieldInputView(viewModel: viewModel.nameInputViewModel, style: InputStyles.textFieldStyle)
         
-        let inputView = TextFieldInputView(viewModel: viewModel.nameInputViewModel, style: InputStyles.textFieldStyle)
-        inputView.translatesAutoresizingMaskIntoConstraints = false
-        return inputView
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
     }()
     
     private lazy var depositSwitchInputView: SwitchInputView = {
@@ -41,13 +62,13 @@ class CreateVaultViewController: UIViewController {
     }()
     
     private lazy var depositInputView: TextFieldInputView = {
+        let view = TextFieldInputView(viewModel: viewModel.depositInputViewModel, style: InputStyles.textFieldStyle)
         
-        let inputView = TextFieldInputView(viewModel: viewModel.depositInputViewModel, style: InputStyles.textFieldStyle)
-        inputView.translatesAutoresizingMaskIntoConstraints = false
+        view.translatesAutoresizingMaskIntoConstraints = false
         
-        inputView.isHidden = !self.viewModel.isInitialDepositOn
+        view.isHidden = self.viewModel.isInitialDepositHidden
         
-        return inputView
+        return view
     }()
     
     private lazy var uploadFileSwitchView: SwitchInputView = {
@@ -80,6 +101,13 @@ class CreateVaultViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
+        setupBindings()
+    }
+    
+    override func setupUI() {
+        title = viewModel.title
+        navigationItem.subtitle = viewModel.subtitle
         view.backgroundColor = .systemBackground
         
         setupScrollView()
@@ -87,20 +115,47 @@ class CreateVaultViewController: UIViewController {
         setupConstraints()
         
         saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
-        
-        setupBindings()
     }
     
-    // MARK: - Setup
+    override func setupBindings() {
+        viewModel.updateUI = { [weak self] in
+            guard let self else { return }
+            
+            self.depositInputView.isHidden = self.viewModel.isInitialDepositHidden
+            self.uploadFilePickerView.isHidden = self.viewModel.isImportHidden
+        }
+        
+        viewModel.onSuccess = { [weak self] _ in
+            guard let self else { return }
+            
+            self.notifyFeedback(.success)
+        }
+        
+        viewModel.onError = { [weak self] error in
+            guard let self else { return }
+            
+            switch error {
+            case .showAlert(let message):
+                self.presentAlert(with:"Error", and: message)
+
+            case .silent:
+                break
+            }
+            
+            self.notifyFeedback(.error)
+        }
+    }
+}
+
+// MARK: - UI Setup
+
+extension VaultFormViewController {
+    
     private func setupScrollView() {
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)
     }
     
     private func setupStackView() {
-        stackView.axis = .vertical
-        stackView.spacing = 16
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(stackView)
         
         stackView.addArrangedSubview(nameInputView)
@@ -110,7 +165,7 @@ class CreateVaultViewController: UIViewController {
         stackView.addArrangedSubview(uploadFilePickerView)
         stackView.addArrangedSubview(saveButton)
         
-        uploadFileSwitchView.isHidden = viewModel.isEditing
+        uploadFileSwitchView.isHidden = viewModel.isFileUploadHidden
         
         uploadFilePickerView.isHidden = true
     }
@@ -130,61 +185,13 @@ class CreateVaultViewController: UIViewController {
             stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -32)
         ])
     }
+}
+
+// MARK: - Actions
+
+extension VaultFormViewController {
     
-    // MARK: - Actions
     @objc private func saveTapped() {
-        
         viewModel.didTapSave()
-    }
-}
-
-// MARK: - Bindings
-
-extension CreateVaultViewController {
-    func setupBindings() {
-        viewModel.updateUI = { [weak self] in
-            guard let self = self else { return }
-            
-            self.depositInputView.isHidden = !self.viewModel.isInitialDepositOn
-            self.uploadFilePickerView.isHidden = !self.viewModel.isImportOn
-            
-        }
-        
-        viewModel.onImportResult = { [weak self] result in
-            guard let self = self else { return }
-            
-            let message: String
-            
-            switch (result.successCount, result.failureCount) {
-            case (_, 0):
-                message = "All \(result.successCount) operations imported successfully."
-                
-            case (0, _):
-                message = "Import failed. \(result.failureCount) rows could not be processed."
-                
-            default:
-                message = """
-                    Imported \(result.successCount) operations.
-                    \(result.failureCount) failed to import.
-                    """
-            }
-            
-            let alert = UIAlertController(
-                title: "Import Result",
-                message: message,
-                preferredStyle: .alert
-            )
-            
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: onImportAlertDismiss)
-            
-            alert.addAction(okAction)
-            self.present(alert, animated: true)
-        }
-    }
-}
-
-extension CreateVaultViewController {
-    func onImportAlertDismiss(_ action: UIAlertAction) {
-        self.viewModel.onImportAlertDismiss()
     }
 }

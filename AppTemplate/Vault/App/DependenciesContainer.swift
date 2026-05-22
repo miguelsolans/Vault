@@ -72,8 +72,8 @@ extension DependenciesContainer {
     }
     
     // MARK: - Create Vault
-    func getCreateVaultViewModel(vaultToEdit: VaultDTO? = nil) -> CreateVaultViewModel {
-        return CreateVaultViewModel(
+    func getCreateVaultViewModel(vaultToEdit: VaultDTO? = nil) -> VaultFormViewModel {
+        return VaultFormViewModel(
             createUseCase: getCreateVaultUseCase(),
             editUseCase: getEditVaultUseCase(),
             vaultToEdit: vaultToEdit

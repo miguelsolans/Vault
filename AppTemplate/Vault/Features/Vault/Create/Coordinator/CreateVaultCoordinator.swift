@@ -41,20 +41,19 @@ class CreateVaultCoordinator: BaseCoordinator {
     
     // MARK: - ViewController's
     
-    lazy var createViewController: CreateVaultViewController = {
+    lazy var createViewController: VaultFormViewController = {
         let viewModel = dependencies.getCreateVaultViewModel()
         
         viewModel.delegate = self
         
-        let viewController = CreateVaultViewController(viewModel: viewModel)
+        let viewController = VaultFormViewController(viewModel: viewModel)
         
         return viewController
     }()
 }
 
-extension CreateVaultCoordinator: CreateVaultViewModelDelegate {
-    func didCreateVault(_ vault: VaultDTO, andFileURL fileURL: URL?) {
-        
+extension CreateVaultCoordinator: VaultFormViewModelDelegate {
+    func didCreateVault(_ viewModel: VaultFormViewModel, vault: VaultCore.VaultDTO, with fileURL: URL?) {
         guard let fileURL = fileURL else {
             finish()
             return
@@ -63,7 +62,7 @@ extension CreateVaultCoordinator: CreateVaultViewModelDelegate {
         goToImportOperations(with: vault, andFileURL: fileURL)
     }
     
-    func didUpdateVault(_ vault: VaultDTO) {
+    func didUpdateVault(_ viewModel: VaultFormViewModel, vault: VaultCore.VaultDTO) {
         finish()
     }
 }

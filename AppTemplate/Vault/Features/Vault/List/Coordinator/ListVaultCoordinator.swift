@@ -25,7 +25,11 @@ class ListVaultCoordinator: BaseCoordinator {
     
     fileprivate let canManageVaults: Bool
     
-    init(navigationController: UINavigationController, dependencies: DependenciesContainer, canManageVaults: Bool = false) {
+    init(
+        navigationController: UINavigationController,
+        dependencies: DependenciesContainer,
+        canManageVaults: Bool = false
+    ) {
         self.navigationController = navigationController
         self.dependencies = dependencies
         self.canManageVaults = canManageVaults
@@ -50,6 +54,8 @@ class ListVaultCoordinator: BaseCoordinator {
         viewModel.delegate = self
         
         let viewController = ListVaultViewController(viewModel: viewModel)
+        
+        viewController.hidesBottomBarWhenPushed = true
         
         return viewController
     }()
@@ -79,13 +85,13 @@ extension ListVaultCoordinator: ListVaultViewModelDelegate {
         
         viewModel.delegate = self
         
-        let viewController = CreateVaultViewController(viewModel: viewModel)
+        let viewController = VaultFormViewController(viewModel: viewModel)
         
         navigationController.pushViewController(viewController, animated: true)
     }
 }
 
-extension ListVaultCoordinator: CreateVaultViewModelDelegate {
+extension ListVaultCoordinator: VaultFormViewModelDelegate {
     
     func navigateToCreateVault() {
         
@@ -98,11 +104,11 @@ extension ListVaultCoordinator: CreateVaultViewModelDelegate {
         coordinator.start()
     }
     
-    func didCreateVault(_ vault: VaultDTO, andFileURL fileURL: URL?) {
+    func didCreateVault(_ viewModel: VaultFormViewModel, vault: VaultCore.VaultDTO, with fileURL: URL?) {
         navigationController.popToViewController(listViewController, animated: true)
     }
     
-    func didUpdateVault(_ vault: VaultDTO) {
+    func didUpdateVault(_ viewModel: VaultFormViewModel, vault: VaultCore.VaultDTO) {
         navigationController.popToViewController(listViewController, animated: true)
     }
 }

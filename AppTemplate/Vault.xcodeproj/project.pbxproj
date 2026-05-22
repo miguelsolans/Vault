@@ -60,13 +60,12 @@
 		8B539C112F7B334100977A6C /* AmountCardSectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539C102F7B334100977A6C /* AmountCardSectionViewModel.swift */; };
 		8B539C312F7B413500977A6C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B539C302F7B413500977A6C /* CoreData.framework */; };
 		8B539C672F7BE7D400977A6C /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539C662F7BE7D400977A6C /* OnboardingCoordinator.swift */; };
-		8B539C6A2F7BE8A500977A6C /* CreateVaultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539C692F7BE8A500977A6C /* CreateVaultViewController.swift */; };
-		8B539C6C2F7BE8AE00977A6C /* CreateVault.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B539C6B2F7BE8AE00977A6C /* CreateVault.storyboard */; };
+		8B539C6A2F7BE8A500977A6C /* VaultFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539C692F7BE8A500977A6C /* VaultFormViewController.swift */; };
 		8B539C732F7BFD1400977A6C /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539C722F7BFD1400977A6C /* IntroViewController.swift */; };
 		8B539C752F7BFD3C00977A6C /* IntroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539C742F7BFD3C00977A6C /* IntroViewModel.swift */; };
 		8B539C782F7C015E00977A6C /* OnboardingItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539C772F7C015E00977A6C /* OnboardingItemViewModel.swift */; };
 		8B539C7A2F7C018D00977A6C /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539C792F7C018D00977A6C /* OnboardingCollectionViewCell.swift */; };
-		8B539C7C2F7C08ED00977A6C /* CreateVaultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539C7B2F7C08ED00977A6C /* CreateVaultViewModel.swift */; };
+		8B539C7C2F7C08ED00977A6C /* VaultFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539C7B2F7C08ED00977A6C /* VaultFormViewModel.swift */; };
 		8B539C822F7C14A800977A6C /* TabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539C812F7C14A800977A6C /* TabBarViewModel.swift */; };
 		8B539CBA2F7C285F00977A6C /* OperationFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539CB92F7C285F00977A6C /* OperationFormViewModel.swift */; };
 		8B539CBC2F7C286F00977A6C /* OperationFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539CBB2F7C286F00977A6C /* OperationFormViewController.swift */; };
@@ -206,13 +205,12 @@
 		8B539C102F7B334100977A6C /* AmountCardSectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountCardSectionViewModel.swift; sourceTree = "<group>"; };
 		8B539C302F7B413500977A6C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		8B539C662F7BE7D400977A6C /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
-		8B539C692F7BE8A500977A6C /* CreateVaultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateVaultViewController.swift; sourceTree = "<group>"; };
-		8B539C6B2F7BE8AE00977A6C /* CreateVault.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateVault.storyboard; sourceTree = "<group>"; };
+		8B539C692F7BE8A500977A6C /* VaultFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultFormViewController.swift; sourceTree = "<group>"; };
 		8B539C722F7BFD1400977A6C /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		8B539C742F7BFD3C00977A6C /* IntroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewModel.swift; sourceTree = "<group>"; };
 		8B539C772F7C015E00977A6C /* OnboardingItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingItemViewModel.swift; sourceTree = "<group>"; };
 		8B539C792F7C018D00977A6C /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
-		8B539C7B2F7C08ED00977A6C /* CreateVaultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateVaultViewModel.swift; sourceTree = "<group>"; };
+		8B539C7B2F7C08ED00977A6C /* VaultFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultFormViewModel.swift; sourceTree = "<group>"; };
 		8B539C812F7C14A800977A6C /* TabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewModel.swift; sourceTree = "<group>"; };
 		8B539CB92F7C285F00977A6C /* OperationFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationFormViewModel.swift; sourceTree = "<group>"; };
 		8B539CBB2F7C286F00977A6C /* OperationFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationFormViewController.swift; sourceTree = "<group>"; };
@@ -758,8 +756,7 @@
 		8B539C622F7BD8A700977A6C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8B539C692F7BE8A500977A6C /* CreateVaultViewController.swift */,
-				8B539C6B2F7BE8AE00977A6C /* CreateVault.storyboard */,
+				8B539C692F7BE8A500977A6C /* VaultFormViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -775,7 +772,7 @@
 		8B539C642F7BD8B000977A6C /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				8B539C7B2F7C08ED00977A6C /* CreateVaultViewModel.swift */,
+				8B539C7B2F7C08ED00977A6C /* VaultFormViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1508,7 +1505,6 @@
 				8B11233E2F81D25000A2AF28 /* LoginPin.xcstrings in Resources */,
 				8BCF15E52F82D12100B483BD /* ListOperations.xcstrings in Resources */,
 				8B1123422F81D27300A2AF28 /* CreateVault.xcstrings in Resources */,
-				8B539C6C2F7BE8AE00977A6C /* CreateVault.storyboard in Resources */,
 				8BC2E5112BFD3842007FAF4C /* Base in Resources */,
 				8B1123442F81D28100A2AF28 /* Dashboard.xcstrings in Resources */,
 				8BCF15E82F82D15D00B483BD /* ListCategories.xcstrings in Resources */,
@@ -1538,7 +1534,7 @@
 				8BF3B9152FACCC8B00DAFA1D /* OperationMetricsTool.swift in Sources */,
 				8B078BD12F7D1F3600075CC1 /* DashboardViewController.swift in Sources */,
 				8BD0F73B2F92F782007C2E59 /* OCRTextRecognitionService.swift in Sources */,
-				8B539C7C2F7C08ED00977A6C /* CreateVaultViewModel.swift in Sources */,
+				8B539C7C2F7C08ED00977A6C /* VaultFormViewModel.swift in Sources */,
 				8B539BE72F7ADC1D00977A6C /* SampleViewModel.swift in Sources */,
 				8B9B09B52F83F48D0042840E /* ImportOperationsCoordinator.swift in Sources */,
 				8B6185672F7F318E008986A8 /* SecurityOptionTableViewModel.swift in Sources */,
@@ -1599,7 +1595,7 @@
 				8B539BFD2F7B258300977A6C /* ListOperationsViewController.swift in Sources */,
 				8B539BE12F7ADBDA00977A6C /* SampleCoordinator.swift in Sources */,
 				8B81F1CF2FAE43A300ECA9F4 /* CashflowBreakdownViewController.swift in Sources */,
-				8B539C6A2F7BE8A500977A6C /* CreateVaultViewController.swift in Sources */,
+				8B539C6A2F7BE8A500977A6C /* VaultFormViewController.swift in Sources */,
 				8B61856D2F7F3409008986A8 /* SecurityViewController.swift in Sources */,
 				8B1123132F816DDB00A2AF28 /* LoginCoordinator.swift in Sources */,
 				8B81F1CD2FAE3F4000ECA9F4 /* CashflowBreakdownCoordinator.swift in Sources */,

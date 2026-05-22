@@ -9,7 +9,7 @@ import UIKit
 import AppUIKit
 import CoreKit
 
-final class OperationFormViewController: BaseViewController {
+final class OperationFormViewController: VaultBaseViewController {
     
     private(set) var viewModel: OperationFormViewModel
     
@@ -396,18 +396,24 @@ extension OperationFormViewController {
             self.refreshReimbursementViews()
         }
         
-        viewModel.onSuccess = { [weak self] in
+        viewModel.onSuccess = { [weak self] _ in
             guard let self = self else { return }
             
             self.notifyFeedback(.success)
         }
         
-        viewModel.onError = { [weak self] message in
+        viewModel.onError = { [weak self] error in
             guard let self = self else { return }
             
-            self.notifyFeedback(.error)
+            switch error {
+            case .showAlert(let message):
+                self.presentAlert(with:"Error", and: message)
+
+            case .silent:
+                break
+            }
             
-            presentAlert(with: "Error", and: message)
+            self.notifyFeedback(.error)
         }
     }
     
@@ -459,24 +465,5 @@ extension OperationFormViewController {
             self?.endEditingAndDismissExpandedInputs()
             existingReimbursementValueChanged?(isOn)
         }
-    }
-}
-
-extension OperationFormViewController {
-    
-    private func presentAlert(with title: String, and message: String) {
-        let alert = UIAlertController(
-            title: title,
-            message: message,
-            preferredStyle: .alert
-        )
-        
-        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-            alert.dismiss(animated: true)
-        }
-        
-        alert.addAction(okAction);
-        
-        present(alert, animated: true)
     }
 }

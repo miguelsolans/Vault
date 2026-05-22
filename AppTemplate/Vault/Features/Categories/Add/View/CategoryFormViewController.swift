@@ -9,7 +9,7 @@ import UIKit
 import AppUIKit
 import CoreKit
 
-final class CategoryFormViewController: BaseViewController {
+final class CategoryFormViewController: VaultBaseViewController {
 
     private(set)var viewModel: CategoryFormViewModel
     
@@ -133,14 +133,22 @@ final class CategoryFormViewController: BaseViewController {
             self.colorInputView.isHidden = !viewModel.isShowInDashboardOn
         }
         
-        viewModel.onSuccess = { [weak self] in
+        viewModel.onSuccess = { [weak self] _ in
             guard let self = self else { return }
             
             self.notifyFeedback(.success)
         }
         
-        viewModel.onError = { [weak self] in
+        viewModel.onError = { [weak self] error in
             guard let self = self else { return }
+            
+            switch error {
+            case .showAlert(let message):
+                self.presentAlert(with:"Error", and: message)
+
+            case .silent:
+                break
+            }
             
             self.notifyFeedback(.error)
         }

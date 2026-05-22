@@ -1,22 +1,23 @@
 //
-//  CreateVaultViewModel.swift
+//  VaultFormViewModel.swift
 //  Vault
 //
 //  Created by Miguel Solans on 31/03/2026.
 //
 
 import UIKit
+import CoreKit
 import AppUIKit
 import VaultCore
 
-protocol CreateVaultViewModelDelegate: AnyObject {
-    func didCreateVault(_ vault: VaultDTO, andFileURL fileURL: URL?)
-    func didUpdateVault(_ vault: VaultDTO)
+protocol VaultFormViewModelDelegate: AnyObject {
+    func didCreateVault(_ viewModel: VaultFormViewModel, vault: VaultDTO, with fileURL: URL?)
+    func didUpdateVault(_ viewModel: VaultFormViewModel, vault: VaultDTO)
 }
 
-class CreateVaultViewModel: NSObject {
+final class VaultFormViewModel: NSObject {
     
-    weak var delegate: CreateVaultViewModelDelegate?
+    weak var delegate: VaultFormViewModelDelegate?
     
     // MARK: - Dependencies
     
@@ -26,7 +27,11 @@ class CreateVaultViewModel: NSObject {
     
     private let vaultToEdit: VaultDTO?
     
-    init(createUseCase: CreateVaultUseCase, editUseCase: EditVaultUseCase, vaultToEdit: VaultDTO?) {
+    init(
+        createUseCase: CreateVaultUseCase,
+        editUseCase: EditVaultUseCase,
+        vaultToEdit: VaultDTO?
+    ) {
         self.createUseCase = createUseCase
         self.editUseCase = editUseCase
         self.vaultToEdit = vaultToEdit
@@ -34,10 +39,30 @@ class CreateVaultViewModel: NSObject {
         self.setupBindings()
     }
     
-    // MARK: - State
+    // MARK: - State State
     
-    public var isEditing: Bool {
+    public var title: String {
+        vaultToEdit != nil ? "Edit Vault" : "Create Vault"
+    }
+    
+    public var subtitle: String {
+        ""
+    }
+    
+    private var isEditing: Bool {
         return vaultToEdit != nil
+    }
+    
+    public var isFileUploadHidden: Bool {
+        return true
+    }
+    
+    public var isInitialDepositHidden: Bool {
+        return !depositSwitchViewModel.isOn
+    }
+    
+    public var isImportHidden: Bool {
+        return true
     }
     
     // MARK: - Input fields
@@ -63,10 +88,10 @@ class CreateVaultViewModel: NSObject {
         }
         
         let viewModel = SwitchInputViewModel(
-            title: "Initial deposit",
+            title: "Initial amount",
             isOn: self.isInitialDepositOn,
             isEditable: true,
-            placeholder: "Include an initial deposit amount"
+            placeholder: "Setup initial amount"
         )
         
         return viewModel
@@ -76,8 +101,8 @@ class CreateVaultViewModel: NSObject {
         
         var amount = ""
         
-        if let vaultToEdit {
-            amount = LocalizedDecimalFormatter.init(numberStyle: .currency)
+        if let vaultToEdit, vaultToEdit.initialDeposit > 0 {
+            amount = LocalizedDecimalFormatter.init(numberStyle: .decimal)
                 .string(from: vaultToEdit.initialDeposit) ?? ""
         }
         
@@ -122,23 +147,25 @@ class CreateVaultViewModel: NSObject {
     
     // MARK: - State
     
-    public var isImportOn: Bool = false {
+    private var isImportOn: Bool = false {
         didSet { updateUI?() }
     }
     
-    public var isInitialDepositOn: Bool = false {
+    private var isInitialDepositOn: Bool = false {
         didSet { updateUI?() }
     }
     
     // MARK: - Bindings
-    var updateUI: (() -> Void)?
+    public var updateUI: (() -> Void)?
     
-    var onImportResult: ((ImportOperationsResponse) -> Void)?
+    public var onSuccess: ((ViewModelFeedback) -> Void)?
+    
+    public var onError: ((ViewModelFeedback) -> Void)?
 }
 
 // MARK: - Actions
 
-extension CreateVaultViewModel {
+extension VaultFormViewModel {
     
     func didTapSave() {
         
@@ -149,15 +176,11 @@ extension CreateVaultViewModel {
         
         self.saveVault();
     }
-    
-    
-    
-    func onImportAlertDismiss() {
-        
-    }
 }
 
-extension CreateVaultViewModel {
+// MARK: - Data
+
+extension VaultFormViewModel {
     
     func saveVault() {
         
@@ -195,10 +218,17 @@ extension CreateVaultViewModel {
             
             let response = try createUseCase.execute(request: request)
             
+            onSuccess?(.silent)
             
-            delegate?.didCreateVault(response.vault, andFileURL: response.importFileURL);
+            delegate?.didCreateVault(self, vault: response.vault, with: response.importFileURL)
+            
+        } catch VaultError.vaultAlreadyExists(let name) {
+            
+            nameInputViewModel.feedback = .error("Vault with name \(name) already exists.")
+            onError?(.silent)
+            
         } catch {
-            // TODO: Present error?
+            onError?(.showAlert(message: "There was an error updating Vault."))
         }
     }
     
@@ -215,17 +245,24 @@ extension CreateVaultViewModel {
             
             let response = try editUseCase.execute(request: request)
             
-            delegate?.didUpdateVault(response.vault)
+            onSuccess?(.silent)
+            
+            delegate?.didUpdateVault(self, vault: response.vault)
+            
+        } catch VaultError.vaultAlreadyExists(let name) {
+            
+            nameInputViewModel.feedback = .error("Vault with name \(name) already exists.")
+            onError?(.silent)
             
         } catch {
-            // TODO: Present error?
+            onError?(.showAlert(message: "There was an error updating Vault."))
         }
     }
 }
 
-// MARK: - Form validations
+// MARK: - Validations
 
-extension CreateVaultViewModel {
+extension VaultFormViewModel {
     fileprivate func validateInputs() -> Bool {
         var isValid = true
         
@@ -292,7 +329,9 @@ extension CreateVaultViewModel {
     }
 }
 
-extension CreateVaultViewModel {
+// MARK: - Bindings
+
+extension VaultFormViewModel {
     private func setupBindings() {
         setupNameInputBindings()
         setupDepositSwitchBindings()
@@ -319,6 +358,10 @@ extension CreateVaultViewModel {
         depositSwitchViewModel.onValueChanged = { [weak self] on in
             guard let self = self else { return }
             self.isInitialDepositOn = on
+            
+            if !on {
+                self.depositInputViewModel.inputText = ""
+            }
         }
     }
     

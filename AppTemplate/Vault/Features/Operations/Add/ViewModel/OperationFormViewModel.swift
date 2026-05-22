@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreKit
 import AppUIKit
 import VaultCore
 
@@ -351,9 +352,9 @@ final class OperationFormViewModel: NSObject {
     
     public var updateUI: (() -> Void)?
     
-    public var onError: ((String) -> Void)?
+    public var onSuccess: ((ViewModelFeedback) -> Void)?
     
-    public var onSuccess: (() -> Void)?
+    public var onError: ((ViewModelFeedback) -> Void)?
 }
 
 // MARK: - Data
@@ -379,7 +380,7 @@ extension OperationFormViewModel {
             self.categories = response.categories
             
         } catch {
-            onError?("There was an error while fetching categories")
+            onError?(.showAlert(message: "There was an error while fetching categories"))
         }
     }
     
@@ -435,7 +436,7 @@ extension OperationFormViewModel {
             reimbursements[index.row] = response.reimbursement
             updateUI?()
         } catch {
-            onError?("There was an error updating the reimbursement status")
+            onError?(.showAlert(message: "There was an error updating the reimbursement status"))
         }
     }
     
@@ -474,12 +475,12 @@ extension OperationFormViewModel {
                 try createReimbursement(operation: result.operation)
             }
             
-            onSuccess?()
+            onSuccess?(.silent)
             
             delegate?.didAddOperation(self)
             
         } catch {
-            onError?("There was an error creating the operation.")
+            onError?(.showAlert(message: "There was an error creating the operation."))
         }
     }
     
@@ -538,12 +539,12 @@ extension OperationFormViewModel {
             
             let _ = try editOperationUseCase.execute(request)
             
-            onSuccess?()
+            onSuccess?(.silent)
             
             delegate?.didEditOperation(self)
             
         } catch {
-            onError?("An error occurred while updating the operation.")
+            onError?(.showAlert(message: "An error occurred while updating the operation."))
         }
         
     }
@@ -594,7 +595,7 @@ extension OperationFormViewModel {
             reimbursements.remove(at: index.row)
             
         } catch {
-            onError?("An error ocurred while trying to delete reimbursement.")
+            onError?(.showAlert(message: "An error ocurred while trying to delete reimbursement."))
         }
         
         updateState()
