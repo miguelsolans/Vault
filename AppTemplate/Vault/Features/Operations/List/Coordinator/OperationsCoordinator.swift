@@ -186,11 +186,11 @@ extension OperationsCoordinator: ListOperationsViewModelProtocol {
 }
 
 extension OperationsCoordinator: OperationDetailViewModelDelegate {
-    func viewModelDidDeleteOperation(_ viewModel: OperationDetailViewModel) {
+    func didDeleteOperation(_ viewModel: OperationDetailViewModel) {
         navigationController.popViewController(animated: true)
     }
     
-    func viewModelDidTapEdit(_ viewModel: OperationDetailViewModel) {
+    func didTapEditOperation(_ viewModel: OperationDetailViewModel) {
         navigationController.popViewController(animated: true)
         
         goToAddOperationWithVault(
@@ -199,7 +199,7 @@ extension OperationsCoordinator: OperationDetailViewModelDelegate {
         )
     }
     
-    func viewModelDidTapEditReimbursement(_ viewModel: OperationDetailViewModel, reimbursement: ReimbursementDTO) {
+    func didTapEditReimbursement(_ viewModel: OperationDetailViewModel, reimbursement: ReimbursementDTO) {
         
         let viewModel = dependencies.getAddReimbursementViewModel(
             with: filter.vault,

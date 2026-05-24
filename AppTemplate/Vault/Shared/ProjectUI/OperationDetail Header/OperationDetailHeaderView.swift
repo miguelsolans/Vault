@@ -73,7 +73,6 @@ final class OperationDetailHeaderView: UIView {
     
     private func setupUI() {
         backgroundColor = .clear
-        layoutMargins = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
         
         emojiContainerView.addSubview(emojiBackgroundView)
         emojiBackgroundView.addSubview(emojiLabel)
@@ -86,11 +85,12 @@ final class OperationDetailHeaderView: UIView {
         addSubview(contentStackView)
         
         NSLayoutConstraint.activate([
-            contentStackView.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
-            contentStackView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
-            contentStackView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
-            contentStackView.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor),
+            contentStackView.topAnchor.constraint(equalTo: topAnchor),
+            contentStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            contentStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            contentStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
 
+            // emojiContainerView.heightAnchor.constraint(equalToConstant: 88),
             emojiBackgroundView.topAnchor.constraint(equalTo: emojiContainerView.topAnchor),
             emojiBackgroundView.bottomAnchor.constraint(equalTo: emojiContainerView.bottomAnchor),
             emojiBackgroundView.centerXAnchor.constraint(equalTo: emojiContainerView.centerXAnchor),
@@ -144,8 +144,9 @@ extension OperationDetailHeaderView {
     }
 }
 
-#Preview("OeprationDetailHeaderView") {
+#Preview("OperationDetailHeaderView") {
     let viewModel = OperationDetailHeaderViewModel(
+        emoji: "F",
         color: "7A9EB1",
         title: "Title",
         amount: 20000,

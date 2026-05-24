@@ -6,16 +6,17 @@
 //
 
 import Foundation
+import CoreKit
 import AppUIKit
 import VaultCore
 
 protocol OperationDetailViewModelDelegate: AnyObject {
-    func viewModelDidDeleteOperation(_ viewModel: OperationDetailViewModel)
-    func viewModelDidTapEdit(_ viewModel: OperationDetailViewModel)
-    func viewModelDidTapEditReimbursement(_ viewModel: OperationDetailViewModel, reimbursement: ReimbursementDTO)
+    func didDeleteOperation(_ viewModel: OperationDetailViewModel)
+    func didTapEditOperation(_ viewModel: OperationDetailViewModel)
+    func didTapEditReimbursement(_ viewModel: OperationDetailViewModel, reimbursement: ReimbursementDTO)
 }
 
-final class OperationDetailViewModel {
+final class OperationDetailViewModel: NSObject {
     
     weak var delegate: OperationDetailViewModelDelegate?
     
@@ -23,44 +24,42 @@ final class OperationDetailViewModel {
     
     private(set) var operation: OperationDTO
     
+    private let operationDetailUseCase: OperationDetailUseCase
+    
     private let deleteOperationUseCase: DeleteOperationUseCase
+    
+    private let updateReimbursementUseCase: UpdateReimbursementStatusUseCase
     
     init(
         operation: OperationDTO,
-        deleteOperationUseCase: DeleteOperationUseCase
+        operationDetailUseCase: OperationDetailUseCase,
+        deleteOperationUseCase: DeleteOperationUseCase,
+        updateReimbursementUseCase: UpdateReimbursementStatusUseCase
     ) {
         self.operation = operation
+        self.operationDetailUseCase = operationDetailUseCase
         self.deleteOperationUseCase = deleteOperationUseCase
+        self.updateReimbursementUseCase = updateReimbursementUseCase
     }
     
-    // MARK: - Table Model
+    // MARK: - UI State
     
-    enum Section {
-        case operationDetail([SimpleDetailInfoRow])
-        case reimbursements([OperationDetailReimbursementRow])
-        case summary([SimpleDetailInfoRow])
+    public var title: String = ""
+    
+    public var subtitle: String = ""
+    
+    public var headerViewModel: OperationDetailHeaderViewModel {
         
-        var title: String? {
-            switch self {
-            case .operationDetail:
-                return "Operation detail"
-            case .reimbursements:
-                return "Reimbursements"
-            case .summary:
-                return "Summary"
-            }
-        }
+        let viewModel = OperationDetailHeaderViewModel(
+            emoji: operation.category.emoji,
+            color: operation.category.color,
+            title: operation.category.title,
+            amount: operation.netAmount,
+            date: operation.date,
+            operationType: operation.operationType
+        )
         
-        var numberOfRows: Int {
-            switch self {
-            case .operationDetail(let rows),
-                    .summary(let rows):
-                return rows.count
-                
-            case .reimbursements(let rows):
-                return rows.count
-            }
-        }
+        return viewModel
     }
     
     private var sections: [Section] {
@@ -70,68 +69,54 @@ final class OperationDetailViewModel {
         
         if !reimbursingOperations.isEmpty {
             sections.append(.reimbursements(reimbursingOperations))
+            sections.append(.summary(summaryRows))
         }
-        
-        sections.append(.summary(summaryRows))
         
         return sections
     }
     
-    // MARK: - State
-    
-    var detailOperation: [SimpleDetailInfoRow] {
+    public var detailOperation: [SimpleDetailInfoRow] {
         [
             .init(title: "Type", value: operation.operationType.localized, systemImageName: nil),
             .init(title: "Notes", value: operation.title, systemImageName: nil)
         ]
     }
     
-    var reimbursingOperations: [OperationDetailReimbursementRow] {
-        reimbursements.map { reimbursement in
+    public var reimbursingOperations: [OperationDetailReimbursementRow] {
+        guard let reimbursements = reimbursements, !reimbursements.isEmpty else {
+            return []
+        }
+        
+        return reimbursements.map { reimbursement in
             OperationDetailReimbursementRow(reimbursement: reimbursement)
         }
     }
     
-    var summaryRows: [SimpleDetailInfoRow] {
+    public var summaryRows: [SimpleDetailInfoRow] {
         [
             .init(title: "Operation amount", value: currencyFormatter.string(from: operation.amount) ?? "", systemImageName: nil),
             .init(title: "Total reimbursed", value: currencyFormatter.string(from: operation.totalReimbursed) ?? "", systemImageName: nil),
             .init(title: "Remaining", value: currencyFormatter.string(from: operation.netAmount) ?? "", systemImageName: nil)
         ]
     }
-    
-    // MARK: - UI
-    
-    var title: String = ""
 
-    var headerViewModel: OperationDetailHeaderViewModel {
-        OperationDetailHeaderViewModel(
-            emoji: operation.category.emoji,
-            color: operation.category.color,
-            title: operation.category.title,
-            amount: operation.netAmount,
-            date: operation.date,
-            operationType: operation.operationType
-        )
-    }
-    
-    var numberOfSections: Int {
+    public var numberOfSections: Int {
         sections.count
     }
     
-    func titleForSection(_ section: Int) -> String? {
+    public func titleForSection(_ section: Int) -> String? {
         sections[section].title
     }
     
-    func numberOfRows(at section: Int) -> Int {
+    public func numberOfRows(at section: Int) -> Int {
         sections[section].numberOfRows
     }
     
-    func section(at index: Int) -> Section {
+    public func section(at index: Int) -> Section {
         sections[index]
     }
     
-    func row(at indexPath: IndexPath) -> Any {
+    public func row(at indexPath: IndexPath) -> Any {
         switch sections[indexPath.section] {
         case .operationDetail(let rows):
             return rows[indexPath.row]
@@ -144,7 +129,7 @@ final class OperationDetailViewModel {
         }
     }
     
-    func title(for section: Int) -> String {
+    public func title(for section: Int) -> String {
         return sections[section].title ?? ""
     }
     
@@ -160,11 +145,22 @@ final class OperationDetailViewModel {
         return true
     }
     
-    // MARK: - Private
-    
-    private var reimbursements: [ReimbursementDTO] {
-        operation.reimbursements ?? []
+    public func isReimbursementStatusAvailable(_ status: ReimbursementStatus, for indexPath: IndexPath) -> Bool {
+        
+        guard let reimbursements = reimbursements, !reimbursements.isEmpty else {
+            return false
+        }
+        
+        let reimbursement = reimbursements[indexPath.row]
+        
+        return reimbursement.status != status
     }
+    
+    // MARK: - Data
+    
+    private var reimbursements: [ReimbursementDTO]?
+    
+    // MARK: - Formatters
     
     private var currencyFormatter: LocalizedDecimalFormatter {
         LocalizedDecimalFormatter(numberStyle: .currency)
@@ -176,15 +172,70 @@ final class OperationDetailViewModel {
         formatter.timeStyle = .none
         return formatter
     }
+    
+    // MARK: - Bindings
+    
+    public var updateUI: (() -> Void)?
+    
+    public var onSuccess: ((ViewModelFeedback) -> Void)?
+    
+    public var onError: ((ViewModelFeedback) -> Void)?
 }
+
+// MARK: - Data
 
 extension OperationDetailViewModel {
     
-    func didTapEdit() {
-        delegate?.viewModelDidTapEdit(self)
+    public func getData() {
+        
+        let request = OperationDetailRequest(operationID: operation.id)
+        
+        do {
+            let response = try operationDetailUseCase.execute(request)
+            
+            operation = response.operation
+            
+            reimbursements = response.reimbursements
+            
+            updateUI?()
+            
+        } catch {
+            onError?(.showAlert(message: "There was an error fetching data"))
+        }
+        
     }
     
-    func didTapDelete() {
+    private func updateReimbursementStatus(at indexPath: IndexPath, to status: ReimbursementStatus) {
+        guard let reimbursements = reimbursements else { return }
+        
+        let reimbursement = reimbursements[indexPath.row]
+        
+        let request = UpdateReimbursementStatusRequest(id: reimbursement.id, status: status)
+        
+        do {
+            _ = try updateReimbursementUseCase.execute(request)
+            
+            getData()
+            
+            onSuccess?(.silent)
+            
+        } catch {
+            
+            onError?(.showAlert(message: "There was an error updating the status of the Reimbursement. Try again."))
+        }
+    }
+}
+
+
+// MARK: - Actions
+
+extension OperationDetailViewModel {
+    
+    public func didTapEdit() {
+        delegate?.didTapEditOperation(self)
+    }
+    
+    public func didTapDelete() {
         let request = DeleteOperationRequest(
             id: operation.id
         )
@@ -192,19 +243,62 @@ extension OperationDetailViewModel {
         do {
             _ = try deleteOperationUseCase.execute(request)
             
-            delegate?.viewModelDidDeleteOperation(self)
-        } catch {
+            onSuccess?(.silent)
             
+            delegate?.didDeleteOperation(self)
+        } catch {
+            onError?(.showAlert(message: "There was an error deleting operation. Try again."))
         }
     }
     
-    func didTapEditReimbursement(at indexPath: IndexPath) {
+    public func didTapEditReimbursement(at indexPath: IndexPath) {
+        guard let reimbursements = reimbursements else { return }
+        
         let reimbursement = reimbursements[indexPath.row]
         
-        delegate?.viewModelDidTapEditReimbursement(self, reimbursement: reimbursement)
+        delegate?.didTapEditReimbursement(self, reimbursement: reimbursement)
+    }
+    
+    public func didTapReceivedReimbursementStatus(at indexPath: IndexPath) {
+        updateReimbursementStatus(at: indexPath, to: .received)
+    }
+    
+    public func didTapCancelledReimbursementStatus(at indexPath: IndexPath) {
+        updateReimbursementStatus(at: indexPath, to: .cancelled)
+    }
+    
+    public func didTapExpectedReimbursementStatus(at indexPath: IndexPath) {
+        updateReimbursementStatus(at: indexPath, to: .expected)
     }
 }
 
+enum Section {
+    case operationDetail([SimpleDetailInfoRow])
+    case reimbursements([OperationDetailReimbursementRow])
+    case summary([SimpleDetailInfoRow])
+    
+    var title: String? {
+        switch self {
+        case .operationDetail:
+            return "Operation detail"
+        case .reimbursements:
+            return "Reimbursements"
+        case .summary:
+            return "Summary"
+        }
+    }
+    
+    var numberOfRows: Int {
+        switch self {
+        case .operationDetail(let rows),
+                .summary(let rows):
+            return rows.count
+            
+        case .reimbursements(let rows):
+            return rows.count
+        }
+    }
+}
 
 struct SimpleDetailInfoRow {
     let title: String

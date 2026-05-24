@@ -8,7 +8,7 @@
 import UIKit
 import CoreKit
 
-final class OperationDetailViewController: BaseViewController {
+final class OperationDetailViewController: VaultBaseViewController {
     
     private static let detailCellIdentifier = "OperationDetailCell"
     
@@ -23,22 +23,36 @@ final class OperationDetailViewController: BaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - UI
+    
     private lazy var headerView: OperationDetailHeaderView = {
         let view = OperationDetailHeaderView()
+        
         view.configure(with: viewModel.headerViewModel)
+        
         return view
     }()
 
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        
         return tableView
     }()
 
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupNavigationItems()
+        setupBindings()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.getData()
     }
 
     override func viewDidLayoutSubviews() {
@@ -47,18 +61,66 @@ final class OperationDetailViewController: BaseViewController {
     }
 
     override func setupUI() {
-        
         view.backgroundColor = tableView.backgroundColor
+        title = viewModel.title
+        navigationItem.subtitle = viewModel.subtitle
         
+        setupTableView()
+        setupConstraints()
+
+    }
+    
+    private func updateUI() {
+        tableView.reloadData()
+        headerView.configure(with: viewModel.headerViewModel)
+    }
+    
+    override func setupBindings() {
+        viewModel.updateUI = { [weak self] in
+            guard let self else { return }
+            
+            self.updateUI()
+        }
+        
+        viewModel.onSuccess = { [weak self] feedback in
+            guard let self = self else { return }
+            
+            switch feedback {
+            case .showAlert(let message):
+                self.presentAlert(with:"Success", and: message)
+
+            case .silent:
+                break
+            }
+            
+            self.notifyFeedback(.error)
+        }
+        
+        viewModel.onError = { [weak self] feedback in
+            guard let self = self else { return }
+            
+            switch feedback {
+            case .showAlert(let message):
+                self.presentAlert(with:"Error", and: message)
+
+            case .silent:
+                break
+            }
+            
+            self.notifyFeedback(.error)
+        }
+    }
+}
+
+// MARK: - UI Setup
+
+extension OperationDetailViewController {
+    
+    private func setupTableView() {
         view.addSubview(tableView)
-
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
-
+        
+        tableView.alwaysBounceVertical = false
+        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableHeaderView = headerView
@@ -72,12 +134,9 @@ final class OperationDetailViewController: BaseViewController {
             ReimbursementTableViewCell.self,
             forCellReuseIdentifier: ReimbursementTableViewCell.identifier
         )
-        
-        tableView.alwaysBounceVertical = false
     }
     
     private func setupNavigationItems() {
-        title = viewModel.title
         
         guard viewModel.isActionAvailable else {
             return
@@ -114,33 +173,13 @@ final class OperationDetailViewController: BaseViewController {
         navigationItem.rightBarButtonItem = moreBarButtonItem
     }
     
-    override func setupBindings() {
-        // TODO: Bindings if needed.
-    }
-
-    private func updateTableHeaderViewHeight() {
-        guard let tableHeaderView = tableView.tableHeaderView else {
-            return
-        }
-
-        let targetSize = CGSize(
-            width: tableView.bounds.width,
-            height: UIView.layoutFittingCompressedSize.height
-        )
-
-        let height = tableHeaderView.systemLayoutSizeFitting(
-            targetSize,
-            withHorizontalFittingPriority: .required,
-            verticalFittingPriority: .fittingSizeLevel
-        ).height
-
-        guard tableHeaderView.frame.width != targetSize.width
-                || tableHeaderView.frame.height != height else {
-            return
-        }
-
-        tableHeaderView.frame.size = CGSize(width: targetSize.width, height: height)
-        tableView.tableHeaderView = tableHeaderView
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
 }
 
@@ -192,32 +231,63 @@ extension OperationDetailViewController: UITableViewDataSource, UITableViewDeleg
         }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
+        
+        guard case .reimbursements = viewModel.section(at: indexPath.section) else {
+            return nil
+        }
+
+        let editAction = UIContextualAction(style: .normal, title: "Edit") { [weak self] _, _, completion in
+            self?.viewModel.didTapEditReimbursement(at: indexPath)
+            completion(true)
+        }
+
+        return UISwipeActionsConfiguration(actions: [editAction])
     }
     
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         
-        var actions: [UIContextualAction] = []
-        
-        switch viewModel.section(at: indexPath.section) {
-        case .operationDetail(let array):
-            actions = []
-        case .reimbursements(let array):
-            let action = UIContextualAction(style: .normal, title: "Edit") { [weak self] _, _, completion in
-                guard let self = self else { return }
-                
-                self.viewModel.didTapEditReimbursement(at: indexPath)
-            }
-            
-            actions.append(action)
-        case .summary(let array):
-            actions = []
+        guard case .reimbursements = viewModel.section(at: indexPath.section) else {
+            return nil
         }
         
-        let configuration = UISwipeActionsConfiguration(actions: actions)
+        var menu: [UIMenuElement] = []
         
-        return configuration
+        if viewModel.isReimbursementStatusAvailable(.received, for: indexPath) {
+            
+            let action = UIAction(title: "Received") { [weak self] _ in
+                guard let self else { return }
+                self.viewModel.didTapReceivedReimbursementStatus(at: indexPath)
+            }
+        
+            menu.append(action)
+        }
+        
+        if viewModel.isReimbursementStatusAvailable(.expected, for: indexPath) {
+            let action = UIAction(title: "Expected") { [weak self] _ in
+                guard let self else { return }
+                self.viewModel.didTapExpectedReimbursementStatus(at: indexPath)
+            }
+        
+            menu.append(action)
+        }
+        
+        if viewModel.isReimbursementStatusAvailable(.cancelled, for: indexPath) {
+            let action = UIAction(title: "Cancelled") { [weak self] _ in
+                guard let self else { return }
+                self.viewModel.didTapCancelledReimbursementStatus(at: indexPath)
+            }
+        
+            menu.append(action)
+        }
+        
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+            return UIMenu(title: "", children: menu)
+        }
+        
     }
     
     private func configureValueCell(_ cell: UITableViewCell, with row: SimpleDetailInfoRow) {
@@ -235,5 +305,30 @@ extension OperationDetailViewController: UITableViewDataSource, UITableViewDeleg
         
         cell.contentConfiguration = content
         cell.selectionStyle = .none
+    }
+    
+    private func updateTableHeaderViewHeight() {
+        guard let tableHeaderView = tableView.tableHeaderView else {
+            return
+        }
+
+        let targetSize = CGSize(
+            width: tableView.bounds.width,
+            height: UIView.layoutFittingCompressedSize.height
+        )
+
+        let height = tableHeaderView.systemLayoutSizeFitting(
+            targetSize,
+            withHorizontalFittingPriority: .required,
+            verticalFittingPriority: .fittingSizeLevel
+        ).height
+
+        guard tableHeaderView.frame.width != targetSize.width
+                || tableHeaderView.frame.height != height else {
+            return
+        }
+
+        tableHeaderView.frame.size = CGSize(width: targetSize.width, height: height)
+        tableView.tableHeaderView = tableHeaderView
     }
 }

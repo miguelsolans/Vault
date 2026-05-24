@@ -354,7 +354,7 @@ extension OperationFormViewController: UITableViewDataSource, UITableViewDelegat
                 completion(true)
             }
             
-            action.backgroundColor = .systemYellow
+            action.backgroundColor = UIColor(resource: .warning)
             
             actions.append(action)
         }

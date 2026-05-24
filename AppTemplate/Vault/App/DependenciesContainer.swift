@@ -227,7 +227,9 @@ extension DependenciesContainer {
     func getOperationDetailViewModel(with operation: OperationDTO) -> OperationDetailViewModel {
         OperationDetailViewModel(
             operation: operation,
-            deleteOperationUseCase: getDeleteOperationUseCase()
+            operationDetailUseCase: getOperationDetailUseCase(),
+            deleteOperationUseCase: getDeleteOperationUseCase(),
+            updateReimbursementUseCase: getUpdateReimbursementStatusUseCase()
         )
     }
     
@@ -278,6 +280,10 @@ extension DependenciesContainer {
     
     func getDeleteOperationUseCase() -> DeleteOperationUseCase {
         return core.getDeleteOperationUseCase()
+    }
+    
+    func getOperationDetailUseCase() -> OperationDetailUseCase {
+        return core.getOperationDetailUseCase()
     }
     
     func getListCategoryUseCase() -> ListCategoriesUseCase {

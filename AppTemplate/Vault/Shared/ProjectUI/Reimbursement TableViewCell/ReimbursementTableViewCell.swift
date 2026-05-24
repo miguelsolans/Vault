@@ -63,6 +63,8 @@ class ReimbursementTableViewCell: UITableViewCell {
     // MARK: - Setup
     
     private func setupUI() {
+        selectionStyle = .none
+        
         textStackView.addArrangedSubview(amountLabel)
         textStackView.addArrangedSubview(statusLabel)
         
