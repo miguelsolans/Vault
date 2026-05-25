@@ -54,6 +54,7 @@ final class CategoryDetailViewController: VaultBaseViewController {
     }
     
     override func setupUI() {
+        view.backgroundColor = UIColor(resource: .background)
         setupNavigationItems()
         setupTableView()
         setupConstraints()

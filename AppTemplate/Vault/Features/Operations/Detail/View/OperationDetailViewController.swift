@@ -36,6 +36,7 @@ final class OperationDetailViewController: VaultBaseViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
         
+        tableView.backgroundColor = .clear
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         return tableView
@@ -61,7 +62,7 @@ final class OperationDetailViewController: VaultBaseViewController {
     }
 
     override func setupUI() {
-        view.backgroundColor = tableView.backgroundColor
+        view.backgroundColor = UIColor(resource: .background)
         title = viewModel.title
         navigationItem.subtitle = viewModel.subtitle
         

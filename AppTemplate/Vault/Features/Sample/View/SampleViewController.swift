@@ -29,7 +29,8 @@ class SampleViewController: UIViewController {
         
         title = viewModel.screenTitle
         navigationItem.subtitle = viewModel.screenSubtitle
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(resource: .background)
+        
         
         setupLayout()
         setupContent()

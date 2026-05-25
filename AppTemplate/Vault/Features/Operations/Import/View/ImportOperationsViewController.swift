@@ -87,7 +87,7 @@ final class ImportOperationsViewController: UIViewController {
     // MARK: - Setup
     
     private func setupUI() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(resource: .background)
         title = NSLocalizedString("import_operations_map_fields", tableName: "ImportOperations", comment: "")
         navigationItem.subtitle = viewModel.subtitle
         

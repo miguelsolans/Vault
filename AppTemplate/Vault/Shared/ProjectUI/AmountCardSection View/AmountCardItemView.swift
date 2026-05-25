@@ -63,6 +63,7 @@ final class AmountCardItemView: ActionableCardBaseView {
     }()
     
     public override func setupUI() {
+        backgroundColor = UIColor(resource: .accentBackground)
         
         verticalStackView.addArrangedSubview(titleLabel)
         verticalStackView.addArrangedSubview(amountLabel)

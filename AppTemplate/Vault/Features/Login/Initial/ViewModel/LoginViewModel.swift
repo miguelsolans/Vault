@@ -37,15 +37,15 @@ class LoginViewModel: NSObject {
         self.keychain = keychain
     }
     
-    // MARK: - State
+    // MARK: - UI State
     
-    var hasBiometricAuthentication: Bool {
-        userDefaults.hasBiometricAuthentication
+    public var biometricAuthenticationHidden: Bool {
+        !userDefaults.hasBiometricAuthentication
     }
     
     // MARK: - Bindings
     
-    var updateUI: (() -> Void)?
+    public var updateUI: (() -> Void)?
 }
 
 // MARK: - Actions

@@ -28,7 +28,10 @@ final class ListCategoriesViewController: VaultBaseViewController {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
+        
+        tableView.backgroundColor = UIColor(resource: .background)
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        
         return tableView
     }()
     
@@ -46,7 +49,7 @@ final class ListCategoriesViewController: VaultBaseViewController {
     }
     
     override func setupUI() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(resource: .background)
         title = viewModel.title
         navigationItem.subtitle = viewModel.subtitle
         
@@ -118,7 +121,7 @@ extension ListCategoriesViewController {
         var config: UIContentUnavailableConfiguration?
         if viewModel.numberOfRows == 0 {
             var empty = UIContentUnavailableConfiguration.empty()
-            empty.background.backgroundColor = .systemBackground
+            empty.background.backgroundColor = UIColor(resource: .background)
             empty.image = UIImage(systemName: "tag")
             empty.text = "No Categories"
             empty.secondaryText = "You can add categories in the plus button"

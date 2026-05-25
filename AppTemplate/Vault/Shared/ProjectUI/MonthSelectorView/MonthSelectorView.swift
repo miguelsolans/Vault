@@ -15,18 +15,25 @@ public final class MonthSelectorView: UIView {
     
     private let containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.secondarySystemBackground
+        view.backgroundColor = UIColor(resource: .accentBackground)
         view.layer.cornerRadius = 18
         view.layer.cornerCurve = .continuous
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    private let selectedBackgroundView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.tertiarySystemBackground
+    private let selectedEffectView: UIVisualEffectView = {
+        let view = UIVisualEffectView()
+        
+        let glassEffect = UIGlassEffect()
+        glassEffect.isInteractive = true
+        glassEffect.tintColor = UIColor(resource: .background)
+        
+        view.effect = glassEffect
         view.layer.cornerRadius = 14
-        view.layer.cornerCurve = .continuous
-        view.isUserInteractionEnabled = false
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
         return view
     }()
     
@@ -83,10 +90,8 @@ public final class MonthSelectorView: UIView {
         backgroundColor = .clear
         
         addSubview(containerView)
-        containerView.translatesAutoresizingMaskIntoConstraints = false
         
-        containerView.addSubview(selectedBackgroundView)
-        selectedBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(selectedEffectView)
         
         containerView.addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -96,17 +101,16 @@ public final class MonthSelectorView: UIView {
             containerView.trailingAnchor.constraint(equalTo: trailingAnchor),
             containerView.topAnchor.constraint(equalTo: topAnchor),
             containerView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            // containerView.heightAnchor.constraint(greaterThanOrEqualToConstant: 52),
             
             stackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 6),
             stackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -6),
             stackView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 6),
             stackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -6),
             
-            selectedBackgroundView.centerXAnchor.constraint(equalTo: currentMonthButton.centerXAnchor),
-            selectedBackgroundView.centerYAnchor.constraint(equalTo: currentMonthButton.centerYAnchor),
-            selectedBackgroundView.widthAnchor.constraint(equalTo: currentMonthButton.widthAnchor),
-            selectedBackgroundView.heightAnchor.constraint(equalTo: currentMonthButton.heightAnchor)
+            selectedEffectView.centerXAnchor.constraint(equalTo: currentMonthButton.centerXAnchor),
+            selectedEffectView.centerYAnchor.constraint(equalTo: currentMonthButton.centerYAnchor),
+            selectedEffectView.widthAnchor.constraint(equalTo: currentMonthButton.widthAnchor),
+            selectedEffectView.heightAnchor.constraint(equalTo: currentMonthButton.heightAnchor)
         ])
         
         previousMonthButton.addTarget(self, action: #selector(previousTapped), for: .touchUpInside)

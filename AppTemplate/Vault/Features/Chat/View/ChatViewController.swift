@@ -27,7 +27,7 @@ final class ChatViewController: BaseViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = .systemBackground
+        tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
         tableView.keyboardDismissMode = .interactive
@@ -75,7 +75,7 @@ final class ChatViewController: BaseViewController {
     private lazy var inputContainer: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .clear
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOpacity = 0.08
         view.layer.shadowRadius = 8
@@ -96,7 +96,7 @@ final class ChatViewController: BaseViewController {
     override func setupUI() {
         title = viewModel.screenTitle
         navigationItem.subtitle = viewModel.screenSubtitle
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(resource: .background)
 
         view.addSubview(tableView)
         view.addSubview(inputContainer)

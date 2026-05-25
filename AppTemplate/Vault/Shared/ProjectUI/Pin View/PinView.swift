@@ -21,22 +21,22 @@ struct PinView: View {
 
             Text(viewModel.title)
                 .font(.system(size: 22, weight: .semibold))
-                .foregroundColor(.black)
+                .foregroundColor(.primary)
                 .padding(.bottom, 16)
 
             Text(viewModel.subtitle)
                 .font(.system(size: 16, weight: .medium))
-                .foregroundColor(Color.gray.opacity(0.8))
+                .foregroundColor(Color.secondary.opacity(0.8))
                 .padding(.bottom, 44)
 
             HStack(spacing: 26) {
                 ForEach(0..<viewModel.numberOfDigits, id: \.self) { index in
                     Circle()
-                        .fill(Color.gray.opacity(0.22))
+                        .fill(Color.primary.opacity(0.15))
                         .frame(width: 18, height: 18)
                         .overlay(
                             Circle()
-                                .fill(Color.gray.opacity(0.45))
+                                .fill(Color.primary.opacity(0.6))
                                 .opacity(index < digits.count ? 1 : 0)
                         )
                 }
@@ -73,7 +73,7 @@ struct PinView: View {
             Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.white.ignoresSafeArea())
+        .background(Color.background.ignoresSafeArea())
     }
 
     @ViewBuilder
@@ -81,12 +81,12 @@ struct PinView: View {
         Button(action: action) {
             ZStack {
                 Circle()
-                    .fill(Color.gray.opacity(0.12))
+                    .fill(.ultraThinMaterial)
                     .frame(width: 88, height: 88)
 
                 Text(title)
                     .font(.system(size: 34, weight: .regular))
-                    .foregroundColor(.black)
+                    .foregroundColor(.primary)
             }
         }
         .buttonStyle(.plain)
@@ -97,7 +97,7 @@ struct PinView: View {
         Button(action: action) {
             Image(systemName: "delete.left")
                 .font(.system(size: 28, weight: .regular))
-                .foregroundColor(.black)
+                .foregroundColor(.primary)
                 .frame(width: 88, height: 88)
         }
         .buttonStyle(.plain)
@@ -110,7 +110,7 @@ struct PinView: View {
         Button(action: action) {
             Image(systemName: "faceid")
                 .font(.system(size: 32, weight: .regular))
-                .foregroundColor(.black)
+                .foregroundColor(.primary)
                 .frame(width: 88, height: 88)
         }
         .buttonStyle(.plain)

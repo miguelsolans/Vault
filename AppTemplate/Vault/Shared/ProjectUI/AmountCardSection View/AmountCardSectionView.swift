@@ -13,7 +13,7 @@ final class AmountCardSectionView: ActionableCardBaseView {
     private let gridStack = UIStackView()
     
     override func setupUI() {
-        backgroundColor = .systemBackground
+        backgroundColor = UIColor(resource: .background)
         
         titleLabel.font = AppFonts.sectionTitle
         

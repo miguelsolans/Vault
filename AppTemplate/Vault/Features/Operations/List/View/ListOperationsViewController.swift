@@ -47,6 +47,7 @@ final class ListOperationsViewController: VaultBaseViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         
+        tableView.backgroundColor = .clear
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         return tableView
@@ -67,6 +68,7 @@ final class ListOperationsViewController: VaultBaseViewController {
     override func setupUI() {
         title = viewModel.title
         navigationItem.subtitle = viewModel.subtitle
+        view.backgroundColor = UIColor(resource: .background)
         setupStackView()
         setupMonthSelector()
         setupTableView()
@@ -110,7 +112,7 @@ extension ListOperationsViewController {
     private func setupMonthSelector() {
         
         NSLayoutConstraint.activate([
-            monthSelectorView.heightAnchor.constraint(equalToConstant: 40)
+            monthSelectorView.heightAnchor.constraint(equalToConstant: 46)
         ])
         
         monthSelectorView.isHidden = !viewModel.canFilter
@@ -183,7 +185,7 @@ extension ListOperationsViewController {
             
             var config = UIContentUnavailableConfiguration.empty()
             
-            config.background.backgroundColor = .systemBackground
+            config.background.backgroundColor = UIColor(resource: .background)
             config.image = UIImage(systemName: "list.bullet")
             config.text = "No Operations"
             config.secondaryText = "You can add operations in the plus button"

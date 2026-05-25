@@ -6,14 +6,15 @@
 //
 
 import UIKit
+import CoreKit
 import VaultCore
 
 protocol SettingsViewModelDelegate: AnyObject {
-    func settingsDidSelectOption(_ option: SettingsOption)
-    func settingsDidDeleteVault()
+    func didSelectOption(_ viewModel: SettingsViewModel,option: SettingsOption)
+    func didDeleteAllData(_ viewModel: SettingsViewModel)
 }
 
-class SettingsViewModel: NSObject {
+final class SettingsViewModel: NSObject {
     
     weak var delegate: SettingsViewModelDelegate?
     
@@ -27,7 +28,7 @@ class SettingsViewModel: NSObject {
         self.deleteDataUseCase = deleteDataUseCase
     }
     
-    // MARK: - State
+    // MARK: - UI State
     
     lazy var items: [MenuOptionTableViewModel] = {
         return [
@@ -62,35 +63,46 @@ class SettingsViewModel: NSObject {
         ]
     }()
     
-    var numberOfRows: Int { items.count }
+    public var numberOfRows: Int { items.count }
     
-    func cellViewModel(at indexPath: IndexPath) -> MenuOptionTableViewModel { items[indexPath.row] }
+    public func cellViewModel(at indexPath: IndexPath) -> MenuOptionTableViewModel { items[indexPath.row] }
+    
+    // MARK: - Bindings
+    
+    public var onSuccess: ((ViewModelFeedback) -> Void)?
+    
+    public var onError: ((ViewModelFeedback) -> Void)?
     
 }
 
 // MARK: - Actions
 extension SettingsViewModel {
     
-    func didSelectRowAtIndex(at indexPath: IndexPath) {
+    public func didSelectRowAtIndex(at indexPath: IndexPath) {
         let cellViewModel = cellViewModel(at: indexPath)
         
         switch cellViewModel.option {
         case .vaults:
-            delegate?.settingsDidSelectOption(cellViewModel.option)
+            delegate?.didSelectOption(self, option: cellViewModel.option)
+            break
         case .security:
-            delegate?.settingsDidSelectOption(cellViewModel.option)
-            print("Go to security")
+            delegate?.didSelectOption(self, option: cellViewModel.option)
+            break
         case .about:
-            print("Go to about")
+            break
         case .deleteAllData:
             break
         }
     }
+    
+    public func didTapDeleteAllData() {
+        deleteData()
+    }
 }
 
-// MARK: -
+// MARK: - Data
 extension SettingsViewModel {
-    func deleteData() {
+    private func deleteData() {
         
         do {
             
@@ -98,11 +110,12 @@ extension SettingsViewModel {
             
             _ = try deleteDataUseCase.execute(request)
             
-            delegate?.settingsDidDeleteVault()
+            onSuccess?(.silent)
+            
+            delegate?.didDeleteAllData(self)
             
         } catch {
-            // TODO: Present error?
+            onError?(.showAlert(message: "There was an error deleting data. Try again later."))
         }
-        
     }
 }

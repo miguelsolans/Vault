@@ -27,6 +27,7 @@ final class ListVaultViewController: VaultBaseViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         
+        tableView.backgroundColor = .clear
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         return tableView
@@ -43,7 +44,7 @@ final class ListVaultViewController: VaultBaseViewController {
     }
     
     override func setupUI() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(resource: .background)
         title = viewModel.title
         navigationItem.subtitle = viewModel.subtitle
         
@@ -76,7 +77,10 @@ extension ListVaultViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(VaultTableViewCell.self, forCellReuseIdentifier: VaultTableViewCell.identifier)
+        tableView.register(
+            VaultTableViewCell.self,
+            forCellReuseIdentifier: VaultTableViewCell.identifier
+        )
         
         tableView.separatorStyle = .none
     }

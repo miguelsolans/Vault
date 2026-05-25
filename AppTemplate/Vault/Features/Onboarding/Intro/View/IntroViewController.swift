@@ -65,7 +65,7 @@ final class IntroViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(resource: .background)
         localizationTableName = "Onboarding"
         
         setupCollectionView()

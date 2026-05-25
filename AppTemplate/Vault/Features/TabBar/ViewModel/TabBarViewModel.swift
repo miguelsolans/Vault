@@ -69,7 +69,7 @@ final class TabBarViewModel {
         return items;
     }();
     
-    var tintColor: UIColor { .systemBlue }
+    public var tintColor: UIColor { UIColor(resource: .brand) }
     
-    var unselectedColor: UIColor { .systemGray }
+    public var unselectedColor: UIColor { .systemGray }
 }

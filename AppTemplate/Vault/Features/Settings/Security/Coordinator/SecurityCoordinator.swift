@@ -69,16 +69,15 @@ extension SecurityCoordinator: SecurityViewModelDelegate {
 // MARK: - CreatePinViewModel delegates
 
 extension SecurityCoordinator: CreatePinViewModelDelegate {
-    func createPinDidCreatePin() {
-        self.navigationController.popViewController(animated: true)
+    func didCreatePin(_ viewModel: CreatePinViewModel) {
+        navigationController.popViewController(animated: true)
     }
     
-    func createPinDidEnrollFaceID() {
-        self.navigationController.popViewController(animated: true)
+    func didEnrollBiometric(_ viewModel: CreatePinViewModel) {
+        navigationController.popViewController(animated: true)
     }
-    
     
     func navigateToCreatePin() {
-        self.navigationController.pushViewController(createPinViewController, animated: true)
+        navigationController.pushViewController(createPinViewController, animated: true)
     }
 }

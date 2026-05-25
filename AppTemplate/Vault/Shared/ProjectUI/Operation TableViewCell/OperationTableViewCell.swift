@@ -95,6 +95,7 @@ final class OperationTableViewCell: UITableViewCell {
     // MARK: - Setup
     
     private func setupUI() {
+        backgroundColor = UIColor(resource: .accentBackground)
         textStack.addArrangedSubview(titleLabel)
         textStack.addArrangedSubview(subtitleLabel)
         textStack.addArrangedSubview(totalReimbursementsLabel)

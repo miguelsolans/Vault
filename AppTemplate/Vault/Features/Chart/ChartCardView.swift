@@ -76,7 +76,7 @@ private extension ChartCardView {
         translatesAutoresizingMaskIntoConstraints = false
 
         cardView.translatesAutoresizingMaskIntoConstraints = false
-        cardView.backgroundColor = UIColor.secondarySystemBackground
+        cardView.backgroundColor = UIColor(resource: .accentBackground)
         cardView.layer.cornerRadius = 20
         cardView.layer.cornerCurve = .continuous
 

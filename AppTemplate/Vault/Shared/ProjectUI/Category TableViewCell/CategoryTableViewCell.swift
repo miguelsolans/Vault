@@ -73,6 +73,7 @@ class CategoryTableViewCell: UITableViewCell {
     // MARK: - Setup
     
     private func setupUI() {
+        backgroundColor = UIColor(resource: .background)
         textStack.addArrangedSubview(titleLabel)
         textStack.addArrangedSubview(subtitleLabel)
         

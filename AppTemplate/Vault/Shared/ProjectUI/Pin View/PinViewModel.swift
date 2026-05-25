@@ -34,12 +34,10 @@ struct PinViewModel {
     }
     
     func didEnterPin(_ pin: String) {
-        print("PIN entered: \(pin)")
         onDidEnterPin?(pin)
     }
     
     func didTapFaceID() {
-        print("Tapped FaceID")
         onDidTapFaceID?()
     }
 }

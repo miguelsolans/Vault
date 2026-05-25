@@ -7,9 +7,9 @@
 
 import UIKit
 
-class SecurityViewController: UIViewController {
+final class SecurityViewController: VaultBaseViewController {
     
-    var viewModel: SecurityViewModel
+    private(set) var viewModel: SecurityViewModel
     
     init(viewModel: SecurityViewModel) {
         self.viewModel = viewModel
@@ -20,22 +20,52 @@ class SecurityViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - UI
+    
     lazy var tableView: UITableView = {
-        let tableView = UITableView()
+        let tableView = UITableView(frame: CGRectZero, style: .plain)
         
+        tableView.backgroundColor = .clear
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         return tableView
     }();
     
+    // MARK: - Lifecycles
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = NSLocalizedString("security_title", tableName: "Security", comment: "")
-        setupTableView()
+        setupUI()
+        setupBindings()
     }
     
-    func setupTableView() {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.getData()
+    }
+    
+    override func setupUI() {
+        title = NSLocalizedString("security_title", tableName: "Security", comment: "")
+        view.backgroundColor = UIColor(resource: .background)
+        setupTableView()
+        setupConstraints()
+    }
+    
+    override func setupBindings() {
+        viewModel.updateUI = { [weak self] in
+            guard let self else { return }
+            
+            self.tableView.reloadData()
+        }
+    }
+}
+
+// MARK: - Setup UI
+
+extension SecurityViewController {
+    private func setupTableView() {
+        view.addSubview(tableView)
         
         tableView.register(
             SecurityOptionTableViewCell.self,
@@ -44,8 +74,9 @@ class SecurityViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        
-        view.addSubview(tableView)
+    }
+    
+    private func setupConstraints() {
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -56,12 +87,13 @@ class SecurityViewController: UIViewController {
     }
 }
 
+// MARK: - UITableView delegates
+
 extension SecurityViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.numberOfSections
     }
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfRows(at: section)
@@ -85,7 +117,7 @@ extension SecurityViewController: UITableViewDelegate, UITableViewDataSource {
         cell.onToggleChanged = { [weak self] value in
             guard let self = self else { return }
             
-            self.viewModel.toggleChanged(to: value, from: indexPath)
+            presentPinConfirmation(from: indexPath)
         }
         
         return cell
@@ -99,13 +131,24 @@ extension SecurityViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension SecurityViewController {
-    func setupBindings() {
+    private func presentPinConfirmation(from indexPath: IndexPath) {
         
-        viewModel.updateUI = { [weak self] in
-            guard let self = self else { return }
+        let confirmationDialog = ConfirmationDialog(
+            title: "Disable PIN",
+            message: "By disabling PIN you will remove any form of authentication when accessing the Vault.",
+            confirmTitle: "Disable",
+            cancelTitle: "Cancel",
+            confirmStyle: .destructive
+        )
+        
+        presentConfirmation(confirmationDialog) { [weak self] in
+            guard let self else { return }
             
-            self.tableView.reloadData()
+            self.viewModel.toggleChanged(to: false, from: indexPath)
+        } onCancel: { [weak self] in
+            guard let self else { return }
             
+            self.viewModel.getData()
         }
     }
 }

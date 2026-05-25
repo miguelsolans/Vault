@@ -20,14 +20,14 @@ open class ActionableCardBaseView: UIView {
     
     init() {
         super.init(frame: .zero)
-        backgroundColor = .secondarySystemBackground
+        backgroundColor = UIColor(resource: .accentBackground)
         layer.cornerRadius = 12
         setupUI()
     }
     
     required public init?(coder: NSCoder) {
         super.init(coder: coder)
-        backgroundColor = .secondarySystemBackground
+        backgroundColor = UIColor(resource: .accentBackground)
         layer.cornerRadius = 12
         setupUI()
     }

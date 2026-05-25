@@ -66,7 +66,7 @@ final class OperationSectionHeaderView: UITableViewHeaderFooterView {
     // MARK: - Setup
     
     private func setupUI() {
-        contentView.backgroundColor = .systemBackground
+        contentView.backgroundColor = UIColor(resource: .background)
         
         contentView.addSubview(dayLabel)
         contentView.addSubview(textStack)

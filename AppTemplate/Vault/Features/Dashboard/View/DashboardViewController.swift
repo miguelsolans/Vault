@@ -37,14 +37,14 @@ final class DashboardViewController: UIViewController {
         
         view.translatesAutoresizingMaskIntoConstraints = false
         
-        view.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        view.heightAnchor.constraint(equalToConstant: 46).isActive = true
         
         return view;
     }();
     
     private lazy var emptyStateView: UIContentUnavailableView = {
         var config = UIContentUnavailableConfiguration.empty()
-        config.background.backgroundColor = .systemBackground
+        config.background.backgroundColor = UIColor(resource: .background)
         config.image = UIImage(systemName: "tag")
         config.text = "No data"
         config.secondaryText = "There is no data to calculate Vault metrics.\nYou can add financial data in Operations."
@@ -93,7 +93,7 @@ final class DashboardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(resource: .background)
         setupNavigationItems()
         setupScrollStack()
         setupStackItems()

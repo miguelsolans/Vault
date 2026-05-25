@@ -17,7 +17,7 @@ final class VaultTableViewCell: UITableViewCell {
     private let cardView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor.secondarySystemBackground
+        view.backgroundColor = UIColor(resource: .accentBackground)
         view.layer.cornerRadius = 16
         view.clipsToBounds = true
         return view

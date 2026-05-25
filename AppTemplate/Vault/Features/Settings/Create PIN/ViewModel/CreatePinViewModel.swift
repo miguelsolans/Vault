@@ -9,26 +9,28 @@ import UIKit
 import VaultCore
 
 protocol CreatePinViewModelDelegate: AnyObject {
-    func createPinDidCreatePin();
-    func createPinDidEnrollFaceID();
+    func didCreatePin(_ viewModel: CreatePinViewModel);
+    func didEnrollBiometric(_ viewModel: CreatePinViewModel);
 }
 
-class CreatePinViewModel: NSObject {
+final class CreatePinViewModel: NSObject {
     
     weak var delegate: CreatePinViewModelDelegate?
     
     // MARK: - Dependencies
     
-    fileprivate let userDefaults: UserDefaultsManager
+    private let pinUseCase: SecurityPinSetupUseCase
     
-    fileprivate let keychain: KeychainManager
-    
-    init(userDefaults: UserDefaultsManager, keychain: KeychainManager) {
-        self.userDefaults = userDefaults
-        self.keychain = keychain
+    init(pinUseCase: SecurityPinSetupUseCase) {
+        self.pinUseCase = pinUseCase
         
         super.init()
         
+        setupBindings()
+        
+    }
+    
+    private func setupBindings() {
         pinViewModel.onDidEnterPin = { pin in
             
             self.setupPin(pin)
@@ -36,7 +38,7 @@ class CreatePinViewModel: NSObject {
         
         pinViewModel.onDidTapFaceID = {
             
-            self.delegate?.createPinDidEnrollFaceID()
+            self.delegate?.didEnrollBiometric(self)
         }
     }
     
@@ -56,25 +58,24 @@ class CreatePinViewModel: NSObject {
 }
 
 extension CreatePinViewModel {
-    func setupPin(_ pin: String) {
+    private func setupPin(_ pin: String) {
         
-        let result = keychain.savePIN(pin)
+        let request = SecurityPinSetupRequest(pin: pin)
         
-        userDefaults.requiresPinOnLaunch = true
+        let response = pinUseCase.execute(request)
         
-        if(result) {
-            userDefaults.hasPinAuthentication = true
-            
-            delegate?.createPinDidCreatePin()
+        if response.result {
+            delegate?.didCreatePin(self)
+        } else {
+            // TODO: Feedback
         }
-        
     }
     
-    func setupFaceID() {
+    /*func setupFaceID() {
         userDefaults.hasBiometricAuthentication = true
         
         userDefaults.requiresPinOnLaunch = true
         
-        delegate?.createPinDidEnrollFaceID()
-    }
+        delegate?.didEnrollBiometric()
+    }*/
 }

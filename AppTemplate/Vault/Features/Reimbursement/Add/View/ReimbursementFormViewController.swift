@@ -143,7 +143,7 @@ final class ReimbursementFormViewController: VaultBaseViewController {
     }
     
     override func setupUI() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(resource: .background)
         title = viewModel.title
         navigationItem.subtitle = viewModel.subtitle
         

@@ -13,17 +13,20 @@ protocol SettingsCoordinatorDelegate: AnyObject {
     func coordinatorDidFinish(_ coordinator: SettingsCoordinator)
 }
 
-class SettingsCoordinator: BaseCoordinator {
+final class SettingsCoordinator: BaseCoordinator {
     
     weak var delegate: SettingsCoordinatorDelegate?
     
     // MARK: - Dependencies
     
-    let navigationController: UINavigationController
+    public let navigationController: UINavigationController
     
-    let dependencies: DependenciesContainer
+    private let dependencies: DependenciesContainer
     
-    init(navigationController: UINavigationController, dependencies: DependenciesContainer) {
+    init(
+        navigationController: UINavigationController,
+        dependencies: DependenciesContainer
+    ) {
         self.navigationController = navigationController
         self.dependencies = dependencies
     }
@@ -32,8 +35,8 @@ class SettingsCoordinator: BaseCoordinator {
     
     override func start() {
         rootViewController = settingsViewController
-        self.navigationController.delegate = self
-        self.navigationController.viewControllers = [ settingsViewController ];
+        navigationController.delegate = self
+        navigationController.viewControllers = [ settingsViewController ];
     }
     
     override func finish() {
@@ -82,8 +85,7 @@ extension SettingsCoordinator {
 
 // MARK: - SettingsViewModel delegates
 extension SettingsCoordinator: SettingsViewModelDelegate {
-    func settingsDidSelectOption(_ option: SettingsOption) {
-        
+    func didSelectOption(_ viewModel: SettingsViewModel, option: SettingsOption) {
         if(option == .vaults) {
             _ = self.setupVaultsCoordinator()
         }
@@ -93,7 +95,7 @@ extension SettingsCoordinator: SettingsViewModelDelegate {
         }
     }
     
-    func settingsDidDeleteVault() {
+    func didDeleteAllData(_ viewModel: SettingsViewModel) {
         self.finish()
     }
 }

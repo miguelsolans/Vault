@@ -78,6 +78,7 @@ final class CashflowBreakdownViewController: BaseViewController {
     override func setupUI() {
         title = viewModel.title
         navigationItem.subtitle = viewModel.subtitle
+        view.backgroundColor = UIColor(resource: .background)
         setupScroll()
         setupStackItems()
     }

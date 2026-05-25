@@ -107,12 +107,12 @@ final class CategoryFormViewController: VaultBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupBindings()
         setupUI()
+        setupBindings()
     }
 
     override func setupUI() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(resource: .background)
         title = viewModel.title
         navigationItem.subtitle = viewModel.subtitle;
 

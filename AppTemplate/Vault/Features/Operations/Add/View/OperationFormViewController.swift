@@ -162,7 +162,7 @@ final class OperationFormViewController: VaultBaseViewController {
     // MARK: - Setup
     
     override func setupUI() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(resource: .background)
         title = viewModel.title
         navigationItem.subtitle = viewModel.subtitle
         

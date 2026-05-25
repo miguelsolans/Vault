@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import CoreKit
 
-class SettingsViewController: UIViewController {
+final class SettingsViewController: VaultBaseViewController {
     
-    var viewModel: SettingsViewModel
+    // MARK: - Dependencies
+    private(set) var viewModel: SettingsViewModel
     
     init(viewModel: SettingsViewModel) {
         self.viewModel = viewModel
@@ -20,24 +22,60 @@ class SettingsViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - UI
     
     lazy var tableView: UITableView = {
-        let tableView = UITableView()
+        let tableView = UITableView(frame: CGRectZero, style: .plain)
         
+        tableView.backgroundColor = .clear
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         return tableView
     }();
 
+    // MARK: - Lifecycles
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        title = NSLocalizedString("settings_title", tableName: "Settings", comment: "")
-        
-        setupTableView()
+        setupUI()
     }
     
-    func setupTableView() {
+    override func setupUI() {
+        title = NSLocalizedString("settings_title", tableName: "Settings", comment: "")
+        view.backgroundColor = UIColor(resource: .background)
+        setupTableView()
+        setupConstraints()
+    }
+    
+    override func setupBindings() {
+        viewModel.onSuccess = { [weak self] _ in
+            guard let self else { return }
+            
+            self.notifyFeedback(.success)
+        }
+        
+        viewModel.onError = { [weak self] feedback in
+            guard let self = self else { return }
+            
+            switch feedback {
+            case .showAlert(let message):
+                self.presentAlert(with:"Error", and: message)
+
+            case .silent:
+                break
+            }
+            
+            self.notifyFeedback(.error)
+        }
+    }
+    
+}
+
+// MARK: - UI Setup
+
+extension SettingsViewController {
+    private func setupTableView() {
+        view.addSubview(tableView)
         
         tableView.rowHeight = UITableView.automaticDimension
         
@@ -51,9 +89,9 @@ class SettingsViewController: UIViewController {
         tableView.delegate = self
         
         tableView.dataSource = self
-        
-        view.addSubview(tableView)
-        
+    }
+    
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -62,6 +100,8 @@ class SettingsViewController: UIViewController {
         ])
     }
 }
+
+// MARK: - UITableView delegates
 
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -96,7 +136,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 )
             ) { [weak self] in
                 guard let self = self else { return }
-                self.viewModel.deleteData()
+                self.viewModel.didTapDeleteAllData()
             }
             return
         }

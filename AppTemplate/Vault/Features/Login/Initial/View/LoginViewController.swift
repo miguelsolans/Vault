@@ -97,19 +97,18 @@ final class LoginViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         localizationTableName = "Login"
-        view.backgroundColor = .systemBackground
         setupUI()
         setupActions()
         setupBindings()
     }
     
     override func setupUI() {
+        view.backgroundColor = UIColor(resource: .background)
         view.addSubview(logoImageView)
         view.addSubview(titleLabel)
         view.addSubview(subtitleLabel)
         view.addSubview(buttonsStackView)
         
-        // Add buttons to stack
         buttonsStackView.addArrangedSubview(pinLoginButton)
         buttonsStackView.addArrangedSubview(biometricsButton)
         
@@ -135,7 +134,7 @@ final class LoginViewController: BaseViewController {
             biometricsButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 50)
         ])
         
-        biometricsButton.isHidden = viewModel.hasBiometricAuthentication
+        biometricsButton.isHidden = viewModel.biometricAuthenticationHidden
     }
     
     private func setupActions() {
@@ -145,11 +144,6 @@ final class LoginViewController: BaseViewController {
     
     override func setupBindings() {
         
-        viewModel.updateUI = { [weak self] in
-            guard let self = self else { return }
-            
-            
-        }
     }
 }
 

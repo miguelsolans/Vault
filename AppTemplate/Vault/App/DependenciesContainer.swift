@@ -169,16 +169,16 @@ extension DependenciesContainer {
     // MARK: - Security
     func getSecurityViewModel() -> SecurityViewModel {
         return SecurityViewModel(
-            userDefaults: core.getUserDefaultsManager()
+            securityInfoUseCase: getSecurityInfoUseCase(),
+            securityInfoUpdateUseCase: getSecurityInfoUpdateUseCase()
         )
     }
     
     // MARK: Create PIN Module
     func getCreatePinViewModel() -> CreatePinViewModel {
         return CreatePinViewModel(
-            userDefaults: core.getUserDefaultsManager(),
-            keychain: core.getKeychainManager()
-        );
+            pinUseCase: getPinSetupUseCase()
+        )
     }
     
     
@@ -336,5 +336,17 @@ extension DependenciesContainer {
     
     func getUpdateReimbursementUseCase() -> UpdateReimbursementUseCase {
         return core.getUpdateReimbursementUseCase()
+    }
+    
+    func getSecurityInfoUseCase() -> SecurityInfoUseCase {
+        return core.getSecurityInfoUseCase()
+    }
+    
+    func getSecurityInfoUpdateUseCase() -> SecurityInfoUpdateUseCase {
+        return core.getSecurityInfoUpdateUseCase()
+    }
+    
+    func getPinSetupUseCase() -> SecurityPinSetupUseCase {
+        return core.getSecurityPinSetupUseCase()
     }
 }

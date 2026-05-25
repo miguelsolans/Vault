@@ -61,6 +61,8 @@ final class MenuOptionTableViewCell: UITableViewCell {
     private func setupUI() {
         selectionStyle = .default
         
+        backgroundColor = UIColor(resource: .background)
+        
         contentView.addSubview(optionImageView)
         contentView.addSubview(labelsStackView)
         

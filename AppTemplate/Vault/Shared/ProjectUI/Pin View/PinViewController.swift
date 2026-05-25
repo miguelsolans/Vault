@@ -10,7 +10,7 @@ import SwiftUI
 
 final class PinViewController: UIViewController {
     
-    var viewModel: PinViewModel
+    private(set) var viewModel: PinViewModel
     
     private var hostingController: UIHostingController<PinView>?
     

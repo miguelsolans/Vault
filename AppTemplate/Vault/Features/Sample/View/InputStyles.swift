@@ -12,7 +12,7 @@ final class InputStyles {
     
     static let datePickerStyle: InputStyle = {
         let style = InputStyle(
-            backgroundColor: UIColor(resource: .background),
+            backgroundColor: UIColor(resource: .accentBackground),
             borderColor: UIColor(resource: .border),
             selectedBorderColor: UIColor(resource: .selected),
             titleColor: UIColor(resource: .text),
@@ -32,7 +32,7 @@ final class InputStyles {
     
     static let textFieldStyle: InputStyle = {
         let style = InputStyle(
-            backgroundColor: UIColor(resource: .background),
+            backgroundColor: UIColor(resource: .accentBackground),
             borderColor: UIColor(resource: .border),
             selectedBorderColor: UIColor(resource: .selected),
             titleColor: UIColor(resource: .text),
@@ -52,7 +52,7 @@ final class InputStyles {
     
     static let segmentedStyle: InputStyle = {
         let style = InputStyle(
-            backgroundColor: UIColor(resource: .background),
+            backgroundColor: UIColor(resource: .accentBackground),
             borderColor: UIColor(resource: .border),
             selectedBorderColor: UIColor(resource: .selected),
             titleColor: UIColor(resource: .text),
@@ -72,7 +72,7 @@ final class InputStyles {
     
     static let pickerStyle: InputStyle = {
         let style = InputStyle(
-            backgroundColor: UIColor(resource: .background),
+            backgroundColor: UIColor(resource: .accentBackground),
             borderColor: UIColor(resource: .border),
             selectedBorderColor: UIColor(resource: .selected),
             titleColor: UIColor(resource: .text),
@@ -92,7 +92,7 @@ final class InputStyles {
     
     static let switchStyle: InputStyle = {
         let style = InputStyle(
-            backgroundColor: UIColor(resource: .background),
+            backgroundColor: UIColor(resource: .accentBackground),
             borderColor: UIColor(resource: .border),
             selectedBorderColor: UIColor(resource: .selected),
             titleColor: UIColor(resource: .text),
@@ -112,7 +112,7 @@ final class InputStyles {
     
     static let colorPickerStyle: InputStyle = {
         let style = InputStyle(
-            backgroundColor: UIColor(resource: .background),
+            backgroundColor: UIColor(resource: .accentBackground),
             borderColor: UIColor(resource: .border),
             selectedBorderColor: UIColor(resource: .selected),
             titleColor: UIColor(resource: .text),
@@ -135,7 +135,8 @@ final class ButtonStyles {
     
     static let primary: ButtonStyle = {
         ButtonStyle(
-            backgroundColor: .systemBlue,
+            materialStyle: .prominentGlass,
+            backgroundColor: UIColor(resource: .brand),
             titleColor: .white,
             borderColor: .systemBlue,
             disabledBackgroundColor: .systemGray4,
@@ -180,7 +181,7 @@ final class FeedbackStyles {
 
     static let informativeFeedback: FeedbackStyle = {
         return FeedbackStyle(
-            backgroundColor: UIColor.secondarySystemBackground,
+            backgroundColor: UIColor(resource: .accentBackground),
             titleColor: UIColor.label,
             subtitleColor: UIColor.secondaryLabel,
             iconColor: UIColor.white,
@@ -199,7 +200,7 @@ final class FeedbackStyles {
     
     static let successFeedback: FeedbackStyle = {
         return FeedbackStyle(
-            backgroundColor: UIColor.secondarySystemBackground,
+            backgroundColor: UIColor(resource: .accentBackground),
             titleColor: UIColor.label,
             subtitleColor: UIColor.secondaryLabel,
             iconColor: UIColor.white,
@@ -218,7 +219,7 @@ final class FeedbackStyles {
     
     static let warningFeedback: FeedbackStyle = {
         return FeedbackStyle(
-            backgroundColor: UIColor.secondarySystemBackground,
+            backgroundColor: UIColor(resource: .accentBackground),
             titleColor: UIColor.label,
             subtitleColor: UIColor.secondaryLabel,
             iconColor: UIColor.white,
@@ -237,7 +238,7 @@ final class FeedbackStyles {
     
     static let errorFeedback: FeedbackStyle = {
         return FeedbackStyle(
-            backgroundColor: UIColor.secondarySystemBackground,
+            backgroundColor: UIColor(resource: .accentBackground),
             titleColor: UIColor.label,
             subtitleColor: UIColor.secondaryLabel,
             iconColor: UIColor.white,

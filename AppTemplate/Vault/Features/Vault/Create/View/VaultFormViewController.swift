@@ -108,7 +108,7 @@ final class VaultFormViewController: VaultBaseViewController {
     override func setupUI() {
         title = viewModel.title
         navigationItem.subtitle = viewModel.subtitle
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(resource: .background)
         
         setupScrollView()
         setupStackView()
