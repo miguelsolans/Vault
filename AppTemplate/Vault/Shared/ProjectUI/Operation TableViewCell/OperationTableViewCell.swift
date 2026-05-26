@@ -154,7 +154,7 @@ extension OperationTableViewCell {
     }
     
     private func configureEmojiColor(_ color: UIColor) {
-        emojiBackgroundView.backgroundColor = color.withAlphaComponent(0.5)
+        emojiBackgroundView.backgroundColor = color
     }
     
     private func configureEmoji(_ emoji: String?) {

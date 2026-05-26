@@ -9,12 +9,6 @@
             "state" : "translated",
             "value" : "Balance"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Saldo"
-          }
         }
       }
     },
@@ -25,12 +19,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Current month"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mês corrente"
           }
         }
       }
@@ -43,12 +31,6 @@
             "state" : "translated",
             "value" : "Delete"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apagar"
-          }
         }
       }
     },
@@ -59,12 +41,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Edit"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Editar"
           }
         }
       }
@@ -77,12 +53,6 @@
             "state" : "translated",
             "value" : "Income"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rendimento"
-          }
         }
       }
     },
@@ -93,12 +63,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Saved"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Poupado"
           }
         }
       }
@@ -111,12 +75,6 @@
             "state" : "translated",
             "value" : "Saving efficiency"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eficiência de poupança"
-          }
         }
       }
     },
@@ -128,12 +86,6 @@
             "state" : "translated",
             "value" : "Spent"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gasto"
-          }
         }
       }
     },
@@ -144,12 +96,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Operations"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Operações"
           }
         }
       }

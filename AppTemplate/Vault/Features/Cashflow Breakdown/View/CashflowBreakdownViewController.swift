@@ -9,8 +9,10 @@ import UIKit
 import CoreKit
 import AppUIKit
 
-final class CashflowBreakdownViewController: BaseViewController {
-     
+final class CashflowBreakdownViewController: VaultBaseViewController {
+    
+    // MARK: - Dependencies
+    
     private(set) var viewModel: CashflowBreakdownViewModel
     
     init(viewModel: CashflowBreakdownViewModel) {
@@ -22,7 +24,7 @@ final class CashflowBreakdownViewController: BaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - UI Elements
+    // MARK: - UI
     
     private lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
@@ -39,7 +41,7 @@ final class CashflowBreakdownViewController: BaseViewController {
         return stack
     }()
     
-    private lazy var amountHeaderView: AmountStatusHeaderView = {
+    private lazy var headerView: AmountStatusHeaderView = {
         let view = AmountStatusHeaderView()
         
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -55,7 +57,7 @@ final class CashflowBreakdownViewController: BaseViewController {
         return view
     }()
     
-    private lazy var categoriesSummaryView: AmountCardSectionView = {
+    private lazy var summaryView: AmountCardSectionView = {
         let view = AmountCardSectionView()
         
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -79,23 +81,55 @@ final class CashflowBreakdownViewController: BaseViewController {
         title = viewModel.title
         navigationItem.subtitle = viewModel.subtitle
         view.backgroundColor = UIColor(resource: .background)
-        setupScroll()
-        setupStackItems()
+        setupScrollView()
+        setupStackView()
+        setupConstraints()
     }
     
     override func setupBindings() {
         viewModel.updateUI = { [weak self] in
             guard let self = self else { return }
+            
             self.updateUI()
+        }
+        
+        viewModel.onSuccess = { [weak self] feedback in
+            guard let self else { return }
+            
+            self.notifyFeedback(.success)
+        }
+        
+        viewModel.onError = { [weak self] feedback in
+            guard let self else { return }
+            
+            switch feedback {
+            case .showAlert(let message):
+                self.presentAlert(with:"Error", and: message)
+
+            case .silent:
+                break
+            }
+            
+            self.notifyFeedback(.error)
         }
     }
 }
 
+// MARK: - UI Setup
+
 extension CashflowBreakdownViewController {
-    private func setupScroll() {
+    private func setupScrollView() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentStack)
-        
+    }
+    
+    private func setupStackView() {
+        contentStack.addArrangedSubview(headerView)
+        contentStack.addArrangedSubview(plotCardView)
+        contentStack.addArrangedSubview(summaryView)
+    }
+    
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -110,25 +144,31 @@ extension CashflowBreakdownViewController {
             contentStack.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -32)
         ])
     }
-    
-    private func setupStackItems() {
-        contentStack.addArrangedSubview(amountHeaderView)
-        contentStack.addArrangedSubview(plotCardView)
-        contentStack.addArrangedSubview(categoriesSummaryView)
-    }
 }
 
+// MARK: - UI Updates
+
 extension CashflowBreakdownViewController {
+    
     private func updateUI() {
-        
-        if let viewModel = viewModel.amountHeaderViewModel {
-            amountHeaderView.configure(with: viewModel)
+        title = viewModel.title
+        navigationItem.subtitle = viewModel.subtitle
+        updateHeaderUI()
+        updatePlotUI()
+        updateCategoriesUI()
+    }
+    
+    private func updateHeaderUI() {
+        if let viewModel = viewModel.headerViewModel {
+            headerView.configure(with: viewModel)
             
-            amountHeaderView.isHidden = false
+            headerView.isHidden = false
         } else {
-            amountHeaderView.isHidden = true
+            headerView.isHidden = true
         }
-        
+    }
+    
+    private func updatePlotUI() {
         if let viewModel = viewModel.plotViewModel {
             plotCardView.configure(
                 title: viewModel.title,
@@ -141,14 +181,16 @@ extension CashflowBreakdownViewController {
         } else {
             plotCardView.isHidden = true
         }
-        
+    }
+    
+    private func updateCategoriesUI() {
         if let viewModel = viewModel.categoriesViewModel {
             
-            categoriesSummaryView.configure(with: viewModel)
+            summaryView.configure(with: viewModel)
             
-            categoriesSummaryView.isHidden = false
+            summaryView.isHidden = false
         } else {
-            categoriesSummaryView.isHidden = true
+            summaryView.isHidden = true
         }
     }
 }

@@ -8,7 +8,9 @@
 import UIKit
 import AppUIKit
 
-final class DashboardViewController: UIViewController {
+final class DashboardViewController: VaultBaseViewController {
+    
+    // MARK: - Dependencies
     
     private(set) var viewModel: DashboardViewModel
     
@@ -21,10 +23,13 @@ final class DashboardViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - UI Elements
+    // MARK: - UI
     
     lazy var feedbackView: FeedbackView = {
-        let view = FeedbackView(viewModel: viewModel.feedbackViewModel, style: FeedbackStyles.informativeFeedback)
+        let view = FeedbackView(
+            viewModel: viewModel.feedbackViewModel,
+            style: FeedbackStyles.informativeFeedback
+        )
         
         view.translatesAutoresizingMaskIntoConstraints = false
         view.isHidden = true
@@ -36,7 +41,6 @@ final class DashboardViewController: UIViewController {
         let view = MonthSelectorView(viewModel: viewModel.monthSelectorViewModel)
         
         view.translatesAutoresizingMaskIntoConstraints = false
-        
         view.heightAnchor.constraint(equalToConstant: 46).isActive = true
         
         return view;
@@ -44,6 +48,7 @@ final class DashboardViewController: UIViewController {
     
     private lazy var emptyStateView: UIContentUnavailableView = {
         var config = UIContentUnavailableConfiguration.empty()
+        
         config.background.backgroundColor = UIColor(resource: .background)
         config.image = UIImage(systemName: "tag")
         config.text = "No data"
@@ -53,12 +58,15 @@ final class DashboardViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.isHidden = true
         view.heightAnchor.constraint(greaterThanOrEqualToConstant: 360).isActive = true
+        
         return view
     }()
     
-    lazy var cashflowCardSectionView: AmountCardSectionView = {
+    private lazy var cashflowCardSectionView: AmountCardSectionView = {
         let view = AmountCardSectionView()
+        
         view.translatesAutoresizingMaskIntoConstraints = false
+        
         return view
     }()
     
@@ -70,55 +78,99 @@ final class DashboardViewController: UIViewController {
         return view
     }()
     
-    lazy var statisticsSummaryView: AmountCardSectionView = {
+    private lazy var statisticsSummaryView: AmountCardSectionView = {
         let view = AmountCardSectionView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    lazy var scrollView: UIScrollView = {
+    private  lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
+        
         scroll.translatesAutoresizingMaskIntoConstraints = false
         scroll.alwaysBounceVertical = true
+        
         return scroll
     }()
     
-    lazy var contentStack: UIStackView = {
+    private lazy var contentStack: UIStackView = {
         let stack = UIStackView()
+        
         stack.axis = .vertical
         stack.spacing = 16
         stack.translatesAutoresizingMaskIntoConstraints = false
+        
         return stack
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(resource: .background)
-        setupNavigationItems()
-        setupScrollStack()
-        setupStackItems()
+        setupUI()
         setupBindings()
-        setupGestures()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         viewModel.getData()
     }
     
-    private func setupGestures() {
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapFeedback))
-        
-        feedbackView.addGestureRecognizer(tapGesture)
+    override func setupUI() {
+        view.backgroundColor = UIColor(resource: .background)
+        setupNavigationItems()
+        setupScrollView()
+        setupStackView()
+        setupConstraints()
+        setupGestures()
     }
     
-    // MARK: - Setup ScrollView + Stack
-    func setupScrollStack() {
+    override func setupBindings() {
+        viewModel.updateUI = { [weak self] in
+            guard let self else { return }
+            
+            self.updateUI()
+        }
+        
+        viewModel.onSuccess = { [weak self] feedback in
+            guard let self else { return }
+            
+            self.notifyFeedback(.success)
+        }
+        
+        viewModel.onError = { [weak self] feedback in
+            guard let self else { return }
+            
+            switch feedback {
+            case .showAlert(let message):
+                self.presentAlert(with:"Error", and: message)
+
+            case .silent:
+                break
+            }
+            
+            self.notifyFeedback(.error)
+        }
+    }
+}
+
+// MARK: - UI Setup
+
+extension DashboardViewController {
+    
+    private func setupScrollView() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentStack)
-        
+    }
+    
+    private func setupStackView() {
+        contentStack.addArrangedSubview(feedbackView)
+        contentStack.addArrangedSubview(monthSelectorView)
+        contentStack.addArrangedSubview(emptyStateView)
+        contentStack.addArrangedSubview(cashflowCardSectionView)
+        contentStack.addArrangedSubview(expensesChartCard)
+        contentStack.addArrangedSubview(statisticsSummaryView)
+    }
+    
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -134,8 +186,7 @@ final class DashboardViewController: UIViewController {
         ])
     }
     
-    // MARK: - Navigation
-    func setupNavigationItems() {
+    private func setupNavigationItems() {
         title = viewModel.title
         
         navigationItem.subtitle = viewModel.subtitle
@@ -191,6 +242,16 @@ final class DashboardViewController: UIViewController {
         navigationItem.rightBarButtonItem = filterBarButtonItem
     }
     
+    private func setupGestures() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapFeedback))
+        
+        feedbackView.addGestureRecognizer(tapGesture)
+    }
+}
+
+// MARK: - Actions
+
+extension DashboardViewController {
     @objc private func didTapVaultSelector() {
         viewModel.didTapVaultSelector()
     }
@@ -206,39 +267,27 @@ final class DashboardViewController: UIViewController {
     @objc private func didTapFeedback() {
         viewModel.didTapFeedback()
     }
-    
-    // MARK: - Summary UI
-    func setupStackItems() {
-        contentStack.addArrangedSubview(feedbackView)
-        contentStack.addArrangedSubview(monthSelectorView)
-        contentStack.addArrangedSubview(emptyStateView)
-        contentStack.addArrangedSubview(cashflowCardSectionView)
-        contentStack.addArrangedSubview(expensesChartCard)
-        contentStack.addArrangedSubview(statisticsSummaryView)
-    }
 }
 
 extension DashboardViewController {
-    func setupBindings() {
-        viewModel.updateUI = { [weak self] in
-            guard let self = self else { return }
-            self.updateMonthSelectorUI()
-            self.updateSummaryUI()
-            self.updateChartUI()
-            self.setupNavigationItems()
-            self.setupContentUnavailable()
-        }
-
-        viewModel.getData()
+    
+    private func updateUI() {
+        title = viewModel.title
+        navigationItem.subtitle = viewModel.subtitle
+        updateMonthSelectorUI()
+        updateSummaryUI()
+        updateChartUI()
+        setupNavigationItems()
+        setupContentUnavailable()
     }
     
-    func updateMonthSelectorUI() {
+    private func updateMonthSelectorUI() {
         let shouldHide = viewModel.filter.period == .yearly
         
         monthSelectorView.isHidden = shouldHide
     }
     
-    func updateSummaryUI() {
+    private func updateSummaryUI() {
         
         feedbackView.isHidden = viewModel.isFeedbackHidden
         cashflowCardSectionView.isHidden = viewModel.isVaultEmpty
@@ -257,7 +306,7 @@ extension DashboardViewController {
         }
     }
     
-    func updateChartUI() {
+    private func updateChartUI() {
         expensesChartCard.isHidden = viewModel.isVaultEmpty
         
         guard !viewModel.isVaultEmpty else { return }
@@ -276,7 +325,7 @@ extension DashboardViewController {
         }
     }
     
-    func setupContentUnavailable() {
+    private func setupContentUnavailable() {
         contentUnavailableConfiguration = nil
         emptyStateView.isHidden = !viewModel.isVaultEmpty
     }

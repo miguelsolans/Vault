@@ -9,11 +9,16 @@
             "state" : "translated",
             "value" : "Delete"
           }
-        },
-        "pt-PT" : {
+        }
+      }
+    },
+    "list_categories_edit" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apagar"
+            "value" : "Edit"
           }
         }
       }
@@ -26,12 +31,6 @@
             "state" : "translated",
             "value" : "Expense"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Despesa"
-          }
         }
       }
     },
@@ -43,12 +42,6 @@
             "state" : "translated",
             "value" : "Income"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rendimento"
-          }
         }
       }
     },
@@ -59,29 +52,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Categories"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Categorias"
-          }
-        }
-      }
-    },
-    "list_categories_edit" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Edit"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Editar"
           }
         }
       }

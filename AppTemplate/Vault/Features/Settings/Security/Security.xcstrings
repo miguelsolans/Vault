@@ -9,12 +9,6 @@
             "state" : "translated",
             "value" : "Authentication"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Autenticação"
-          }
         }
       }
     },
@@ -25,12 +19,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Auto-Lock"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bloqueio automático"
           }
         }
       }
@@ -43,12 +31,6 @@
             "state" : "translated",
             "value" : "Biometric"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Biometria"
-          }
         }
       }
     },
@@ -59,12 +41,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Use biometrics to unlock"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Utilizar dados biométricos para desbloquear"
           }
         }
       }
@@ -77,12 +53,6 @@
             "state" : "translated",
             "value" : "Immediately"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Imediatamente"
-          }
         }
       }
     },
@@ -93,12 +63,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Never"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nunca"
           }
         }
       }
@@ -111,12 +75,6 @@
             "state" : "translated",
             "value" : "Options"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Opções"
-          }
         }
       }
     },
@@ -124,12 +82,6 @@
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "PIN"
-          }
-        },
-        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "PIN"
@@ -145,12 +97,6 @@
             "state" : "translated",
             "value" : "PIN authentication when app launches"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Autenticação por PIN ao abrir a aplicação"
-          }
         }
       }
     },
@@ -161,12 +107,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Requires Authentication"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Requer autenticação"
           }
         }
       }
@@ -179,12 +119,6 @@
             "state" : "translated",
             "value" : "Always ask for authentication when app launches"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pedir sempre autenticação ao abrir a aplicação"
-          }
         }
       }
     },
@@ -195,12 +129,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Security"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Segurança"
           }
         }
       }

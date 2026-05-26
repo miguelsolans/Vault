@@ -9,12 +9,6 @@
             "state" : "translated",
             "value" : "Enter your 4 digits PIN"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Introduza o seu PIN de 4 dígitos"
-          }
         }
       }
     },
@@ -25,12 +19,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enter PIN"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Introduza o PIN"
           }
         }
       }

@@ -69,12 +69,12 @@ final class ChatBubbleTableViewCell: UITableViewCell {
 
         switch message.role {
         case .user:
-            bubbleView.backgroundColor = UIColor.systemBlue
+            bubbleView.backgroundColor = UIColor(resource: .brand)
             messageLabel.textColor = .white
             bubbleLeadingConstraint?.isActive = false
             bubbleTrailingConstraint?.isActive = true
         case .assistant:
-            bubbleView.backgroundColor = UIColor.secondarySystemBackground
+            bubbleView.backgroundColor = UIColor(resource: .background)
             messageLabel.textColor = .label
             bubbleLeadingConstraint?.isActive = true
             bubbleTrailingConstraint?.isActive = false

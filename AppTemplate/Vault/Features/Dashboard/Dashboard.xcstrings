@@ -9,12 +9,6 @@
             "state" : "translated",
             "value" : "Average income"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Média de rendimentos"
-          }
         }
       }
     },
@@ -25,12 +19,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Average spent"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Média gasta"
           }
         }
       }
@@ -43,12 +31,6 @@
             "state" : "translated",
             "value" : "Category"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Categoria"
-          }
         }
       }
     },
@@ -59,12 +41,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Current year"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ano corrente"
           }
         }
       }
@@ -77,12 +53,6 @@
             "state" : "translated",
             "value" : "Between %@ and %@ "
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Entre %@ e %@ "
-          }
         }
       }
     },
@@ -93,12 +63,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Expense categories"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Categoria de despesas"
           }
         }
       }
@@ -111,12 +75,6 @@
             "state" : "translated",
             "value" : "Expenses"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Despesas"
-          }
         }
       }
     },
@@ -127,12 +85,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ available"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ disponível"
           }
         }
       }
@@ -145,12 +97,6 @@
             "state" : "translated",
             "value" : "Income"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rendimento"
-          }
         }
       }
     },
@@ -161,12 +107,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Income and Expenses"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rendimentos e Despesas"
           }
         }
       }
@@ -179,12 +119,6 @@
             "state" : "translated",
             "value" : "Income categories"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Categorias de rendimentos"
-          }
         }
       }
     },
@@ -195,12 +129,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Key metrics"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Métricas"
           }
         }
       }
@@ -213,12 +141,6 @@
             "state" : "translated",
             "value" : "No categories selected"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nenhuma categoria selecionada"
-          }
         }
       }
     },
@@ -229,12 +151,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Choose categories with Visible In Plot enabled to display them here."
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Escolha categorias com a opção “Visível no gráfico” ativada para as mostrar aqui."
           }
         }
       }
@@ -247,12 +163,6 @@
             "state" : "translated",
             "value" : "Other expenses"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Outras despesas"
-          }
         }
       }
     },
@@ -263,12 +173,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Other incomes"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Outros rendimentos"
           }
         }
       }
@@ -281,12 +185,6 @@
             "state" : "translated",
             "value" : "Overview"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Visão geral"
-          }
         }
       }
     },
@@ -297,12 +195,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Saving efficiency"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eficiência de poupança"
           }
         }
       }
@@ -315,12 +207,6 @@
             "state" : "translated",
             "value" : "Overview"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Visão Geral"
-          }
         }
       }
     },
@@ -331,12 +217,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Total saved"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Total poupado"
           }
         }
       }
@@ -349,12 +229,6 @@
             "state" : "translated",
             "value" : "Uncategorized"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Não caracterizado"
-          }
         }
       }
     },
@@ -365,12 +239,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Value"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Valor"
           }
         }
       }

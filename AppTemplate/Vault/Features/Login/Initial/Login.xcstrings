@@ -9,12 +9,6 @@
             "state" : "translated",
             "value" : "Track your finances"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Acompanhe as suas finanças"
-          }
         }
       }
     },
@@ -25,12 +19,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vault"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cofre"
           }
         }
       }
@@ -43,12 +31,6 @@
             "state" : "translated",
             "value" : "Unlock with biometrics"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Desbloquear com dados biométricos"
-          }
         }
       }
     },
@@ -58,12 +40,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Login with PIN"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Login com PIN"
           }
         }
       }

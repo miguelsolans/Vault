@@ -28,6 +28,7 @@ final class CategoryDetailViewController: VaultBaseViewController {
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
         
+        tableView.backgroundColor = .clear
         tableView.alwaysBounceVertical = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -142,8 +143,6 @@ extension CategoryDetailViewController {
             UITableViewCell.self,
             forCellReuseIdentifier: Self.detailCellIdentifier
         )
-        
-        view.backgroundColor = tableView.backgroundColor
     }
     
     private func setupConstraints() {

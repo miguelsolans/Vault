@@ -15,14 +15,14 @@ protocol DashboardCoordinatorDelegate: AnyObject {
 
 class DashboardCoordinator: BaseCoordinator {
     
+    weak var delegate: DashboardCoordinatorDelegate?
+    
     // MARK: - Dependencies
     let navigationController: UINavigationController
     
-    fileprivate let dependencies: DependenciesContainer
+    private let dependencies: DependenciesContainer
     
-    fileprivate let vault: VaultDTO
-    
-    weak var delegate: DashboardCoordinatorDelegate?
+    private let vault: VaultDTO
     
     init(
         navigationController: UINavigationController,

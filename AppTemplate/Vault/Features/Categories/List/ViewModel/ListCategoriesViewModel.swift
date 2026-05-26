@@ -54,6 +54,12 @@ final class ListCategoriesViewModel: NSObject {
 
     // MARK: - UI State
     
+    public var sort: ListOrdering = .ascending {
+        didSet {
+            getData()
+        }
+    }
+    
     public var title: String { "Categories" }
     
     public var subtitle: String { vault.name }
@@ -87,7 +93,7 @@ extension ListCategoriesViewModel {
     func getData() {
         
         do {
-            let request = ListCategoriesRequest(vaultID: vault.id)
+            let request = ListCategoriesRequest(vaultID: vault.id, order: sort)
             
             let response = try listUseCase.execute(request)
             

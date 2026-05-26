@@ -9,12 +9,6 @@
             "state" : "translated",
             "value" : "Color"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cor"
-          }
         }
       }
     },
@@ -25,12 +19,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enter category name"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Introduza o nome da categoria"
           }
         }
       }
@@ -43,12 +31,6 @@
             "state" : "translated",
             "value" : "Enter Vault name"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Introduza o nome do cofre"
-          }
         }
       }
     },
@@ -59,12 +41,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Expense"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Despesa"
           }
         }
       }
@@ -77,12 +53,6 @@
             "state" : "translated",
             "value" : "Income"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rendimento"
-          }
         }
       }
     },
@@ -93,12 +63,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Category Name"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nome da Categoria"
           }
         }
       }
@@ -111,12 +75,6 @@
             "state" : "translated",
             "value" : "Category name already exists. Choose a different name."
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Categoria já existe. Escolha um nome diferente."
-          }
         }
       }
     },
@@ -127,12 +85,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Name is invalid"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "O nome é inválido"
           }
         }
       }
@@ -145,12 +97,6 @@
             "state" : "translated",
             "value" : "Operation Type"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tipo de Operação"
-          }
         }
       }
     },
@@ -161,12 +107,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Save"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Guardar"
           }
         }
       }
@@ -179,12 +119,6 @@
             "state" : "translated",
             "value" : "Show in dashboard plot"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mostrar no gráfico da Dashboard"
-          }
         }
       }
     },
@@ -195,12 +129,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "By toggling this switch data will be displayed in the plotting."
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ao ativar este, os dados serão exibidos no gráfico."
           }
         }
       }
@@ -213,12 +141,6 @@
             "state" : "translated",
             "value" : "Add Category"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Adicionar Categoria"
-          }
         }
       }
     },
@@ -229,12 +151,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Category name"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nome da Categoria"
           }
         }
       }
@@ -247,12 +163,6 @@
             "state" : "translated",
             "value" : "Vault Name"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nome do Cofre"
-          }
         }
       }
     },
@@ -264,12 +174,6 @@
             "state" : "translated",
             "value" : "Plotting"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gráfico"
-          }
         }
       }
     },
@@ -280,12 +184,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Edit Category"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Editar Categoria"
           }
         }
       }

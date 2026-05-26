@@ -5,14 +5,9 @@
 //  Created by Miguel Solans on 01/04/2026.
 //
 
-
-// Cashflow: Income, Expenses
-// Expenses plot
-// Key metrics: Average income, Average spent, Total saved, Saving efficiency
-
+import Foundation
 import AppUIKit
-import CoreData
-import SwiftUI
+import CoreKit
 import FoundationModels
 import VaultCore
 
@@ -23,7 +18,7 @@ protocol DashboardViewModelDelegate: AnyObject {
     func didTapFeedback(_ viewModel: DashboardViewModel)
 }
 
-public final class DashboardViewModel: NSObject {
+final class DashboardViewModel: NSObject {
     
     weak var delegate: DashboardViewModelDelegate?
 
@@ -51,11 +46,7 @@ public final class DashboardViewModel: NSObject {
         self.setupBindings()
     }
 
-    // MARK: - Data State
-    
-    private(set) var dashboardMetrics: DashboardMetrics?
-
-    // MARK: - UI State
+    // MARK: - UI
     
     public var title: String {
         get {
@@ -63,41 +54,31 @@ public final class DashboardViewModel: NSObject {
         }
     }
 
-    public var subtitle: String? {
-        get {
-            let currentBalance = dashboardMetrics?.balance.currentBalance ?? vault.currentBalance
-            
-            return currencyFormatter.string(
-                from: currentBalance
-            )
-        }
-    }
+    private(set) var subtitle: String?
     
     public var isChatAvailable: Bool {
         get {
-            return foundationModelManager.isSupported
+            return false
         }
     }
     
-    private lazy var currencyFormatter = {
-        LocalizedDecimalFormatter(numberStyle: .currency)
-    }()
+    private(set) var isVaultEmpty: Bool = true
     
-    public var isVaultEmpty: Bool = true
+    private(set) var isFeedbackHidden: Bool = true
     
     private(set) var feedbackViewModel: FeedbackViewModel = {
-        return FeedbackViewModel(title: "", subtitle: "", feedbackType: .informative)
+        return FeedbackViewModel(
+            title: "",
+            subtitle: "",
+            feedbackType: .informative
+        )
     }()
     
-    public var isFeedbackHidden: Bool {
-        get {
-            guard let dashboardMetrics else {
-                return true
-            }
-            
-            return dashboardMetrics.reimbursements.expected <= 0
-        }
-    }
+    private(set) var monthSelectorViewModel: MonthSelectorViewModel = {
+        let viewModel = MonthSelectorViewModel();
+        
+        return viewModel
+    }();
     
     private(set) var summaryViewModel: AmountCardSectionViewModel?
     
@@ -105,43 +86,26 @@ public final class DashboardViewModel: NSObject {
     
     private(set) var expensesPlotViewModel: ChartViewModel?
     
-    private(set) var monthSelectorViewModel: MonthSelectorViewModel = {
-        let viewModel = MonthSelectorViewModel();
-        
-        return viewModel
-    }();
+    // MARK: - Formatters
+    
+    private lazy var currencyFormatter = {
+        LocalizedDecimalFormatter(numberStyle: .currency)
+    }()
 
     // MARK: - Binding
 
-    var updateUI: (() -> Void)?
+    public var updateUI: (() -> Void)?
+    
+    public var onSuccess: ((ViewModelFeedback) -> Void)?
+    
+    public var onError: ((ViewModelFeedback) -> Void)?
     
 }
 
-// MARK: - Public API
+// MARK: - Data
 extension DashboardViewModel {
     
-    func applyPeriod(_ period: Period) {
-        
-        let startDate = period == .monthly ? Date().monthStart() : Date().yearStart()
-        let endDate = period == .monthly ? Date().monthEnd() : Date().yearEnd()
-        
-        let filter = OperationsFilter(
-            startDate: startDate,
-            endDate: endDate,
-            period: period,
-            vault: vault
-        )
-        
-        self.applyFilter(filter)
-    }
-    
-    func applyFilter(_ filter: OperationsFilter) {
-        self.filter = filter
-        
-        getData()
-    }
-
-    func getData() {
+    public func getData() {
         
         do {
             
@@ -156,34 +120,77 @@ extension DashboardViewModel {
             
             isVaultEmpty = response.isEmpty
             
-            dashboardMetrics = response.dashboardMetrics
-            
             updateReimbursementsWarning(metrics: response.dashboardMetrics.reimbursements)
             
-            summaryViewModel = makeGeneralSummary(metrics: response.dashboardMetrics)
+            updateGeneralSummary(metrics: response.dashboardMetrics)
             
-            statisticsSummaryViewModel = makeStatisticsSummary(metrics: response.dashboardMetrics)
+            updateStatisticsSummary(metrics: response.dashboardMetrics)
             
-            expensesPlotViewModel = ChartViewModel(
-                title: "Where your money went",
-                items: response.dashboardMetrics.categories.netExpenses,
-                chartType: .pie,
-                subtitle: currencyFormatter.string(from: response.dashboardMetrics.categories.totalNetExpenses) ?? ""
+            updateExpensesPlot(metrics: response.dashboardMetrics.categories)
+            
+            subtitle = currencyFormatter.string(
+                from: response.dashboardMetrics.balance.currentBalance
             )
             
         } catch {
-            // TODO: Present error?
+            onError?(.showAlert(message: "There was an error fetching data."))
         }
         
         updateUI?()
     }
-    
 }
 
-// MARK: - View Model Builders
+// MARK: - Actions
+
+extension DashboardViewModel {
+    
+    public func didTapVaultSelector() {
+        
+        delegate?.didTapVaultSelector(self)
+    }
+    
+    public func didTapAgent() {
+        
+        delegate?.didTapAgent(self)
+    }
+    
+    public func didTapIncome() {
+        
+        let filter = OperationsFilter(
+            startDate: filter.startDate,
+            endDate: filter.endDate,
+            type: .income,
+            period: filter.period,
+            vault: vault
+        )
+        
+        delegate?.didTapOperationGroup(self, with: filter)
+    }
+    
+    public func didTapExpense() {
+        
+        let filter = OperationsFilter(
+            startDate: filter.startDate,
+            endDate: filter.endDate,
+            type: .expense,
+            period: filter.period,
+            vault: vault
+        )
+        
+        delegate?.didTapOperationGroup(self, with: filter)
+    }
+    
+    public func didTapFeedback() {
+        
+        delegate?.didTapFeedback(self)
+    }
+}
+
+// MARK: - Helper
+
 private extension DashboardViewModel {
     
-    func updateReimbursementsWarning(metrics: ReimbursementMetrics) {
+    private func updateReimbursementsWarning(metrics: ReimbursementMetrics) {
         
         let titleText = "Pending Reimbursements"
         let formattedAmount = currencyFormatter.string(from: metrics.expected) ?? "\(metrics.expected)"
@@ -204,9 +211,11 @@ private extension DashboardViewModel {
         )
         
         feedbackViewModel.feedbackType = .warning
+        
+        isFeedbackHidden = metrics.expected <= 0
     }
 
-    func makeGeneralSummary(metrics: DashboardMetrics) -> AmountCardSectionViewModel {
+    private func updateGeneralSummary(metrics: DashboardMetrics) {
         
         let incomeViewModel = AmountCardItemViewModel(
             title: "Income",
@@ -232,15 +241,15 @@ private extension DashboardViewModel {
             self.didTapExpense()
         }
         
-        return AmountCardSectionViewModel(
+        summaryViewModel = AmountCardSectionViewModel(
             monthTitle: "",
             items: [ incomeViewModel, expenseViewModel ],
             gridFormat: true
         )
     }
 
-    func makeStatisticsSummary(metrics: DashboardMetrics) -> AmountCardSectionViewModel {
-        AmountCardSectionViewModel(
+    private func updateStatisticsSummary(metrics: DashboardMetrics) {
+        let viewModel = AmountCardSectionViewModel(
             monthTitle: "Key metrics",
             items: [
                 makeSummaryItem(
@@ -270,9 +279,11 @@ private extension DashboardViewModel {
             ],
             gridFormat: true
         )
+        
+        statisticsSummaryViewModel = viewModel
     }
     
-    func makeSummaryItem(
+    private func makeSummaryItem(
         emoji: String? = nil,
         title: String,
         amount: Double,
@@ -288,47 +299,45 @@ private extension DashboardViewModel {
         
         return item
     }
+    
+    private func updateExpensesPlot(metrics: CategoryMetrics) {
+        
+        let viewModel = ChartViewModel(
+            title: "Where your money went",
+            items: metrics.netExpenses,
+            chartType: .pie,
+            subtitle: currencyFormatter.string(from: metrics.totalNetExpenses) ?? ""
+        )
+        
+        expensesPlotViewModel = viewModel
+    }
 }
 
-// MARK: - Actions
+// MARK: - Filter
+
 extension DashboardViewModel {
-    func didTapVaultSelector() {
-        delegate?.didTapVaultSelector(self)
-    }
-    
-    func didTapAgent() {
-        delegate?.didTapAgent(self)
-    }
-    
-    func didTapIncome() {
+    public func applyPeriod(_ period: Period) {
+        
+        let startDate = period == .monthly ? Date().monthStart() : Date().yearStart()
+        let endDate = period == .monthly ? Date().monthEnd() : Date().yearEnd()
+        
         let filter = OperationsFilter(
-            startDate: filter.startDate,
-            endDate: filter.endDate,
-            type: .income,
-            period: filter.period,
+            startDate: startDate,
+            endDate: endDate,
+            period: period,
             vault: vault
         )
         
-        delegate?.didTapOperationGroup(self, with: filter)
+        self.applyFilter(filter)
     }
     
-    func didTapExpense() {
-        let filter = OperationsFilter(
-            startDate: filter.startDate,
-            endDate: filter.endDate,
-            type: .expense,
-            period: filter.period,
-            vault: vault
-        )
+    public func applyFilter(_ filter: OperationsFilter) {
+        self.filter = filter
         
-        delegate?.didTapOperationGroup(self, with: filter)
-    }
-    
-    func didTapFeedback() {
-        
-        delegate?.didTapFeedback(self)
+        getData()
     }
 }
+
 
 // MARK: - Bindings
 extension DashboardViewModel {

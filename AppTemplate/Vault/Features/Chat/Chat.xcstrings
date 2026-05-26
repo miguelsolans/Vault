@@ -9,12 +9,6 @@
             "state" : "translated",
             "value" : "Ask Vault"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pergunta ao Vault"
-          }
         }
       }
     },
@@ -25,12 +19,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hi! I’m Vault’s Financial Assistant. Private by design—everything runs on your device. I’m great for quick insights and everyday financial questions."
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Olá! Sou o Assistente Financeiro da Vault. Privado por design — tudo funciona no seu dispositivo. Sou ótimo para obter insights rápidos e responder a perguntas financeiras do dia a dia."
           }
         }
       }
@@ -43,12 +31,6 @@
             "state" : "translated",
             "value" : "Assistant"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Assistente"
-          }
         }
       }
     },
@@ -59,12 +41,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Send"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enviar"
           }
         }
       }

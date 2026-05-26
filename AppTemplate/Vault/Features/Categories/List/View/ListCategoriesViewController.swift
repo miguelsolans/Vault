@@ -104,13 +104,46 @@ extension ListCategoriesViewController {
     }
     
     private func setupBarButtonItems() {
-        let addButton = UIBarButtonItem(
+        
+        let sortAscendingAction = UIAction(
+            title: "Ascending",
+            state: viewModel.sort == .ascending ? .on : .off
+        ) { [weak self] _ in
+            guard let self else { return }
+            self.viewModel.sort = .ascending
+        }
+        
+        let sortDescendingAction = UIAction(
+            title: "Descending",
+            state: viewModel.sort == .descending ? .on : .off
+        ) { [weak self] _ in
+            guard let self else { return }
+            self.viewModel.sort = .descending
+        }
+        
+        let sortTypeAction = UIAction(
+            title: "Type",
+            state: viewModel.sort == .type ? .on : .off
+        ) { [weak self] _ in
+            guard let self else { return }
+            self.viewModel.sort = .type
+        }
+        
+        let sortMenu = UIMenu(title: "", options: .singleSelection, children: [sortAscendingAction, sortDescendingAction, sortTypeAction])
+        
+        let sortBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "line.horizontal.3.decrease.circle"),
+            menu: sortMenu
+        )
+        
+        let addBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .add,
             target: self,
             action: #selector(didTapAddCategory)
         )
         
-        navigationItem.rightBarButtonItem = addButton
+        navigationItem.leftBarButtonItem = sortBarButtonItem
+        navigationItem.rightBarButtonItem = addBarButtonItem
     }
     
     private func setupContentUnavailable() {

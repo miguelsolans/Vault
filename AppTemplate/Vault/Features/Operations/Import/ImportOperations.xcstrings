@@ -9,12 +9,6 @@
             "state" : "translated",
             "value" : "All %@ operations imported successfully."
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Todas as %@ foram importadas com sucesso."
-          }
         }
       }
     },
@@ -25,12 +19,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Amount"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Montante"
           }
         }
       }
@@ -43,12 +31,6 @@
             "state" : "translated",
             "value" : "Category"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Categoria"
-          }
         }
       }
     },
@@ -59,12 +41,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Date"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Data"
           }
         }
       }
@@ -77,12 +53,6 @@
             "state" : "translated",
             "value" : "Description"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Descrição"
-          }
         }
       }
     },
@@ -93,12 +63,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Import"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Importar"
           }
         }
       }
@@ -111,12 +75,6 @@
             "state" : "translated",
             "value" : "Import Result"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Resultados da Importação"
-          }
         }
       }
     },
@@ -127,12 +85,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Imported failed. %@ rows could not be processed."
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Importação falhou. %@ linhas não foram processadas."
           }
         }
       }
@@ -145,12 +97,6 @@
             "state" : "translated",
             "value" : "Fields Mapping"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mapeamento de Campos"
-          }
         }
       }
     },
@@ -158,12 +104,6 @@
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OK"
-          }
-        },
-        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
@@ -178,12 +118,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Operation Type"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tipo de Operação"
           }
         }
       }
@@ -206,12 +140,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Imported %@ operations.\\n%@ failed to import."
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Importadas %@ operações.\\n%@ operações falharam."
           }
         }
       }

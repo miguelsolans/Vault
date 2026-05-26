@@ -5,12 +5,13 @@
 //  Created by Miguel Solans on 08/05/2026.
 //
 
-import UIKit
+import Foundation
+import CoreKit
 import VaultCore
-
 
 final class CashflowBreakdownViewModel: NSObject {
 
+    // MARK: - Dependencies
     private(set) var filter: OperationsFilter
     
     private let useCase: DashboardUseCase;
@@ -37,9 +38,9 @@ final class CashflowBreakdownViewModel: NSObject {
         }
     }
     
-    public var subtitle: String? = nil
+    private(set) var subtitle: String? = nil
     
-    private(set) var amountHeaderViewModel: AmountStatusHeaderViewModel?
+    private(set) var headerViewModel: AmountStatusHeaderViewModel?
     
     private(set) var plotViewModel: ChartViewModel?
     
@@ -48,6 +49,10 @@ final class CashflowBreakdownViewModel: NSObject {
     // MARK: - Bindings
     
     public var updateUI: (() -> Void)?
+    
+    public var onSuccess: ((ViewModelFeedback) -> Void)?
+    
+    public var onError: ((ViewModelFeedback) -> Void)?
 }
 
 extension CashflowBreakdownViewModel {
@@ -78,7 +83,7 @@ extension CashflowBreakdownViewModel {
                 response.dashboardMetrics.cashFlow.averageIncome :
                 response.dashboardMetrics.cashFlow.averageExpense
             
-            amountHeaderViewModel = AmountStatusHeaderViewModel(
+            headerViewModel = AmountStatusHeaderViewModel(
                 amount: total,
                 percentage: percentage?.value ?? 0.00,
                 operationType: filter.type ?? .income,
@@ -100,7 +105,8 @@ extension CashflowBreakdownViewModel {
             )
             
         } catch {
-            // TODO: Present error?
+            
+            onError?(.showAlert(message: "There was an error fetching data."))
         }
         
         updateUI?()

@@ -9,12 +9,6 @@
             "state" : "translated",
             "value" : "Amount"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Montante"
-          }
         }
       }
     },
@@ -24,12 +18,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Amount can’t be empty"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Montante não pode estar vazio"
           }
         }
       }
@@ -42,12 +30,6 @@
             "state" : "translated",
             "value" : "Category"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Categoria"
-          }
         }
       }
     },
@@ -57,12 +39,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Category can’t be empty"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Categoria não pode estar vazia"
           }
         }
       }
@@ -75,12 +51,6 @@
             "state" : "translated",
             "value" : "Date"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Data"
-          }
         }
       }
     },
@@ -91,12 +61,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Description"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Descrição"
           }
         }
       }
@@ -109,12 +73,6 @@
             "state" : "translated",
             "value" : "Enter amount"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Introduza o montante"
-          }
         }
       }
     },
@@ -125,12 +83,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enter description"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Introduza a descrição"
           }
         }
       }
@@ -143,12 +95,6 @@
             "state" : "translated",
             "value" : "Enter Vault name"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Introduza o nome do Cofre"
-          }
         }
       }
     },
@@ -159,12 +105,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Expense"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Despesa"
           }
         }
       }
@@ -177,12 +117,6 @@
             "state" : "translated",
             "value" : "Income"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rendimento"
-          }
         }
       }
     },
@@ -192,12 +126,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Amount is invalid"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Montante é inválido"
           }
         }
       }
@@ -210,12 +138,6 @@
             "state" : "translated",
             "value" : "Operation type"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tipo de Operação"
-          }
         }
       }
     },
@@ -226,12 +148,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Add Operation"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Adicionar Operação"
           }
         }
       }
@@ -244,12 +160,6 @@
             "state" : "translated",
             "value" : "By default, date is set to today's"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Por defeito, a data está definida para hoje\n"
-          }
         }
       }
     },
@@ -260,12 +170,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vault name"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nome do Cofre"
           }
         }
       }
@@ -278,12 +182,6 @@
             "state" : "translated",
             "value" : "Save"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Guardar"
-          }
         }
       }
     },
@@ -295,12 +193,6 @@
             "state" : "translated",
             "value" : "Edit Operation"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Editar Operação"
-          }
         }
       }
     },
@@ -311,12 +203,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Edit"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Editar"
           }
         }
       }

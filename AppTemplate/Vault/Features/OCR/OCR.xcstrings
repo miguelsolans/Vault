@@ -9,12 +9,6 @@
             "state" : "translated",
             "value" : "Cancel"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancelar"
-          }
         }
       }
     },
@@ -26,12 +20,6 @@
             "state" : "translated",
             "value" : "Retry"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tentar novamente"
-          }
         }
       }
     },
@@ -39,12 +27,6 @@
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Error"
-          }
-        },
-        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Error"
@@ -60,12 +42,6 @@
             "state" : "translated",
             "value" : "Image is invalid"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "A imagem não é válida"
-          }
         }
       }
     },
@@ -76,12 +52,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "No text has been detected"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Não foi possível ler o texto"
           }
         }
       }

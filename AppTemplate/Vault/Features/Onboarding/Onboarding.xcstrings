@@ -20,12 +20,6 @@
             "state" : "translated",
             "value" : "Set goals and reach them faster"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Defina objetivos e alcance-os mais rapidamente\n"
-          }
         }
       }
     },
@@ -36,12 +30,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Save smarter"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Poupe de forma mais inteligente"
           }
         }
       }
@@ -54,12 +42,6 @@
             "state" : "translated",
             "value" : "Real-time insights into your finances"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Informações em tempo real sobre as suas finanças"
-          }
         }
       }
     },
@@ -70,12 +52,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Stay in control"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mantenha o controlo"
           }
         }
       }
@@ -88,12 +64,6 @@
             "state" : "translated",
             "value" : "See where your money goes every month"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Veja para onde vai o seu dinheiro todos os meses"
-          }
         }
       }
     },
@@ -104,12 +74,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Track your spending"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Acompanhe os seus gastos"
           }
         }
       }

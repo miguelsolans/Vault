@@ -9,12 +9,6 @@
             "state" : "translated",
             "value" : "Enter amount"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Introduza o montante\n"
-          }
         }
       }
     },
@@ -26,12 +20,6 @@
             "state" : "translated",
             "value" : "Enter Vault name"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Introduza o nome do cofre\n"
-          }
         }
       }
     },
@@ -41,12 +29,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Select file to import"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Selecione o ficheiro a importar"
           }
         }
       }
@@ -59,12 +41,6 @@
             "state" : "translated",
             "value" : "Initial deposit"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Depósito inicial"
-          }
         }
       }
     },
@@ -74,12 +50,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enter the initial deposit"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Introduza o depósito inicial"
           }
         }
       }
@@ -92,12 +62,6 @@
             "state" : "translated",
             "value" : "Name"
           }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nome"
-          }
         }
       }
     },
@@ -107,12 +71,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enter the name"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Introduza o nome"
           }
         }
       }
