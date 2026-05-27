@@ -133,6 +133,10 @@
 		8BD0F7462F930DA6007C2E59 /* NVActivityIndicatorViewExtended in Frameworks */ = {isa = PBXBuildFile; productRef = 8BD0F7452F930DA6007C2E59 /* NVActivityIndicatorViewExtended */; };
 		8BD0F7492F930F98007C2E59 /* VaultBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD0F7482F930F98007C2E59 /* VaultBaseViewController.swift */; };
 		8BD0F74D2F931A36007C2E59 /* OCR.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 8BD0F74C2F931A36007C2E59 /* OCR.xcstrings */; };
+		8BDD8FCF2FC60EA500DA9917 /* ExpectedReimbursementsIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDD8FCE2FC60EA500DA9917 /* ExpectedReimbursementsIntent.swift */; };
+		8BDD8FD12FC6DDB700DA9917 /* CheckBalanceIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDD8FD02FC6DDB700DA9917 /* CheckBalanceIntent.swift */; };
+		8BDD8FD32FC6F6A900DA9917 /* MonthlySavedIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDD8FD22FC6F6A900DA9917 /* MonthlySavedIntent.swift */; };
+		8BDD8FD52FC7617B00DA9917 /* MonthlySpentIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDD8FD42FC7617B00DA9917 /* MonthlySpentIntent.swift */; };
 		8BE035CC2C07FB03006958EA /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE035CB2C07FB03006958EA /* TabBar.swift */; };
 		8BEFE4432F8EA72400A9D1DD /* ChartCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEFE4422F8EA72400A9D1DD /* ChartCardView.swift */; };
 		8BEFE4452F8EA77B00A9D1DD /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEFE4442F8EA77B00A9D1DD /* ChartViewModel.swift */; };
@@ -140,7 +144,7 @@
 		8BEFE4572F91309800A9D1DD /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEFE4562F91309800A9D1DD /* CategoryTableViewCell.swift */; };
 		8BEFE4592F9130A800A9D1DD /* CategoryTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEFE4582F9130A800A9D1DD /* CategoryTableViewModel.swift */; };
 		8BF3B9012FACC43100DAFA1D /* VaultCore in Frameworks */ = {isa = PBXBuildFile; productRef = 8BF3B9002FACC43100DAFA1D /* VaultCore */; };
-		8BF3B9062FACCC8100DAFA1D /* AddOperationIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF3B9042FACCC8100DAFA1D /* AddOperationIntent.swift */; };
+		8BF3B9062FACCC8100DAFA1D /* VaultShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF3B9042FACCC8100DAFA1D /* VaultShortcuts.swift */; };
 		8BF3B9072FACCC8100DAFA1D /* AddIncomeIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF3B9032FACCC8100DAFA1D /* AddIncomeIntent.swift */; };
 		8BF3B9082FACCC8100DAFA1D /* AddExpenseIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF3B9022FACCC8100DAFA1D /* AddExpenseIntent.swift */; };
 		8BF3B9112FACCC8B00DAFA1D /* FoundationModelAvailability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF3B90E2FACCC8B00DAFA1D /* FoundationModelAvailability.swift */; };
@@ -277,6 +281,10 @@
 		8BD0F7392F92F782007C2E59 /* OCRTextRecognitionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRTextRecognitionService.swift; sourceTree = "<group>"; };
 		8BD0F7482F930F98007C2E59 /* VaultBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultBaseViewController.swift; sourceTree = "<group>"; };
 		8BD0F74C2F931A36007C2E59 /* OCR.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = OCR.xcstrings; sourceTree = "<group>"; };
+		8BDD8FCE2FC60EA500DA9917 /* ExpectedReimbursementsIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpectedReimbursementsIntent.swift; sourceTree = "<group>"; };
+		8BDD8FD02FC6DDB700DA9917 /* CheckBalanceIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBalanceIntent.swift; sourceTree = "<group>"; };
+		8BDD8FD22FC6F6A900DA9917 /* MonthlySavedIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlySavedIntent.swift; sourceTree = "<group>"; };
+		8BDD8FD42FC7617B00DA9917 /* MonthlySpentIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlySpentIntent.swift; sourceTree = "<group>"; };
 		8BE035CB2C07FB03006958EA /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		8BEFE4422F8EA72400A9D1DD /* ChartCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartCardView.swift; sourceTree = "<group>"; };
 		8BEFE4442F8EA77B00A9D1DD /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
@@ -285,7 +293,7 @@
 		8BEFE4582F9130A800A9D1DD /* CategoryTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewModel.swift; sourceTree = "<group>"; };
 		8BF3B9022FACCC8100DAFA1D /* AddExpenseIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseIntent.swift; sourceTree = "<group>"; };
 		8BF3B9032FACCC8100DAFA1D /* AddIncomeIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIncomeIntent.swift; sourceTree = "<group>"; };
-		8BF3B9042FACCC8100DAFA1D /* AddOperationIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOperationIntent.swift; sourceTree = "<group>"; };
+		8BF3B9042FACCC8100DAFA1D /* VaultShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultShortcuts.swift; sourceTree = "<group>"; };
 		8BF3B9092FACCC8B00DAFA1D /* FinanceAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceAssistant.swift; sourceTree = "<group>"; };
 		8BF3B90A2FACCC8B00DAFA1D /* OperationMetricsTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationMetricsTool.swift; sourceTree = "<group>"; };
 		8BF3B90C2FACCC8B00DAFA1D /* ReceiptAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptAssistant.swift; sourceTree = "<group>"; };
@@ -1384,7 +1392,11 @@
 			children = (
 				8BF3B9022FACCC8100DAFA1D /* AddExpenseIntent.swift */,
 				8BF3B9032FACCC8100DAFA1D /* AddIncomeIntent.swift */,
-				8BF3B9042FACCC8100DAFA1D /* AddOperationIntent.swift */,
+				8BDD8FCE2FC60EA500DA9917 /* ExpectedReimbursementsIntent.swift */,
+				8BDD8FD02FC6DDB700DA9917 /* CheckBalanceIntent.swift */,
+				8BDD8FD22FC6F6A900DA9917 /* MonthlySavedIntent.swift */,
+				8BDD8FD42FC7617B00DA9917 /* MonthlySpentIntent.swift */,
+				8BF3B9042FACCC8100DAFA1D /* VaultShortcuts.swift */,
 			);
 			path = Shortcuts;
 			sourceTree = "<group>";
@@ -1535,6 +1547,7 @@
 				8BD0F73B2F92F782007C2E59 /* OCRTextRecognitionService.swift in Sources */,
 				8B539C7C2F7C08ED00977A6C /* VaultFormViewModel.swift in Sources */,
 				8B539BE72F7ADC1D00977A6C /* SampleViewModel.swift in Sources */,
+				8BDD8FD12FC6DDB700DA9917 /* CheckBalanceIntent.swift in Sources */,
 				8B9B09B52F83F48D0042840E /* ImportOperationsCoordinator.swift in Sources */,
 				8B6185672F7F318E008986A8 /* SecurityOptionTableViewModel.swift in Sources */,
 				8B1123152F816DEA00A2AF28 /* LoginViewController.swift in Sources */,
@@ -1587,6 +1600,7 @@
 				8BD0F7362F92D72D007C2E59 /* OCRViewModel.swift in Sources */,
 				8B00F3452F8D301F008C8777 /* ChatMessage.swift in Sources */,
 				8B00F3462F8D301F008C8777 /* ChatViewController.swift in Sources */,
+				8BDD8FCF2FC60EA500DA9917 /* ExpectedReimbursementsIntent.swift in Sources */,
 				8BC2E5042BFD3841007FAF4C /* SceneDelegate.swift in Sources */,
 				8B81F1E02FB1190000ECA9F4 /* CategoryDetailViewController.swift in Sources */,
 				8B9B09B72F83F49B0042840E /* ImportOperationsViewModel.swift in Sources */,
@@ -1598,6 +1612,7 @@
 				8B61856D2F7F3409008986A8 /* SecurityViewController.swift in Sources */,
 				8B1123132F816DDB00A2AF28 /* LoginCoordinator.swift in Sources */,
 				8B81F1CD2FAE3F4000ECA9F4 /* CashflowBreakdownCoordinator.swift in Sources */,
+				8BDD8FD52FC7617B00DA9917 /* MonthlySpentIntent.swift in Sources */,
 				8B61856F2F7F3DE5008986A8 /* SecurityViewModel.swift in Sources */,
 				8BD0F7382F92D73F007C2E59 /* OCRCoordinator.swift in Sources */,
 				8B539BFB2F7B251B00977A6C /* OperationsCoordinator.swift in Sources */,
@@ -1616,13 +1631,14 @@
 				8B078BCF2F7D1F0A00075CC1 /* DashboardCoordinator.swift in Sources */,
 				8B539C0C2F7B2FCC00977A6C /* OperationSectionHeaderView.swift in Sources */,
 				8B6185692F7F31A8008986A8 /* SecurityOptionTableViewCell.swift in Sources */,
-				8BF3B9062FACCC8100DAFA1D /* AddOperationIntent.swift in Sources */,
+				8BF3B9062FACCC8100DAFA1D /* VaultShortcuts.swift in Sources */,
 				8BF3B9072FACCC8100DAFA1D /* AddIncomeIntent.swift in Sources */,
 				8BF3B9082FACCC8100DAFA1D /* AddExpenseIntent.swift in Sources */,
 				8B7436EC2F80037300E2760E /* CreatePinViewModel.swift in Sources */,
 				8B11232A2F81B15500A2AF28 /* LoginPinViewModel.swift in Sources */,
 				8BA170B42FAAD00100CAC30 /* UIViewController+Confirmation.swift in Sources */,
 				8BCF15F62F82D8F400B483BD /* DependenciesContainer.swift in Sources */,
+				8BDD8FD32FC6F6A900DA9917 /* MonthlySavedIntent.swift in Sources */,
 				8BD0F7342F92D6E7007C2E59 /* OCRViewController.swift in Sources */,
 				8BEFE4592F9130A800A9D1DD /* CategoryTableViewModel.swift in Sources */,
 				8B2C30F22F86D11B00126BA8 /* ListVaultCoordinator.swift in Sources */,

@@ -8,7 +8,6 @@
 import AppIntents
 import VaultCore
 
-// MARK: - Expense
 struct CategoryExpenseIntentEntity: AppEntity, Identifiable{
     
     var id: UUID
@@ -78,7 +77,9 @@ struct CategoryExpenseIntentQuery: EntityQuery {
 }
 
 struct AddExpenseIntent: AppIntent {
+    
     static var title: LocalizedStringResource = "Add Expense"
+    
     static var description = IntentDescription("Adds a new expense to Vault.")
 
     @Parameter(title: "Expense amount")
@@ -91,7 +92,6 @@ struct AddExpenseIntent: AppIntent {
     var category: CategoryExpenseIntentEntity
     
     static var parameterSummary: some ParameterSummary {
-        // Summary("Add an expense of \(\.$amount) to Vault")
         Summary("Add an expense to Vault")
     }
     

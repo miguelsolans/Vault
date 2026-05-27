@@ -77,7 +77,9 @@ struct CategoryIncomeIntentQuery: EntityQuery {
 }
 
 struct AddIncomeIntent: AppIntent {
-    static var title: LocalizedStringResource = "Add UIncome"
+    
+    static var title: LocalizedStringResource = "Add Income"
+    
     static var description = IntentDescription("Adds a new income to Vault.")
 
     @Parameter(title: "Income amount")
@@ -101,7 +103,7 @@ struct AddIncomeIntent: AppIntent {
         
         guard let _ = userDefaults.favoriteVault else {
             return .result(
-                dialog: IntentDialog("There is no default Vault to add the expense to.")
+                dialog: IntentDialog("There is no default Vault to add the income to.")
             )
         }
         
