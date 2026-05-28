@@ -289,6 +289,12 @@ final class OperationFormViewModel: NSObject {
         }
     }
     
+    public var isReimbursmentSwitchHidden: Bool {
+        get {
+            operationToEdit != nil
+        }
+    }
+    
     public var isAddReimbursementHidden: Bool {
         get {
             

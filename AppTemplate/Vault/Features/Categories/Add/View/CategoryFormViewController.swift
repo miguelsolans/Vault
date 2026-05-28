@@ -73,15 +73,6 @@ final class CategoryFormViewController: VaultBaseViewController {
         
         return view
     }()
-
-    private lazy var colorInputView: ColorPickerInputView = {
-        let view = ColorPickerInputView(
-            viewModel: viewModel.colorInputViewModel,
-            style: InputStyles.colorPickerStyle
-        )
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
     
     private lazy var plotSwitchInputView: SwitchInputView = {
         let view = SwitchInputView(
@@ -89,6 +80,30 @@ final class CategoryFormViewController: VaultBaseViewController {
             style: InputStyles.switchStyle
         )
         
+        view.isHidden = viewModel.plotSwitchHidden
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view;
+    }()
+
+    private lazy var colorInputView: ColorPickerInputView = {
+        let view = ColorPickerInputView(
+            viewModel: viewModel.colorInputViewModel,
+            style: InputStyles.colorPickerStyle
+        )
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    private lazy var mainIncomeSwitchInputView: SwitchInputView = {
+        let view = SwitchInputView(
+            viewModel: viewModel.mainIncomeSwitchInputViewModel,
+            style: InputStyles.switchStyle
+        )
+        
+        view.isHidden = viewModel.mainIncomeSwitchHidden
         view.translatesAutoresizingMaskIntoConstraints = false
         
         return view;
@@ -122,15 +137,18 @@ final class CategoryFormViewController: VaultBaseViewController {
         setupConstraints()
 
         saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
-        
-        colorInputView.isHidden = !viewModel.isShowInDashboardOn
-        
+    }
+    
+    private func updateUI() {
+        plotSwitchInputView.isHidden = viewModel.plotSwitchHidden
+        mainIncomeSwitchInputView.isHidden = viewModel.mainIncomeSwitchHidden
     }
 
     override func setupBindings() {
         viewModel.updateUI = { [weak self] in
             guard let self = self else { return }
-            self.colorInputView.isHidden = !viewModel.isShowInDashboardOn
+            
+            updateUI()
         }
         
         viewModel.onSuccess = { [weak self] _ in
@@ -167,6 +185,7 @@ extension CategoryFormViewController {
         stackView.addArrangedSubview(categoryNameInputView)
         stackView.addArrangedSubview(plotSwitchInputView)
         stackView.addArrangedSubview(colorInputView)
+        stackView.addArrangedSubview(mainIncomeSwitchInputView)
         stackView.addArrangedSubview(saveButton)
     }
 

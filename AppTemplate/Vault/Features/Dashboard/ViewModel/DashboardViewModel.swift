@@ -217,20 +217,24 @@ private extension DashboardViewModel {
 
     private func updateGeneralSummary(metrics: DashboardMetrics) {
         
-        let incomeViewModel = AmountCardItemViewModel(
-            title: "Income",
-            amount: metrics.cashFlow.income,
+        var items: [AmountCardItemViewModel] = []
+        
+        let totalIncomeViewModel = AmountCardItemViewModel(
+            title: "Total income",
+            amount: metrics.cashFlow.totalIncome,
             type: .income
         )
         
-        incomeViewModel.onTap = { [weak self] in
+        totalIncomeViewModel.onTap = { [weak self] in
             guard let self = self else { return }
             
             self.didTapIncome()
         }
         
+        items.append(totalIncomeViewModel)
+        
         let expenseViewModel = AmountCardItemViewModel(
-            title: "Expenses",
+            title: "Total expenses",
             amount: metrics.netSpending.netExpenses,
             type: .expense
         )
@@ -241,9 +245,11 @@ private extension DashboardViewModel {
             self.didTapExpense()
         }
         
+        items.append(expenseViewModel)
+        
         summaryViewModel = AmountCardSectionViewModel(
             monthTitle: "",
-            items: [ incomeViewModel, expenseViewModel ],
+            items: items,
             gridFormat: true
         )
     }

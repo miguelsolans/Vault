@@ -259,7 +259,7 @@
 		8BABC0022FA2000000D00101 /* OperationDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationDetailViewModel.swift; sourceTree = "<group>"; };
 		8BABC0112FA300000D00101 /* TransferMoneyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMoneyTableViewCell.swift; sourceTree = "<group>"; };
 		8BABC0132FA300000D00101 /* TransferMoneyTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMoneyTableViewModel.swift; sourceTree = "<group>"; };
-		8BC2E4FE2BFD3841007FAF4C /* Vault.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vault.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BC2E4FE2BFD3841007FAF4C /* Vault .app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Vault .app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BC2E5012BFD3841007FAF4C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BC2E5032BFD3841007FAF4C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8BC2E50D2BFD3842007FAF4C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -1179,7 +1179,7 @@
 		8BC2E4FF2BFD3841007FAF4C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8BC2E4FE2BFD3841007FAF4C /* Vault.app */,
+				8BC2E4FE2BFD3841007FAF4C /* Vault .app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1454,7 +1454,7 @@
 				8B8338BA2FB9191800EDC242 /* CoreKit */,
 			);
 			productName = AppTemplate;
-			productReference = 8BC2E4FE2BFD3841007FAF4C /* Vault.app */;
+			productReference = 8BC2E4FE2BFD3841007FAF4C /* Vault .app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1798,6 +1798,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8B5365602C09362600B3144C /* AppStore.xcconfig */;
 			buildSettings = {
+				APP_NAME = "Vault ";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -1827,6 +1828,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8B5365602C09362600B3144C /* AppStore.xcconfig */;
 			buildSettings = {
+				APP_NAME = Vault;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -1923,6 +1925,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8BC5FA7C2FA150EE003EC163 /* Dev.xcconfig */;
 			buildSettings = {
+				APP_NAME = "Vault DEV";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -2012,6 +2015,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8BC5FA7C2FA150EE003EC163 /* Dev.xcconfig */;
 			buildSettings = {
+				APP_NAME = "Vault DEV";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;

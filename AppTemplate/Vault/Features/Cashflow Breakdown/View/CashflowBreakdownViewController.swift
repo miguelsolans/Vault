@@ -44,6 +44,7 @@ final class CashflowBreakdownViewController: VaultBaseViewController {
     private lazy var headerView: AmountStatusHeaderView = {
         let view = AmountStatusHeaderView()
         
+        view.isHidden = viewModel.headerHidden
         view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
@@ -60,6 +61,16 @@ final class CashflowBreakdownViewController: VaultBaseViewController {
     private lazy var summaryView: AmountCardSectionView = {
         let view = AmountCardSectionView()
         
+        view.isHidden = viewModel.categoriesHidden
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    private lazy var additionalMetricsView: AmountCardSectionView = {
+        let view = AmountCardSectionView()
+        
+        view.isHidden = viewModel.additionalMetricsHidden
         view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
@@ -126,6 +137,7 @@ extension CashflowBreakdownViewController {
     private func setupStackView() {
         contentStack.addArrangedSubview(headerView)
         contentStack.addArrangedSubview(plotCardView)
+        contentStack.addArrangedSubview(additionalMetricsView)
         contentStack.addArrangedSubview(summaryView)
     }
     
@@ -156,16 +168,15 @@ extension CashflowBreakdownViewController {
         updateHeaderUI()
         updatePlotUI()
         updateCategoriesUI()
+        updateMetricsUI()
     }
     
     private func updateHeaderUI() {
         if let viewModel = viewModel.headerViewModel {
             headerView.configure(with: viewModel)
-            
-            headerView.isHidden = false
-        } else {
-            headerView.isHidden = true
         }
+        
+        headerView.isHidden = viewModel.headerHidden
     }
     
     private func updatePlotUI() {
@@ -176,21 +187,22 @@ extension CashflowBreakdownViewController {
                 plotViewModel: viewModel,
                 parentViewController: self
             )
-            
-            plotCardView.isHidden = false
-        } else {
-            plotCardView.isHidden = true
         }
     }
     
     private func updateCategoriesUI() {
         if let viewModel = viewModel.categoriesViewModel {
-            
             summaryView.configure(with: viewModel)
-            
-            summaryView.isHidden = false
-        } else {
-            summaryView.isHidden = true
         }
+        
+        summaryView.isHidden = viewModel.categoriesHidden
+    }
+    
+    private func updateMetricsUI() {
+        if let viewModel = viewModel.additionalMetricsViewModel {
+            additionalMetricsView.configure(with: viewModel)
+        }
+        
+        additionalMetricsView.isHidden = viewModel.additionalMetricsHidden
     }
 }

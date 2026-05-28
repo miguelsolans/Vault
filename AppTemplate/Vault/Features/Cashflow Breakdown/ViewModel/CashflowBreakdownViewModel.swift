@@ -46,6 +46,14 @@ final class CashflowBreakdownViewModel: NSObject {
     
     private(set) var categoriesViewModel: AmountCardSectionViewModel?
     
+    private(set) var additionalMetricsViewModel: AmountCardSectionViewModel?
+    
+    private(set) var headerHidden: Bool = true
+    
+    private(set) var categoriesHidden: Bool = true
+    
+    private(set) var additionalMetricsHidden: Bool = true
+    
     // MARK: - Bindings
     
     public var updateUI: (() -> Void)?
@@ -68,8 +76,10 @@ extension CashflowBreakdownViewModel {
             let response = try useCase.execute(request)
             
             let total = filter.type == .income ?
-                response.dashboardMetrics.cashFlow.income :
+                response.dashboardMetrics.cashFlow.totalIncome :
                 response.dashboardMetrics.netSpending.netExpenses
+            
+            let isEmpty = total == 0
             
             let percentage = filter.type == .income ?
                 response.dashboardMetrics.cashFlow.incomeChangeFromPreviousMonth :
@@ -104,6 +114,18 @@ extension CashflowBreakdownViewModel {
                 gridFormat: true
             )
             
+            additionalMetricsViewModel = AmountCardSectionViewModel(
+                monthTitle: "",
+                items: additionalMetricItems(from: response.dashboardMetrics.cashFlow),
+                gridFormat: true
+            )
+            
+            headerHidden = isEmpty
+            
+            categoriesHidden = isEmpty
+            
+            additionalMetricsHidden = filter.type == .expense || isEmpty
+            
         } catch {
             
             onError?(.showAlert(message: "There was an error fetching data."))
@@ -130,6 +152,32 @@ extension CashflowBreakdownViewModel {
         
         items.sort {
             $0.amount > $1.amount
+        }
+        
+        return items
+    }
+    
+    private func additionalMetricItems(from cashFlow: CashFlowMetrics) -> [AmountCardItemViewModel] {
+        var items: [AmountCardItemViewModel] = []
+        
+        if let mainIncome = cashFlow.mainIncome {
+            let mainIncomeViewModel = AmountCardItemViewModel(
+                title: "Main income",
+                amount: mainIncome,
+                type: .income
+            )
+            
+            items.append(mainIncomeViewModel)
+        }
+        
+        if let otherIncome = cashFlow.otherIncome {
+            let mainIncomeViewModel = AmountCardItemViewModel(
+                title: "Other income",
+                amount: otherIncome,
+                type: .income
+            )
+            
+            items.append(mainIncomeViewModel)
         }
         
         return items

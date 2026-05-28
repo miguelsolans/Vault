@@ -120,11 +120,26 @@ final class CategoryFormViewModel: NSObject {
         )
     }()
     
+    lazy var mainIncomeSwitchInputViewModel: SwitchInputViewModel = {
+        SwitchInputViewModel(
+            title: "Main income",
+            isOn: categoryToEdit?.isMainIncome ?? false,
+            isEditable: true,
+            placeholder: "Is main source of income",
+            subtitle: "Subtitle",
+            isMandatory: false
+        )
+    }()
+    
+    public var plotSwitchHidden: Bool {
+        return false
+    }
+    
     public var isShowInDashboardOn: Bool {
         return plotSwitchInputViewModel.isOn
     }
     
-    public var isBudgetSectionVisible: Bool {
+    public var mainIncomeSwitchHidden: Bool {
         return selectedOperationType() == .expense
     }
     
@@ -152,9 +167,18 @@ extension CategoryFormViewModel {
         let colorHex = colorInputViewModel.selectedColor.toHexString()
         let visibleInPlot = plotSwitchInputViewModel.isOn
         let emoji = emojiInputViewModel.inputText.isEmpty ? nil : emojiInputViewModel.inputText
+        let mainIncome = mainIncomeSwitchInputViewModel.isOn
         
         if let existingCategory = categoryToEdit {
-            updateCategory(existingCategory, name: trimmedName, emoji: emoji, color: colorHex, type: type, visibleInPlot: visibleInPlot)
+            updateCategory(
+                existingCategory,
+                name: trimmedName,
+                emoji: emoji,
+                color: colorHex,
+                type: type,
+                visibleInPlot: visibleInPlot,
+                mainIncome: mainIncome
+            )
             return
         }
         
@@ -163,11 +187,20 @@ extension CategoryFormViewModel {
             emoji: emoji,
             color: colorHex,
             type: type,
-            visibleInPlot: visibleInPlot
+            visibleInPlot: visibleInPlot,
+            mainIncome: mainIncome
         )
     }
     
-    private func updateCategory(_ category: CategoryDTO, name: String, emoji: String? = nil, color: String?, type: OperationType, visibleInPlot: Bool) {
+    private func updateCategory(
+        _ category: CategoryDTO,
+        name: String,
+        emoji: String? = nil,
+        color: String?,
+        type: OperationType,
+        visibleInPlot: Bool,
+        mainIncome: Bool = false
+    ) {
         do {
             let request = EditCategoryRequest(
                 vaultID: vault.id,
@@ -176,7 +209,8 @@ extension CategoryFormViewModel {
                 newEmoji: emoji,
                 newColor: color,
                 newType: type,
-                newVisibleInPlot: visibleInPlot
+                newVisibleInPlot: visibleInPlot,
+                isMainIncome: mainIncome
             )
             
             let _ = try editUseCase.execute(request)
@@ -192,7 +226,14 @@ extension CategoryFormViewModel {
         }
     }
     
-    private func saveCategory(name: String, emoji: String? = nil, color: String?, type: OperationType, visibleInPlot: Bool) {
+    private func saveCategory(
+        name: String,
+        emoji: String? = nil,
+        color: String?,
+        type: OperationType,
+        visibleInPlot: Bool,
+        mainIncome: Bool = false
+    ) {
         
         do {
             let request = AddCategoryRequest(
@@ -201,7 +242,8 @@ extension CategoryFormViewModel {
                 emoji: emoji,
                 color: color,
                 type: type,
-                visibleInPlot: visibleInPlot
+                visibleInPlot: visibleInPlot,
+                isMainIncome: mainIncome
             )
             
             let _ = try addUseCase.execute(request)

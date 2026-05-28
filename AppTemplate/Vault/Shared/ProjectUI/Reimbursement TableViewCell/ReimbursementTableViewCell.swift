@@ -65,6 +65,8 @@ class ReimbursementTableViewCell: UITableViewCell {
     private func setupUI() {
         selectionStyle = .none
         
+        backgroundColor = UIColor(resource: .accentBackground)
+        
         textStackView.addArrangedSubview(amountLabel)
         textStackView.addArrangedSubview(statusLabel)
         

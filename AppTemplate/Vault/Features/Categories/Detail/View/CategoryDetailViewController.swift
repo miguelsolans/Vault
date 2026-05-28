@@ -211,6 +211,7 @@ extension CategoryDetailViewController: UITableViewDelegate, UITableViewDataSour
         
         cell.contentConfiguration = content
         cell.selectionStyle = .none
+        cell.backgroundColor = UIColor(resource: .accentBackground)
         
         return cell
     }

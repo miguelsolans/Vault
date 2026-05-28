@@ -306,6 +306,7 @@ extension OperationDetailViewController: UITableViewDataSource, UITableViewDeleg
         
         cell.contentConfiguration = content
         cell.selectionStyle = .none
+        cell.backgroundColor = UIColor(resource: .accentBackground)
     }
     
     private func updateTableHeaderViewHeight() {

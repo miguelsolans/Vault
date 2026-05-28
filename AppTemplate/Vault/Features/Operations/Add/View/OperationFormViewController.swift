@@ -102,6 +102,7 @@ final class OperationFormViewController: VaultBaseViewController {
     private lazy var reimbursementSwitchView: SwitchInputView = {
         let view = SwitchInputView(viewModel: viewModel.reimbursementViewModel, style: InputStyles.switchStyle)
         
+        view.isHidden = viewModel.isReimbursmentSwitchHidden
         view.translatesAutoresizingMaskIntoConstraints = false
         
         return view;
@@ -255,6 +256,7 @@ extension OperationFormViewController {
 
 extension OperationFormViewController {
     private func refreshReimbursementViews() {
+        reimbursementSwitchView.isHidden = viewModel.isReimbursmentSwitchHidden
         reimbursementStackView.isHidden = viewModel.isReimbursementHidden
         reimbursementTableView.isHidden = !viewModel.isReimbursementOn
         addReimbursementButton.isHidden = viewModel.isAddReimbursementHidden
