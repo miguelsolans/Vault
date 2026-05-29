@@ -18,13 +18,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let window = UIWindow(windowScene: windowScene);
+        let window = ShakeDetectingWindow(windowScene: windowScene);
         
         let dependenciesContainer = DependenciesContainer.shared
         
         appCoordinator = AppCoordinator(window: window, dependencies: dependenciesContainer);
         
         appCoordinator?.start();
+
+        window.onShake = { [weak self] in
+            guard let self else { return }
+            
+            self.appCoordinator?.navigateToFeedback()
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -60,3 +66,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 
+
+final class ShakeDetectingWindow: UIWindow {
+    var onShake: (() -> Void)?
+
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        guard motion == .motionShake else { return }
+        onShake?()
+    }
+}

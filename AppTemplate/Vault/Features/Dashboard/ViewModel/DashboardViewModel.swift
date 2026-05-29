@@ -16,6 +16,7 @@ protocol DashboardViewModelDelegate: AnyObject {
     func didTapAgent(_ viewModel: DashboardViewModel)
     func didTapOperationGroup(_ viewModel: DashboardViewModel, with filter: OperationsFilter)
     func didTapFeedback(_ viewModel: DashboardViewModel)
+    func presentMarketing(_ viewModel: DashboardViewModel)
 }
 
 final class DashboardViewModel: NSObject {
@@ -131,6 +132,10 @@ extension DashboardViewModel {
             subtitle = currencyFormatter.string(
                 from: response.dashboardMetrics.balance.currentBalance
             )
+            
+            if response.presentMarketing {
+                delegate?.presentMarketing(self)
+            }
             
         } catch {
             onError?(.showAlert(message: "There was an error fetching data."))

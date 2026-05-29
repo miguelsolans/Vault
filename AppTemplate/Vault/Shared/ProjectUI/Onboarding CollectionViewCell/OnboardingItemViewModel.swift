@@ -8,7 +8,9 @@
 import UIKit
 
 struct OnboardingItemViewModel {
-    let imageName: String
-    let title: String
-    let subtitle: String
+    public let imageName: String
+    
+    public let title: String
+    
+    public let subtitle: String
 }

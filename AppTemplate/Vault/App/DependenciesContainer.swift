@@ -67,8 +67,10 @@ extension DependenciesContainer {
     }
     
     // MARK: - Onboarding
-    func getIntroViewModel() -> IntroViewModel {
-        return IntroViewModel()
+    func getMarketingViewModel(configuration: MarketingConfiguration) -> MarketingViewModel {
+        return MarketingViewModel(
+            configuration: configuration
+        )
     }
     
     // MARK: - Create Vault
@@ -348,5 +350,9 @@ extension DependenciesContainer {
     
     func getPinSetupUseCase() -> SecurityPinSetupUseCase {
         return core.getSecurityPinSetupUseCase()
+    }
+    
+    func getCreateFeedbackUseCase() -> CreateFeedbackUseCase {
+        return core.getCreateFeedbackUseCase()
     }
 }

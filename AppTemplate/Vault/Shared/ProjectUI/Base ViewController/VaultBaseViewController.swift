@@ -100,7 +100,6 @@ extension VaultBaseViewController {
         
         let okAction = UIAlertAction(title: "OK", style: .default) { _ in
             onDismiss?()
-            alert.dismiss(animated: true)
         }
         
         alert.addAction(okAction);

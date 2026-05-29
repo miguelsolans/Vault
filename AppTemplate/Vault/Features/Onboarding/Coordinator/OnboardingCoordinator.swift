@@ -43,12 +43,41 @@ final class OnboardingCoordinator: BaseCoordinator {
     
     // MARK: - ViewController's
     
-    lazy var introViewController: IntroViewController = {
-        let viewModel = dependencies.getIntroViewModel()
+    lazy var introViewController: MarketingViewController = {
+        
+        let configuration = MarketingConfiguration(
+            pageTitle: "",
+            pageSubtitle: "",
+            primaryAction: .init(title: "Create Vault", action: .appFeature(.createVault)),
+            items: [
+                .init(
+                    imageName: "onboarding_vault",
+                    title: NSLocalizedString("intro_onboarding_work_offline_title", tableName: "Onboarding", comment: ""),
+                    subtitle: NSLocalizedString("intro_onboarding_work_offline_description", tableName: "Onboarding", comment: "")
+                ),
+                .init(
+                    imageName: "onboarding_wallet_diag",
+                    title: NSLocalizedString("intro_onboarding_track_spending_title", tableName: "Onboarding", comment: ""),
+                    subtitle: NSLocalizedString("intro_onboarding_track_spending_description", tableName: "Onboarding", comment: "")
+                ),
+                .init(
+                    imageName: "onboarding_savings",
+                    title: NSLocalizedString("intro_onboarding_save_smarter_title", tableName: "Onboarding", comment: ""),
+                    subtitle: NSLocalizedString("intro_onboarding_save_smarter_description", tableName: "Onboarding", comment: "")
+                ),
+                .init(
+                    imageName: "onboarding_visual_data",
+                    title: NSLocalizedString("intro_onboarding_stay_in_control_title", tableName: "Onboarding", comment: ""),
+                    subtitle: NSLocalizedString("intro_onboarding_stay_in_control_description", tableName: "Onboarding", comment: "")
+                )
+            ]
+        )
+        
+        let viewModel = dependencies.getMarketingViewModel(configuration: configuration)
         
         viewModel.delegate = self
         
-        let viewController = IntroViewController(viewModel: viewModel);
+        let viewController = MarketingViewController(viewModel: viewModel);
         
         return viewController;
     }();
@@ -65,10 +94,13 @@ final class OnboardingCoordinator: BaseCoordinator {
     }();
 }
 
-// MARK: - IntroViewModel delegates
-extension OnboardingCoordinator: IntroViewModelProtocol {
-    func introViewModelDidTapCreateVault(_ viewModel: IntroViewModel) {
-        self.goToCreateVault()
+// MARK: - MarketingViewController delegates
+extension OnboardingCoordinator: MarketingViewModelDelegate {
+    
+    func didTapPrimaryAction(_ viewModel: MarketingViewModel, action: MarketingAction) {
+        if action == .appFeature(.createVault) {
+            self.goToCreateVault()
+        }
     }
 }
 

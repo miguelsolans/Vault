@@ -43,6 +43,8 @@
 		8B2C30F52F86F52600126BA8 /* VaultTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2C30F42F86F52600126BA8 /* VaultTableViewModel.swift */; };
 		8B2C30F72F86F54600126BA8 /* VaultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2C30F62F86F54600126BA8 /* VaultTableViewCell.swift */; };
 		8B2C30FA2F87000C00126BA8 /* CreateVaultCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2C30F92F87000C00126BA8 /* CreateVaultCoordinator.swift */; };
+		8B2F23DD2FC99BD80041350E /* GoogleService-Info-Prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B2F23DC2FC99BD80041350E /* GoogleService-Info-Prod.plist */; };
+		8B2F23DF2FC99CE50041350E /* GoogleService-Info-Dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B2F23DE2FC99CE50041350E /* GoogleService-Info-Dev.plist */; };
 		8B36E0902FA3A5B7007D0E07 /* ReimbursementFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B36E08F2FA3A5B7007D0E07 /* ReimbursementFormViewController.swift */; };
 		8B36E0922FA3A5E2007D0E07 /* ReimbursementFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B36E0912FA3A5E2007D0E07 /* ReimbursementFormViewModel.swift */; };
 		8B36E0F72FA412E1007D0E07 /* OperationFormCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B36E0F62FA412E1007D0E07 /* OperationFormCoordinator.swift */; };
@@ -61,8 +63,8 @@
 		8B539C312F7B413500977A6C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B539C302F7B413500977A6C /* CoreData.framework */; };
 		8B539C672F7BE7D400977A6C /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539C662F7BE7D400977A6C /* OnboardingCoordinator.swift */; };
 		8B539C6A2F7BE8A500977A6C /* VaultFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539C692F7BE8A500977A6C /* VaultFormViewController.swift */; };
-		8B539C732F7BFD1400977A6C /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539C722F7BFD1400977A6C /* IntroViewController.swift */; };
-		8B539C752F7BFD3C00977A6C /* IntroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539C742F7BFD3C00977A6C /* IntroViewModel.swift */; };
+		8B539C732F7BFD1400977A6C /* MarketingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539C722F7BFD1400977A6C /* MarketingViewController.swift */; };
+		8B539C752F7BFD3C00977A6C /* MarketingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539C742F7BFD3C00977A6C /* MarketingViewModel.swift */; };
 		8B539C782F7C015E00977A6C /* OnboardingItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539C772F7C015E00977A6C /* OnboardingItemViewModel.swift */; };
 		8B539C7A2F7C018D00977A6C /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539C792F7C018D00977A6C /* OnboardingCollectionViewCell.swift */; };
 		8B539C7C2F7C08ED00977A6C /* VaultFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539C7B2F7C08ED00977A6C /* VaultFormViewModel.swift */; };
@@ -137,6 +139,9 @@
 		8BDD8FD12FC6DDB700DA9917 /* CheckBalanceIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDD8FD02FC6DDB700DA9917 /* CheckBalanceIntent.swift */; };
 		8BDD8FD32FC6F6A900DA9917 /* MonthlySavedIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDD8FD22FC6F6A900DA9917 /* MonthlySavedIntent.swift */; };
 		8BDD8FD52FC7617B00DA9917 /* MonthlySpentIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDD8FD42FC7617B00DA9917 /* MonthlySpentIntent.swift */; };
+		8BDD8FEF2FC8F79D00DA9917 /* FeedbackFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDD8FEE2FC8F79D00DA9917 /* FeedbackFormViewController.swift */; };
+		8BDD8FF12FC8F7F500DA9917 /* FeedbackFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDD8FF02FC8F7F500DA9917 /* FeedbackFormViewModel.swift */; };
+		8BDD8FF32FC8F9A000DA9917 /* FeedbackCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDD8FF22FC8F9A000DA9917 /* FeedbackCoordinator.swift */; };
 		8BE035CC2C07FB03006958EA /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE035CB2C07FB03006958EA /* TabBar.swift */; };
 		8BEFE4432F8EA72400A9D1DD /* ChartCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEFE4422F8EA72400A9D1DD /* ChartCardView.swift */; };
 		8BEFE4452F8EA77B00A9D1DD /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEFE4442F8EA77B00A9D1DD /* ChartViewModel.swift */; };
@@ -191,6 +196,8 @@
 		8B2C30F42F86F52600126BA8 /* VaultTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultTableViewModel.swift; sourceTree = "<group>"; };
 		8B2C30F62F86F54600126BA8 /* VaultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultTableViewCell.swift; sourceTree = "<group>"; };
 		8B2C30F92F87000C00126BA8 /* CreateVaultCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateVaultCoordinator.swift; sourceTree = "<group>"; };
+		8B2F23DC2FC99BD80041350E /* GoogleService-Info-Prod.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Prod.plist"; sourceTree = "<group>"; };
+		8B2F23DE2FC99CE50041350E /* GoogleService-Info-Dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Dev.plist"; sourceTree = "<group>"; };
 		8B36E08F2FA3A5B7007D0E07 /* ReimbursementFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReimbursementFormViewController.swift; sourceTree = "<group>"; };
 		8B36E0912FA3A5E2007D0E07 /* ReimbursementFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReimbursementFormViewModel.swift; sourceTree = "<group>"; };
 		8B36E0F62FA412E1007D0E07 /* OperationFormCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationFormCoordinator.swift; sourceTree = "<group>"; };
@@ -210,8 +217,8 @@
 		8B539C302F7B413500977A6C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		8B539C662F7BE7D400977A6C /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		8B539C692F7BE8A500977A6C /* VaultFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultFormViewController.swift; sourceTree = "<group>"; };
-		8B539C722F7BFD1400977A6C /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
-		8B539C742F7BFD3C00977A6C /* IntroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewModel.swift; sourceTree = "<group>"; };
+		8B539C722F7BFD1400977A6C /* MarketingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketingViewController.swift; sourceTree = "<group>"; };
+		8B539C742F7BFD3C00977A6C /* MarketingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketingViewModel.swift; sourceTree = "<group>"; };
 		8B539C772F7C015E00977A6C /* OnboardingItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingItemViewModel.swift; sourceTree = "<group>"; };
 		8B539C792F7C018D00977A6C /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
 		8B539C7B2F7C08ED00977A6C /* VaultFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultFormViewModel.swift; sourceTree = "<group>"; };
@@ -285,6 +292,9 @@
 		8BDD8FD02FC6DDB700DA9917 /* CheckBalanceIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBalanceIntent.swift; sourceTree = "<group>"; };
 		8BDD8FD22FC6F6A900DA9917 /* MonthlySavedIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlySavedIntent.swift; sourceTree = "<group>"; };
 		8BDD8FD42FC7617B00DA9917 /* MonthlySpentIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlySpentIntent.swift; sourceTree = "<group>"; };
+		8BDD8FEE2FC8F79D00DA9917 /* FeedbackFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackFormViewController.swift; sourceTree = "<group>"; };
+		8BDD8FF02FC8F7F500DA9917 /* FeedbackFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackFormViewModel.swift; sourceTree = "<group>"; };
+		8BDD8FF22FC8F9A000DA9917 /* FeedbackCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackCoordinator.swift; sourceTree = "<group>"; };
 		8BE035CB2C07FB03006958EA /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		8BEFE4422F8EA72400A9D1DD /* ChartCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartCardView.swift; sourceTree = "<group>"; };
 		8BEFE4442F8EA77B00A9D1DD /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
@@ -571,6 +581,24 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
+		8B2F23DB2FC99BCF0041350E /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				8B2F23DE2FC99CE50041350E /* GoogleService-Info-Dev.plist */,
+				8B2F23DC2FC99BD80041350E /* GoogleService-Info-Prod.plist */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
+		8B2F23E92FC9E01A0041350E /* Marketing */ = {
+			isa = PBXGroup;
+			children = (
+				8B539C6E2F7BFCCD00977A6C /* View */,
+				8B539C6F2F7BFCD500977A6C /* ViewModel */,
+			);
+			path = Marketing;
+			sourceTree = "<group>";
+		};
 		8B36E08A2FA2807E007D0E07 /* OperationDetail Header */ = {
 			isa = PBXGroup;
 			children = (
@@ -756,7 +784,6 @@
 			children = (
 				8BCF15EF2F82D33200B483BD /* Onboarding.xcstrings */,
 				8B539C632F7BD8AC00977A6C /* Coordinator */,
-				8B539C6D2F7BFCBF00977A6C /* Intro */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -796,19 +823,10 @@
 			path = Create;
 			sourceTree = "<group>";
 		};
-		8B539C6D2F7BFCBF00977A6C /* Intro */ = {
-			isa = PBXGroup;
-			children = (
-				8B539C6F2F7BFCD500977A6C /* ViewModel */,
-				8B539C6E2F7BFCCD00977A6C /* View */,
-			);
-			path = Intro;
-			sourceTree = "<group>";
-		};
 		8B539C6E2F7BFCCD00977A6C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8B539C722F7BFD1400977A6C /* IntroViewController.swift */,
+				8B539C722F7BFD1400977A6C /* MarketingViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -816,7 +834,7 @@
 		8B539C6F2F7BFCD500977A6C /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				8B539C742F7BFD3C00977A6C /* IntroViewModel.swift */,
+				8B539C742F7BFD3C00977A6C /* MarketingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1187,6 +1205,7 @@
 		8BC2E5002BFD3841007FAF4C /* Vault */ = {
 			isa = PBXGroup;
 			children = (
+				8B2F23DB2FC99BCF0041350E /* Firebase */,
 				8BC2E5182BFD3864007FAF4C /* App */,
 				8BC2E5202BFD38E7007FAF4C /* Features */,
 				8BD0F78C2F945A1A007C2E59 /* Shared */,
@@ -1235,6 +1254,8 @@
 		8BC2E5202BFD38E7007FAF4C /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				8B2F23E92FC9E01A0041350E /* Marketing */,
+				8BDD8FEA2FC8F76A00DA9917 /* Feedback */,
 				8B81F1C82FAE3F1B00ECA9F4 /* Cashflow Breakdown */,
 				8BF3B9102FACCC8B00DAFA1D /* FoundationModel */,
 				8BF3B9052FACCC8100DAFA1D /* Shortcuts */,
@@ -1369,6 +1390,40 @@
 			path = Shared;
 			sourceTree = "<group>";
 		};
+		8BDD8FEA2FC8F76A00DA9917 /* Feedback */ = {
+			isa = PBXGroup;
+			children = (
+				8BDD8FEC2FC8F77700DA9917 /* View */,
+				8BDD8FED2FC8F77900DA9917 /* ViewModel */,
+				8BDD8FEB2FC8F77200DA9917 /* Coordinator */,
+			);
+			path = Feedback;
+			sourceTree = "<group>";
+		};
+		8BDD8FEB2FC8F77200DA9917 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				8BDD8FF22FC8F9A000DA9917 /* FeedbackCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		8BDD8FEC2FC8F77700DA9917 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8BDD8FEE2FC8F79D00DA9917 /* FeedbackFormViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8BDD8FED2FC8F77900DA9917 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8BDD8FF02FC8F7F500DA9917 /* FeedbackFormViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		8BEFE4412F8EA71600A9D1DD /* Chart */ = {
 			isa = PBXGroup;
 			children = (
@@ -1439,6 +1494,8 @@
 				8BC2E4FA2BFD3841007FAF4C /* Sources */,
 				8BC2E4FB2BFD3841007FAF4C /* Frameworks */,
 				8BC2E4FC2BFD3841007FAF4C /* Resources */,
+				8B2F23E12FC99E2F0041350E /* Link Firebase Google Service */,
+				8B2F23E22FC9A25B0041350E /* Process Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -1512,7 +1569,9 @@
 				8B2748D62F993F0D0029ED84 /* Chat.xcstrings in Resources */,
 				8B11234C2F81D2AF00A2AF28 /* AddCategory.xcstrings in Resources */,
 				8B1123482F81D29900A2AF28 /* AddOperation.xcstrings in Resources */,
+				8B2F23DF2FC99CE50041350E /* GoogleService-Info-Dev.plist in Resources */,
 				8BC2E5222BFD390A007FAF4C /* Colors.xcassets in Resources */,
+				8B2F23DD2FC99BD80041350E /* GoogleService-Info-Prod.plist in Resources */,
 				8B11233E2F81D25000A2AF28 /* LoginPin.xcstrings in Resources */,
 				8BCF15E52F82D12100B483BD /* ListOperations.xcstrings in Resources */,
 				8B1123422F81D27300A2AF28 /* CreateVault.xcstrings in Resources */,
@@ -1525,6 +1584,50 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		8B2F23E12FC99E2F0041350E /* Link Firebase Google Service */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Link Firebase Google Service";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"Using Firebase config for ${CONFIGURATION}\"\n\nif [[ \"${CONFIGURATION}\" == *DEV* ]]; then\n    cp -f \"${PROJECT_DIR}/Vault/Firebase/GoogleService-Info-Dev.plist\" \\\n          \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\n\nelif [[ \"${CONFIGURATION}\" == *PRD* ]]; then\n    cp -f \"${PROJECT_DIR}/Vault/Firebase/GoogleService-Info-Prod.plist\" \\\n          \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
+		};
+		8B2F23E22FC9A25B0041350E /* Process Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${PRODUCT_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/GoogleService-Info.plist",
+				"$(TARGET_BUILD_DIR)/$(EXECUTABLE_PATH)",
+			);
+			name = "Process Crashlytics";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8BC2E4FA2BFD3841007FAF4C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1536,7 +1639,7 @@
 				8B539C822F7C14A800977A6C /* TabBarViewModel.swift in Sources */,
 				8B61853F2F7F1701008986A8 /* MenuOptionTableViewCell.swift in Sources */,
 				8B9B09B92F83F4B60042840E /* ImportOperationsViewController.swift in Sources */,
-				8B539C732F7BFD1400977A6C /* IntroViewController.swift in Sources */,
+				8B539C732F7BFD1400977A6C /* MarketingViewController.swift in Sources */,
 				8B539C052F7B2A3A00977A6C /* OperationTableViewCell.swift in Sources */,
 				8BF3B9112FACCC8B00DAFA1D /* FoundationModelAvailability.swift in Sources */,
 				8BF3B9122FACCC8B00DAFA1D /* FinanceAssistant.swift in Sources */,
@@ -1565,13 +1668,15 @@
 				8B7D6F832FA7F67E004866D8 /* FormValidator.swift in Sources */,
 				8B539CC12F7C710600977A6C /* MonthSelectorView.swift in Sources */,
 				8B2C30EE2F86D10100126BA8 /* ListVaultViewController.swift in Sources */,
-				8B539C752F7BFD3C00977A6C /* IntroViewModel.swift in Sources */,
+				8B539C752F7BFD3C00977A6C /* MarketingViewModel.swift in Sources */,
 				8B078C222F7DDA7B00075CC1 /* ListCategoriesViewModel.swift in Sources */,
 				8B5365642C09379400B3144C /* Constants.swift in Sources */,
 				8B078C262F7DDACA00075CC1 /* CategoryFormViewController.swift in Sources */,
 				8B078BD32F7D224C00075CC1 /* DashboardViewModel.swift in Sources */,
 				8BC2E5022BFD3841007FAF4C /* AppDelegate.swift in Sources */,
+				8BDD8FEF2FC8F79D00DA9917 /* FeedbackFormViewController.swift in Sources */,
 				8B11232C2F81B48F00A2AF28 /* AppCoordinator+Onboarding.swift in Sources */,
+				8BDD8FF32FC8F9A000DA9917 /* FeedbackCoordinator.swift in Sources */,
 				8B7436E22F8001CE00E2760E /* PinView.swift in Sources */,
 				8BE035CC2C07FB03006958EA /* TabBar.swift in Sources */,
 				8B6185382F7F1313008986A8 /* SettingsViewModel.swift in Sources */,
@@ -1614,6 +1719,7 @@
 				8B81F1CD2FAE3F4000ECA9F4 /* CashflowBreakdownCoordinator.swift in Sources */,
 				8BDD8FD52FC7617B00DA9917 /* MonthlySpentIntent.swift in Sources */,
 				8B61856F2F7F3DE5008986A8 /* SecurityViewModel.swift in Sources */,
+				8BDD8FF12FC8F7F500DA9917 /* FeedbackFormViewModel.swift in Sources */,
 				8BD0F7382F92D73F007C2E59 /* OCRCoordinator.swift in Sources */,
 				8B539BFB2F7B251B00977A6C /* OperationsCoordinator.swift in Sources */,
 				8B539C782F7C015E00977A6C /* OnboardingItemViewModel.swift in Sources */,
@@ -1803,6 +1909,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "${APP_BUILD}";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vault/Resources/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Permission to camera is required to read receipts and populate forms. No data is kept after being used.";
@@ -1833,6 +1940,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "${APP_BUILD}";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vault/Resources/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Permission to camera is required to read receipts and populate forms. No data is kept after being used.";
@@ -1930,6 +2038,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "${APP_BUILD}";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vault/Resources/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Permission to camera is required to read receipts and populate forms. No data is kept after being used.";
@@ -2020,6 +2129,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "${APP_BUILD}";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vault/Resources/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Permission to camera is required to read receipts and populate forms. No data is kept after being used.";

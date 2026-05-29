@@ -21,3 +21,5 @@ APP_NAME=Vault
 
 // Base endpoint for private API
 APP_BASE_API=http:${SIMPLE_SLASH}/localhost:3000
+
+ENABLE_USER_SCRIPT_SANDBOXING = NO

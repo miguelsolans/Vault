@@ -61,6 +61,7 @@ final class OnboardingCollectionViewCell: UICollectionViewCell {
     // MARK: - Setup
     
     private func setupUI() {
+        contentView.backgroundColor = .clear
         contentView.addSubview(stackView)
         
         stackView.addArrangedSubview(imageView)

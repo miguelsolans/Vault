@@ -12,11 +12,13 @@ import VaultCore
 class AppCoordinator: BaseCoordinator  {
     
     // MARK: - Properties
-    let window: UIWindow?
+    public let window: UIWindow?
     
-    let dependencies: DependenciesContainer
+    public let dependencies: DependenciesContainer
     
-    var isAuthenticated: Bool = false
+    public var isAuthenticated: Bool = false
+    
+    public var isFeedbackOpen: Bool = false
 
     // MARK: - Methods
     
@@ -69,6 +71,46 @@ extension AppCoordinator {
         } catch {
             navigateToOnboarding()
         }
+    }
+}
+
+extension AppCoordinator: FeedbackCoordinatorDelegate {
+    
+    public func navigateToFeedback() {
+        guard let presenter = window?.rootViewController?.topMostViewController else {
+            return
+        }
+        
+        if isFeedbackOpen {
+            return
+        }
+
+        let navigationController = UINavigationController()
+
+        let coordinator = FeedbackCoordinator(
+            navigationController: navigationController,
+            dependencies: dependencies
+        )
+
+        coordinator.delegate = self
+        
+        addChildCoordinator(coordinator)
+
+        coordinator.start()
+
+        navigationController.modalPresentationStyle = .pageSheet
+        
+        presenter.present(navigationController, animated: true)
+        
+        isFeedbackOpen = true
+    }
+    
+    func coordinatorDidFinish(_ coordinator: FeedbackCoordinator) {
+        coordinator.navigationController.dismiss(animated: true)
+        
+        removeChildCoordinator(coordinator)
+        
+        isFeedbackOpen = false
     }
 }
 

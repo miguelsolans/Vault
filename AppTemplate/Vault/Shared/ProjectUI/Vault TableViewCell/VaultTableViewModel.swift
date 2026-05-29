@@ -28,7 +28,7 @@ class VaultTableViewModel: NSObject {
     }
     
     var initialDepositText: String {
-        "Initial deposit: \(formattedInitialDeposit)"
+        "Started with \(formattedInitialDeposit)"
     }
     
     init(title: String,

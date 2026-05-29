@@ -65,6 +65,25 @@ class DashboardCoordinator: BaseCoordinator {
         
         return viewController;
     }();
+    
+    lazy var marketingViewController: MarketingViewController = {
+        let configuration = MarketingConfiguration(
+            pageTitle: "",
+            pageSubtitle: "",
+            primaryAction: .init(title: "Ok", action: .dismiss),
+            items: [
+                .init(imageName: "", title: "Shake for Feedback", subtitle: "Shake your device to provide feedback, either suggestions or report a bug.")
+            ]
+        )
+        
+        let viewModel = dependencies.getMarketingViewModel(configuration: configuration)
+        
+        viewModel.delegate = self
+        
+        let viewController = MarketingViewController(viewModel: viewModel)
+        
+        return viewController
+    }()
 }
 
 // MARK: - ListVaultCoordinatorDelegate
@@ -143,7 +162,28 @@ extension DashboardCoordinator: DashboardViewModelDelegate {
         addChildCoordinator(coordinator)
         coordinator.start()
     }
+    
+    func presentMarketing(_ viewModel: DashboardViewModel) {
+        marketingViewController.modalPresentationStyle = .pageSheet
+        
+        navigationController.present(marketingViewController, animated: true) {
+            
+        }
+    }
 }
+
+extension DashboardCoordinator: MarketingViewModelDelegate {
+    
+    func didTapPrimaryAction(_ viewModel: MarketingViewModel, action: MarketingAction) {
+        if action == .dismiss {
+            dependencies.getUserDefaultsManager()
+                .feedbackDismissed = true
+            
+            marketingViewController.dismiss(animated: true, completion: nil)
+        }
+    }
+}
+
 
 extension DashboardCoordinator: ChatCoordinatorDelegate {
     
@@ -169,3 +209,4 @@ extension DashboardCoordinator: UINavigationControllerDelegate {
         coordinator.removeAllChildCoordinators()
     }
 }
+

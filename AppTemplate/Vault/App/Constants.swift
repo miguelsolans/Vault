@@ -60,4 +60,8 @@ struct AppConfig {
         }
         return value
     }
+    
+    static var systemVersion: String {
+        return UIDevice.current.systemVersion
+    }
 }

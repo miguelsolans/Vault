@@ -1,5 +1,5 @@
 //
-//  IntroViewController.swift
+//  MarketingViewController.swift
 //  Vault
 //
 //  Created by Miguel Solans on 31/03/2026.
@@ -8,12 +8,12 @@
 import UIKit
 import CoreKit
 
-final class IntroViewController: BaseViewController {
+final class MarketingViewController: BaseViewController {
     
     // MARK: - Dependencies
-    private(set) var viewModel: IntroViewModel
+    private(set) var viewModel: MarketingViewModel
     
-    init(viewModel: IntroViewModel) {
+    init(viewModel: MarketingViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -31,6 +31,7 @@ final class IntroViewController: BaseViewController {
         layout.minimumLineSpacing = 0
         
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        view.backgroundColor = .clear
         
         view.isPagingEnabled = true
         view.showsHorizontalScrollIndicator = false
@@ -50,14 +51,11 @@ final class IntroViewController: BaseViewController {
         return pageControl
     }()
     
-    private var createVaultButton: UIButton = {
+    private var primaryButton: UIButton = {
         let button = UIButton(type: .system)
         
-        button.apply(
-            style: ButtonStyles.primary,
-            title: String(localized: LocalizedStringResource.Onboarding.introOnboardingGetStarted)
-        )
         button.translatesAutoresizingMaskIntoConstraints = false
+        
         return button
     }()
     
@@ -65,13 +63,8 @@ final class IntroViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(resource: .background)
-        localizationTableName = "Onboarding"
-        
-        setupCollectionView()
         setupUI()
-        
-        
+        setupBindings()
     }
     
     override func viewDidLayoutSubviews() {
@@ -83,36 +76,28 @@ final class IntroViewController: BaseViewController {
         }
     }
     
-    // MARK: - Setup
-    
     override func setupUI() {
-        pageControl.numberOfPages = viewModel.numberOfItems
+        view.backgroundColor = UIColor(resource: .background)
+        title = viewModel.title
+        navigationItem.subtitle = viewModel.subtitle
         
-        createVaultButton.addTarget(self, action: #selector(didTapCreateVault), for: .touchUpInside)
-        
-        view.addSubview(pageControl)
-        view.addSubview(createVaultButton)
-        
-        NSLayoutConstraint.activate([
-            collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.heightAnchor.constraint(equalToConstant: 250),
-            
-            pageControl.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 16),
-            pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            createVaultButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            createVaultButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            createVaultButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -28),
-            createVaultButton.heightAnchor.constraint(equalToConstant: 50)
-        ])
-        
-        view.bringSubviewToFront(pageControl)
-        view.bringSubviewToFront(createVaultButton)
+        setupCollectionView()
+        setupButtons()
+        setupConstraints()
     }
     
+    override func setupBindings() {
+        
+    }
+}
+
+// MARK: - UI Setup
+
+extension MarketingViewController {
     private func setupCollectionView() {
+        pageControl.currentPageIndicatorTintColor = UIColor(resource: .brand)
+        
+        pageControl.numberOfPages = viewModel.numberOfItems
         
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -123,21 +108,51 @@ final class IntroViewController: BaseViewController {
         )
         
         view.addSubview(collectionView)
+        view.addSubview(pageControl)
+        view.bringSubviewToFront(pageControl)
     }
     
+    private func setupButtons() {
+        primaryButton.addTarget(self, action: #selector(didTapPrimaryAction), for: .touchUpInside)
+        
+        primaryButton.apply(
+            style: ButtonStyles.primary,
+            title: viewModel.configuration.primaryAction.title
+        )
+        
+        view.addSubview(primaryButton)
+        view.bringSubviewToFront(primaryButton)
+    }
+    
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.heightAnchor.constraint(equalToConstant: 250),
+            
+            pageControl.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 16),
+            pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            primaryButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            primaryButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            primaryButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -28),
+            primaryButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
+    }
 }
 
 // MARK: - Actions
 
-extension IntroViewController {
-    @objc private func didTapCreateVault() {
-        viewModel.didTapCreateVault()
+extension MarketingViewController {
+    @objc private func didTapPrimaryAction() {
+        viewModel.didTapPrimaryAction()
     }
 }
 
 // MARK: - UICollectionView delegates
 
-extension IntroViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension MarketingViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.numberOfItems
@@ -160,7 +175,7 @@ extension IntroViewController: UICollectionViewDataSource, UICollectionViewDeleg
 
 // MARK: - Scroll Handling
 
-extension IntroViewController: UIScrollViewDelegate {
+extension MarketingViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let width = scrollView.frame.width

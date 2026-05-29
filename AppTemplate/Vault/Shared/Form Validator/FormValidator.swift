@@ -32,6 +32,21 @@ public enum NumericCondition {
 }
 
 public enum FormValidator {
+    
+    static func validateRequired(
+        _ viewModel: TextInputViewModel,
+        message: String
+    ) -> Bool {
+        
+        if viewModel.inputText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            viewModel.feedback = .error(message)
+            return false
+        }
+        
+        viewModel.feedback = .none
+        return true
+    }
+    
     static func validateRequired(
         _ viewModel: TextFieldInputViewModel,
         message: String
