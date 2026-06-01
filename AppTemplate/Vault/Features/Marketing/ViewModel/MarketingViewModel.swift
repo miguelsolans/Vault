@@ -39,7 +39,7 @@ struct MarketingConfiguration {
     
     public let primaryAction: MarketingCTA
     
-    public let items: [OnboardingItemViewModel]
+    public let items: [MarketingItemViewModel]
 }
 
 protocol MarketingViewModelDelegate: AnyObject {
@@ -69,7 +69,7 @@ final class MarketingViewModel: NSObject {
     
     public var numberOfItems: Int { configuration.items.count }
     
-    public func cellViewModel(at index: Int) -> OnboardingItemViewModel { configuration.items[index] }
+    public func cellViewModel(at index: Int) -> MarketingItemViewModel { configuration.items[index] }
 }
 
 // MARK: - Actions

@@ -1,5 +1,5 @@
 //
-//  OnboardingCollectionViewCell.swift
+//  MarketingCollectionViewCell.swift
 //  Vault
 //
 //  Created by Miguel Solans on 31/03/2026.
@@ -7,17 +7,17 @@
 
 import UIKit
 
-final class OnboardingCollectionViewCell: UICollectionViewCell {
+final class MarketingCollectionViewCell: UICollectionViewCell {
     
-    static let identifier = "OnboardingCollectionViewCell"
+    static let identifier = "MarketingCollectionViewCell"
     
     // MARK: - UI
     
     private let imageView: UIImageView = {
-        let iv = UIImageView()
-        iv.contentMode = .scaleAspectFit
-        iv.translatesAutoresizingMaskIntoConstraints = false
-        return iv
+        let imaveView = UIImageView()
+        imaveView.contentMode = .scaleAspectFit
+        imaveView.translatesAutoresizingMaskIntoConstraints = false
+        return imaveView
     }()
     
     private let titleLabel: UILabel = {
@@ -38,12 +38,12 @@ final class OnboardingCollectionViewCell: UICollectionViewCell {
     }()
     
     private let stackView: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.spacing = 16
-        stack.alignment = .fill
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 16
+        stackView.alignment = .fill
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
     }()
     
     // MARK: - Init
@@ -74,13 +74,13 @@ final class OnboardingCollectionViewCell: UICollectionViewCell {
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24),
             stackView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -16),
             
-            imageView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.4)
+            imageView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.70)
         ])
     }
     
     // MARK: - Configure
     
-    func configure(with viewModel: OnboardingItemViewModel) {
+    func configure(with viewModel: MarketingItemViewModel) {
         imageView.image = UIImage(named: viewModel.imageName)
         titleLabel.text = viewModel.title
         subtitleLabel.text = viewModel.subtitle
@@ -88,10 +88,14 @@ final class OnboardingCollectionViewCell: UICollectionViewCell {
 }
 
 
-#Preview("OnboardingCollectionViewCell") {
-    let viewModel = OnboardingItemViewModel(imageName: "onboarding_insights", title: "Title", subtitle: "Subtitle")
+#Preview("MarketingCollectionViewCell") {
+    let viewModel = MarketingItemViewModel(
+        imageName: "onboarding_money_flow",
+        title: "Title",
+        subtitle: "Subtitle"
+    )
     
-    let view = OnboardingCollectionViewCell()
+    let view = MarketingCollectionViewCell()
     
     view.configure(with: viewModel)
     

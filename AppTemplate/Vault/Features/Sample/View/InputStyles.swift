@@ -150,9 +150,9 @@ final class ButtonStyles {
     
     static let secondary: ButtonStyle = {
         ButtonStyle(
-            backgroundColor: .secondarySystemBackground,
-            titleColor: .systemBlue,
-            borderColor: .systemBlue,
+            backgroundColor: .clear,
+            titleColor: UIColor(resource: .brand),
+            borderColor: .clear,
             disabledBackgroundColor: .systemGray6,
             disabledTitleColor: .systemGray2,
             cornerRadius: 8,

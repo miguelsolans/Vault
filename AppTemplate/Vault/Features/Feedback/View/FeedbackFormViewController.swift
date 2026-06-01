@@ -133,7 +133,11 @@ final class FeedbackFormViewController: VaultBaseViewController {
             stopLoading()
         }
         
-        emailInputView.isHidden = viewModel.emailInputHidden
+        if viewModel.emailInputHidden {
+            emailInputView.hideAnimated()
+        } else {
+            emailInputView.showAnimated()
+        }
         
     }
     

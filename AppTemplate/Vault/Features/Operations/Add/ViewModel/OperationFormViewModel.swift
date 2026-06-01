@@ -164,7 +164,7 @@ final class OperationFormViewModel: NSObject {
         )
     }()
     
-    public lazy var titleInputViewModel: TextFieldInputViewModel = {
+    public lazy var titleInputViewModel: TextInputViewModel = {
         
         var title = ""
         
@@ -176,13 +176,12 @@ final class OperationFormViewModel: NSObject {
             title = receipt.description ?? ""
         }
         
-        let viewModel = TextFieldInputViewModel(
+        let viewModel = TextInputViewModel(
             title: NSLocalizedString("add_operation_description", tableName: "AddOperation", comment: ""),
             isEditable: true,
             placeholder: NSLocalizedString("add_operation_enter_description", tableName: "AddOperation", comment: ""),
             subtitle: nil,
             inputText: title,
-            textType: .text,
             isMandatory: false
         )
         
@@ -747,6 +746,12 @@ extension OperationFormViewModel {
     private func updateState() {
         amountInputViewModel.isEditable = isAmountEditable
         reimbursementViewModel.isEditable = isReimbursementEditable
+        
+        if isAmountEditable {
+            amountInputViewModel.feedback = .none
+        } else {
+            amountInputViewModel.feedback = .info("Remove reimbursements to edit amount")
+        }
         
         updateUI?()
     }

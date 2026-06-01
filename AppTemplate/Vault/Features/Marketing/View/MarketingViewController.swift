@@ -98,13 +98,14 @@ extension MarketingViewController {
         pageControl.currentPageIndicatorTintColor = UIColor(resource: .brand)
         
         pageControl.numberOfPages = viewModel.numberOfItems
+        pageControl.isHidden = viewModel.numberOfItems <= 1
         
         collectionView.dataSource = self
         collectionView.delegate = self
         
         collectionView.register(
-            OnboardingCollectionViewCell.self,
-            forCellWithReuseIdentifier: OnboardingCollectionViewCell.identifier
+            MarketingCollectionViewCell.self,
+            forCellWithReuseIdentifier: MarketingCollectionViewCell.identifier
         )
         
         view.addSubview(collectionView)
@@ -126,10 +127,10 @@ extension MarketingViewController {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -16),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.heightAnchor.constraint(equalToConstant: 250),
+            collectionView.heightAnchor.constraint(equalToConstant: 500),
             
             pageControl.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 16),
             pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -162,9 +163,9 @@ extension MarketingViewController: UICollectionViewDataSource, UICollectionViewD
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: OnboardingCollectionViewCell.identifier,
+            withReuseIdentifier: MarketingCollectionViewCell.identifier,
             for: indexPath
-        ) as! OnboardingCollectionViewCell
+        ) as! MarketingCollectionViewCell
         
         let vm = viewModel.cellViewModel(at: indexPath.item)
         cell.configure(with: vm)

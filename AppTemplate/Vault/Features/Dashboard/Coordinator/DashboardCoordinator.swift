@@ -72,7 +72,7 @@ class DashboardCoordinator: BaseCoordinator {
             pageSubtitle: "",
             primaryAction: .init(title: "Ok", action: .dismiss),
             items: [
-                .init(imageName: "", title: "Shake for Feedback", subtitle: "Shake your device to provide feedback, either suggestions or report a bug.")
+                .init(imageName: "feedback_shake_device", title: "Shake for feedback", subtitle: "Shake your device to provide feedback, either suggestions or report a bug.")
             ]
         )
         

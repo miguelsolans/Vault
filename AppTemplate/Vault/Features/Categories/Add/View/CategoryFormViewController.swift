@@ -140,8 +140,17 @@ final class CategoryFormViewController: VaultBaseViewController {
     }
     
     private func updateUI() {
-        plotSwitchInputView.isHidden = viewModel.plotSwitchHidden
-        mainIncomeSwitchInputView.isHidden = viewModel.mainIncomeSwitchHidden
+        if viewModel.plotSwitchHidden {
+            plotSwitchInputView.hideAnimated()
+        } else {
+            plotSwitchInputView.showAnimated()
+        }
+        
+        if viewModel.mainIncomeSwitchHidden {
+            mainIncomeSwitchInputView.hideAnimated()
+        } else {
+            mainIncomeSwitchInputView.showAnimated()
+        }
     }
 
     override func setupBindings() {

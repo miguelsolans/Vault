@@ -14,6 +14,8 @@ public final class AmountCardItemViewModel: ActionableCardBaseViewModel {
     
     let amount: Double
     
+    let numberStyle: NumberFormatter.Style
+    
     let type: OperationType?
     
     let bottomText: String?
@@ -24,12 +26,14 @@ public final class AmountCardItemViewModel: ActionableCardBaseViewModel {
         emoji: String? = nil,
         title: String,
         amount: Double,
+        numberStyle: NumberFormatter.Style = .currency,
         type: OperationType?,
         bottomText: String? = nil,
         bottomAttributedText: AttributedString? = nil
     ) {
         self.emoji = emoji
         self.amount = amount
+        self.numberStyle = numberStyle
         self.type = type
         self.bottomText = bottomText
         self.bottomAttributedText = bottomAttributedText

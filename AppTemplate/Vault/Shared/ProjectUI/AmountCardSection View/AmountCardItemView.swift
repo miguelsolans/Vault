@@ -85,7 +85,8 @@ extension AmountCardItemView {
         super.configure(with: viewModel)
         
         titleLabel.text = viewModel.title
-        amountLabel.text = LocalizedDecimalFormatter(numberStyle: .currency).string(from: viewModel.amount) ?? "0,00€"
+        amountLabel.text = LocalizedDecimalFormatter(numberStyle: viewModel.numberStyle)
+            .string(from: viewModel.amount) ?? "\(viewModel.amount)"
         
         configureAmountColor(for: viewModel.type)
         configureBottomText(viewModel.bottomText, attributedText: viewModel.bottomAttributedText)

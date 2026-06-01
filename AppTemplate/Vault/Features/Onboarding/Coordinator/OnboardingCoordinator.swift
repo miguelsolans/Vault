@@ -50,26 +50,36 @@ final class OnboardingCoordinator: BaseCoordinator {
             pageSubtitle: "",
             primaryAction: .init(title: "Create Vault", action: .appFeature(.createVault)),
             items: [
-                .init(
+                /*.init(
                     imageName: "onboarding_vault",
-                    title: NSLocalizedString("intro_onboarding_work_offline_title", tableName: "Onboarding", comment: ""),
-                    subtitle: NSLocalizedString("intro_onboarding_work_offline_description", tableName: "Onboarding", comment: "")
+                    title: "Designed to work offline",
+                    subtitle: "No registration required. Experience every feature securely and completely offline."
+                ),*/
+                .init(
+                    imageName: "onboarding_money_flow",
+                    title: "Track your spending",
+                    subtitle: "Understand where your money goes every month and year."
                 ),
                 .init(
-                    imageName: "onboarding_wallet_diag",
-                    title: NSLocalizedString("intro_onboarding_track_spending_title", tableName: "Onboarding", comment: ""),
-                    subtitle: NSLocalizedString("intro_onboarding_track_spending_description", tableName: "Onboarding", comment: "")
+                    imageName: "onboarding_list_categories",
+                    title: "Personalize with categories",
+                    subtitle: "Create custom categories and assign them colors that fit your style."
                 ),
                 .init(
-                    imageName: "onboarding_savings",
-                    title: NSLocalizedString("intro_onboarding_save_smarter_title", tableName: "Onboarding", comment: ""),
-                    subtitle: NSLocalizedString("intro_onboarding_save_smarter_description", tableName: "Onboarding", comment: "")
+                    imageName: "onboarding_reimbursements",
+                    title: "Track reimbursements",
+                    subtitle: "Keep shared expenses under control. Record reimbursements and automatically reflect what you actually spent."
                 ),
                 .init(
-                    imageName: "onboarding_visual_data",
-                    title: NSLocalizedString("intro_onboarding_stay_in_control_title", tableName: "Onboarding", comment: ""),
-                    subtitle: NSLocalizedString("intro_onboarding_stay_in_control_description", tableName: "Onboarding", comment: "")
-                )
+                    imageName: "onboarding_list_vaults",
+                    title: "Multiple Vaults",
+                    subtitle: "Organize different money with separate Vaults."
+                ),
+                .init(
+                    imageName: "onboarding_monthly_statistics",
+                    title: "Save smarter",
+                    subtitle: "Gain valuable insights into your spending habits and financial progress."
+                ),
             ]
         )
         

@@ -81,6 +81,16 @@ extension SettingsCoordinator {
         
         return coordinator
     }
+    
+    private func setupAboutCoordinator() -> AboutCoordinator {
+        let coordinator = AboutCoordinator(navigationController: navigationController, dependencies: dependencies)
+        
+        coordinator.start()
+        
+        addChildCoordinator(coordinator)
+        
+        return coordinator
+    }
 }
 
 // MARK: - SettingsViewModel delegates
@@ -92,6 +102,10 @@ extension SettingsCoordinator: SettingsViewModelDelegate {
         
         if(option == .security){
             _ = self.setupSecurityCoordinator()
+        }
+        
+        if(option == .about) {
+            _ = self.setupAboutCoordinator()
         }
     }
     

@@ -65,8 +65,8 @@
 		8B539C6A2F7BE8A500977A6C /* VaultFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539C692F7BE8A500977A6C /* VaultFormViewController.swift */; };
 		8B539C732F7BFD1400977A6C /* MarketingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539C722F7BFD1400977A6C /* MarketingViewController.swift */; };
 		8B539C752F7BFD3C00977A6C /* MarketingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539C742F7BFD3C00977A6C /* MarketingViewModel.swift */; };
-		8B539C782F7C015E00977A6C /* OnboardingItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539C772F7C015E00977A6C /* OnboardingItemViewModel.swift */; };
-		8B539C7A2F7C018D00977A6C /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539C792F7C018D00977A6C /* OnboardingCollectionViewCell.swift */; };
+		8B539C782F7C015E00977A6C /* MarketingItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539C772F7C015E00977A6C /* MarketingItemViewModel.swift */; };
+		8B539C7A2F7C018D00977A6C /* MarketingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539C792F7C018D00977A6C /* MarketingCollectionViewCell.swift */; };
 		8B539C7C2F7C08ED00977A6C /* VaultFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539C7B2F7C08ED00977A6C /* VaultFormViewModel.swift */; };
 		8B539C822F7C14A800977A6C /* TabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539C812F7C14A800977A6C /* TabBarViewModel.swift */; };
 		8B539CBA2F7C285F00977A6C /* OperationFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B539CB92F7C285F00977A6C /* OperationFormViewModel.swift */; };
@@ -135,6 +135,9 @@
 		8BD0F7462F930DA6007C2E59 /* NVActivityIndicatorViewExtended in Frameworks */ = {isa = PBXBuildFile; productRef = 8BD0F7452F930DA6007C2E59 /* NVActivityIndicatorViewExtended */; };
 		8BD0F7492F930F98007C2E59 /* VaultBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD0F7482F930F98007C2E59 /* VaultBaseViewController.swift */; };
 		8BD0F74D2F931A36007C2E59 /* OCR.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 8BD0F74C2F931A36007C2E59 /* OCR.xcstrings */; };
+		8BDB394C2FCDE63C0013661D /* AboutCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB394B2FCDE63C0013661D /* AboutCoordinator.swift */; };
+		8BDB394E2FCDE64C0013661D /* AboutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB394D2FCDE64C0013661D /* AboutViewModel.swift */; };
+		8BDB39502FCDE6700013661D /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB394F2FCDE6700013661D /* AboutViewController.swift */; };
 		8BDD8FCF2FC60EA500DA9917 /* ExpectedReimbursementsIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDD8FCE2FC60EA500DA9917 /* ExpectedReimbursementsIntent.swift */; };
 		8BDD8FD12FC6DDB700DA9917 /* CheckBalanceIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDD8FD02FC6DDB700DA9917 /* CheckBalanceIntent.swift */; };
 		8BDD8FD32FC6F6A900DA9917 /* MonthlySavedIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDD8FD22FC6F6A900DA9917 /* MonthlySavedIntent.swift */; };
@@ -219,8 +222,8 @@
 		8B539C692F7BE8A500977A6C /* VaultFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultFormViewController.swift; sourceTree = "<group>"; };
 		8B539C722F7BFD1400977A6C /* MarketingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketingViewController.swift; sourceTree = "<group>"; };
 		8B539C742F7BFD3C00977A6C /* MarketingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketingViewModel.swift; sourceTree = "<group>"; };
-		8B539C772F7C015E00977A6C /* OnboardingItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingItemViewModel.swift; sourceTree = "<group>"; };
-		8B539C792F7C018D00977A6C /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
+		8B539C772F7C015E00977A6C /* MarketingItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketingItemViewModel.swift; sourceTree = "<group>"; };
+		8B539C792F7C018D00977A6C /* MarketingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketingCollectionViewCell.swift; sourceTree = "<group>"; };
 		8B539C7B2F7C08ED00977A6C /* VaultFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultFormViewModel.swift; sourceTree = "<group>"; };
 		8B539C812F7C14A800977A6C /* TabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewModel.swift; sourceTree = "<group>"; };
 		8B539CB92F7C285F00977A6C /* OperationFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationFormViewModel.swift; sourceTree = "<group>"; };
@@ -288,6 +291,9 @@
 		8BD0F7392F92F782007C2E59 /* OCRTextRecognitionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRTextRecognitionService.swift; sourceTree = "<group>"; };
 		8BD0F7482F930F98007C2E59 /* VaultBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultBaseViewController.swift; sourceTree = "<group>"; };
 		8BD0F74C2F931A36007C2E59 /* OCR.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = OCR.xcstrings; sourceTree = "<group>"; };
+		8BDB394B2FCDE63C0013661D /* AboutCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutCoordinator.swift; sourceTree = "<group>"; };
+		8BDB394D2FCDE64C0013661D /* AboutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewModel.swift; sourceTree = "<group>"; };
+		8BDB394F2FCDE6700013661D /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		8BDD8FCE2FC60EA500DA9917 /* ExpectedReimbursementsIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpectedReimbursementsIntent.swift; sourceTree = "<group>"; };
 		8BDD8FD02FC6DDB700DA9917 /* CheckBalanceIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBalanceIntent.swift; sourceTree = "<group>"; };
 		8BDD8FD22FC6F6A900DA9917 /* MonthlySavedIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlySavedIntent.swift; sourceTree = "<group>"; };
@@ -750,6 +756,7 @@
 		8B539C2B2F7B39B600977A6C /* ProjectUI */ = {
 			isa = PBXGroup;
 			children = (
+				8BEFE4412F8EA71600A9D1DD /* Chart */,
 				8B81F1D52FAF7E8500ECA9F4 /* AmountStatusHeader View */,
 				8BD0F7472F930F89007C2E59 /* Base ViewController */,
 				8B7436E02F8001BF00E2760E /* Pin View */,
@@ -763,7 +770,7 @@
 				8B2C30F32F86F50900126BA8 /* Vault TableViewCell */,
 				8B6185652F7F316F008986A8 /* Security Option TableViewCell */,
 				8B61853D2F7F16E1008986A8 /* Menu Option TableViewCell */,
-				8B539C762F7C011B00977A6C /* Onboarding CollectionViewCell */,
+				8B539C762F7C011B00977A6C /* Marketing CollectionViewCell */,
 				8B539C082F7B2DCB00977A6C /* Operation TableViewSectionHeader */,
 				8B539C022F7B2A1600977A6C /* Operation TableViewCell */,
 			);
@@ -839,13 +846,13 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		8B539C762F7C011B00977A6C /* Onboarding CollectionViewCell */ = {
+		8B539C762F7C011B00977A6C /* Marketing CollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				8B539C772F7C015E00977A6C /* OnboardingItemViewModel.swift */,
-				8B539C792F7C018D00977A6C /* OnboardingCollectionViewCell.swift */,
+				8B539C772F7C015E00977A6C /* MarketingItemViewModel.swift */,
+				8B539C792F7C018D00977A6C /* MarketingCollectionViewCell.swift */,
 			);
-			path = "Onboarding CollectionViewCell";
+			path = "Marketing CollectionViewCell";
 			sourceTree = "<group>";
 		};
 		8B539C7D2F7C13C200977A6C /* TabBar */ = {
@@ -1254,23 +1261,23 @@
 		8BC2E5202BFD38E7007FAF4C /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				8B2F23E92FC9E01A0041350E /* Marketing */,
-				8BDD8FEA2FC8F76A00DA9917 /* Feedback */,
-				8B81F1C82FAE3F1B00ECA9F4 /* Cashflow Breakdown */,
-				8BF3B9102FACCC8B00DAFA1D /* FoundationModel */,
-				8BF3B9052FACCC8100DAFA1D /* Shortcuts */,
-				8B11230E2F816DB100A2AF28 /* Login */,
 				8B539C612F7BCF2300977A6C /* Onboarding */,
-				8BCF15F32F82D79000B483BD /* Vault */,
-				8B539C7D2F7C13C200977A6C /* TabBar */,
-				8B00F3432F8D301F008C8777 /* Chat */,
+				8B11230E2F816DB100A2AF28 /* Login */,
 				8B078BCA2F7D1EB500075CC1 /* Dashboard */,
-				8BEFE4412F8EA71600A9D1DD /* Chart */,
+				8B81F1C82FAE3F1B00ECA9F4 /* Cashflow Breakdown */,
 				8BCF15E32F82D0FB00B483BD /* Operations */,
 				8B36E08B2FA3A561007D0E07 /* Reimbursement */,
 				8BD0F72F2F92D5A8007C2E59 /* OCR */,
 				8BCF15E62F82D13900B483BD /* Categories */,
+				8BCF15F32F82D79000B483BD /* Vault */,
 				8B61852F2F7F12C3008986A8 /* Settings */,
+				8BDB39472FCDE60F0013661D /* About */,
+				8B2F23E92FC9E01A0041350E /* Marketing */,
+				8BDD8FEA2FC8F76A00DA9917 /* Feedback */,
+				8BF3B9052FACCC8100DAFA1D /* Shortcuts */,
+				8B00F3432F8D301F008C8777 /* Chat */,
+				8BF3B9102FACCC8B00DAFA1D /* FoundationModel */,
+				8B539C7D2F7C13C200977A6C /* TabBar */,
 				8B539BDC2F7ADB9100977A6C /* Sample */,
 			);
 			path = Features;
@@ -1388,6 +1395,40 @@
 				8B813E782F893DCA003BFDD1 /* Utils */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		8BDB39472FCDE60F0013661D /* About */ = {
+			isa = PBXGroup;
+			children = (
+				8BDB394A2FCDE62A0013661D /* Coordinator */,
+				8BDB39492FCDE6260013661D /* ViewModel */,
+				8BDB39482FCDE6220013661D /* View */,
+			);
+			path = About;
+			sourceTree = "<group>";
+		};
+		8BDB39482FCDE6220013661D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8BDB394F2FCDE6700013661D /* AboutViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8BDB39492FCDE6260013661D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8BDB394D2FCDE64C0013661D /* AboutViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8BDB394A2FCDE62A0013661D /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				8BDB394B2FCDE63C0013661D /* AboutCoordinator.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		8BDD8FEA2FC8F76A00DA9917 /* Feedback */ = {
@@ -1645,6 +1686,7 @@
 				8BF3B9122FACCC8B00DAFA1D /* FinanceAssistant.swift in Sources */,
 				8BF3B9132FACCC8B00DAFA1D /* InitialDepositOfVault.swift in Sources */,
 				8BF3B9142FACCC8B00DAFA1D /* ReceiptAssistant.swift in Sources */,
+				8BDB394E2FCDE64C0013661D /* AboutViewModel.swift in Sources */,
 				8BF3B9152FACCC8B00DAFA1D /* OperationMetricsTool.swift in Sources */,
 				8B078BD12F7D1F3600075CC1 /* DashboardViewController.swift in Sources */,
 				8BD0F73B2F92F782007C2E59 /* OCRTextRecognitionService.swift in Sources */,
@@ -1669,6 +1711,7 @@
 				8B539CC12F7C710600977A6C /* MonthSelectorView.swift in Sources */,
 				8B2C30EE2F86D10100126BA8 /* ListVaultViewController.swift in Sources */,
 				8B539C752F7BFD3C00977A6C /* MarketingViewModel.swift in Sources */,
+				8BDB394C2FCDE63C0013661D /* AboutCoordinator.swift in Sources */,
 				8B078C222F7DDA7B00075CC1 /* ListCategoriesViewModel.swift in Sources */,
 				8B5365642C09379400B3144C /* Constants.swift in Sources */,
 				8B078C262F7DDACA00075CC1 /* CategoryFormViewController.swift in Sources */,
@@ -1697,6 +1740,7 @@
 				8B6185412F7F1715008986A8 /* MenuOptionTableViewModel.swift in Sources */,
 				8B7D6FB62FAA36DD004866D8 /* OperationDetailHeaderView.swift in Sources */,
 				8BEFE4432F8EA72400A9D1DD /* ChartCardView.swift in Sources */,
+				8BDB39502FCDE6700013661D /* AboutViewController.swift in Sources */,
 				8B1123172F816DFC00A2AF28 /* LoginViewModel.swift in Sources */,
 				8BEFE4572F91309800A9D1DD /* CategoryTableViewCell.swift in Sources */,
 				8B1123302F81B50A00A2AF28 /* AppCoordinator+Private.swift in Sources */,
@@ -1722,11 +1766,11 @@
 				8BDD8FF12FC8F7F500DA9917 /* FeedbackFormViewModel.swift in Sources */,
 				8BD0F7382F92D73F007C2E59 /* OCRCoordinator.swift in Sources */,
 				8B539BFB2F7B251B00977A6C /* OperationsCoordinator.swift in Sources */,
-				8B539C782F7C015E00977A6C /* OnboardingItemViewModel.swift in Sources */,
+				8B539C782F7C015E00977A6C /* MarketingItemViewModel.swift in Sources */,
 				8B2C30F72F86F54600126BA8 /* VaultTableViewCell.swift in Sources */,
 				8B81F1D72FAF7EAB00ECA9F4 /* AmountStatusHeaderView.swift in Sources */,
 				8B36E0922FA3A5E2007D0E07 /* ReimbursementFormViewModel.swift in Sources */,
-				8B539C7A2F7C018D00977A6C /* OnboardingCollectionViewCell.swift in Sources */,
+				8B539C7A2F7C018D00977A6C /* MarketingCollectionViewCell.swift in Sources */,
 				8BD0F7492F930F98007C2E59 /* VaultBaseViewController.swift in Sources */,
 				8B81F1D92FAF7EB500ECA9F4 /* AmountStatusHeaderViewModel.swift in Sources */,
 				8B36E0902FA3A5B7007D0E07 /* ReimbursementFormViewController.swift in Sources */,

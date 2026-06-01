@@ -48,10 +48,17 @@ final class SettingsViewModel: NSObject {
             ),
             .init(
                 option: .about,
+                title: "Backup",
+                subtitle: "Backup data with iCloud",
+                imageName: "icloud",
+                style: .disabled
+            ),
+            .init(
+                option: .about,
                 title: NSLocalizedString("settings_about", tableName: "Settings", comment: ""),
                 subtitle: NSLocalizedString("settings_app_version_and_information", tableName: "Settings", comment: ""),
                 imageName: "info.circle",
-                style: .disabled
+                style: .navigable
             ),
             .init(
                 option: .deleteAllData,
@@ -79,17 +86,12 @@ final class SettingsViewModel: NSObject {
 extension SettingsViewModel {
     
     public func didSelectRowAtIndex(at indexPath: IndexPath) {
-        let cellViewModel = cellViewModel(at: indexPath)
+        let option = cellViewModel(at: indexPath).option
         
-        switch cellViewModel.option {
-        case .vaults:
-            delegate?.didSelectOption(self, option: cellViewModel.option)
-            break
-        case .security:
-            delegate?.didSelectOption(self, option: cellViewModel.option)
-            break
-        case .about:
-            break
+        switch option {
+        case .vaults, .security, .about:
+            delegate?.didSelectOption(self, option: option)
+            
         case .deleteAllData:
             break
         }

@@ -284,6 +284,7 @@ private extension DashboardViewModel {
                 makeSummaryItem(
                     title: "Saving efficiency",
                     amount: metrics.netSpending.savingEfficiency,
+                    numberStyle: .percent,
                     type: nil,
                     budgetAmount:nil
                 )
@@ -298,6 +299,7 @@ private extension DashboardViewModel {
         emoji: String? = nil,
         title: String,
         amount: Double,
+        numberStyle: NumberFormatter.Style = .currency,
         type: OperationType?,
         budgetAmount: Double?
     ) -> AmountCardItemViewModel {
@@ -305,6 +307,7 @@ private extension DashboardViewModel {
             emoji: emoji,
             title: title,
             amount: amount,
+            numberStyle: numberStyle,
             type: type
         )
         

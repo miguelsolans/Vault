@@ -52,6 +52,7 @@ final class OperationFormViewController: VaultBaseViewController {
         view.axis = .vertical
         view.spacing = 16
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.isHidden = viewModel.isReimbursementHidden
         return view
     }()
     
@@ -83,8 +84,8 @@ final class OperationFormViewController: VaultBaseViewController {
         return view
     }()
     
-    private lazy var titleInputView: TextFieldInputView = {
-        let view = TextFieldInputView(viewModel: viewModel.titleInputViewModel, style: InputStyles.textFieldStyle)
+    private lazy var titleInputView: TextInputView = {
+        let view = TextInputView(viewModel: viewModel.titleInputViewModel, style: InputStyles.textFieldStyle)
         
         view.translatesAutoresizingMaskIntoConstraints = false
         
@@ -117,6 +118,7 @@ final class OperationFormViewController: VaultBaseViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 76
         tableView.tableFooterView = UIView()
+        tableView.isHidden = !viewModel.isReimbursementOn
 
         return tableView
     }()
@@ -128,6 +130,7 @@ final class OperationFormViewController: VaultBaseViewController {
         
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.isHidden = viewModel.isAddReimbursementHidden
         
         return button
     }()
@@ -176,8 +179,6 @@ final class OperationFormViewController: VaultBaseViewController {
         saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
         
         addReimbursementButton.addTarget(self, action: #selector(addReimbursementTapped), for: .touchUpInside)
-        
-        refreshReimbursementViews()
     }
     
     override func setupBindings() {
@@ -256,10 +257,30 @@ extension OperationFormViewController {
 
 extension OperationFormViewController {
     private func refreshReimbursementViews() {
-        reimbursementSwitchView.isHidden = viewModel.isReimbursmentSwitchHidden
-        reimbursementStackView.isHidden = viewModel.isReimbursementHidden
-        reimbursementTableView.isHidden = !viewModel.isReimbursementOn
-        addReimbursementButton.isHidden = viewModel.isAddReimbursementHidden
+        
+        if viewModel.isReimbursmentSwitchHidden {
+            reimbursementSwitchView.hideAnimated()
+        } else {
+            reimbursementSwitchView.showAnimated()
+        }
+        
+        if viewModel.isReimbursementHidden {
+            reimbursementStackView.hideAnimated()
+        } else {
+            reimbursementStackView.showAnimated()
+        }
+        
+        if viewModel.isReimbursementOn {
+            reimbursementTableView.showAnimated()
+        } else {
+            reimbursementTableView.hideAnimated()
+        }
+        
+        if viewModel.isAddReimbursementHidden {
+            addReimbursementButton.hideAnimated()
+        } else {
+            addReimbursementButton.showAnimated()
+        }
 
         reimbursementTableView.reloadData()
         updateReimbursementTableViewHeight()

@@ -117,12 +117,25 @@ final class VaultFormViewController: VaultBaseViewController {
         saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
     }
     
+    private func updateUI() {
+        if viewModel.isInitialDepositHidden {
+            depositInputView.hideAnimated()
+        } else {
+            depositInputView.showAnimated()
+        }
+        
+        if viewModel.isImportHidden {
+            uploadFilePickerView.hideAnimated()
+        } else {
+            uploadFilePickerView.showAnimated()
+        }
+    }
+    
     override func setupBindings() {
         viewModel.updateUI = { [weak self] in
             guard let self else { return }
             
-            self.depositInputView.isHidden = self.viewModel.isInitialDepositHidden
-            self.uploadFilePickerView.isHidden = self.viewModel.isImportHidden
+            self.updateUI()
         }
         
         viewModel.onSuccess = { [weak self] _ in

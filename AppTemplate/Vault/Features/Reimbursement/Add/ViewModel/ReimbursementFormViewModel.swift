@@ -127,9 +127,9 @@ final class ReimbursementFormViewModel: NSObject {
     public lazy var notesInputViewModel: TextFieldInputViewModel = {
         
         return TextFieldInputViewModel(
-            title: "Notes",
+            title: "Title",
             isEditable: true,
-            placeholder: "Enter notes",
+            placeholder: "Enter title",
             subtitle: nil,
             inputText: reimbursementToEdit?.notes ?? "",
             textType: .text,

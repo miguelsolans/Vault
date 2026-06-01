@@ -257,6 +257,7 @@ extension FeedbackFormViewModel {
         contactSwitchInputViewModel.onValueChanged = { [weak self] _ in
             guard let self else { return }
             
+            self.emailInputViewModel.inputText = ""
             self.contactSwitchInputViewModel.feedback = .none
             
             self.updateUI?()
