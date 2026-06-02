@@ -84,12 +84,28 @@ extension AmountCardItemView {
     func configure(with viewModel: AmountCardItemViewModel) {
         super.configure(with: viewModel)
         
-        titleLabel.text = viewModel.title
+        configureTitle(viewModel.title)
+        
         amountLabel.text = LocalizedDecimalFormatter(numberStyle: viewModel.numberStyle)
             .string(from: viewModel.amount) ?? "\(viewModel.amount)"
         
         configureAmountColor(for: viewModel.type)
         configureBottomText(viewModel.bottomText, attributedText: viewModel.bottomAttributedText)
+    }
+    
+    private func configureTitle(_ text: String?) {
+        let isActionable = viewModel?.isEnabled == true && viewModel?.onTap != nil
+        
+        titleLabel.text = text
+        
+        if isActionable, let text {
+            titleLabel.setTextWithSystemImage(
+                systemName: "arrow.forward.circle",
+                text: text,
+                side: .right,
+                tintColor: .label
+            )
+        }
     }
     
     private func configureAmountColor(for operationType: OperationType? = nil) {
