@@ -14,7 +14,7 @@ SIMPLE_SLASH=/
 APP_VERSION=1.0.0
 
 // App build version
-APP_BUILD=20260412.1
+APP_BUILD=20260601.1
 
 // App name
 APP_NAME=Vault
