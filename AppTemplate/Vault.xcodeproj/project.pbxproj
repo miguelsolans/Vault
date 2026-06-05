@@ -11,6 +11,9 @@
 		8B00F3452F8D301F008C8777 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B00F3412F8D301F008C8777 /* ChatMessage.swift */; };
 		8B00F3462F8D301F008C8777 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B00F3422F8D301F008C8777 /* ChatViewController.swift */; };
 		8B00F34B2F8D345A008C8777 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B00F34A2F8D345A008C8777 /* ChatViewModel.swift */; };
+		8B03A60C2FD10C0800478564 /* CustomizeDashboardCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03A60B2FD10C0800478564 /* CustomizeDashboardCoordinator.swift */; };
+		8B03A60E2FD10C8800478564 /* CustomizeDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03A60D2FD10C8800478564 /* CustomizeDashboardViewController.swift */; };
+		8B03A6102FD10C9600478564 /* CustomizeDashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03A60F2FD10C9600478564 /* CustomizeDashboardViewModel.swift */; };
 		8B078BCF2F7D1F0A00075CC1 /* DashboardCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B078BCE2F7D1F0A00075CC1 /* DashboardCoordinator.swift */; };
 		8B078BD12F7D1F3600075CC1 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B078BD02F7D1F3600075CC1 /* DashboardViewController.swift */; };
 		8B078BD32F7D224C00075CC1 /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B078BD22F7D224200075CC1 /* DashboardViewModel.swift */; };
@@ -104,6 +107,10 @@
 		8B81F1E02FB1190000ECA9F4 /* CategoryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B81F1DF2FB1190000ECA9F4 /* CategoryDetailViewController.swift */; };
 		8B81F1E22FB1194A00ECA9F4 /* CategoryDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B81F1E12FB1194A00ECA9F4 /* CategoryDetailViewModel.swift */; };
 		8B8338BB2FB9191800EDC242 /* CoreKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8B8338BA2FB9191800EDC242 /* CoreKit */; };
+		8B8873102FD306A60016BD71 /* CustomizeDashboardTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B88730F2FD306A60016BD71 /* CustomizeDashboardTableViewModel.swift */; };
+		8B8873122FD306B80016BD71 /* CustomizeDashboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8873112FD306B80016BD71 /* CustomizeDashboardTableViewCell.swift */; };
+		8B8873142FD32F470016BD71 /* VaultBaseViewController+Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8873132FD32F470016BD71 /* VaultBaseViewController+Empty.swift */; };
+		8B8873162FD32F930016BD71 /* VaultBaseViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8873152FD32F930016BD71 /* VaultBaseViewController+Alert.swift */; };
 		8B9B09B52F83F48D0042840E /* ImportOperationsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B09B42F83F48D0042840E /* ImportOperationsCoordinator.swift */; };
 		8B9B09B72F83F49B0042840E /* ImportOperationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B09B62F83F49B0042840E /* ImportOperationsViewModel.swift */; };
 		8B9B09B92F83F4B60042840E /* ImportOperationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B09B82F83F4B60042840E /* ImportOperationsViewController.swift */; };
@@ -168,6 +175,9 @@
 		8B00F3422F8D301F008C8777 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		8B00F34A2F8D345A008C8777 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		8B03A5EA2FCF1D5300478564 /* Vault.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Vault.entitlements; sourceTree = "<group>"; };
+		8B03A60B2FD10C0800478564 /* CustomizeDashboardCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizeDashboardCoordinator.swift; sourceTree = "<group>"; };
+		8B03A60D2FD10C8800478564 /* CustomizeDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizeDashboardViewController.swift; sourceTree = "<group>"; };
+		8B03A60F2FD10C9600478564 /* CustomizeDashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizeDashboardViewModel.swift; sourceTree = "<group>"; };
 		8B078BCE2F7D1F0A00075CC1 /* DashboardCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardCoordinator.swift; sourceTree = "<group>"; };
 		8B078BD02F7D1F3600075CC1 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		8B078BD22F7D224200075CC1 /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
@@ -261,6 +271,10 @@
 		8B81F1D82FAF7EB500ECA9F4 /* AmountStatusHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountStatusHeaderViewModel.swift; sourceTree = "<group>"; };
 		8B81F1DF2FB1190000ECA9F4 /* CategoryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailViewController.swift; sourceTree = "<group>"; };
 		8B81F1E12FB1194A00ECA9F4 /* CategoryDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailViewModel.swift; sourceTree = "<group>"; };
+		8B88730F2FD306A60016BD71 /* CustomizeDashboardTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizeDashboardTableViewModel.swift; sourceTree = "<group>"; };
+		8B8873112FD306B80016BD71 /* CustomizeDashboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizeDashboardTableViewCell.swift; sourceTree = "<group>"; };
+		8B8873132FD32F470016BD71 /* VaultBaseViewController+Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VaultBaseViewController+Empty.swift"; sourceTree = "<group>"; };
+		8B8873152FD32F930016BD71 /* VaultBaseViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VaultBaseViewController+Alert.swift"; sourceTree = "<group>"; };
 		8B9B09B42F83F48D0042840E /* ImportOperationsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportOperationsCoordinator.swift; sourceTree = "<group>"; };
 		8B9B09B62F83F49B0042840E /* ImportOperationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportOperationsViewModel.swift; sourceTree = "<group>"; };
 		8B9B09B82F83F4B60042840E /* ImportOperationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportOperationsViewController.swift; sourceTree = "<group>"; };
@@ -369,6 +383,40 @@
 			isa = PBXGroup;
 			children = (
 				8BEFE44C2F90005D00A9D1DD /* ChatCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		8B03A6072FD10BDB00478564 /* Customize Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				8B03A6082FD10BE600478564 /* View */,
+				8B03A6092FD10BE900478564 /* ViewModel */,
+				8B03A60A2FD10BEE00478564 /* Coordinator */,
+			);
+			path = "Customize Dashboard";
+			sourceTree = "<group>";
+		};
+		8B03A6082FD10BE600478564 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8B03A60D2FD10C8800478564 /* CustomizeDashboardViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8B03A6092FD10BE900478564 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8B03A60F2FD10C9600478564 /* CustomizeDashboardViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8B03A60A2FD10BEE00478564 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				8B03A60B2FD10C0800478564 /* CustomizeDashboardCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -757,9 +805,10 @@
 		8B539C2B2F7B39B600977A6C /* ProjectUI */ = {
 			isa = PBXGroup;
 			children = (
+				8BD0F7472F930F89007C2E59 /* Base ViewController */,
+				8B88730E2FD301E40016BD71 /* CustomizeDashboard TableViewCell */,
 				8BEFE4412F8EA71600A9D1DD /* Chart */,
 				8B81F1D52FAF7E8500ECA9F4 /* AmountStatusHeader View */,
-				8BD0F7472F930F89007C2E59 /* Base ViewController */,
 				8B7436E02F8001BF00E2760E /* Pin View */,
 				8B7D6FE42FAB8CEB004866D8 /* ActionableCard View */,
 				8B539C0D2F7B32D300977A6C /* AmountCardSection View */,
@@ -1124,6 +1173,15 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		8B88730E2FD301E40016BD71 /* CustomizeDashboard TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				8B88730F2FD306A60016BD71 /* CustomizeDashboardTableViewModel.swift */,
+				8B8873112FD306B80016BD71 /* CustomizeDashboardTableViewCell.swift */,
+			);
+			path = "CustomizeDashboard TableViewCell";
+			sourceTree = "<group>";
+		};
 		8B9B09AA2F83F3B80042840E /* Import */ = {
 			isa = PBXGroup;
 			children = (
@@ -1266,6 +1324,7 @@
 				8B539C612F7BCF2300977A6C /* Onboarding */,
 				8B11230E2F816DB100A2AF28 /* Login */,
 				8B078BCA2F7D1EB500075CC1 /* Dashboard */,
+				8B03A6072FD10BDB00478564 /* Customize Dashboard */,
 				8B81F1C82FAE3F1B00ECA9F4 /* Cashflow Breakdown */,
 				8BCF15E32F82D0FB00B483BD /* Operations */,
 				8B36E08B2FA3A561007D0E07 /* Reimbursement */,
@@ -1385,6 +1444,8 @@
 			isa = PBXGroup;
 			children = (
 				8BD0F7482F930F98007C2E59 /* VaultBaseViewController.swift */,
+				8B8873152FD32F930016BD71 /* VaultBaseViewController+Alert.swift */,
+				8B8873132FD32F470016BD71 /* VaultBaseViewController+Empty.swift */,
 			);
 			path = "Base ViewController";
 			sourceTree = "<group>";
@@ -1727,6 +1788,7 @@
 				8B6185382F7F1313008986A8 /* SettingsViewModel.swift in Sources */,
 				8B539C672F7BE7D400977A6C /* OnboardingCoordinator.swift in Sources */,
 				8B7D6FB22FAA0A74004866D8 /* ReimbursementTableViewCell.swift in Sources */,
+				8B03A6102FD10C9600478564 /* CustomizeDashboardViewModel.swift in Sources */,
 				8B6185712F7F3F96008986A8 /* SecurityCoordinator.swift in Sources */,
 				8B7436E42F8001E400E2760E /* PinViewModel.swift in Sources */,
 				8B539BE52F7ADBF600977A6C /* SampleViewController.swift in Sources */,
@@ -1751,6 +1813,7 @@
 				8BD0F7362F92D72D007C2E59 /* OCRViewModel.swift in Sources */,
 				8B00F3452F8D301F008C8777 /* ChatMessage.swift in Sources */,
 				8B00F3462F8D301F008C8777 /* ChatViewController.swift in Sources */,
+				8B03A60E2FD10C8800478564 /* CustomizeDashboardViewController.swift in Sources */,
 				8BDD8FCF2FC60EA500DA9917 /* ExpectedReimbursementsIntent.swift in Sources */,
 				8BC2E5042BFD3841007FAF4C /* SceneDelegate.swift in Sources */,
 				8B81F1E02FB1190000ECA9F4 /* CategoryDetailViewController.swift in Sources */,
@@ -1760,12 +1823,14 @@
 				8B539BE12F7ADBDA00977A6C /* SampleCoordinator.swift in Sources */,
 				8B81F1CF2FAE43A300ECA9F4 /* CashflowBreakdownViewController.swift in Sources */,
 				8B539C6A2F7BE8A500977A6C /* VaultFormViewController.swift in Sources */,
+				8B8873102FD306A60016BD71 /* CustomizeDashboardTableViewModel.swift in Sources */,
 				8B61856D2F7F3409008986A8 /* SecurityViewController.swift in Sources */,
 				8B1123132F816DDB00A2AF28 /* LoginCoordinator.swift in Sources */,
 				8B81F1CD2FAE3F4000ECA9F4 /* CashflowBreakdownCoordinator.swift in Sources */,
 				8BDD8FD52FC7617B00DA9917 /* MonthlySpentIntent.swift in Sources */,
 				8B61856F2F7F3DE5008986A8 /* SecurityViewModel.swift in Sources */,
 				8BDD8FF12FC8F7F500DA9917 /* FeedbackFormViewModel.swift in Sources */,
+				8B8873162FD32F930016BD71 /* VaultBaseViewController+Alert.swift in Sources */,
 				8BD0F7382F92D73F007C2E59 /* OCRCoordinator.swift in Sources */,
 				8B539BFB2F7B251B00977A6C /* OperationsCoordinator.swift in Sources */,
 				8B539C782F7C015E00977A6C /* MarketingItemViewModel.swift in Sources */,
@@ -1779,8 +1844,11 @@
 				8B6185342F7F12ED008986A8 /* SettingsViewController.swift in Sources */,
 				8B539C012F7B25A500977A6C /* ListOperationsViewModel.swift in Sources */,
 				8B078C1C2F7DDA2600075CC1 /* CategoriesCoordinator.swift in Sources */,
+				8B8873142FD32F470016BD71 /* VaultBaseViewController+Empty.swift in Sources */,
+				8B8873122FD306B80016BD71 /* CustomizeDashboardTableViewCell.swift in Sources */,
 				8B7D6FB42FAA0D17004866D8 /* ReimbursementTableViewModel.swift in Sources */,
 				8B078BCF2F7D1F0A00075CC1 /* DashboardCoordinator.swift in Sources */,
+				8B03A60C2FD10C0800478564 /* CustomizeDashboardCoordinator.swift in Sources */,
 				8B539C0C2F7B2FCC00977A6C /* OperationSectionHeaderView.swift in Sources */,
 				8B6185692F7F31A8008986A8 /* SecurityOptionTableViewCell.swift in Sources */,
 				8BF3B9062FACCC8100DAFA1D /* VaultShortcuts.swift in Sources */,

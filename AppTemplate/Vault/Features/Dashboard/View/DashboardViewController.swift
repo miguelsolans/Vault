@@ -47,22 +47,17 @@ final class DashboardViewController: VaultBaseViewController {
     }();
     
     private lazy var emptyStateView: UIContentUnavailableView = {
-        var config = UIContentUnavailableConfiguration.empty()
+        let view = makeEmptyContentView(
+            with: noDataEmptyContentConfiguration(),
+            minimumHeight: 360
+        )
         
-        config.background.backgroundColor = UIColor(resource: .background)
-        config.image = UIImage(systemName: "tag")
-        config.text = "No data"
-        config.secondaryText = "There is no data to calculate Vault metrics.\nYou can add financial data in Operations."
-        
-        let view = UIContentUnavailableView(configuration: config)
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.isHidden = true
-        view.heightAnchor.constraint(greaterThanOrEqualToConstant: 360).isActive = true
         
         return view
     }()
     
-    private lazy var cashflowCardSectionView: AmountCardSectionView = {
+    private lazy var incomeAndSpendingSectionView: AmountCardSectionView = {
         let view = AmountCardSectionView()
         
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -70,7 +65,15 @@ final class DashboardViewController: VaultBaseViewController {
         return view
     }()
     
-    private lazy var expensesChartCard: ChartCardView = {
+    private lazy var mainAndOtherIncomeSectionView: AmountCardSectionView = {
+        let view = AmountCardSectionView()
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    private lazy var spendingCategoriesPieChartView: ChartCardView = {
         let view = ChartCardView()
         
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -78,10 +81,66 @@ final class DashboardViewController: VaultBaseViewController {
         return view
     }()
     
-    private lazy var statisticsSummaryView: AmountCardSectionView = {
-        let view = AmountCardSectionView()
+    private lazy var incomeCategoriesPieChartView: ChartCardView = {
+        let view = ChartCardView()
+        
         view.translatesAutoresizingMaskIntoConstraints = false
+        
         return view
+    }()
+    
+    private lazy var spendingCategoriesBarChartView: ChartCardView = {
+        let view = ChartCardView()
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    private lazy var incomeCategoriesBarChartView: ChartCardView = {
+        let view = ChartCardView()
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    private lazy var keyMetricsSectionView: AmountCardSectionView = {
+        let view = AmountCardSectionView()
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    private lazy var spendingBreakdownSectionView: AmountCardSectionView = {
+        let view = AmountCardSectionView()
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    private lazy var incomeBreakdownSectionView: AmountCardSectionView = {
+        let view = AmountCardSectionView()
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    
+    private lazy var customizeButton: UIButton = {
+        let button = UIButton()
+        
+        button.apply(
+            style: ButtonStyles.secondary,
+            title: "Customize Dashboard"
+        )
+        
+        button.configuration?.image = UIImage(systemName: "slider.horizontal.3")
+        
+        return button
     }()
     
     private  lazy var scrollView: UIScrollView = {
@@ -165,9 +224,18 @@ extension DashboardViewController {
         contentStack.addArrangedSubview(feedbackView)
         contentStack.addArrangedSubview(monthSelectorView)
         contentStack.addArrangedSubview(emptyStateView)
-        contentStack.addArrangedSubview(cashflowCardSectionView)
-        contentStack.addArrangedSubview(expensesChartCard)
-        contentStack.addArrangedSubview(statisticsSummaryView)
+        
+        contentStack.addArrangedSubview(incomeAndSpendingSectionView)
+        contentStack.addArrangedSubview(spendingCategoriesPieChartView)
+        contentStack.addArrangedSubview(mainAndOtherIncomeSectionView)
+        contentStack.addArrangedSubview(incomeCategoriesPieChartView)
+        contentStack.addArrangedSubview(spendingCategoriesBarChartView)
+        contentStack.addArrangedSubview(incomeCategoriesBarChartView)
+        contentStack.addArrangedSubview(keyMetricsSectionView)
+        contentStack.addArrangedSubview(spendingBreakdownSectionView)
+        contentStack.addArrangedSubview(incomeBreakdownSectionView)
+        
+        contentStack.addArrangedSubview(customizeButton)
     }
     
     private func setupConstraints() {
@@ -246,6 +314,8 @@ extension DashboardViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapFeedback))
         
         feedbackView.addGestureRecognizer(tapGesture)
+        
+        customizeButton.addTarget(self, action: #selector(didTapCustomize), for: .touchUpInside)
     }
 }
 
@@ -260,12 +330,12 @@ extension DashboardViewController {
         viewModel.didTapAgent()
     }
     
-    private func didTapFilter() {
-        
-    }
-    
     @objc private func didTapFeedback() {
         viewModel.didTapFeedback()
+    }
+    
+    @objc private func didTapCustomize() {
+        viewModel.didTapCustomize()
     }
 }
 
@@ -275,8 +345,9 @@ extension DashboardViewController {
         title = viewModel.title
         navigationItem.subtitle = viewModel.subtitle
         updateMonthSelectorUI()
-        updateSummaryUI()
-        updateChartUI()
+        
+        updateWidgetUI()
+        
         setupNavigationItems()
         setupContentUnavailable()
     }
@@ -287,46 +358,137 @@ extension DashboardViewController {
         monthSelectorView.isHidden = shouldHide
     }
     
-    private func updateSummaryUI() {
+    private func updateWidgetUI() {
         
         feedbackView.isHidden = viewModel.isFeedbackHidden
-        cashflowCardSectionView.isHidden = viewModel.isVaultEmpty
-        statisticsSummaryView.isHidden = viewModel.isVaultEmpty
         
-        if let yearlyViewModel = viewModel.summaryViewModel {
-            cashflowCardSectionView.configure(with: yearlyViewModel)
-            cashflowCardSectionView.setNeedsLayout()
-            cashflowCardSectionView.layoutIfNeeded()
+        if let viewModel = viewModel.incomeAndSpendingSectionViewModel {
+            incomeAndSpendingSectionView.configure(with: viewModel)
+            incomeAndSpendingSectionView.isHidden = self.viewModel.isVaultEmpty
+        } else {
+            incomeAndSpendingSectionView.isHidden = true
         }
         
-        if let statisticsViewModel = viewModel.statisticsSummaryViewModel {
-            statisticsSummaryView.configure(with: statisticsViewModel)
-            statisticsSummaryView.setNeedsLayout()
-            statisticsSummaryView.layoutIfNeeded()
+        if let viewModel = viewModel.mainAndOtherIncomeSectionViewModel {
+            mainAndOtherIncomeSectionView.configure(with: viewModel)
+            mainAndOtherIncomeSectionView.isHidden = self.viewModel.isVaultEmpty
+        } else {
+            mainAndOtherIncomeSectionView.isHidden = true
         }
-    }
-    
-    private func updateChartUI() {
-        expensesChartCard.isHidden = viewModel.isVaultEmpty
         
-        guard !viewModel.isVaultEmpty else { return }
-        
-        if let viewModel = viewModel.expensesPlotViewModel {
-            expensesChartCard.configure(
+        if let viewModel = viewModel.spendingCategoriesPieChartViewModel {
+            spendingCategoriesPieChartView.configure(
                 title: viewModel.title,
                 subtitle: viewModel.subtitle,
                 plotViewModel: viewModel,
                 parentViewController: self
             )
-            
-            expensesChartCard.isHidden = false
+            spendingCategoriesPieChartView.isHidden = self.viewModel.isVaultEmpty
         } else {
-            expensesChartCard.isHidden = false
+            spendingCategoriesPieChartView.isHidden = true
+        }
+        
+        if let viewModel = viewModel.incomeCategoriesPieChartViewModel {
+            incomeCategoriesPieChartView.configure(
+                title: viewModel.title,
+                subtitle: viewModel.subtitle,
+                plotViewModel: viewModel,
+                parentViewController: self
+            )
+            incomeCategoriesPieChartView.isHidden = self.viewModel.isVaultEmpty
+        } else {
+            incomeCategoriesPieChartView.isHidden = true
+        }
+        
+        if let viewModel = viewModel.spendingCategoriesBarChartViewModel {
+            spendingCategoriesBarChartView.configure(
+                title: viewModel.title,
+                subtitle: viewModel.subtitle,
+                plotViewModel: viewModel,
+                parentViewController: self
+            )
+            spendingCategoriesBarChartView.isHidden = self.viewModel.isVaultEmpty
+        } else {
+            spendingCategoriesBarChartView.isHidden = true
+        }
+        
+        if let viewModel = viewModel.incomeCategoriesBarChartViewModel {
+            incomeCategoriesBarChartView.configure(
+                title: viewModel.title,
+                subtitle: viewModel.subtitle,
+                plotViewModel: viewModel,
+                parentViewController: self
+            )
+            incomeCategoriesBarChartView.isHidden = self.viewModel.isVaultEmpty
+        } else {
+            incomeCategoriesBarChartView.isHidden = true
+        }
+        
+        if let viewModel = viewModel.keyMetricsSectionViewModel {
+            keyMetricsSectionView.configure(with: viewModel)
+            keyMetricsSectionView.isHidden = self.viewModel.isVaultEmpty
+        } else {
+            keyMetricsSectionView.isHidden = true
+        }
+        
+        if let viewModel = viewModel.spendingBreakdownSectionViewModel {
+            spendingBreakdownSectionView.configure(with: viewModel)
+            spendingBreakdownSectionView.isHidden = self.viewModel.isVaultEmpty
+        } else {
+            spendingBreakdownSectionView.isHidden = true
+        }
+        
+        if let viewModel = viewModel.incomeBreakdownSectionViewModel {
+            incomeBreakdownSectionView.configure(with: viewModel)
+            incomeBreakdownSectionView.isHidden = self.viewModel.isVaultEmpty
+        } else {
+            incomeBreakdownSectionView.isHidden = true
+        }
+        
+        customizeButton.isHidden = viewModel.emptyContent != nil
+    }
+}
+
+extension DashboardViewController {
+    private func setupContentUnavailable() {
+        contentUnavailableConfiguration = nil
+        updateEmptyContentView(
+            emptyStateView,
+            with: emptyContentConfiguration()
+        )
+    }
+    
+    private func emptyContentConfiguration() -> EmptyContentConfiguration? {
+        switch viewModel.emptyContent {
+        case .noData:
+            return noDataEmptyContentConfiguration()
+            
+        case .noWidgets:
+            return noWidgetsEmptyContentConfiguration()
+            
+        case .none:
+            return nil
         }
     }
     
-    private func setupContentUnavailable() {
-        contentUnavailableConfiguration = nil
-        emptyStateView.isHidden = !viewModel.isVaultEmpty
+    private func noDataEmptyContentConfiguration() -> EmptyContentConfiguration {
+        EmptyContentConfiguration(
+            image: UIImage(systemName: "list.bullet"),
+            title: "No data",
+            message: "There is no data to calculate Vault metrics.\nYou can add financial data in Operations."
+        )
+    }
+    
+    private func noWidgetsEmptyContentConfiguration() -> EmptyContentConfiguration {
+        EmptyContentConfiguration(
+            image: UIImage(systemName: "rectangle.grid.2x2"),
+            title: "No widgets",
+            message: "Choose the information you want to see in your Dashboard.",
+            buttonTitle: "Customize Dashboard",
+            buttonImage: UIImage(systemName: "slider.horizontal.3"),
+            buttonAction: { [weak self] in
+                self?.viewModel.didTapCustomize()
+            }
+        )
     }
 }

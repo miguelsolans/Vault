@@ -13,6 +13,7 @@ protocol ListVaultViewModelDelegate: AnyObject {
     func viewModel(_ viewModel: ListVaultViewModel, didSelectVault vault: VaultDTO)
     func viewModel(_ viewModel: ListVaultViewModel, didTapEditVault vault: VaultDTO)
     func viewModel(_ viewModel: ListVaultViewModel, didTapExportVault vault: VaultDTO, csvContent: String, suggestedFilename: String)
+    func didTapClose(_ viewModel: ListVaultViewModel)
 }
 
 final class ListVaultViewModel: NSObject {
@@ -188,6 +189,11 @@ extension ListVaultViewModel {
     public func didTapCreateVault() {
         
         delegate?.viewModelDidTapCreateVault(self)
+    }
+    
+    public func didTapClose() {
+        
+        delegate?.didTapClose(self)
     }
     
     public func didSelectVault(at indexPath: IndexPath) {

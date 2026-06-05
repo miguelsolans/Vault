@@ -14,11 +14,11 @@ final class CashflowBreakdownViewModel: NSObject {
     // MARK: - Dependencies
     private(set) var filter: OperationsFilter
     
-    private let useCase: DashboardUseCase;
+    private let useCase: StatisticsUseCase;
     
     init(
         filter: OperationsFilter,
-        useCase: DashboardUseCase
+        useCase: StatisticsUseCase
     ) {
         self.useCase = useCase
         self.filter = filter
@@ -65,7 +65,7 @@ final class CashflowBreakdownViewModel: NSObject {
 
 extension CashflowBreakdownViewModel {
     public func getData() {
-        let request = DashboardRequest(
+        let request = StatisticsRequest(
             vaultID: filter.vault.id,
             startDate: filter.startDate,
             endDate: filter.endDate,
@@ -76,22 +76,22 @@ extension CashflowBreakdownViewModel {
             let response = try useCase.execute(request)
             
             let total = filter.type == .income ?
-                response.dashboardMetrics.cashFlow.totalIncome :
-                response.dashboardMetrics.netSpending.netExpenses
+                response.metrics.cashFlow.totalIncome :
+                response.metrics.netSpending.netExpenses
             
             let isEmpty = total == 0
             
             let percentage = filter.type == .income ?
-                response.dashboardMetrics.cashFlow.incomeChangeFromPreviousMonth :
-                response.dashboardMetrics.cashFlow.expensesChangeFromPreviousMonth
+                response.metrics.cashFlow.incomeChangeFromPreviousMonth :
+                response.metrics.cashFlow.expensesChangeFromPreviousMonth
             
             let items = filter.type == .income ?
-                response.dashboardMetrics.categories.income :
-                response.dashboardMetrics.categories.netExpenses
+                response.metrics.categories.income :
+                response.metrics.categories.netExpenses
             
             let average = filter.type == .income ?
-                response.dashboardMetrics.cashFlow.averageIncome :
-                response.dashboardMetrics.cashFlow.averageExpense
+                response.metrics.cashFlow.averageIncome :
+                response.metrics.cashFlow.averageExpense
             
             headerViewModel = AmountStatusHeaderViewModel(
                 amount: total,
@@ -109,14 +109,14 @@ extension CashflowBreakdownViewModel {
             )
             
             categoriesViewModel = AmountCardSectionViewModel(
-                monthTitle: "Breakdown",
+                title: "Breakdown",
                 items: categorySummaryItems(from: items),
                 gridFormat: true
             )
             
             additionalMetricsViewModel = AmountCardSectionViewModel(
-                monthTitle: "",
-                items: additionalMetricItems(from: response.dashboardMetrics.cashFlow),
+                title: "",
+                items: additionalMetricItems(from: response.metrics.cashFlow),
                 gridFormat: true
             )
             

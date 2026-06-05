@@ -87,6 +87,16 @@ extension ListVaultViewController {
     
     func setupBarButtonItems() {
         
+        if isModal {
+            let closeButtonItem = UIBarButtonItem(
+                barButtonSystemItem: .close,
+                target: self,
+                action: #selector(didTapClose)
+            )
+            
+            navigationItem.rightBarButtonItem = closeButtonItem
+        }
+        
         guard viewModel.isAddVaultAvailable else { return }
         
         let addOperationButtonItem = UIBarButtonItem(
@@ -277,6 +287,10 @@ extension ListVaultViewController: UITableViewDataSource, UITableViewDelegate {
 extension ListVaultViewController {
     @objc private func didTapCreateVault() {
         viewModel.didTapCreateVault()
+    }
+    
+    @objc private func didTapClose() {
+        viewModel.didTapClose()
     }
 }
 

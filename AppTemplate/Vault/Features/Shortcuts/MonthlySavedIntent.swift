@@ -23,7 +23,7 @@ struct MonthlySavedIntent: AppIntent {
     
     func perform() async throws -> some IntentResult & ProvidesDialog {
         
-        let useCase = DependenciesContainer.shared.getDashboardUseCase()
+        let useCase = DependenciesContainer.shared.getStatisticsUseCase()
         
         let userDefaults = UserDefaultsManager.shared
         
@@ -35,7 +35,7 @@ struct MonthlySavedIntent: AppIntent {
         }
         
         do {
-            let request = DashboardRequest(
+            let request = StatisticsRequest(
                 vaultID: vaultID,
                 startDate: Date().monthStart(),
                 endDate: Date().monthEnd(),
@@ -47,7 +47,7 @@ struct MonthlySavedIntent: AppIntent {
             let currencyFormatter = LocalizedDecimalFormatter(numberStyle: .currency)
             
             let formattedAmount = currencyFormatter
-                .string(from: response.dashboardMetrics.netSpending.savings) ?? "\(response.dashboardMetrics.netSpending.savings)"
+                .string(from: response.metrics.netSpending.savings) ?? "\(response.metrics.netSpending.savings)"
             
             return .result(
                 dialog: IntentDialog(stringLiteral: "This month, you saved \(formattedAmount)")

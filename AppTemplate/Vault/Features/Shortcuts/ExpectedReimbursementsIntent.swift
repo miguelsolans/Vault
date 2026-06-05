@@ -21,7 +21,7 @@ struct ExpectedReimbursementsIntent: AppIntent {
     
     func perform() async throws -> some IntentResult & ProvidesDialog {
         
-        let useCase = DependenciesContainer.shared.getDashboardUseCase()
+        let useCase = DependenciesContainer.shared.getStatisticsUseCase()
         
         let userDefaults = UserDefaultsManager.shared
         
@@ -33,13 +33,13 @@ struct ExpectedReimbursementsIntent: AppIntent {
         }
         
         do {
-            let request = DashboardRequest(
+            let request = StatisticsRequest(
                 vaultID: vaultID
             )
             
             let response = try useCase.execute(request)
             
-            let reimbursements = response.dashboardMetrics.reimbursements;
+            let reimbursements = response.metrics.reimbursements;
             
             var message: String = ""
             

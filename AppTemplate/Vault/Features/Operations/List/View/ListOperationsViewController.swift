@@ -178,23 +178,18 @@ extension ListOperationsViewController {
     }
     
     override func updateContentUnavailableConfiguration(using state: UIContentUnavailableConfigurationState) {
-        
-        var emptyView: UIContentUnavailableView?
-        
-        if viewModel.numberOfSections == 0 {
-            
-            var config = UIContentUnavailableConfiguration.empty()
-            
-            config.background.backgroundColor = UIColor(resource: .background)
-            config.image = UIImage(systemName: "list.bullet")
-            config.text = "No Operations"
-            config.secondaryText = "You can add operations in the plus button"
-            
-            emptyView = UIContentUnavailableView(configuration: config)
-            
-        }
-        
-        tableView.backgroundView = emptyView
+        updateEmptyContentBackground(
+            for: tableView,
+            configuration: viewModel.numberOfSections == 0 ? noOperationsEmptyContentConfiguration() : nil
+        )
+    }
+    
+    private func noOperationsEmptyContentConfiguration() -> EmptyContentConfiguration {
+        EmptyContentConfiguration(
+            image: UIImage(systemName: "list.bullet"),
+            title: "No Operations",
+            message: "You can add operations in the plus button"
+        )
     }
 }
 

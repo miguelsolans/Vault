@@ -90,20 +90,3 @@ open class VaultBaseViewController: BaseViewController {
 }
 
 
-extension VaultBaseViewController {
-    public func presentAlert(with title: String, and message: String, onDismiss: (() -> Void)? = nil) {
-        let alert = UIAlertController(
-            title: title,
-            message: message,
-            preferredStyle: .alert
-        )
-        
-        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-            onDismiss?()
-        }
-        
-        alert.addAction(okAction);
-        
-        present(alert, animated: true)
-    }
-}

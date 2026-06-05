@@ -50,7 +50,7 @@ struct OperationMetricsOutput {
 
 struct OperationMetricsTool: Tool {
     
-    let useCase: DashboardUseCase
+    let useCase: StatisticsUseCase
     
     let description = """
         Return information regarding an account or Vault, namely:
@@ -108,7 +108,7 @@ struct OperationMetricsTool: Tool {
             )
         }
         
-        let request = DashboardRequest(
+        let request = StatisticsRequest(
             vaultID: vaultID,
             startDate: arguments.date?.monthStart(),
             endDate: arguments.date?.monthEnd(),

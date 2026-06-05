@@ -13,15 +13,15 @@ final class FinanceAssistant {
     
     private let session: LanguageModelSession
     
-    private var dashboardUseCase: DashboardUseCase
+    private var useCase: StatisticsUseCase
     
     init(
-        dashboardUseCase: DashboardUseCase
+        useCase: StatisticsUseCase
     ) {
-        self.dashboardUseCase = dashboardUseCase
+        self.useCase = useCase
         
         self.session = LanguageModelSession(tools: [
-            OperationMetricsTool(useCase: dashboardUseCase)
+            OperationMetricsTool(useCase: useCase)
             
         ], instructions: """
             You are a finance asistant inside a budgeting app. 

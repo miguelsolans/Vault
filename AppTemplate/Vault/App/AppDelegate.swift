@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         populateCurrenciesIfNeeded()
         
-        UserDefaultsManager.shared.lastAppVersion = AppConfig.appVersion
+        startUp()
         
         return true
     }
@@ -53,6 +53,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         do {
             _ = try useCase.execute(request)
+        } catch {
+            exit(1)
+        }
+    }
+    
+    private func startUp() {
+        let request = AppStartUpUseCaseRequest(
+            appVersion: AppConfig.appVersion
+        )
+        
+        let useCase = DependenciesContainer.shared.getAppStartupUseCase()
+        
+        do {
+            _ = try useCase.execute(request: request)
         } catch {
             exit(1)
         }

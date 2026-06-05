@@ -42,9 +42,19 @@ public final class AmountCardItemViewModel: ActionableCardBaseViewModel {
 }
 
 public struct AmountCardSectionViewModel {
-    let monthTitle: String
+    public let title: String?
     
-    let items: [AmountCardItemViewModel]
+    public let items: [AmountCardItemViewModel]
     
-    let gridFormat: Bool
+    public let gridFormat: Bool
+    
+    init(
+        title: String? = nil,
+        items: [AmountCardItemViewModel],
+        gridFormat: Bool
+    ) {
+        self.title = title
+        self.items = items
+        self.gridFormat = gridFormat
+    }
 }

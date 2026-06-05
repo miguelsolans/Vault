@@ -37,7 +37,9 @@ final class AmountCardSectionView: ActionableCardBaseView {
     }
     
     func configure(with vm: AmountCardSectionViewModel) {
-        titleLabel.text = vm.monthTitle
+        titleLabel.isHidden = vm.title == nil
+        
+        titleLabel.text = vm.title
         
         gridStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
@@ -60,11 +62,6 @@ final class AmountCardSectionView: ActionableCardBaseView {
                 rowStack.addArrangedSubview(card)
             }
             
-            // Fill space if odd
-            /*if rowItems.count == 1 {
-                rowStack.addArrangedSubview(UIView())
-            }*/
-            
             gridStack.addArrangedSubview(rowStack)
         }
     }
@@ -82,7 +79,7 @@ final class AmountCardSectionView: ActionableCardBaseView {
 }
 
 #Preview("SummaryHeaderView") {
-    let viewModel = AmountCardSectionViewModel(monthTitle: "Section title", items: [
+    let viewModel = AmountCardSectionViewModel(title: "Section title", items: [
         .init(title: "Card title", amount: 10000, type: nil),
         .init(title: "Card title", amount: 10000000, type: .income),
         .init(title: "Card title", amount: 10, type: .income),

@@ -14,7 +14,7 @@ protocol ListVaultCoordinatorDelegate: AnyObject {
     func coordinator(_ coordinator: ListVaultCoordinator, didSelectVault vault: VaultDTO)
 }
 
-class ListVaultCoordinator: BaseCoordinator {
+final class ListVaultCoordinator: BaseCoordinator {
     
     weak var delegate: ListVaultCoordinatorDelegate?
     
@@ -44,6 +44,7 @@ class ListVaultCoordinator: BaseCoordinator {
     
     override func finish() {
         removeAllChildCoordinators()
+        delegate?.coordinatorDidFinish(self)
     }
     
     // MARK: - ViewController's
@@ -63,6 +64,10 @@ class ListVaultCoordinator: BaseCoordinator {
 }
 
 extension ListVaultCoordinator: ListVaultViewModelDelegate {
+    
+    func didTapClose(_ viewModel: ListVaultViewModel) {
+        finish()
+    }
     
     func viewModelDidTapCreateVault(_ viewModel: ListVaultViewModel) {
         self.navigateToCreateVault()

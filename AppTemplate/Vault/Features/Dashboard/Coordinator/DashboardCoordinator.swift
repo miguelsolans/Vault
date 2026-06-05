@@ -163,12 +163,40 @@ extension DashboardCoordinator: DashboardViewModelDelegate {
         coordinator.start()
     }
     
+    func didTapCustomize(_ viewModel: DashboardViewModel) {
+        navigateToCustomizeDashboard(with: viewModel.vault)
+    }
+    
     func presentMarketing(_ viewModel: DashboardViewModel) {
         marketingViewController.modalPresentationStyle = .pageSheet
         
         navigationController.present(marketingViewController, animated: true) {
             
         }
+    }
+}
+
+extension DashboardCoordinator: CustomizeDashboardCoordinatorDelegate {
+    
+    func coordinatorDidFinish(_ coordinator: CustomizeDashboardCoordinator) {
+        
+        removeChildCoordinator(coordinator)
+        navigationController.dismiss(animated: true)
+    }
+    
+    func navigateToCustomizeDashboard(with vault: VaultDTO) {
+        
+        let coordinator = CustomizeDashboardCoordinator(
+            navigationController: navigationController,
+            dependencies: dependencies,
+            vault: vault
+        )
+        
+        coordinator.delegate = self
+        
+        addChildCoordinator(coordinator)
+        
+        coordinator.start()
     }
 }
 

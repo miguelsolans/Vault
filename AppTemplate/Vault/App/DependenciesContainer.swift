@@ -22,7 +22,7 @@ final class DependenciesContainer {
     
     private lazy var assistant: FinanceAssistant = {
         FinanceAssistant(
-            dashboardUseCase: getDashboardUseCase()
+            useCase: getStatisticsUseCase()
         )
     }()
 
@@ -85,9 +85,10 @@ extension DependenciesContainer {
     // MARK: Dashboard Module
     func getDashboardViewModel(with vault: VaultDTO, filter: OperationsFilter) -> DashboardViewModel {
         return DashboardViewModel(
-            dashboardUseCase: getDashboardUseCase(),
             vault: vault,
             filter: filter,
+            vaultDashboardUseCase: getVaultDashboardUseCase(),
+            statisticsUseCase: getStatisticsUseCase(),
             foundationModelManager: foundationModelManager
         )
     }
@@ -96,7 +97,7 @@ extension DependenciesContainer {
     func getCashflowBreakdownViewModel(filter: OperationsFilter) -> CashflowBreakdownViewModel {
         return CashflowBreakdownViewModel(
             filter: filter,
-            useCase: getDashboardUseCase()
+            useCase: getStatisticsUseCase()
         )
     }
     
@@ -189,6 +190,15 @@ extension DependenciesContainer {
         TabBarViewModel()
     }
     
+    // MARK: - Customize Dashboard Module
+    func getCustomizeDashboardViewModel(vault: VaultDTO) -> CustomizeDashboardViewModel {
+        CustomizeDashboardViewModel(
+            vault: vault,
+            vaultDashboardUseCase: getVaultDashboardUseCase(),
+            updateWidgetUseCase: getUpdateWidgetUseCase()
+        )
+    }
+    
     // MARK: - Import operations
     func createImportOperationsViewModel(with vault: VaultDTO, andFileURL url: URL) -> ImportOperationsViewModel {
         return ImportOperationsViewModel(
@@ -252,6 +262,10 @@ extension DependenciesContainer {
 // MARK: - Use Cases
 extension DependenciesContainer {
     
+    func getAppStartupUseCase() -> AppStartUpUseCase {
+        return core.getAppStartUpUseCase()
+    }
+    
     func getCurrencySeedUseCase() -> CurrencySeedUseCase {
         return core.getCurrencySeedUseCase()
     }
@@ -312,8 +326,8 @@ extension DependenciesContainer {
         return core.getEditOperationUseCase()
     }
     
-    func getDashboardUseCase() -> DashboardUseCase {
-        return core.getDashboardUseCase()
+    func getVaultDashboardUseCase() -> GetVaultDashboardUseCase {
+        return core.getVaultDashboardUseCase()
     }
     
     func getExportOperationsUseCase() -> ExportOperationsUseCase {
@@ -354,5 +368,17 @@ extension DependenciesContainer {
     
     func getCreateFeedbackUseCase() -> CreateFeedbackUseCase {
         return core.getCreateFeedbackUseCase()
+    }
+    
+    func getStatisticsUseCase() -> StatisticsUseCase {
+        return core.getStatisticsUseCase()
+    }
+    
+    func getWidgetsUseCase() -> GetWidgetsUseCase {
+        return core.getWidgetsUseCase()
+    }
+    
+    func getUpdateWidgetUseCase() -> UpdateWidgetUseCase {
+        return core.getUpdateWidgetUseCase()
     }
 }

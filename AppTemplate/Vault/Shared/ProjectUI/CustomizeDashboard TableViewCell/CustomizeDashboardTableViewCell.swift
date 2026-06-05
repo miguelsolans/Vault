@@ -1,15 +1,15 @@
 //
-//  SecurityOptionTableViewCell.swift
+//  CustomizeDashboardTableViewCell.swift
 //  Vault
 //
-//  Created by Miguel Solans on 03/04/2026.
+//  Created by Miguel Solans on 05/06/2026.
 //
 
 import UIKit
 
-final class SecurityOptionTableViewCell: UITableViewCell {
+final class CustomizeDashboardTableViewCell: UITableViewCell {
     
-    static let identifier = "SecurityOptionTableViewCell"
+    static let identifier = "CustomizeDashboardTableViewCell"
     
     // MARK: - Callback
     
@@ -18,10 +18,11 @@ final class SecurityOptionTableViewCell: UITableViewCell {
     // MARK: - UI
     
     private let optionImageView: UIImageView = {
-        let iv = UIImageView()
-        iv.contentMode = .scaleAspectFit
-        iv.translatesAutoresizingMaskIntoConstraints = false
-        return iv
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.tintColor = .label
+        return imageView
     }()
     
     private let titleLabel: UILabel = {
@@ -48,26 +49,11 @@ final class SecurityOptionTableViewCell: UITableViewCell {
         return stack
     }()
     
-    private let valueLabel: UILabel = {
-        let label = UILabel()
-        label.font = AppFonts.secondaryValue
-        label.textColor = .secondaryLabel
-        label.textAlignment = .right
-        label.setContentHuggingPriority(.required, for: .horizontal)
-        label.setContentCompressionResistancePriority(.required, for: .horizontal)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
     private let toggleSwitch: UISwitch = {
         let control = UISwitch()
         control.translatesAutoresizingMaskIntoConstraints = false
         return control
     }()
-    
-    // MARK: - State
-    
-    private var currentStyle: MenuOptionStyle?
     
     // MARK: - Init
     
@@ -91,31 +77,23 @@ final class SecurityOptionTableViewCell: UITableViewCell {
         subtitleLabel.text = nil
         subtitleLabel.isHidden = false
         
-        valueLabel.text = nil
-        valueLabel.isHidden = true
-        
         toggleSwitch.isOn = false
-        toggleSwitch.isHidden = true
         toggleSwitch.isEnabled = true
         
         accessoryType = .none
-        selectionStyle = .default
+        selectionStyle = .none
         contentView.alpha = 1.0
-        
-        onToggleChanged = nil
-        currentStyle = nil
     }
     
     // MARK: - Setup
     
     private func setupUI() {
-        selectionStyle = .default
+        selectionStyle = .none
         
         backgroundColor = UIColor(resource: .background)
         
         contentView.addSubview(optionImageView)
         contentView.addSubview(labelsStackView)
-        contentView.addSubview(valueLabel)
         contentView.addSubview(toggleSwitch)
         
         labelsStackView.addArrangedSubview(titleLabel)
@@ -133,15 +111,9 @@ final class SecurityOptionTableViewCell: UITableViewCell {
             labelsStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
             labelsStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
             
-            valueLabel.leadingAnchor.constraint(greaterThanOrEqualTo: labelsStackView.trailingAnchor, constant: 12),
-            valueLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            valueLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            
             toggleSwitch.leadingAnchor.constraint(greaterThanOrEqualTo: labelsStackView.trailingAnchor, constant: 12),
             toggleSwitch.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             toggleSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            
-            labelsStackView.trailingAnchor.constraint(lessThanOrEqualTo: valueLabel.leadingAnchor, constant: -12)
         ])
         
         contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 60).isActive = true
@@ -149,8 +121,7 @@ final class SecurityOptionTableViewCell: UITableViewCell {
     
     // MARK: - Configure
     
-    func configure(with viewModel: SecurityOptionTableViewModel) {
-        currentStyle = viewModel.style
+    func configure(with viewModel: CustomizeDashboardTableViewModel) {
         
         if let imageName = viewModel.imageName {
             optionImageView.image = UIImage(systemName: imageName)
@@ -164,47 +135,11 @@ final class SecurityOptionTableViewCell: UITableViewCell {
         subtitleLabel.text = viewModel.subtitle
         subtitleLabel.isHidden = viewModel.subtitle == nil
         
-        valueLabel.text = viewModel.valueText
         toggleSwitch.isOn = viewModel.isToggleOn
         
         contentView.alpha = viewModel.isEnabled ? 1.0 : 0.5
         isUserInteractionEnabled = viewModel.isEnabled
         
-        switch viewModel.style {
-        case .navigable:
-            valueLabel.isHidden = viewModel.valueText == nil
-            toggleSwitch.isHidden = true
-            accessoryType = .disclosureIndicator
-            selectionStyle = viewModel.isEnabled ? .default : .none
-            
-            titleLabel.textColor = .label
-            subtitleLabel.textColor = .secondaryLabel
-            optionImageView.tintColor = .label
-            
-        case .toggle:
-            valueLabel.isHidden = true
-            toggleSwitch.isHidden = false
-            toggleSwitch.isEnabled = viewModel.isEnabled
-            accessoryType = .none
-            selectionStyle = .none
-            
-            titleLabel.textColor = .label
-            subtitleLabel.textColor = .secondaryLabel
-            optionImageView.tintColor = .label
-            
-        case .disabled:
-            valueLabel.isHidden = viewModel.valueText == nil
-            toggleSwitch.isHidden = true
-            accessoryType = .none
-            selectionStyle = .none
-            
-            titleLabel.textColor = .secondaryLabel
-            subtitleLabel.textColor = .tertiaryLabel
-            optionImageView.tintColor = .secondaryLabel
-            
-        default:
-            break
-        }
     }
     
     // MARK: - Actions
@@ -214,20 +149,16 @@ final class SecurityOptionTableViewCell: UITableViewCell {
     }
 }
 
-#Preview("SecurityOptionTableViewCell") {
+#Preview("CustomizeDashboardTableViewCell") {
     
-    let viewModel = SecurityOptionTableViewModel(
-        option: .biometricAuthentication,
+    let viewModel = CustomizeDashboardTableViewModel(
+        id: UUID(),
         title: "Title",
-        subtitle: "Subtitle",
-        imageName: nil,
-        style: .toggle,
-        valueText: "Value text",
-        isToggleOn: false,
-        isEnabled: true
+        subtitle: "A brief description of the widget",
+        isToggleOn: true
     )
     
-    let view = SecurityOptionTableViewCell()
+    let view = CustomizeDashboardTableViewCell()
     
     view.configure(with: viewModel)
     

@@ -23,7 +23,7 @@ struct CheckBalanceIntent: AppIntent {
     
     func perform() async throws -> some IntentResult & ProvidesDialog {
         
-        let useCase = DependenciesContainer.shared.getDashboardUseCase()
+        let useCase = DependenciesContainer.shared.getStatisticsUseCase()
         
         let userDefaults = UserDefaultsManager.shared
         
@@ -36,14 +36,14 @@ struct CheckBalanceIntent: AppIntent {
         
         do {
             
-            let request = DashboardRequest(
+            let request = StatisticsRequest(
                 vaultID: vaultID
             )
             
             let response = try useCase.execute(request)
             
             let formattedBalance = LocalizedDecimalFormatter(numberStyle: .currency)
-                .string(from: response.dashboardMetrics.balance.currentBalance) ?? "\(response.dashboardMetrics.balance.currentBalance)"
+                .string(from: response.metrics.balance.currentBalance) ?? "\(response.metrics.balance.currentBalance)"
             
             let message: String = "The current balance of Vault \(response.vault) is \(formattedBalance)"
             
