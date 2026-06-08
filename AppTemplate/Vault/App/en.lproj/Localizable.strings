@@ -1,0 +1,327 @@
+/*
+  Localizable.strings
+  Vault
+
+  Generated from L10n.swift
+*/
+
+/* Common */
+"common.general.vault" = "Vault";
+"common.general.error" = "Error";
+"common.general.success" = "Success";
+"common.general.noData" = "No data";
+"common.general.errorFetchingData" = "There was an error fetching data.";
+"common.general.ok" = "Ok";
+"common.general.delete" = "Delete";
+"common.general.edit" = "Edit";
+"common.general.save" = "Save";
+"common.general.expense" = "Expense";
+"common.general.income" = "Income";
+"common.general.optional" = "Optional";
+"common.general.cancel" = "Cancel";
+"common.general.received" = "Received";
+"common.general.expected" = "Expected";
+"common.general.cancelled" = "Cancelled";
+"common.general.disable" = "Disable";
+
+/* Onboarding */
+"onboarding.offline.title" = "Designed to work offline";
+"onboarding.offline.description" = "No registration required. Experience every feature securely and completely offline.";
+"onboarding.trackSpending.title" = "Track your spending";
+"onboarding.trackSpending.description" = "Understand where your money goes every month and year.";
+"onboarding.personalizeCategories.title" = "Personalize with categories";
+"onboarding.personalizeCategories.description" = "Create custom categories and assign them colors that fit your style.";
+"onboarding.trackReimbursements.title" = "Track reimbursements";
+"onboarding.trackReimbursements.description" = "Keep shared expenses under control. Record reimbursements and automatically reflect what you actually spent.";
+"onboarding.multipleVaults.title" = "Multiple Vaults";
+"onboarding.multipleVaults.description" = "Organize different money with separate Vaults.";
+"onboarding.saveSmarter.title" = "Save smarter";
+"onboarding.saveSmarter.description" = "Gain valuable insights into your spending habits and financial progress.";
+"onboarding.cta.title" = "Create Vault";
+
+/* Vaults */
+"vaults.page.title" = "List of Vaults";
+"vaults.page.subtitle" = "Choose a Vault";
+"vaults.action.favorite" = "Favorite";
+"vaults.action.export" = "Export";
+"vaults.error.fetchingVaults" = "There was an error fetching Vaults. Please try again.";
+"vaults.error.deletingVault" = "There was an error deleting Vault. Please try again.";
+"vaults.error.exportingVault" = "There was an error exporting Vault. Please try again.";
+
+/* Create Vault */
+"vault.create.page.title" = "Create Vault";
+"vault.create.page.subtitle" = "";
+"vault.create.field.name" = "Name";
+"vault.create.field.enterName" = "Enter name";
+"vault.create.field.initialAmount" = "Initial amount";
+"vault.create.field.setupInitialAmount" = "Setup initial amount";
+"vault.create.field.enterInitialAmount" = "Enter initial amount";
+"vault.create.field.importOperations" = "Import operations";
+"vault.create.field.importFromCsv" = "import from CSV";
+"vault.create.field.csvFile" = "CSV file";
+"vault.create.validation.nameRequired" = "Name can't be empty";
+"vault.create.validation.initialAmountRequired" = "Amount can't be empty";
+"vault.create.validation.fileRequired" = "File can't be empty";
+"vault.create.error.nameAlreadyExists" = "A vault with this name already exists.";
+"vault.create.error.creatingVault" = "There was an error updating Vault. Please try again.";
+
+/* Edit Vault */
+"vault.edit.page.title" = "Edit Vault";
+"vault.edit.error.nameAlreadyExists" = "A vault with this name already exists.";
+"vault.edit.error.updatingVault" = "There was an error updating Vault. Please try again.";
+
+/* Overview */
+"dashboard.overview.page.title" = "Overview";
+"dashboard.overview.customizeDashboard" = "Customize Dashboard";
+"dashboard.overview.mode.yearly" = "Yearly";
+"dashboard.overview.mode.monthly" = "Monthly";
+"dashboard.overview.emptyData.description" = "There is no data to calculate Vault metrics.\nYou can add financial data in Operations.";
+"dashboard.overview.emptyWidget.title" = "No widgets";
+"dashboard.overview.emptyWidget.description" = "Choose the information you want to see in your Dashboard.";
+"dashboard.overview.error.fetchingConfiguration" = "There was an error fetching dashboard configuration";
+"dashboard.overview.yourIncome" = "Your income";
+"dashboard.overview.keyMetrics" = "Key metrics";
+"dashboard.overview.averageIncome" = "Average income";
+"dashboard.overview.averageSpent" = "Average spent";
+"dashboard.overview.totalSaved" = "Total saved";
+"dashboard.overview.savingEfficiency" = "Saving efficiency";
+"dashboard.overview.totalIncome" = "Total income";
+"dashboard.overview.totalExpenses" = "Total expenses";
+"dashboard.overview.mainIncome" = "Main income";
+"dashboard.overview.otherIncome" = "Other income";
+"dashboard.overview.yourExpenses" = "Your expenses";
+"dashboard.overview.spendingBreakdown" = "Spending breakdown";
+"dashboard.overview.incomeBreakdown" = "Income breakdown";
+"dashboard.overview.pendingReimbursements.title" = "Pending Reimbursements";
+"dashboard.overview.pendingReimbursements.body" = "You are currently expecting reimbursements with a total value of %@";
+"dashboard.overview.spendingDistribution" = "Where your money went";
+"dashboard.overview.incomeDistribution" = "Where your money comes from";
+
+/* Customize Dashboard */
+"dashboard.customize.page.title" = "Customize Dashboard";
+"dashboard.customize.totalIncomeAndSpending.title" = "Total income and spending";
+"dashboard.customize.totalIncomeAndSpending.description" = "A card displaying total income and spent";
+"dashboard.customize.mainAndOtherIncome.title" = "Main and other income";
+"dashboard.customize.mainAndOtherIncome.description" = "A card displaying main and other income";
+"dashboard.customize.pieChartSpendingCategories.title" = "Pie chart spending categories";
+"dashboard.customize.pieChartSpendingCategories.description" = "A pie chart with spending categories";
+"dashboard.customize.pieChartIncomeCategories.title" = "Pie chart income categories";
+"dashboard.customize.pieChartIncomeCategories.description" = "A pie chart with income categories";
+"dashboard.customize.barChartSpendingCategories.title" = "Bar chart spending categories";
+"dashboard.customize.barChartSpendingCategories.description" = "A bar chart with spending categories";
+"dashboard.customize.barChartIncomeCategories.title" = "Bar chart income categories";
+"dashboard.customize.barChartIncomeCategories.description" = "A bar chart with income categories";
+"dashboard.customize.keyMetrics.title" = "Key metrics";
+"dashboard.customize.keyMetrics.description" = "A card with metrics such as average and saving efficiency";
+"dashboard.customize.incomeBreakdown.title" = "Income breakdown";
+"dashboard.customize.incomeBreakdown.description" = "A breakdown of all income categories";
+"dashboard.customize.spendingBreakdown.title" = "Spending breakdown";
+"dashboard.customize.spendingBreakdown.description" = "A breakdown of all spending categories";
+"dashboard.customize.unknownTitle" = "Unknown";
+"dashboard.customize.error.fetchingWidgets" = "There was an error fetching widgets. Try again later.";
+"dashboard.customize.error.updatingWidgetVisibility" = "There was an error editing the visibility of the widget. Try again later.";
+
+/* Breakdown */
+"dashboard.breakdown.income.page.title" = "Income";
+"dashboard.breakdown.spending.page.title" = "Spending";
+"dashboard.breakdown.title" = "Breakdown";
+"dashboard.breakdown.mainIncome" = "Main income";
+"dashboard.breakdown.otherIncome" = "Other income";
+
+/* Feedback */
+"feedback.page.title" = "Shake for feedback";
+"feedback.page.subtitle" = "Shake your device to provide feedback, either suggestions or report a bug.";
+
+/* Operations */
+"operations.page.title" = "Operations";
+"operations.action.fromCamera" = "From camera";
+"operations.empty.title" = "No Operations";
+"operations.empty.message" = "You can add operations in the plus button.";
+"operations.error.fetchingOperations" = "There was an error fetching operations.";
+"operations.error.deletingOperation" = "There was an error deleting the operation.";
+
+/* Operation Detail */
+"operation.detail.page.title" = "";
+"operation.detail.page.subtitle" = "";
+"operation.detail.type" = "Type";
+"operation.detail.notes" = "Notes";
+"operation.detail.amount" = "Operation amount";
+"operation.detail.totalReimbursed" = "Total reimbursed";
+"operation.detail.remaining" = "Remaining";
+"operation.detail.operationDetail" = "Operation detail";
+"operation.detail.reimbursements" = "Reimbursements";
+"operation.detail.summary" = "Summary";
+"operation.detail.error.updatingReimbursementStatus" = "There was an error updating the status of the Reimbursement. Try again.";
+"operation.detail.error.deletingOperation" = "There was an error deleting the operation. Try again.";
+
+/* Add Operation */
+"operation.add.page.title" = "Add operation";
+"operation.add.review.title" = "Review data";
+"operation.add.review.message" = "Information has been automatically populated from the receipt. Review data before saving.";
+"operation.add.type" = "Type";
+"operation.add.category" = "Category";
+"operation.add.amount" = "Amount";
+"operation.add.enterAmount" = "Enter amount";
+"operation.add.description" = "Description";
+"operation.add.enterDescription" = "Enter description";
+"operation.add.date" = "Date";
+"operation.add.reimbursement" = "Reimbursement";
+"operation.add.isSplitBill" = "Is a split bill";
+"operation.add.categoryRequired" = "Category can't be empty";
+"operation.add.amountRequired" = "Amount can't be empty";
+"operation.add.amountInvalid" = "Amount is invalid";
+"operation.add.descriptionRequired" = "Description can't be empty";
+"operation.add.removeReimbursementToEditAmount" = "Remove reimbursements to edit amount";
+"operation.add.addReimbursement" = "Add reimbursement";
+"operation.add.error.fetchingCategories" = "There was an error while fetching categories. Try again.";
+"operation.add.error.updatingReimbursementStatus" = "There was an error updating the status of the Reimbursement. Try again.";
+"operation.add.error.creatingOperation" = "There was an error creating the operation. Try again.";
+
+/* Edit Operation */
+"operation.edit.page.title" = "Edit operation";
+"operation.edit.error.updatingOperation" = "There was an error updating the operation. Try again.";
+"operation.edit.error.deletingReimbursement" = "There wasn error deleting the reimbursement. Try again.";
+
+/* Add Reimbursement */
+"reimbursement.add.page.title" = "Add reimbursement";
+"reimbursement.add.page.subtitle" = "";
+"reimbursement.add.maximumTitle" = "Maximum reimbursement allowed";
+"reimbursement.add.maximumMessage" = "You can add a reimbursement up to %@";
+"reimbursement.add.status" = "Status";
+"reimbursement.add.amount" = "Reimbursing amount";
+"reimbursement.add.enterAmount" = "Enter amount";
+"reimbursement.add.title" = "Title";
+"reimbursement.add.enterTitle" = "Enter title";
+"reimbursement.add.depositVault" = "Deposit Vault";
+"reimbursement.add.chooseDepositVault" = "Choose deposit Vault";
+"reimbursement.add.depositVaultFeedback.title" = "Deposit Vault different from source Vault";
+"reimbursement.add.depositVaultFeedback.message" = "You selected a different Vault for the deposit. You will receive an income operation in the selected deposit Vault.";
+"reimbursement.add.depositIncomeCategory" = "Deposit income category";
+"reimbursement.add.chooseDepositCategory" = "Choose deposit category";
+"reimbursement.add.amountRequired" = "Amount can't be empty";
+"reimbursement.add.amountGreaterThanZero" = "Amount should be greater than zero";
+"reimbursement.add.amountInferiorOrEqual" = "Amount should be less or equal the maximum amount";
+"reimbursement.add.depositVaultRequired" = "Deposit Vault can't be empty";
+"reimbursement.add.depositCategoryRequired" = "Deposit category can't be empty";
+"reimbursement.add.error.fetchingVaults" = "There was an error while fetching Vaults. Please try again.";
+"reimbursement.add.error.fetchingVaultCategories" = "There was an error while fetching categories from Vault %@. Please try again.";
+"reimbursement.add.error.savingReimbursement" = "There was an error while saving the Reimbursement. Please try again.";
+
+/* Edit Reimbursement */
+"reimbursement.edit.page.title" = "Edit reimbursement";
+"reimbursement.edit.page.subtitle" = "";
+
+/* OCR */
+"ocr.page.title" = "";
+"ocr.page.subtitle" = "";
+
+/* Categories */
+"categories.page.title" = "Categories";
+"categories.sort.ascending" = "Ascending";
+"categories.sort.descending" = "Descending";
+"categories.sort.type" = "Type";
+"categories.numberOfOperations" = "%@ • %d operation(s)";
+"categories.error.fetchingCategories" = "There was an error while fetching categories. Please try again.";
+"categories.error.deletingCategory" = "There was an error while deleting the category. Please try again.";
+"categories.empty.title" = "No categories";
+"categories.empty.description" = "You can add categories in the plus button";
+
+/* Add Category */
+"category.add.page.title" = "Add category";
+"category.add.type" = "Type";
+"category.add.emoji" = "Emoji";
+"category.add.enterEmoji" = "Enter emoji or a single letter";
+"category.add.name" = "Category name";
+"category.add.enterName" = "Enter category name";
+"category.add.color" = "Color";
+"category.add.colorDescription" = "Color for category";
+"category.add.plotting" = "Plotting";
+"category.add.showInPlot" = "Show in plot";
+"category.add.mainIncome" = "Main income";
+"category.add.isMainSourceOfIncome" = "Is main source of income";
+"category.add.validation.nameRequired" = "Category name can't be empty";
+"category.add.error.addingCategory" = "There was an error adding the category. Please try again.";
+"category.add.error.alreadyExists" = "Category with name %@ already exists";
+
+/* Edit Category */
+"category.edit.page.title" = "Edit category";
+"category.edit.error.updatingCategory" = "There was an error updating the category. Please try again.";
+"category.edit.error.alreadyExists" = "Category with name %@ already exists";
+
+/* Category Detail */
+"category.detail.page.title" = "";
+"category.detail.page.subtitle" = "";
+"category.detail.type" = "Type";
+"category.detail.notes" = "Notes";
+"category.detail.operationsCount" = "Operations count";
+"category.detail.error.deletingCategory" = "There was an error deleting the category. Please try again.";
+
+/* Settings */
+"settings.page.title" = "Settings";
+"settings.page.subtitle" = "";
+"settings.settings.vaultsOption.title" = "Vaults";
+"settings.settings.vaultsOption.description" = "Manage your vaults";
+"settings.settings.securityOption.title" = "Security";
+"settings.settings.securityOption.description" = "PIN and biometric authentication";
+"settings.settings.backupOption.title" = "Backup";
+"settings.settings.backupOption.description" = "Backup data with iCloud";
+"settings.settings.aboutOption.title" = "About";
+"settings.settings.aboutOption.description" = "App version and information";
+"settings.settings.deleteInformation" = "Delete information";
+"settings.settings.deleteInformationDisclaimer" = "All information regarding Vaults, Operations and Categories will be deleted.";
+"settings.settings.error.deletingData" = "There was an error deleting data. Please try again.";
+
+/* Security */
+"security.page.title" = "Security";
+"security.page.subtitle" = "";
+"security.disablePin" = "Disable PIN";
+"security.disablePinMessage" = "By disabling PIN you will remove any form of authentication when accessing the Vault.";
+"security.pinOption.title" = "PIN";
+"security.pinOption.description" = "PIN authentication when app launches";
+"security.biometricOption.title" = "Biometric";
+"security.biometricOption.description" = "Use biometrics to unlock";
+"security.options" = "Options";
+"security.autoLockOption.title" = "Auto-Lock";
+"security.immediately" = "Immediately";
+"security.never" = "Never";
+"security.requiresAuthenticationOption.title" = "Requires authentication";
+"security.requiresAuthenticationOption.description" = "Always ask for authentication when app launches";
+"security.authentication" = "Authentication";
+"security.option" = "Option";
+
+/* Create PIN */
+"security.pin.create.page.title" = "Create PIN";
+"security.pin.create.numberOfDigits" = "Enter a 4 digit PIN";
+
+/* About */
+"about.page.title" = "About";
+"about.page.subtitle" = "";
+"about.privacyOption.title" = "Privacy & Data";
+"about.privacyOption.description" = "Learn how we store your data";
+"about.dashboardOption.title" = "Dashboard";
+"about.dashboardOption.description" = "Metrics and analytics";
+"about.vaultsOption.title" = "Vaults";
+"about.vaultsOption.description" = "Setup and manage your Vaults";
+"about.categoriesOption.title" = "Categories";
+"about.categoriesOption.description" = "Create and manage categories";
+"about.operationsOption.title" = "Operations";
+"about.operationsOption.description" = "Register and manage operations";
+"about.versionOption.title" = "Version";
+"about.general" = "General";
+"about.features" = "Features";
+"about.info" = "Info";
+"about.pageFooter" = "Built with ❤️ in Portugal";
+
+/* Chat */
+"chat.page.title" = "Assistant";
+"chat.page.subtitle" = "";
+"chat.firstMessage" = "Hi! I’m Vault’s Financial Assistant. Private by design—everything runs on your device. I’m great for quick insights and everyday financial questions.";
+"chat.askVault" = "Ask Vault";
+"chat.send" = "Send";
+
+/* Tab */
+"tab.overview" = "Overview";
+"tab.operations" = "Operations";
+"tab.categories" = "Categories";
+"tab.settings" = "Settings";
+"tab.demo" = "Demo";

@@ -90,7 +90,7 @@ final class VaultFormViewController: VaultBaseViewController {
         
         button.apply(
             style: ButtonStyles.primary,
-            title: String(localized: LocalizedStringResource.CreateVault.save)
+            title: L10n.Common.save
         )
         
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
@@ -149,7 +149,7 @@ final class VaultFormViewController: VaultBaseViewController {
             
             switch error {
             case .showAlert(let message):
-                self.presentAlert(with:"Error", and: message)
+                self.presentAlert(with: L10n.Common.error, and: message)
 
             case .silent:
                 break

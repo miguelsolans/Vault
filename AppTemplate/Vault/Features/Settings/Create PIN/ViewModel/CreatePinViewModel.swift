@@ -46,8 +46,8 @@ final class CreatePinViewModel: NSObject {
     
     lazy var pinViewModel: PinViewModel = {
         let viewModel = PinViewModel(
-            title: NSLocalizedString("create_pin_title", tableName: "CreatePIN", comment: ""),
-            subtitle: NSLocalizedString("create_pin_number_of_digits", tableName: "CreatePIN", comment: ""),
+            title: L10n.CreatePIN.pageTitle,
+            subtitle: L10n.CreatePIN.numberOfDigits,
             numberOfDigits: 4,
             hasFaceID: false
         )

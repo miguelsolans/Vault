@@ -50,9 +50,9 @@ final class CategoryFormViewModel: NSObject {
     
     public var title: String {
         if categoryToEdit != nil {
-            return NSLocalizedString("edit_category_title", tableName: "AddCategory", comment: "")
+            return L10n.EditCategory.pageTitle
         }
-        return NSLocalizedString("add_category_title", tableName: "AddCategory", comment: "")
+        return L10n.AddCategory.pageTitle
     }
     
     public var subtitle: String { vault.name }
@@ -60,10 +60,10 @@ final class CategoryFormViewModel: NSObject {
     lazy var operationTypeInputViewModel: SegmentedInputViewModel = {
         let selectedValue = selectedIndex(for: categoryToEdit?.operationType ?? .expense)
         return SegmentedInputViewModel(
-            title: NSLocalizedString("add_category_operation_type", tableName: "AddCategory", comment: ""),
+            title: L10n.AddCategory.type,
             options: [
-                NSLocalizedString("add_category_expense", tableName: "AddCategory", comment: ""),
-                NSLocalizedString("add_category_income", tableName: "AddCategory", comment: "")
+                L10n.Common.expense,
+                L10n.Common.income
             ],
             selectedIndex: selectedValue,
             isEditable: categoryToEdit == nil,
@@ -75,9 +75,9 @@ final class CategoryFormViewModel: NSObject {
     
     lazy var emojiInputViewModel: TextFieldInputViewModel = {
         TextFieldInputViewModel(
-            title: "Emoji",
+            title: L10n.AddCategory.emoji,
             isEditable: true,
-            placeholder: "Emoji placeholder",
+            placeholder: L10n.AddCategory.enterEmoji,
             subtitle: nil,
             inputText: categoryToEdit?.emoji ?? "",
             textType: .text,
@@ -88,9 +88,9 @@ final class CategoryFormViewModel: NSObject {
     
     lazy var categoryNameInputViewModel: TextFieldInputViewModel = {
         TextFieldInputViewModel(
-            title: NSLocalizedString("add_category_name", tableName: "AddCategory", comment: ""),
+            title: L10n.AddCategory.categoryName,
             isEditable: true,
-            placeholder: NSLocalizedString("add_category_enter_category_name", tableName: "AddCategory", comment: ""),
+            placeholder: L10n.AddCategory.enterCategoryName,
             subtitle: nil,
             inputText: categoryToEdit?.title ?? "",
             textType: .text,
@@ -100,33 +100,33 @@ final class CategoryFormViewModel: NSObject {
 
     lazy var colorInputViewModel: ColorPickerInputViewModel = {
         ColorPickerInputViewModel(
-            title: NSLocalizedString("add_category_color", tableName: "AddCategory", comment: ""),
+            title: L10n.AddCategory.color,
             selectedColor: UIColor(hexString: categoryToEdit?.color ?? String.randomHexColor()) ?? .green,
             isEditable: true,
-            placeholder: "Color for plotting",
-            subtitle: "Optional",
+            placeholder: L10n.AddCategory.categoryColor,
+            subtitle: L10n.Common.optional,
             isMandatory: false
         )
     }()
     
     lazy var plotSwitchInputViewModel: SwitchInputViewModel = {
         SwitchInputViewModel(
-            title: NSLocalizedString("add_category_vault_plotting", tableName: "AddCategory", comment: ""),
+            title: L10n.AddCategory.plotting,
             isOn: categoryToEdit?.visibleInPlot ?? false,
             isEditable: true,
-            placeholder: NSLocalizedString("add_category_show_in_plot", tableName: "AddCategory", comment: ""),
-            subtitle: NSLocalizedString("add_category_show_in_plot_subtitle", tableName: "AddCategory", comment: ""),
+            placeholder: L10n.AddCategory.showInPlot,
+            subtitle: L10n.AddCategory.showInPlot,
             isMandatory: false
         )
     }()
     
     lazy var mainIncomeSwitchInputViewModel: SwitchInputViewModel = {
         SwitchInputViewModel(
-            title: "Main income",
+            title: L10n.AddCategory.mainIncome,
             isOn: categoryToEdit?.isMainIncome ?? false,
             isEditable: true,
-            placeholder: "Is main source of income",
-            subtitle: "Subtitle",
+            placeholder: L10n.AddCategory.isMainSourceOfIncome,
+            subtitle: "",
             isMandatory: false
         )
     }()
@@ -219,10 +219,11 @@ extension CategoryFormViewModel {
             delegate?.didUpdateCategory(self)
             
         } catch CategoryError.categoryAlreadyExists {
-            categoryNameInputViewModel.feedback = .error("Category with name \(name) already exists")
+            let message = String(format: L10n.EditCategory.errorCategoryAlreadyExists, name)
+            categoryNameInputViewModel.feedback = .error(message)
             onError?(.silent)
         } catch {
-            onError?(.showAlert(message: "There was an error updating category"))
+            onError?(.showAlert(message: L10n.EditCategory.errorUpdatingCategory))
         }
     }
     
@@ -252,10 +253,11 @@ extension CategoryFormViewModel {
             delegate?.didAddCategory(self)
             
         } catch CategoryError.categoryAlreadyExists {
-            categoryNameInputViewModel.feedback = .error("Category with name \(name) already exists")
+            let message = String(format: L10n.AddCategory.errorCategoryAlreadyExists, name)
+            categoryNameInputViewModel.feedback = .error(message)
             onError?(.silent)
         } catch {
-            onError?(.showAlert(message: "There was an error adding the category"))
+            onError?(.showAlert(message: L10n.AddCategory.errorAddingCategory))
         }
 
     }
@@ -281,7 +283,7 @@ extension CategoryFormViewModel {
         let trimmedName = categoryNameInputViewModel.inputText.trimmingCharacters(in: .whitespacesAndNewlines)
         
         guard !trimmedName.isEmpty else {
-            categoryNameInputViewModel.feedback = .error(NSLocalizedString("add_category_name_invalid", tableName: "AddCategory", comment: ""))
+            categoryNameInputViewModel.feedback = .error(L10n.AddCategory.categoryNameRequired)
             return false
         }
         

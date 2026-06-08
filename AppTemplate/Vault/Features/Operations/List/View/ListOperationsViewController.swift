@@ -55,7 +55,6 @@ final class ListOperationsViewController: VaultBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        localizationTableName = "ListOperations";
         setupUI()
         setupBindings()
     }
@@ -87,7 +86,7 @@ final class ListOperationsViewController: VaultBaseViewController {
         viewModel.onError = { [weak self] message in
             guard let self = self else { return }
             
-            self.presentAlert(with: "Error", and: message);
+            self.presentAlert(with: L10n.Common.error, and: message);
         }
     }
 }
@@ -140,11 +139,11 @@ extension ListOperationsViewController {
         
         var childMenus: [UIMenu] = []
         
-        let addExpenseAction = UIAction(title: "Expense", image: UIImage(systemName: "arrow.up"), handler: { _ in
+        let addExpenseAction = UIAction(title: L10n.Common.expense, image: UIImage(systemName: "arrow.up"), handler: { _ in
             self.didTapAddExpense()
         })
         
-        let addIncomeAction = UIAction(title: "Income", image: UIImage(systemName: "arrow.down"), handler: { _ in
+        let addIncomeAction = UIAction(title: L10n.Common.income, image: UIImage(systemName: "arrow.down"), handler: { _ in
             self.didTapAddIncome()
         })
         
@@ -153,7 +152,7 @@ extension ListOperationsViewController {
         )
         
         if viewModel.isAddFromCameraAvailable {
-            let fromCameraAction = UIAction(title: "From camera", image: UIImage(systemName: "camera"), handler: { _ in
+            let fromCameraAction = UIAction(title: L10n.Operations.fromCamera, image: UIImage(systemName: "camera"), handler: { _ in
                 self.didTapAddFromCamera()
             })
             
@@ -187,8 +186,8 @@ extension ListOperationsViewController {
     private func noOperationsEmptyContentConfiguration() -> EmptyContentConfiguration {
         EmptyContentConfiguration(
             image: UIImage(systemName: "list.bullet"),
-            title: "No Operations",
-            message: "You can add operations in the plus button"
+            title: L10n.Operations.emptyTitle,
+            message: L10n.Operations.emptyMessage
         )
     }
 }
@@ -238,12 +237,12 @@ extension ListOperationsViewController: UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = makeConfirmedContextualAction(
-            title: localized("list_operations_delete")
+            title: L10n.Common.delete
         ) { [weak self] in
             self?.viewModel.didTapDeleteOperation(at: indexPath)
         }
         
-        let editAction = UIContextualAction(style: .normal, title: localized("list_operations_edit")) { [weak self] _, _, completion in
+        let editAction = UIContextualAction(style: .normal, title: L10n.Common.edit) { [weak self] _, _, completion in
             self?.viewModel.didTapEditOperation(at: indexPath)
             completion(true)
         }
@@ -256,14 +255,14 @@ extension ListOperationsViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         
         let deleteAction = makeConfirmedMenuAction(
-            title: "Delete",
+            title: L10n.Common.delete,
             image: UIImage(systemName: "trash")
         ) { [weak self] in
             guard let self = self else { return }
             self.viewModel.didTapDeleteOperation(at: indexPath)
         }
         
-        let editAction = UIAction(title: "Edit", image: UIImage(systemName: "pencil")) { [weak self] _ in
+        let editAction = UIAction(title: L10n.Common.edit, image: UIImage(systemName: "pencil")) { [weak self] _ in
             guard let self = self else { return }
             self.viewModel.didTapEditOperation(at: indexPath)
         }

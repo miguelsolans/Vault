@@ -16,7 +16,7 @@ extension VaultBaseViewController {
             preferredStyle: .alert
         )
         
-        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+        let okAction = UIAlertAction(title: L10n.Common.ok, style: .default) { _ in
             onDismiss?()
         }
         

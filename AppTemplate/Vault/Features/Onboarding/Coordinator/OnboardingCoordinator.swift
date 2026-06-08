@@ -48,37 +48,37 @@ final class OnboardingCoordinator: BaseCoordinator {
         let configuration = MarketingConfiguration(
             pageTitle: "",
             pageSubtitle: "",
-            primaryAction: .init(title: "Create Vault", action: .appFeature(.createVault)),
+            primaryAction: .init(title: L10n.Onboarding.ctaTitle, action: .appFeature(.createVault)),
             items: [
                 /*.init(
                     imageName: "onboarding_vault",
-                    title: "Designed to work offline",
-                    subtitle: "No registration required. Experience every feature securely and completely offline."
+                    title: L10n.Onboarding.offlineTitle,
+                    subtitle: L10n.Onboarding.offlineDescription
                 ),*/
                 .init(
                     imageName: "onboarding_money_flow",
-                    title: "Track your spending",
-                    subtitle: "Understand where your money goes every month and year."
+                    title: L10n.Onboarding.trackSpendingTitle,
+                    subtitle: L10n.Onboarding.trackSpendingDescription
                 ),
                 .init(
                     imageName: "onboarding_list_categories",
-                    title: "Personalize with categories",
-                    subtitle: "Create custom categories and assign them colors that fit your style."
+                    title: L10n.Onboarding.personalizeCategoriesTitle,
+                    subtitle: L10n.Onboarding.personalizeCategoriesDescription
                 ),
                 .init(
                     imageName: "onboarding_reimbursements",
-                    title: "Track reimbursements",
-                    subtitle: "Keep shared expenses under control. Record reimbursements and automatically reflect what you actually spent."
+                    title: L10n.Onboarding.trackReimbursementsTitle,
+                    subtitle: L10n.Onboarding.trackReimbursementsDescription
                 ),
                 .init(
                     imageName: "onboarding_list_vaults",
-                    title: "Multiple Vaults",
-                    subtitle: "Organize different money with separate Vaults."
+                    title: L10n.Onboarding.multipleVaultsTitle,
+                    subtitle: L10n.Onboarding.multipleVaultsDescription
                 ),
                 .init(
                     imageName: "onboarding_monthly_statistics",
-                    title: "Save smarter",
-                    subtitle: "Gain valuable insights into your spending habits and financial progress."
+                    title: L10n.Onboarding.saveSmarterTitle,
+                    subtitle: L10n.Onboarding.saveSmarterDescription
                 ),
             ]
         )

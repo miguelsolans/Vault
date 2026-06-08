@@ -126,7 +126,7 @@ final class OperationFormViewController: VaultBaseViewController {
     private lazy var addReimbursementButton: UIButton = {
         let button = UIButton(type: .system)
         
-        button.apply(style: ButtonStyles.secondary, title: "Add reimbursement")
+        button.apply(style: ButtonStyles.secondary, title: L10n.AddOperation.addReimbursement)
         
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -140,7 +140,7 @@ final class OperationFormViewController: VaultBaseViewController {
         
         button.apply(
             style: ButtonStyles.primary,
-            title: "Save"
+            title: L10n.Common.save
         )
         
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
@@ -356,7 +356,7 @@ extension OperationFormViewController: UITableViewDataSource, UITableViewDelegat
         var actions: [UIContextualAction] = []
         
         if viewModel.isDeleteReimbursementAvailable(for: indexPath) {
-            let action = makeConfirmedContextualAction(title: "Delete") { [weak self] in
+            let action = makeConfirmedContextualAction(title: L10n.Common.delete) { [weak self] in
                 self?.viewModel.didTapDeleteReimbursement(at: indexPath)
             }
             
@@ -372,7 +372,7 @@ extension OperationFormViewController: UITableViewDataSource, UITableViewDelegat
         var actions: [UIContextualAction] = []
         
         if viewModel.isLeadingAvailable(.expected, for: indexPath) {
-            let action = UIContextualAction(style: .normal, title: "Expected") { [weak self] _, _, completion in
+            let action = UIContextualAction(style: .normal, title: L10n.Common.expected) { [weak self] _, _, completion in
                 self?.viewModel.didTapExpectedReimbursementStatus(at: indexPath)
                 completion(true)
             }
@@ -384,7 +384,7 @@ extension OperationFormViewController: UITableViewDataSource, UITableViewDelegat
         
         
         if viewModel.isLeadingAvailable(.received, for: indexPath) {
-            let action = UIContextualAction(style: .normal, title: "Received") { [weak self] _, _, completion in
+            let action = UIContextualAction(style: .normal, title: L10n.Common.received) { [weak self] _, _, completion in
                 self?.viewModel.didTapReceivedReimbursementStatus(at: indexPath)
                 completion(true)
             }
@@ -395,7 +395,7 @@ extension OperationFormViewController: UITableViewDataSource, UITableViewDelegat
         }
         
         if viewModel.isLeadingAvailable(.cancelled, for: indexPath) {
-            let action = UIContextualAction(style: .normal, title: "Cancelled") { [weak self] _, _, completion in
+            let action = UIContextualAction(style: .normal, title: L10n.Common.cancelled) { [weak self] _, _, completion in
                 self?.viewModel.didTapCancelledReimbursementStatus(at: indexPath)
                 completion(true)
             }
@@ -430,7 +430,7 @@ extension OperationFormViewController {
             
             switch error {
             case .showAlert(let message):
-                self.presentAlert(with:"Error", and: message)
+                self.presentAlert(with: L10n.Common.error, and: message)
 
             case .silent:
                 break

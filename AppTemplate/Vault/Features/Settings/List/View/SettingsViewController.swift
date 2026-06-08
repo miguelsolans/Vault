@@ -41,7 +41,8 @@ final class SettingsViewController: VaultBaseViewController {
     }
     
     override func setupUI() {
-        title = NSLocalizedString("settings_title", tableName: "Settings", comment: "")
+        title = viewModel.title
+        navigationItem.subtitle = viewModel.subtitle
         view.backgroundColor = UIColor(resource: .background)
         setupTableView()
         setupConstraints()
@@ -59,7 +60,7 @@ final class SettingsViewController: VaultBaseViewController {
             
             switch feedback {
             case .showAlert(let message):
-                self.presentAlert(with:"Error", and: message)
+                self.presentAlert(with: L10n.Common.error, and: message)
 
             case .silent:
                 break
@@ -129,10 +130,10 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         guard cellViewModel.option != .deleteAllData else {
             presentConfirmation(
                 .delete(
-                    title: NSLocalizedString("settings_delete_information", tableName: "Settings", comment: ""),
-                    message: NSLocalizedString("settings_delete_information_message", tableName: "Settings", comment: ""),
-                    confirmTitle: NSLocalizedString("settings_delete_action", tableName: "Settings", comment: ""),
-                    cancelTitle: NSLocalizedString("settings_delete_cancel", tableName: "Settings", comment: "")
+                    title: L10n.Settings.deleteInformation,
+                    message: L10n.Settings.deleteInformationDisclaimer,
+                    confirmTitle: L10n.Common.delete,
+                    cancelTitle: L10n.Common.cancel
                 )
             ) { [weak self] in
                 guard let self = self else { return }

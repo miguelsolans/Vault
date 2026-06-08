@@ -61,7 +61,7 @@ final class DashboardViewModel: NSObject {
     
     public var title: String {
         get {
-            "Overview"
+            L10n.Overview.pageTitle
         }
     }
 
@@ -169,7 +169,7 @@ extension DashboardViewModel {
             getStatistics()
             
         } catch {
-            onError?(.showAlert(message: "There was an error fetching dashboard configuration"))
+            onError?(.showAlert(message: L10n.Overview.errorDashboardConfiguration))
         }
     }
     
@@ -195,7 +195,7 @@ extension DashboardViewModel {
             )
             
         } catch {
-            onError?(.showAlert(message: "There was an error fetching data."))
+            onError?(.showAlert(message: L10n.Common.errorFetchingData))
         }
         
         updateUI?()
@@ -321,7 +321,7 @@ extension DashboardViewModel {
         var items: [AmountCardItemViewModel] = []
         
         let totalIncomeViewModel = AmountCardItemViewModel(
-            title: "Total income",
+            title: L10n.Overview.totalIncome,
             amount: metrics.cashFlow.totalIncome,
             type: .income
         )
@@ -335,7 +335,7 @@ extension DashboardViewModel {
         items.append(totalIncomeViewModel)
         
         let expenseViewModel = AmountCardItemViewModel(
-            title: "Total expenses",
+            title: L10n.Overview.totalExpenses,
             amount: metrics.netSpending.netExpenses,
             type: .expense
         )
@@ -358,7 +358,7 @@ extension DashboardViewModel {
         var items: [AmountCardItemViewModel] = []
         
         let mainIncomeViewModel = AmountCardItemViewModel(
-            title: "Main income",
+            title: L10n.Overview.mainIncome,
             amount: metrics.cashFlow.mainIncome ?? 0,
             type: .income
         )
@@ -366,7 +366,7 @@ extension DashboardViewModel {
         items.append(mainIncomeViewModel)
         
         let otherIncomeViewModel = AmountCardItemViewModel(
-            title: "Other income",
+            title: L10n.Overview.otherIncome,
             amount: metrics.cashFlow.otherIncome ?? 0,
             type: .income
         )
@@ -381,7 +381,7 @@ extension DashboardViewModel {
     
     private func makeSpendingCategoriesPieChart(metrics: VaultMetrics) {
         let viewModel = ChartViewModel(
-            title: "Where your money went",
+            title: L10n.Overview.spendingDistribution,
             items: metrics.categories.netExpenses,
             chartType: .pie,
             subtitle: currencyFormatter.string(from: metrics.categories.totalNetExpenses) ?? ""
@@ -392,7 +392,7 @@ extension DashboardViewModel {
     
     private func makeIncomeCategoriesPieChart(metrics: VaultMetrics) {
         let viewModel = ChartViewModel(
-            title: "Where your money comes from",
+            title: L10n.Overview.incomeDistribution,
             items: metrics.categories.income,
             chartType: .pie,
             subtitle: currencyFormatter.string(from: metrics.categories.totalIncome) ?? ""
@@ -403,7 +403,7 @@ extension DashboardViewModel {
     
     private func makeSpendingCategoriesBarChart(metrics: VaultMetrics) {
         let viewModel = ChartViewModel(
-            title: "Your expenses",
+            title: L10n.Overview.yourExpenses,
             items: metrics.categories.netExpenses,
             chartType: .bar,
             subtitle: currencyFormatter.string(from: metrics.categories.totalNetExpenses) ?? ""
@@ -414,7 +414,7 @@ extension DashboardViewModel {
     
     private func makeIncomeCategoriesBarChart(metrics: VaultMetrics) {
         let viewModel = ChartViewModel(
-            title: "Your income",
+            title: L10n.Overview.yourIncome,
             items: metrics.categories.income,
             chartType: .bar,
             subtitle: currencyFormatter.string(from: metrics.categories.totalIncome) ?? ""
@@ -425,28 +425,28 @@ extension DashboardViewModel {
     
     private func makeKeyMetricsSection(metrics: VaultMetrics) {
         let viewModel = AmountCardSectionViewModel(
-            title: "Key metrics",
+            title: L10n.Overview.keyMetrics,
             items: [
                 makeSummaryItem(
-                    title: "Average income",
+                    title: L10n.Overview.averageIncome,
                     amount: metrics.cashFlow.averageIncome,
                     type: .income,
                     budgetAmount:nil
                 ),
                 makeSummaryItem(
-                    title: "Average spent",
+                    title: L10n.Overview.averageSpent,
                     amount: metrics.cashFlow.averageExpense,
                     type: .expense,
                     budgetAmount:nil
                 ),
                 makeSummaryItem(
-                    title: "Total saved",
+                    title: L10n.Overview.totalSaved,
                     amount: metrics.netSpending.savings,
                     type: nil,
                     budgetAmount:nil
                 ),
                 makeSummaryItem(
-                    title: "Saving efficiency",
+                    title: L10n.Overview.savingEfficiency,
                     amount: metrics.netSpending.savingEfficiency,
                     numberStyle: .percent,
                     type: nil,
@@ -461,7 +461,7 @@ extension DashboardViewModel {
     
     private func makeSpendingBreakdownSection(metrics: VaultMetrics) {
         spendingBreakdownSectionViewModel = AmountCardSectionViewModel(
-            title: "Spending breakdown",
+            title: L10n.Overview.spendingBreakdown,
             items: categorySummaryItems(from: metrics.categories.income),
             gridFormat: true
         )
@@ -469,7 +469,7 @@ extension DashboardViewModel {
     
     private func makeIncomeBreakdownSection(metrics: VaultMetrics) {
         incomeBreakdownSectionViewModel = AmountCardSectionViewModel(
-            title: "Income breakdown",
+            title: L10n.Overview.incomeBreakdown,
             items: categorySummaryItems(from: metrics.categories.netExpenses),
             gridFormat: true
         )
@@ -502,9 +502,9 @@ private extension DashboardViewModel {
     
     private func updateReimbursementsWarning(metrics: ReimbursementMetrics) {
         
-        let titleText = "Pending Reimbursements"
+        let titleText = L10n.Overview.pendingReimbursementsTitle
         let formattedAmount = currencyFormatter.string(from: metrics.expected) ?? "\(metrics.expected)"
-        let bodyText = "You are currently expecting reimbursements with a total value of \(formattedAmount)"
+        let bodyText = String(format: L10n.Overview.pendingReimbursementsBody, formattedAmount)
         
         feedbackViewModel.title = titleText
         feedbackViewModel.subtitle = bodyText;

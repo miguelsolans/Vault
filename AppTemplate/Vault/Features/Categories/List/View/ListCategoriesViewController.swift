@@ -74,7 +74,7 @@ final class ListCategoriesViewController: VaultBaseViewController {
         viewModel.onErrorAlert = { [weak self] message in
             guard let self = self else { return }
             
-            self.presentAlert(with: "Error", and: message)
+            self.presentAlert(with: L10n.Common.error, and: message)
         }
     }
 }
@@ -106,7 +106,7 @@ extension ListCategoriesViewController {
     private func setupBarButtonItems() {
         
         let sortAscendingAction = UIAction(
-            title: "Ascending",
+            title: L10n.Categories.ascending,
             state: viewModel.sort == .ascending ? .on : .off
         ) { [weak self] _ in
             guard let self else { return }
@@ -114,7 +114,7 @@ extension ListCategoriesViewController {
         }
         
         let sortDescendingAction = UIAction(
-            title: "Descending",
+            title: L10n.Categories.descending,
             state: viewModel.sort == .descending ? .on : .off
         ) { [weak self] _ in
             guard let self else { return }
@@ -122,7 +122,7 @@ extension ListCategoriesViewController {
         }
         
         let sortTypeAction = UIAction(
-            title: "Type",
+            title: L10n.Categories.type,
             state: viewModel.sort == .type ? .on : .off
         ) { [weak self] _ in
             guard let self else { return }
@@ -156,8 +156,8 @@ extension ListCategoriesViewController {
             var empty = UIContentUnavailableConfiguration.empty()
             empty.background.backgroundColor = UIColor(resource: .background)
             empty.image = UIImage(systemName: "tag")
-            empty.text = "No Categories"
-            empty.secondaryText = "You can add categories in the plus button"
+            empty.text = L10n.Categories.emptyTitle
+            empty.secondaryText = L10n.Categories.emptyDescription
             config = empty
         }
         contentUnavailableConfiguration = config
@@ -212,7 +212,7 @@ extension ListCategoriesViewController: UITableViewDataSource, UITableViewDelega
         
         if category.canDelete {
             let deleteAction = makeConfirmedContextualAction(
-                title: NSLocalizedString("list_categories_delete", tableName: "ListCategories", comment: "")
+                title: L10n.Common.delete
             ) { [weak self] in
                 self?.viewModel.deleteCategory(at: indexPath)
             }
@@ -221,7 +221,7 @@ extension ListCategoriesViewController: UITableViewDataSource, UITableViewDelega
         }
         
         
-        let editAction = UIContextualAction(style: .normal, title: NSLocalizedString("list_categories_edit", tableName: "ListCategories", comment: "")) { [weak self] _, _, completion in
+        let editAction = UIContextualAction(style: .normal, title: L10n.Common.edit) { [weak self] _, _, completion in
             self?.viewModel.editCategory(at: indexPath)
             completion(true)
         }
@@ -242,7 +242,7 @@ extension ListCategoriesViewController: UITableViewDataSource, UITableViewDelega
             
         let category = viewModel.category(at: indexPath)
             
-        let editAction = UIAction(title: "Edit", image: UIImage(systemName: "pencil")) { [weak self] _ in
+        let editAction = UIAction(title: L10n.Common.edit, image: UIImage(systemName: "pencil")) { [weak self] _ in
             guard let self = self else { return }
             self.viewModel.editCategory(at: indexPath)
         }
@@ -251,7 +251,7 @@ extension ListCategoriesViewController: UITableViewDataSource, UITableViewDelega
             
         if category.canDelete {
             let deleteAction = makeConfirmedMenuAction(
-                title: "Delete",
+                title: L10n.Common.delete,
                 image: UIImage(systemName: "trash")
             ) { [weak self] in
                 guard let self = self else { return }

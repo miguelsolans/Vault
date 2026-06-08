@@ -42,11 +42,11 @@ final class VaultFormViewModel: NSObject {
     // MARK: - State State
     
     public var title: String {
-        vaultToEdit != nil ? "Edit Vault" : "Create Vault"
+        vaultToEdit != nil ? L10n.EditVault.pageTitle : L10n.CreateVault.pageTitle
     }
     
     public var subtitle: String {
-        ""
+        L10n.CreateVault.pageSubtitle
     }
     
     private var isEditing: Bool {
@@ -69,9 +69,9 @@ final class VaultFormViewModel: NSObject {
     
     lazy var nameInputViewModel: TextFieldInputViewModel = {
         let viewModel = TextFieldInputViewModel(
-            title: NSLocalizedString("create_vault_name", tableName: "CreateVault", comment: ""),
+            title: L10n.CreateVault.name,
             isEditable: true,
-            placeholder: NSLocalizedString("create_vault_enter_name", tableName: "CreateVault", comment: ""),
+            placeholder: L10n.CreateVault.enterName,
             subtitle: nil,
             inputText: vaultToEdit?.name ?? "",
             textType: .text,
@@ -88,10 +88,10 @@ final class VaultFormViewModel: NSObject {
         }
         
         let viewModel = SwitchInputViewModel(
-            title: "Initial amount",
+            title: L10n.CreateVault.initialAmount,
             isOn: self.isInitialDepositOn,
             isEditable: true,
-            placeholder: "Setup initial amount"
+            placeholder: L10n.CreateVault.setupInitialAmount
         )
         
         return viewModel
@@ -107,9 +107,9 @@ final class VaultFormViewModel: NSObject {
         }
         
         let viewModel = TextFieldInputViewModel(
-            title: NSLocalizedString("create_vault_initial_deposit", tableName: "CreateVault", comment: ""),
+            title: L10n.CreateVault.initialAmount,
             isEditable: true,
-            placeholder: NSLocalizedString("create_vault_enter_amount", tableName: "CreateVault", comment: ""),
+            placeholder: L10n.CreateVault.enterInitialAmount,
             subtitle: nil,
             inputText: amount,
             textType: .currency("EUR"),
@@ -121,10 +121,10 @@ final class VaultFormViewModel: NSObject {
     
     lazy var importFileSwitchViewModel: SwitchInputViewModel = {
         let viewModel = SwitchInputViewModel(
-            title: String(localized: LocalizedStringResource.CreateVault.importOperations),
+            title: L10n.CreateVault.importOperations,
             isOn: false,
             isEditable: !isEditing,
-            placeholder: String(localized: LocalizedStringResource.CreateVault.importFromCsvFile),
+            placeholder: L10n.CreateVault.importFromCsv,
             subtitle: nil,
             isMandatory: false
         )
@@ -134,10 +134,10 @@ final class VaultFormViewModel: NSObject {
     
     lazy var importFileViewModel: FilePickerInputViewModel = {
         let viewModel = FilePickerInputViewModel(
-            title: String(localized: LocalizedStringResource.CreateVault.csvFile),
+            title: L10n.CreateVault.csvFile,
             isEditable: true,
             allowedContentTypes: [ .commaSeparatedText ],
-            placeholder: String(localized: LocalizedStringResource.CreateVault.save),
+            placeholder: "",
             subtitle: nil,
             isMandatory: false
         )
@@ -224,11 +224,11 @@ extension VaultFormViewModel {
             
         } catch VaultError.vaultAlreadyExists(let name) {
             
-            nameInputViewModel.feedback = .error("Vault with name \(name) already exists.")
+            nameInputViewModel.feedback = .error(L10n.CreateVault.vaultWithNameAlreadyExists)
             onError?(.silent)
             
         } catch {
-            onError?(.showAlert(message: "There was an error updating Vault."))
+            onError?(.showAlert(message: L10n.CreateVault.errorCreatingVault))
         }
     }
     
@@ -251,11 +251,11 @@ extension VaultFormViewModel {
             
         } catch VaultError.vaultAlreadyExists(let name) {
             
-            nameInputViewModel.feedback = .error("Vault with name \(name) already exists.")
+            nameInputViewModel.feedback = .error(L10n.EditVault.vaultWithNameAlreadyExists)
             onError?(.silent)
             
         } catch {
-            onError?(.showAlert(message: "There was an error updating Vault."))
+            onError?(.showAlert(message: L10n.EditVault.errorUpdatingVault))
         }
     }
 }
@@ -284,7 +284,7 @@ extension VaultFormViewModel {
     private func validateName() -> Bool {
         
         if nameInputViewModel.inputText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            nameInputViewModel.feedback = .error(NSLocalizedString("create_vault_name_required", tableName: "CreateVault", comment: ""))
+            nameInputViewModel.feedback = .error(L10n.CreateVault.nameRequired)
             return false
         } else {
             nameInputViewModel.feedback = .none
@@ -299,7 +299,7 @@ extension VaultFormViewModel {
             
             guard let _ = LocalizedDecimalFormatter()
                 .double(from: depositInputViewModel.inputText) else {
-                depositInputViewModel.feedback = .error(NSLocalizedString("create_vault_invalid_amount", tableName: "CreateVault", comment: ""))
+                depositInputViewModel.feedback = .error(L10n.CreateVault.initialAmountRequired)
                 return false
             }
             
@@ -316,7 +316,7 @@ extension VaultFormViewModel {
         
         if isImportOn {
             if importFileViewModel.selectedFileURL == nil {
-                importFileViewModel.feedback = .error(NSLocalizedString("create_vault_file_required", tableName: "CreateVault", comment: ""))
+                importFileViewModel.feedback = .error(L10n.CreateVault.fileRequired)
                 return false
             } else {
                 importFileViewModel.feedback = .none

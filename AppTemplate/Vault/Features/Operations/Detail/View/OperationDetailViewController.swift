@@ -13,12 +13,12 @@ final class OperationDetailViewController: VaultBaseViewController {
     private static let detailCellIdentifier = "OperationDetailCell"
     
     private(set) var viewModel: OperationDetailViewModel
-
+    
     init(viewModel: OperationDetailViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -32,7 +32,7 @@ final class OperationDetailViewController: VaultBaseViewController {
         
         return view
     }()
-
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
         
@@ -41,7 +41,7 @@ final class OperationDetailViewController: VaultBaseViewController {
         
         return tableView
     }()
-
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -55,12 +55,12 @@ final class OperationDetailViewController: VaultBaseViewController {
         super.viewWillAppear(animated)
         viewModel.getData()
     }
-
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         updateTableHeaderViewHeight()
     }
-
+    
     override func setupUI() {
         view.backgroundColor = UIColor(resource: .background)
         title = viewModel.title
@@ -68,7 +68,7 @@ final class OperationDetailViewController: VaultBaseViewController {
         
         setupTableView()
         setupConstraints()
-
+        
     }
     
     private func updateUI() {
@@ -88,8 +88,8 @@ final class OperationDetailViewController: VaultBaseViewController {
             
             switch feedback {
             case .showAlert(let message):
-                self.presentAlert(with:"Success", and: message)
-
+                self.presentAlert(with: L10n.Common.success, and: message)
+                
             case .silent:
                 break
             }
@@ -102,8 +102,8 @@ final class OperationDetailViewController: VaultBaseViewController {
             
             switch feedback {
             case .showAlert(let message):
-                self.presentAlert(with:"Error", and: message)
-
+                self.presentAlert(with: L10n.Common.error, and: message)
+                
             case .silent:
                 break
             }
@@ -146,16 +146,19 @@ extension OperationDetailViewController {
         var actions: [UIAction] = []
         
         if viewModel.canEditOperation {
-            let action = UIAction(title: "Edit", image: UIImage(systemName: "pencil"), handler: { _ in
-                self.viewModel.didTapEdit()
-            })
+            let action = UIAction(
+                title: L10n.Common.edit,
+                image: UIImage(systemName: "pencil"),
+                handler: { _ in
+                    self.viewModel.didTapEdit()
+                })
             
             actions.append(action)
         }
         
         if viewModel.canDeleteOperation {
             let action = makeConfirmedMenuAction(
-                title: "Delete",
+                title: L10n.Common.delete,
                 image: UIImage(systemName: "trash")
             ) { [weak self] in
                 self?.viewModel.didTapDelete()
@@ -197,7 +200,7 @@ extension OperationDetailViewController: UITableViewDataSource, UITableViewDeleg
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return viewModel.title(for: section)
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch viewModel.section(at: indexPath.section) {
         case .operationDetail(let rows):
@@ -209,7 +212,7 @@ extension OperationDetailViewController: UITableViewDataSource, UITableViewDeleg
             
             configureValueCell(cell, with: row)
             return cell
-
+            
         case .reimbursements(let rows):
             let row = rows[indexPath.row]
             let cell = tableView.dequeueReusableCell(
@@ -219,7 +222,7 @@ extension OperationDetailViewController: UITableViewDataSource, UITableViewDeleg
             
             cell.configure(with: row.tableViewModel)
             return cell
-
+            
         case .summary(let rows):
             let row = rows[indexPath.row]
             let cell = tableView.dequeueReusableCell(
@@ -240,12 +243,12 @@ extension OperationDetailViewController: UITableViewDataSource, UITableViewDeleg
         guard case .reimbursements = viewModel.section(at: indexPath.section) else {
             return nil
         }
-
-        let editAction = UIContextualAction(style: .normal, title: "Edit") { [weak self] _, _, completion in
+        
+        let editAction = UIContextualAction(style: .normal, title: L10n.Common.edit) { [weak self] _, _, completion in
             self?.viewModel.didTapEditReimbursement(at: indexPath)
             completion(true)
         }
-
+        
         return UISwipeActionsConfiguration(actions: [editAction])
     }
     
@@ -259,29 +262,29 @@ extension OperationDetailViewController: UITableViewDataSource, UITableViewDeleg
         
         if viewModel.isReimbursementStatusAvailable(.received, for: indexPath) {
             
-            let action = UIAction(title: "Received") { [weak self] _ in
+            let action = UIAction(title: L10n.Common.received) { [weak self] _ in
                 guard let self else { return }
                 self.viewModel.didTapReceivedReimbursementStatus(at: indexPath)
             }
-        
+            
             menu.append(action)
         }
         
         if viewModel.isReimbursementStatusAvailable(.expected, for: indexPath) {
-            let action = UIAction(title: "Expected") { [weak self] _ in
+            let action = UIAction(title: L10n.Common.expected) { [weak self] _ in
                 guard let self else { return }
                 self.viewModel.didTapExpectedReimbursementStatus(at: indexPath)
             }
-        
+            
             menu.append(action)
         }
         
         if viewModel.isReimbursementStatusAvailable(.cancelled, for: indexPath) {
-            let action = UIAction(title: "Cancelled") { [weak self] _ in
+            let action = UIAction(title: L10n.Common.cancelled) { [weak self] _ in
                 guard let self else { return }
                 self.viewModel.didTapCancelledReimbursementStatus(at: indexPath)
             }
-        
+            
             menu.append(action)
         }
         
@@ -313,23 +316,23 @@ extension OperationDetailViewController: UITableViewDataSource, UITableViewDeleg
         guard let tableHeaderView = tableView.tableHeaderView else {
             return
         }
-
+        
         let targetSize = CGSize(
             width: tableView.bounds.width,
             height: UIView.layoutFittingCompressedSize.height
         )
-
+        
         let height = tableHeaderView.systemLayoutSizeFitting(
             targetSize,
             withHorizontalFittingPriority: .required,
             verticalFittingPriority: .fittingSizeLevel
         ).height
-
+        
         guard tableHeaderView.frame.width != targetSize.width
                 || tableHeaderView.frame.height != height else {
             return
         }
-
+        
         tableHeaderView.frame.size = CGSize(width: targetSize.width, height: height)
         tableView.tableHeaderView = tableHeaderView
     }

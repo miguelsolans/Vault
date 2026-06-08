@@ -60,7 +60,7 @@ final class ListCategoriesViewModel: NSObject {
         }
     }
     
-    public var title: String { "Categories" }
+    public var title: String { L10n.Categories.pageTitle }
     
     public var subtitle: String { vault.name }
     
@@ -102,7 +102,7 @@ extension ListCategoriesViewModel {
             categoriesCell = makeListViewModel(with: categories)
             
         } catch {
-            onErrorAlert?("An error ocurred while trying to fetch categories")
+            onErrorAlert?(L10n.Categories.errorFetchingCategories)
         }
     }
 
@@ -116,7 +116,7 @@ extension ListCategoriesViewModel {
             
             getData()
         } catch {
-            onErrorAlert?("An error ocurred while trying to delete category")
+            onErrorAlert?(L10n.Categories.errorDeletingCategory)
         }
     }
 
@@ -147,9 +147,11 @@ extension ListCategoriesViewModel {
         return categories.map { category in
             
             let typeLocalized = category.operationType.localized
+            let numberOfOperations = String(format: L10n.Categories.numberOfOperations, typeLocalized, category.numberOfOperations)
+            
             let subtitleText = category.numberOfOperations == 0
                 ? typeLocalized
-                : "\(typeLocalized) • \(category.numberOfOperations) operation(s)"
+                : numberOfOperations
             
             return CategoryTableViewModel(
                 color: category.color,

@@ -46,7 +46,8 @@ final class SecurityViewController: VaultBaseViewController {
     }
     
     override func setupUI() {
-        title = NSLocalizedString("security_title", tableName: "Security", comment: "")
+        title = viewModel.title
+        navigationItem.subtitle = viewModel.subtitle
         view.backgroundColor = UIColor(resource: .background)
         setupTableView()
         setupConstraints()
@@ -134,9 +135,9 @@ extension SecurityViewController {
     private func presentPinConfirmation(from indexPath: IndexPath) {
         
         let confirmationDialog = ConfirmationDialog(
-            title: "Disable PIN",
-            message: "By disabling PIN you will remove any form of authentication when accessing the Vault.",
-            confirmTitle: "Disable",
+            title: L10n.Security.disablePin,
+            message: L10n.Security.disablePinMessage,
+            confirmTitle: L10n.Common.disable,
             cancelTitle: "Cancel",
             confirmStyle: .destructive
         )

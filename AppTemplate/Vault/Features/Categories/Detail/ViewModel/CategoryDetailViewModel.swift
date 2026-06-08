@@ -34,11 +34,11 @@ final class CategoryDetailViewModel: NSObject {
     // MARK: - UI State
     
     public var title: String {
-        ""
+        L10n.CategoryDetail.pageTitle
     }
     
     public var subtitle: String {
-        ""
+        L10n.CategoryDetail.pageSubtitle
     }
     
     public var canEdit: Bool {
@@ -74,18 +74,18 @@ final class CategoryDetailViewModel: NSObject {
         var detail: [SimpleDetailInfoRow] = []
         
         detail.append(
-            .init(title: "Type", value: category.operationType.localized, systemImageName: nil)
+            .init(title: L10n.CategoryDetail.type, value: category.operationType.localized, systemImageName: nil)
         )
         
         if !category.notes.isEmpty {
             detail.append(
-                .init(title: "Notes", value: category.notes, systemImageName: nil)
+                .init(title: L10n.CategoryDetail.notes, value: category.notes, systemImageName: nil)
             )
         }
         
         if category.numberOfOperations > 0 {
             detail.append(
-                .init(title: "Operations count", value: "\(category.numberOfOperations)", systemImageName: nil)
+                .init(title: L10n.CategoryDetail.operationsCount, value: "\(category.numberOfOperations)", systemImageName: nil)
             )
         }
         
@@ -113,7 +113,7 @@ extension CategoryDetailViewModel {
             
             delegate?.didDeleteCategory(self)
         } catch {
-            onError?("An error ocurred while deleting the category")
+            onError?(L10n.CategoryDetail.errorDeletingCategory)
         }
     }
 }

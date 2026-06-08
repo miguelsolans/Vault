@@ -10,9 +10,9 @@ import CoreKit
 
 final class AboutViewModel: NSObject {
     
-    public var title: String = "About";
+    public var title: String = L10n.About.pageTitle;
     
-    public var subtitle: String = ""
+    public var subtitle: String = L10n.About.pageTitle
     
     // MARK: - UI State
     
@@ -21,8 +21,8 @@ final class AboutViewModel: NSObject {
             [
                 .init(
                     option: .vaults,
-                    title: "Privacy & Data",
-                    subtitle: "Learn how we store your data",
+                    title: L10n.About.privacyOptionTitle,
+                    subtitle: L10n.About.privacyOptionDescription,
                     imageName: "hand.raised.circle",
                     style: .disabled
                 )
@@ -30,36 +30,36 @@ final class AboutViewModel: NSObject {
             [
                 .init(
                     option: .about,
-                    title: "Dashboard",
-                    subtitle: "Metrics and analytics",
+                    title: L10n.About.dashboardOptionTitle,
+                    subtitle: L10n.About.dashboardOptionDescription,
                     imageName: "chart.pie",
                     style: .disabled
                 ),
                 .init(
                     option: .about,
-                    title: "Vaults",
-                    subtitle: "Setup and manage your vaults",
+                    title: L10n.About.vaultsOptionTitle,
+                    subtitle: L10n.About.vaultsOptionDescription,
                     imageName: "lock.square.stack",
                     style: .disabled
                 ),
                 .init(
                     option: .about,
-                    title: "Categories",
-                    subtitle: "Create and manage categories",
+                    title: L10n.About.categoriesOptionTitle,
+                    subtitle: L10n.About.categoriesOptionDescription,
                     imageName: "tag",
                     style: .disabled
                 ),
                 .init(
                     option: .about,
-                    title: "Operations",
-                    subtitle: "Register and manage operations",
+                    title: L10n.About.operationsOptionTitle,
+                    subtitle: L10n.About.operationsOptionDescription,
                     imageName: "list.bullet",
                     style: .disabled
                 )
             ], [
                 .init(
                     option: .about,
-                    title: "Version",
+                    title: L10n.About.versionOptionTitle,
                     subtitle: AppConfig.appVersion,
                     imageName: "info.circle",
                     style: .disabled
@@ -76,9 +76,9 @@ final class AboutViewModel: NSObject {
     
     public func titleForHeader(in section: Int) -> String? {
         switch section {
-        case 0: return "General"
-        case 1: return "Features"
-        case 2: return "Info"
+        case 0: return L10n.About.general
+        case 1: return L10n.About.features
+        case 2: return L10n.About.info
         default: return nil
         }
     }
@@ -86,7 +86,7 @@ final class AboutViewModel: NSObject {
     public func titleForFooter(in section: Int) -> String? {
         switch section {
         case 0, 1: return nil
-        case 2: return "Built with ❤️ in Portugal"
+        case 2: return L10n.About.pageFooter
         default: return nil
         }
     }

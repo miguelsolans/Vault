@@ -48,7 +48,7 @@ final class ListVaultViewModel: NSObject {
     
     // MARK: - UI State
 
-    public let title: String = "List of Vaults"
+    public let title: String = L10n.Vaults.pageTitle
     
     public lazy var subtitle: String = {
         
@@ -56,7 +56,7 @@ final class ListVaultViewModel: NSObject {
            return ""
         }
         
-        return "Choose a vault"
+        return L10n.Vaults.pageSubtitle
     }()
     
     var numberOfRows: Int {
@@ -128,7 +128,7 @@ extension ListVaultViewModel {
             vaults = response.vaults
             
         } catch {
-            onError?("There was an error fetching Vaults")
+            onError?(L10n.Vaults.errorFetchingVaults)
         }
     }
     
@@ -143,7 +143,7 @@ extension ListVaultViewModel {
             
             getData()
         } catch {
-             onError?("There was an error deleting Vault")
+            onError?(L10n.Vaults.errorDeletingVault)
         }
     }
     
@@ -178,7 +178,7 @@ extension ListVaultViewModel {
             
         } catch {
             
-            onError?("There was an error exporting Vault")
+            onError?(L10n.Vaults.errorExportingVault)
         }
     }
 }

@@ -17,14 +17,18 @@ class ChatViewModel: NSObject {
     
     // MARK: - State
     
-    var screenTitle: String = String(localized: .Chat.pageTitle);
+    public var title: String {
+        L10n.Chat.pageTitle
+    }
     
-    var screenSubtitle: String? = nil;
+    public var subtitle: String {
+        L10n.Chat.pageSubtitle
+    }
     
     fileprivate var messages: [ChatMessage] = [
         ChatMessage(
             role: .assistant,
-            text: String(localized: .Chat.firstMessage)
+            text: L10n.Chat.firstMessage
         )
     ];
     

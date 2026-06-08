@@ -77,17 +77,17 @@ final class OperationFormViewModel: NSObject {
     
     public var title: String {
         if operationToEdit != nil {
-            return NSLocalizedString("edit_operation_title", tableName: "AddOperation", comment: "")
+            return L10n.EditOperation.pageTitle
         }
-        return NSLocalizedString("add_operation_title", tableName: "AddOperation", comment: "")
+        return L10n.AddOperation.pageTitle
     }
     
     public var subtitle: String { vault.name }
     
     public lazy var ocrFeedback: FeedbackViewModel = {
         let viewModel = FeedbackViewModel(
-            title: "Review data",
-            subtitle: "Information has been automatically populated from the receipt. Review data before saving.",
+            title: L10n.AddOperation.reviewDataTitle,
+            subtitle: L10n.AddOperation.reviewDataMessage,
             feedbackType: .informative)
         
         return viewModel
@@ -102,8 +102,11 @@ final class OperationFormViewModel: NSObject {
         }
         
         let viewModel = SegmentedInputViewModel(
-            title: NSLocalizedString("add_operation_operation_type", tableName: "AddOperation", comment: ""),
-            options: [NSLocalizedString("add_operation_expense", tableName: "AddOperation", comment: ""), NSLocalizedString("add_operation_income", tableName: "AddOperation", comment: "")],
+            title: L10n.AddOperation.type,
+            options: [
+                L10n.Common.expense,
+                L10n.Common.income
+            ],
             selectedIndex: selectedValue,
             isEditable: isOperationTypeEditable,
             placeholder: nil,
@@ -127,7 +130,7 @@ final class OperationFormViewModel: NSObject {
         }
         
         let viewModel = OptionInputViewModel(
-            title: NSLocalizedString("add_operation_category", tableName: "AddOperation", comment: ""),
+            title: L10n.AddOperation.category,
             isEditable: true,
             placeholder: "",
             subtitle: "",
@@ -154,9 +157,9 @@ final class OperationFormViewModel: NSObject {
         }
 
         return TextFieldInputViewModel(
-            title: NSLocalizedString("add_operation_amount", tableName: "AddOperation", comment: ""),
+            title: L10n.AddOperation.amount,
             isEditable: isAmountEditable,
-            placeholder: NSLocalizedString("add_operation_enter_amount", tableName: "AddOperation", comment: ""),
+            placeholder: L10n.AddOperation.enterAmount,
             subtitle: nil,
             inputText: amountText,
             textType: .currency(vault.currency.title),
@@ -177,9 +180,9 @@ final class OperationFormViewModel: NSObject {
         }
         
         let viewModel = TextInputViewModel(
-            title: NSLocalizedString("add_operation_description", tableName: "AddOperation", comment: ""),
+            title: L10n.AddOperation.description,
             isEditable: true,
-            placeholder: NSLocalizedString("add_operation_enter_description", tableName: "AddOperation", comment: ""),
+            placeholder: L10n.AddOperation.enterDescription,
             subtitle: nil,
             inputText: title,
             isMandatory: false
@@ -190,15 +193,13 @@ final class OperationFormViewModel: NSObject {
     
     public lazy var dateInputViewModel: DatePickerInputViewModel = {
         let viewModel = DatePickerInputViewModel(
-            title: NSLocalizedString("add_operation_date", tableName: "AddOperation", comment: ""),
+            title: L10n.AddOperation.date,
             selectedDate: operationToEdit?.date ?? Date(),
             isEditable: true,
             placeholder: nil,
             subtitle: nil,
             isMandatory: true
         )
-        
-        viewModel.feedback = .info(NSLocalizedString("add_operation_vault_date_bottom_placeholder", tableName: "AddOperation", comment: ""))
         
         return viewModel;
     }()
@@ -214,10 +215,10 @@ final class OperationFormViewModel: NSObject {
         }
         
         return SwitchInputViewModel(
-            title: "Reimbursement",
+            title: L10n.AddOperation.reimbursement,
             isOn: isOn,
             isEditable: isReimbursementEditable,
-            placeholder: "Has a reimbursement",
+            placeholder: L10n.AddOperation.isSplitBill,
             subtitle: "",
             isMandatory: false
         )
@@ -385,7 +386,7 @@ extension OperationFormViewModel {
             self.categories = response.categories
             
         } catch {
-            onError?(.showAlert(message: "There was an error while fetching categories"))
+            onError?(.showAlert(message: L10n.AddOperation.errorFetchingCategories))
         }
     }
     
@@ -441,7 +442,7 @@ extension OperationFormViewModel {
             reimbursements[index.row] = response.reimbursement
             updateUI?()
         } catch {
-            onError?(.showAlert(message: "There was an error updating the reimbursement status"))
+            onError?(.showAlert(message: L10n.AddOperation.errorUpdatingReimbursementStatus))
         }
     }
     
@@ -485,7 +486,7 @@ extension OperationFormViewModel {
             delegate?.didAddOperation(self)
             
         } catch {
-            onError?(.showAlert(message: "There was an error creating the operation."))
+            onError?(.showAlert(message: L10n.AddOperation.errorCreatingOperation))
         }
     }
     
@@ -549,7 +550,7 @@ extension OperationFormViewModel {
             delegate?.didEditOperation(self)
             
         } catch {
-            onError?(.showAlert(message: "An error occurred while updating the operation."))
+            onError?(.showAlert(message: L10n.EditOperation.errorUpdatingOperation))
         }
         
     }
@@ -600,7 +601,7 @@ extension OperationFormViewModel {
             reimbursements.remove(at: index.row)
             
         } catch {
-            onError?(.showAlert(message: "An error ocurred while trying to delete reimbursement."))
+            onError?(.showAlert(message: L10n.EditOperation.errorDeletingReimbursement))
         }
         
         updateState()
@@ -644,7 +645,7 @@ extension OperationFormViewModel {
         
         return FormValidator.validateRequired(
             categoryInputViewModel,
-            message: NSLocalizedString("add_operation_category_required", tableName: "AddOperation", comment: "")
+            message: L10n.AddOperation.categoryRequired
         )
         
     }
@@ -655,13 +656,13 @@ extension OperationFormViewModel {
         
         valid = FormValidator.validateRequired(
             amountInputViewModel,
-            message: NSLocalizedString("add_operation_amount_required", tableName: "AddOperation", comment: "")
+            message: L10n.AddOperation.amountRequired
         )
         
         if valid {
             valid = FormValidator.validatePositiveAmount(
                 amountInputViewModel,
-                message: NSLocalizedString("add_operation_invalid_amount", tableName: "AddOperation", comment: "")
+                message: L10n.AddOperation.amountInvalid
             )
         }
         
@@ -671,7 +672,7 @@ extension OperationFormViewModel {
     private func validateDescription() -> Bool {
         return FormValidator.validateRequired(
             titleInputViewModel,
-            message: "Description can't be empty"
+            message: L10n.AddOperation.descriptionRequired
         )
     }
 }
@@ -750,7 +751,7 @@ extension OperationFormViewModel {
         if isAmountEditable {
             amountInputViewModel.feedback = .none
         } else {
-            amountInputViewModel.feedback = .info("Remove reimbursements to edit amount")
+            amountInputViewModel.feedback = .info(L10n.AddOperation.removeReimbursementToEditAmount)
         }
         
         updateUI?()

@@ -135,7 +135,7 @@ final class DashboardViewController: VaultBaseViewController {
         
         button.apply(
             style: ButtonStyles.secondary,
-            title: "Customize Dashboard"
+            title: L10n.Overview.customizeDashboard
         )
         
         button.configuration?.image = UIImage(systemName: "slider.horizontal.3")
@@ -200,7 +200,7 @@ final class DashboardViewController: VaultBaseViewController {
             
             switch feedback {
             case .showAlert(let message):
-                self.presentAlert(with:"Error", and: message)
+                self.presentAlert(with: L10n.Common.error, and: message)
 
             case .silent:
                 break
@@ -284,7 +284,7 @@ extension DashboardViewController {
         navigationItem.leftBarButtonItems = leftBarButtonItems
         
         let yearlyAction = UIAction(
-            title: "Yearly",
+            title: L10n.Overview.yearly,
             state: viewModel.filter.period == .yearly ? .on : .off
         ) { [weak self] _ in
             guard let self = self else { return }
@@ -292,7 +292,7 @@ extension DashboardViewController {
         }
         
         let monthlyAction = UIAction(
-            title: "Monthly",
+            title: L10n.Overview.monthly,
             state: viewModel.filter.period == .monthly ? .on : .off
         ) { [weak self] _ in
             guard let self = self else { return }
@@ -474,17 +474,17 @@ extension DashboardViewController {
     private func noDataEmptyContentConfiguration() -> EmptyContentConfiguration {
         EmptyContentConfiguration(
             image: UIImage(systemName: "list.bullet"),
-            title: "No data",
-            message: "There is no data to calculate Vault metrics.\nYou can add financial data in Operations."
+            title: L10n.Common.noData,
+            message: L10n.Overview.emptyDataDescription
         )
     }
     
     private func noWidgetsEmptyContentConfiguration() -> EmptyContentConfiguration {
         EmptyContentConfiguration(
             image: UIImage(systemName: "rectangle.grid.2x2"),
-            title: "No widgets",
-            message: "Choose the information you want to see in your Dashboard.",
-            buttonTitle: "Customize Dashboard",
+            title: L10n.Overview.emptyWidgetTitle,
+            message: L10n.Overview.emptyWidgetDescription,
+            buttonTitle: L10n.Overview.customizeDashboard,
             buttonImage: UIImage(systemName: "slider.horizontal.3"),
             buttonAction: { [weak self] in
                 self?.viewModel.didTapCustomize()

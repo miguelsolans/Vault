@@ -57,18 +57,25 @@ final class ReimbursementFormViewModel: NSObject {
     public var title: String {
         
         if reimbursementToEdit != nil {
-            return "Edit Reimbursement"
+            return L10n.EditReimbursement.pageTitle
         }
         
-        return "Add Reimbursement"
+        return L10n.AddReimbursement.pageTitle
     }
     
-    public var subtitle: String { "" }
+    public var subtitle: String {
+        if reimbursementToEdit != nil {
+            return L10n.EditReimbursement.pageSubtitle
+        }
+        
+        return L10n.AddReimbursement.pageSubtitle
+    }
     
     public lazy var amountFeedbackViewModel: FeedbackViewModel = {
         
         let formattedAmount = currencyFormatter.string(from: maximumAmount) ?? "\(maximumAmount)"
-        let bodyText = "You can add a reimbursement up to \(formattedAmount)"
+        let bodyText = String(format: L10n.AddReimbursement.maximumReimbursementMessage, formattedAmount)
+        
         let attributedBody = bodyText.styled(
             baseAttributes: [
                 .font: FeedbackStyles.informativeFeedback.subtitleFont,
@@ -82,7 +89,7 @@ final class ReimbursementFormViewModel: NSObject {
         )
         
         return FeedbackViewModel(
-            title: "Maximum reimbursement allowed",
+            title: L10n.AddReimbursement.maximumReimbursementTitle,
             subtitleAttributed: attributedBody,
             feedbackType: .informative
         )
@@ -91,8 +98,8 @@ final class ReimbursementFormViewModel: NSObject {
     public lazy var statusInputViewModel: SegmentedInputViewModel = {
         
         let viewModel = SegmentedInputViewModel(
-            title: "Status",
-            options: ["Expected", "Received", "Cancelled"],
+            title: L10n.AddReimbursement.status,
+            options: [L10n.Common.expected, L10n.Common.received, L10n.Common.cancelled],
             selectedIndex: 0,
             isEditable: isStatusEditable,
             placeholder: nil,
@@ -114,9 +121,9 @@ final class ReimbursementFormViewModel: NSObject {
         }
         
         return TextFieldInputViewModel(
-            title: "Reimbursing amount",
+            title: L10n.AddReimbursement.amount,
             isEditable: isAmountEditable,
-            placeholder: "Enter amount",
+            placeholder: L10n.AddReimbursement.enterAmount,
             subtitle: nil,
             inputText: amountText,
             textType: .currency(vault.currency.title),
@@ -127,9 +134,9 @@ final class ReimbursementFormViewModel: NSObject {
     public lazy var notesInputViewModel: TextFieldInputViewModel = {
         
         return TextFieldInputViewModel(
-            title: "Title",
+            title: L10n.AddReimbursement.title,
             isEditable: true,
-            placeholder: "Enter title",
+            placeholder: L10n.AddReimbursement.enterTitle,
             subtitle: nil,
             inputText: reimbursementToEdit?.notes ?? "",
             textType: .text,
@@ -146,9 +153,9 @@ final class ReimbursementFormViewModel: NSObject {
         }
         
         return OptionInputViewModel(
-            title: "Deposit Vault",
+            title: L10n.AddReimbursement.depositVault,
             isEditable: isDepositVaultEditable,
-            placeholder: "Choose deposit Vault",
+            placeholder: L10n.AddReimbursement.chooseDepositVault,
             subtitle: "",
             options: [],
             selectedOption: selectedOption,
@@ -158,8 +165,8 @@ final class ReimbursementFormViewModel: NSObject {
     
     public lazy var depositFeedbackViewModel: FeedbackViewModel = {
         return FeedbackViewModel(
-            title: "Deposit Vault different from source Vault",
-            subtitle: "You selected a different Vault for the deposit. You will receive an income operation in the selected deposit Vault.",
+            title: L10n.AddReimbursement.depositVaultFeedbackTitle,
+            subtitle: L10n.AddReimbursement.depositVaultFeedbackMessage,
             feedbackType: .informative
         )
     }()
@@ -181,9 +188,9 @@ final class ReimbursementFormViewModel: NSObject {
         }
         
         return OptionInputViewModel(
-            title: "Deposit income category",
+            title: L10n.AddReimbursement.depositIncomeCategory,
             isEditable: isDepositCategoryEditable,
-            placeholder: "Choose deposit category",
+            placeholder: L10n.AddReimbursement.chooseDepositCategory,
             subtitle: "",
             options: [],
             selectedOption: selectedOption,
@@ -284,7 +291,7 @@ extension ReimbursementFormViewModel {
             }
             
         } catch {
-            onError?(.showAlert(message: "There was an error while fetching your Vaults. Please try again."))
+            onError?(.showAlert(message: L10n.AddReimbursement.errorFetchingVaults))
         }
     }
     
@@ -322,7 +329,8 @@ extension ReimbursementFormViewModel {
             }
             
         } catch {
-            onError?(.showAlert(message: "There was an error while fetching categories from Vault \(depositVault.name). Please try again."))
+            let errorMessage = String(format: L10n.AddReimbursement.errorFetchingVaultCategories, depositVault.name)
+            onError?(.showAlert(message: errorMessage))
         }
     }
 }
@@ -355,12 +363,13 @@ extension ReimbursementFormViewModel {
         
         var valid = FormValidator.validateRequired(
             amountInputViewModel,
-            message: "Enter a valid amount")
+            message: L10n.AddReimbursement.amountRequired
+        )
         
         if valid {
             valid = FormValidator.validatePositiveAmount(
                 amountInputViewModel,
-                message: "Amount should be greater than zero"
+                message: L10n.AddReimbursement.amountGreaterThanZero
             )
         }
         
@@ -368,7 +377,7 @@ extension ReimbursementFormViewModel {
             valid = FormValidator.validateAmount(
                 amountInputViewModel,
                 condition: .lessThanOrEqual(maximumAmount),
-                message: "Amount should be less or equal the maximum amount"
+                message: L10n.AddReimbursement.amountInferiorOrEqual
             )
         }
         
@@ -378,14 +387,14 @@ extension ReimbursementFormViewModel {
     private func validateDepositVault() -> Bool {
         return FormValidator.validateRequired(
             depositVaultViewModel,
-            message: "Deposit vault is required"
+            message: L10n.AddReimbursement.depositVaultRequired
         )
     }
     
     private func validateDepositCategory() -> Bool {
         return FormValidator.validateRequired(
             depositCategoryViewModel,
-            message: "Deposit category is required"
+            message: L10n.AddReimbursement.depositCategoryRequired
         )
     }
     
@@ -451,7 +460,7 @@ extension ReimbursementFormViewModel {
             
             delegate?.didUpdateReimbursement(self, reimbursement: reimbursementToEdit)
         } catch {
-            onError?(.showAlert(message: "An error ocurred saving the Reimbursement"))
+            onError?(.showAlert(message: L10n.AddReimbursement.errorSavingReimbursement))
         }
     }
 }

@@ -32,6 +32,14 @@ final class SecurityViewModel: NSObject {
     
     // MARK: - UI State
     
+    public var title: String {
+        L10n.Security.pageTitle
+    }
+    
+    public var subtitle: String {
+        L10n.Security.pageSubtitle
+    }
+    
     public var securityOptionsViewModel: [SecurityOptionsTableViewModel] = []
     
     public var numberOfSections: Int { securityOptionsViewModel.count }
@@ -64,8 +72,8 @@ extension SecurityViewModel {
     private func updateVM(with response: SecurityInfoResponse) {
         let pinOptionViewModel = SecurityOptionTableViewModel(
             option: .changePin,
-            title: NSLocalizedString("security_pin", tableName: "Security", comment: ""),
-            subtitle:NSLocalizedString("security_pin_subtitle", tableName: "Security", comment: ""),
+            title: L10n.Security.pinOptionTitle,
+            subtitle: L10n.Security.pinOptionDescription,
             imageName:"lock.shield",
             style: (response.pinEnabled ? .toggle : .navigable),
             isToggleOn: response.pinEnabled,
@@ -74,8 +82,8 @@ extension SecurityViewModel {
         
         let biometricOptionViewModel = SecurityOptionTableViewModel(
             option: .biometricAuthentication,
-            title: NSLocalizedString("security_biometric", tableName: "Security", comment: ""),
-            subtitle:NSLocalizedString("security_biometric_subtitle", tableName: "Security", comment: ""),
+            title: L10n.Security.biometricOptionTitle,
+            subtitle: L10n.Security.biometricOptionDescription,
             imageName:"faceid",
             style: .toggle,
             valueText: "Disabled",
@@ -85,23 +93,23 @@ extension SecurityViewModel {
         
         let autolockOptionViewModel = SecurityOptionTableViewModel(
             option: .autoLock,
-            title: NSLocalizedString("security_auto_lock", tableName: "Security", comment: ""),
-            imageName:"",
+            title: L10n.Security.autoLockOptionTitle,
+            imageName: "",
             style: .disabled,
-            valueText: (response.authenticationEnabled ? NSLocalizedString("security_immediately", tableName: "Security", comment: "") : NSLocalizedString("security_never", tableName: "Security", comment: ""))
+            valueText: (response.authenticationEnabled ? L10n.Security.immediately : L10n.Security.never)
         )
         
         let requirementOptionViewModel = SecurityOptionTableViewModel(
             option: .requireAuthentication,
-            title: NSLocalizedString("security_requires_authentication", tableName: "Security", comment: ""),
-            subtitle: NSLocalizedString("security_requires_authentication_subtitle", tableName: "Security", comment: ""),
+            title: L10n.Security.requiresAuthenticationOptionTitle,
+            subtitle: L10n.Security.requiresAuthenticationOptionDescription,
             style: .toggle,
             isToggleOn: response.authenticationEnabled,
             isEnabled: false
         )
         
-        let authenticationViewModel = SecurityOptionsTableViewModel(sectionTitle: "Authentication", options: [ pinOptionViewModel, biometricOptionViewModel ])
-        let optionsViewModel = SecurityOptionsTableViewModel(sectionTitle: "Option", options: [ autolockOptionViewModel, requirementOptionViewModel ])
+        let authenticationViewModel = SecurityOptionsTableViewModel(sectionTitle: L10n.Security.authentication, options: [ pinOptionViewModel, biometricOptionViewModel ])
+        let optionsViewModel = SecurityOptionsTableViewModel(sectionTitle: L10n.Security.option, options: [ autolockOptionViewModel, requirementOptionViewModel ])
         
         securityOptionsViewModel = [ authenticationViewModel, optionsViewModel ];
     }

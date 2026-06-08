@@ -29,25 +29,25 @@ final class TabBarViewModel {
     lazy var tabs: [TabItem] = {
         var items = [
             TabItem(
-                title: "Overview",
+                title: L10n.Tab.overview,
                 imageName: "house",
                 selectedImageName: "house.fill",
                 type: .dashboard
             ),
             TabItem(
-                title: "Operations",
+                title: L10n.Tab.operations,
                 imageName: "list.bullet",
                 selectedImageName: "list.bullet",
                 type: .operations
             ),
             TabItem(
-                title: "Categories",
+                title: L10n.Tab.categories,
                 imageName: "tag",
                 selectedImageName: "tag.fill",
                 type: .tag
             ),
             TabItem(
-                title: "Settings",
+                title: L10n.Tab.settings,
                 imageName: "gear",
                 selectedImageName: "gear",
                 type: .settings
@@ -57,7 +57,7 @@ final class TabBarViewModel {
         if(showDemoUI) {
             items.append(
                 .init(
-                    title: "Demo",
+                    title: L10n.Tab.demo,
                     imageName: "pencil.and.ruler",
                     selectedImageName: "pencil.and.ruler.fill",
                     type: .demoUI

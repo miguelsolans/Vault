@@ -30,40 +30,48 @@ final class SettingsViewModel: NSObject {
     
     // MARK: - UI State
     
+    public var title: String {
+        return L10n.Settings.pageTitle
+    }
+    
+    public var subtitle: String {
+        return L10n.Settings.pageSubtitle
+    }
+    
     lazy var items: [MenuOptionTableViewModel] = {
         return [
             .init(
                 option: .vaults,
-                title: NSLocalizedString("settings_vaults", tableName: "Settings", comment: ""),
-                subtitle: NSLocalizedString("settings_manage_vaults", tableName: "Settings", comment: ""),
+                title: L10n.Settings.vaultsOptionTitle,
+                subtitle: L10n.Settings.vaultsOptionDescription,
                 imageName: "lock.square.stack",
                 style: .navigable
             ),
             .init(
                 option: .security,
-                title: NSLocalizedString("settings_security", tableName: "Settings", comment: ""),
-                subtitle: NSLocalizedString("settings_pin_and_biometric_authentication", tableName: "Settings", comment: ""),
+                title: L10n.Settings.securityOptionTitle,
+                subtitle: L10n.Settings.securityOptionDescription,
                 imageName: "lock.shield",
                 style: .navigable
             ),
             .init(
                 option: .about,
-                title: "Backup",
-                subtitle: "Backup data with iCloud",
+                title: L10n.Settings.backupOptionTitle,
+                subtitle: L10n.Settings.backupOptionDescription,
                 imageName: "icloud",
                 style: .disabled
             ),
             .init(
                 option: .about,
-                title: NSLocalizedString("settings_about", tableName: "Settings", comment: ""),
-                subtitle: NSLocalizedString("settings_app_version_and_information", tableName: "Settings", comment: ""),
+                title: L10n.Settings.aboutOptionTitle,
+                subtitle: L10n.Settings.aboutOptionDescription,
                 imageName: "info.circle",
                 style: .navigable
             ),
             .init(
                 option: .deleteAllData,
-                title: NSLocalizedString("settings_delete_action", tableName: "Settings", comment: ""),
-                subtitle: NSLocalizedString("settings_delete_information_message", tableName: "Settings", comment: ""),
+                title: L10n.Common.delete,
+                subtitle: L10n.Settings.deleteInformationDisclaimer,
                 imageName: "trash",
                 style: .destructive
             )
@@ -117,7 +125,7 @@ extension SettingsViewModel {
             delegate?.didDeleteAllData(self)
             
         } catch {
-            onError?(.showAlert(message: "There was an error deleting data. Try again later."))
+            onError?(.showAlert(message: L10n.Settings.errorDeletingData))
         }
     }
 }

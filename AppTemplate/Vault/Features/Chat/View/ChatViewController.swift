@@ -57,7 +57,7 @@ final class ChatViewController: BaseViewController {
     private lazy var placeholderLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = String(localized: .Chat.askVault)
+        label.text = L10n.Chat.askVault
         label.textColor = .placeholderText
         label.font = UIFont.preferredFont(forTextStyle: .body)
         return label
@@ -66,7 +66,7 @@ final class ChatViewController: BaseViewController {
     private lazy var sendButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(String(localized: .Chat.send), for: .normal)
+        button.setTitle(L10n.Chat.send, for: .normal)
         button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
         button.addTarget(self, action: #selector(didTapSend), for: .touchUpInside)
         return button
@@ -94,8 +94,8 @@ final class ChatViewController: BaseViewController {
     }
 
     override func setupUI() {
-        title = viewModel.screenTitle
-        navigationItem.subtitle = viewModel.screenSubtitle
+        title = viewModel.title
+        navigationItem.subtitle = viewModel.subtitle
         view.backgroundColor = UIColor(resource: .background)
 
         view.addSubview(tableView)

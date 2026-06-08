@@ -70,9 +70,9 @@ class DashboardCoordinator: BaseCoordinator {
         let configuration = MarketingConfiguration(
             pageTitle: "",
             pageSubtitle: "",
-            primaryAction: .init(title: "Ok", action: .dismiss),
+            primaryAction: .init(title: L10n.Common.ok, action: .dismiss),
             items: [
-                .init(imageName: "feedback_shake_device", title: "Shake for feedback", subtitle: "Shake your device to provide feedback, either suggestions or report a bug.")
+                .init(imageName: "feedback_shake_device", title: L10n.Feedback.pageTitle, subtitle: L10n.Feedback.subtitle)
             ]
         )
         

@@ -125,7 +125,7 @@ final class ReimbursementFormViewController: VaultBaseViewController {
         
         button.apply(
             style: ButtonStyles.primary,
-            title: "Save"
+            title: L10n.Common.save
         )
         
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -178,7 +178,7 @@ final class ReimbursementFormViewController: VaultBaseViewController {
             
             switch error {
             case .showAlert(let message):
-                self.presentAlert(with:"Error", and: message)
+                self.presentAlert(with: L10n.Common.error, and: message)
 
             case .silent:
                 break

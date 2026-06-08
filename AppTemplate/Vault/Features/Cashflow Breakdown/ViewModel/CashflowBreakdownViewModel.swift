@@ -30,9 +30,9 @@ final class CashflowBreakdownViewModel: NSObject {
     public var title: String {
         switch filter.type {
         case .income:
-            "Income"
+            L10n.Breakdown.incomePageTitle
         case .expense:
-            "Spending"
+            L10n.Breakdown.spendingPageTitle
         case .none:
             ""
         }
@@ -109,7 +109,7 @@ extension CashflowBreakdownViewModel {
             )
             
             categoriesViewModel = AmountCardSectionViewModel(
-                title: "Breakdown",
+                title: L10n.Breakdown.breakdown,
                 items: categorySummaryItems(from: items),
                 gridFormat: true
             )
@@ -128,7 +128,7 @@ extension CashflowBreakdownViewModel {
             
         } catch {
             
-            onError?(.showAlert(message: "There was an error fetching data."))
+            onError?(.showAlert(message: L10n.Common.errorFetchingData))
         }
         
         updateUI?()
@@ -162,7 +162,7 @@ extension CashflowBreakdownViewModel {
         
         if let mainIncome = cashFlow.mainIncome {
             let mainIncomeViewModel = AmountCardItemViewModel(
-                title: "Main income",
+                title: L10n.Breakdown.mainIncome,
                 amount: mainIncome,
                 type: .income
             )
@@ -172,7 +172,7 @@ extension CashflowBreakdownViewModel {
         
         if let otherIncome = cashFlow.otherIncome {
             let mainIncomeViewModel = AmountCardItemViewModel(
-                title: "Other income",
+                title: L10n.Breakdown.otherIncome,
                 amount: otherIncome,
                 type: .income
             )

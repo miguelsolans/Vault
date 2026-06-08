@@ -115,7 +115,7 @@ final class CashflowBreakdownViewController: VaultBaseViewController {
             
             switch feedback {
             case .showAlert(let message):
-                self.presentAlert(with:"Error", and: message)
+                self.presentAlert(with: L10n.Common.error, and: message)
 
             case .silent:
                 break

@@ -55,7 +55,7 @@ public final class ListOperationsViewModel: NSObject {
     
     // MARK: - UI State
     
-    public var title: String { "Operations" }
+    public var title: String { L10n.Operations.pageTitle }
     
     public var subtitle: String { filter.vault.name }
     
@@ -103,7 +103,7 @@ extension ListOperationsViewModel {
             self.operations = try loadGroupedOperations()
             
         } catch {
-            onError?("There was an error fetching operations.")
+            onError?(L10n.Operations.errorFetchingOperations)
         }
         
         updateUI?()
@@ -119,7 +119,7 @@ extension ListOperationsViewModel {
             
             getData()
         } catch {
-            onError?("There was an error deleting the operation.")
+            onError?(L10n.Operations.errorDeletingOperation)
         }
     }
     

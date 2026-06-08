@@ -152,7 +152,7 @@ extension ListVaultViewController: UITableViewDataSource, UITableViewDelegate {
         var actions: [UIContextualAction] = []
         
         if viewModel.isEditAvailable {
-            let editAction = UIContextualAction(style: .normal, title: "Edit") { [weak self] _, _, completion in
+            let editAction = UIContextualAction(style: .normal, title: L10n.Common.edit) { [weak self] _, _, completion in
                 guard let self = self else { return }
                 
                 self.viewModel.editVault(at: indexPath)
@@ -166,7 +166,7 @@ extension ListVaultViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         if viewModel.isDeleteAvailable(cell: vault) {
-            let deleteAction = makeConfirmedContextualAction(title: "Delete") { [weak self] in
+            let deleteAction = makeConfirmedContextualAction(title: L10n.Common.delete) { [weak self] in
                 self?.viewModel.deleteVault(at: indexPath)
             }
             
@@ -191,7 +191,7 @@ extension ListVaultViewController: UITableViewDataSource, UITableViewDelegate {
         var actions: [UIContextualAction] = []
         
         if viewModel.isFavoriteAvailable(cell: vault) {
-            let favoriteAction = UIContextualAction(style: .normal, title: "Favorite") { [weak self] _, _, completion in
+            let favoriteAction = UIContextualAction(style: .normal, title: L10n.Vaults.favorite) { [weak self] _, _, completion in
                 guard let self = self else { return }
                 
                 self.viewModel.favoriteVault(at: indexPath)
@@ -205,7 +205,7 @@ extension ListVaultViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         if viewModel.isExportAvailable {
-            let exportAction = UIContextualAction(style: .normal, title: "Export") { [weak self] _, _, completion in
+            let exportAction = UIContextualAction(style: .normal, title: L10n.Vaults.export) { [weak self] _, _, completion in
                 guard let self = self else { return }
                 
                 self.viewModel.exportVault(at: indexPath)
@@ -238,7 +238,7 @@ extension ListVaultViewController: UITableViewDataSource, UITableViewDelegate {
         if viewModel.isEditAvailable {
             
             let action = UIAction(
-                title: "Edit",
+                title: L10n.Common.edit,
                 image: UIImage(systemName: "pencil")
             ) { [weak self] _ in
                 guard let self = self else { return }
@@ -251,7 +251,7 @@ extension ListVaultViewController: UITableViewDataSource, UITableViewDelegate {
         if viewModel.isFavoriteAvailable(cell: vault) {
             
             let action = UIAction(
-                title: "Favorite",
+                title: L10n.Vaults.favorite,
                 image: UIImage(systemName: "star")
             ) { [weak self] _ in
                 guard let self = self else { return }
@@ -265,7 +265,7 @@ extension ListVaultViewController: UITableViewDataSource, UITableViewDelegate {
         if viewModel.isDeleteAvailable(cell: vault) {
             
             let action = makeConfirmedMenuAction(
-                title: "Delete",
+                title: L10n.Common.delete,
                 image: UIImage(systemName: "trash")
             ) { [weak self] in
                 guard let self = self else { return }

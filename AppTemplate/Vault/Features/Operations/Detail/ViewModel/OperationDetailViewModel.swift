@@ -44,9 +44,9 @@ final class OperationDetailViewModel: NSObject {
     
     // MARK: - UI State
     
-    public var title: String = ""
+    public var title: String = L10n.OperationDetail.pageTitle
     
-    public var subtitle: String = ""
+    public var subtitle: String = L10n.OperationDetail.pageSubtitle
     
     public var headerViewModel: OperationDetailHeaderViewModel {
         
@@ -77,8 +77,8 @@ final class OperationDetailViewModel: NSObject {
     
     public var detailOperation: [SimpleDetailInfoRow] {
         [
-            .init(title: "Type", value: operation.operationType.localized, systemImageName: nil),
-            .init(title: "Notes", value: operation.title, systemImageName: nil)
+            .init(title: L10n.OperationDetail.type, value: operation.operationType.localized, systemImageName: nil),
+            .init(title: L10n.OperationDetail.notes, value: operation.title, systemImageName: nil)
         ]
     }
     
@@ -94,9 +94,9 @@ final class OperationDetailViewModel: NSObject {
     
     public var summaryRows: [SimpleDetailInfoRow] {
         [
-            .init(title: "Operation amount", value: currencyFormatter.string(from: operation.amount) ?? "", systemImageName: nil),
-            .init(title: "Total reimbursed", value: currencyFormatter.string(from: operation.totalReimbursed) ?? "", systemImageName: nil),
-            .init(title: "Remaining", value: currencyFormatter.string(from: operation.netAmount) ?? "", systemImageName: nil)
+            .init(title: L10n.OperationDetail.operationAmount, value: currencyFormatter.string(from: operation.amount) ?? "", systemImageName: nil),
+            .init(title: L10n.OperationDetail.totalReimbursed, value: currencyFormatter.string(from: operation.totalReimbursed) ?? "", systemImageName: nil),
+            .init(title: L10n.OperationDetail.remaining, value: currencyFormatter.string(from: operation.netAmount) ?? "", systemImageName: nil)
         ]
     }
 
@@ -200,7 +200,7 @@ extension OperationDetailViewModel {
             updateUI?()
             
         } catch {
-            onError?(.showAlert(message: "There was an error fetching data"))
+            onError?(.showAlert(message: L10n.Common.errorFetchingData))
         }
         
     }
@@ -221,7 +221,7 @@ extension OperationDetailViewModel {
             
         } catch {
             
-            onError?(.showAlert(message: "There was an error updating the status of the Reimbursement. Try again."))
+            onError?(.showAlert(message: L10n.OperationDetail.errorUpdatingReimbursementStatus))
         }
     }
 }
@@ -247,7 +247,7 @@ extension OperationDetailViewModel {
             
             delegate?.didDeleteOperation(self)
         } catch {
-            onError?(.showAlert(message: "There was an error deleting operation. Try again."))
+            onError?(.showAlert(message: L10n.OperationDetail.errorDeletingOperation))
         }
     }
     
@@ -280,11 +280,11 @@ enum Section {
     var title: String? {
         switch self {
         case .operationDetail:
-            return "Operation detail"
+            return L10n.OperationDetail.operationDetail
         case .reimbursements:
-            return "Reimbursements"
+            return L10n.OperationDetail.reimbursements
         case .summary:
-            return "Summary"
+            return L10n.OperationDetail.summary
         }
     }
     

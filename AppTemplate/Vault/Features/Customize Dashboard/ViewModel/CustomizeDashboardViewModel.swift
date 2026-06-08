@@ -29,7 +29,7 @@ final class CustomizeDashboardViewModel: NSObject {
     
     // MARK: - UI State
     
-    public var title: String = "Customize Dashboard";
+    public var title: String = L10n.CustomizeDashboard.pageTitle;
     
     public var subtitle: String = "";
     
@@ -63,7 +63,7 @@ extension CustomizeDashboardViewModel {
             
             makeWidgetsViewModel(from: response.dashboard)
         } catch {
-            onError?(.showAlert(message: "There was an error fetching widgets. Try again later."))
+            onError?(.showAlert(message: L10n.CustomizeDashboard.errorFetchingWidgets))
         }
         
         updateUI?()
@@ -82,7 +82,7 @@ extension CustomizeDashboardViewModel {
             _ = try updateWidgetUseCase.execute(request)
         } catch {
             getData()
-            onError?(.showAlert(message: "There was an error editing the visibility of the widget. Try again later."))
+            onError?(.showAlert(message: L10n.CustomizeDashboard.errorUpdatingWidgetVisibility))
         }
     }
 }
@@ -109,48 +109,48 @@ extension CustomizeDashboardViewModel {
     private func titleForWidget(_ widget: DashboardWidgetDTO) -> String {
         switch widget.type {
         case .totalIncomeAndSpending:
-            return "Total income and spending"
+            return L10n.CustomizeDashboard.totalIncomeAndSpendingTitle
         case .totalMainAndOtherIncome:
-            return "Main and other income"
+            return L10n.CustomizeDashboard.mainAndOtherIncomeTitle
         case .pieChartSpendingCategories:
-            return "Pie chart spending categories"
+            return L10n.CustomizeDashboard.pieChartSpendingCategoriesTitle
         case .pieChartIncomeCategories:
-            return "Pie chart income categories"
+            return L10n.CustomizeDashboard.pieChartIncomeCategoriesTitle
         case .barChartSpendingCategories:
-            return "Bar chart spending categories"
+            return L10n.CustomizeDashboard.barChartSpendingCategoriesTitle
         case .barChartIncomeCategories:
-            return "Bar chart income categories"
+            return L10n.CustomizeDashboard.barChartIncomeCategoriesTitle
         case .keyMetrics:
-            return "Key metrics"
+            return L10n.CustomizeDashboard.keyMetricsTitle
         case .incomeBreakdown:
-            return "Income breakdown"
+            return L10n.CustomizeDashboard.incomeBreakdownTitle
         case .spendingBreakdown:
-            return "Spending breakdown"
+            return L10n.CustomizeDashboard.spendingBreakdownTitle
         case .unknown:
-            return "Unknown"
+            return L10n.CustomizeDashboard.unknownTitle
         }
     }
     
     private func descriptionForWidget(_ widget: DashboardWidgetDTO) -> String? {
         switch widget.type {
         case .totalIncomeAndSpending:
-            return "A card displaying total income and spent"
+            return L10n.CustomizeDashboard.totalIncomeAndSpendingDescription
         case .totalMainAndOtherIncome:
-            return "A card displaying main and other income"
+            return L10n.CustomizeDashboard.totalMainAndOtherIncomeDescription
         case .pieChartSpendingCategories:
-            return "A pie chart with spending categories"
+            return L10n.CustomizeDashboard.pieChartSpendingCategoriesDescription
         case .pieChartIncomeCategories:
-            return "A pie chart with income categories"
+            return L10n.CustomizeDashboard.pieChartIncomeCategoriesDescription
         case .barChartSpendingCategories:
-            return "A bar chart with spending categories"
+            return L10n.CustomizeDashboard.barChartSpendingCategoriesDescription
         case .barChartIncomeCategories:
-            return "A bar chart with income categories"
+            return L10n.CustomizeDashboard.barChartIncomeCategoriesDescription
         case .keyMetrics:
-            return "A card with metrics such as average and saving efficiency"
+            return L10n.CustomizeDashboard.keyMetricsDescription
         case .incomeBreakdown:
-            return "A breakdown of all income categories"
+            return L10n.CustomizeDashboard.incomeBreakdownDescription
         case .spendingBreakdown:
-            return "A breakdown of all spending categories"
+            return L10n.CustomizeDashboard.spendingBreakdownDescription
         case .unknown:
             return nil
         }

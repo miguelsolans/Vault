@@ -1,0 +1,327 @@
+/*
+  Localizable.strings
+  Vault
+
+  Generated from L10n.swift
+*/
+
+/* Common */
+"common.general.vault" = "Cofre";
+"common.general.error" = "Erro";
+"common.general.success" = "Sucesso";
+"common.general.noData" = "Não há dados";
+"common.general.errorFetchingData" = "Ocorreu um erro a procurar os dados.";
+"common.general.ok" = "Ok";
+"common.general.delete" = "Eliminar";
+"common.general.edit" = "Editar";
+"common.general.save" = "Guardar";
+"common.general.expense" = "Despesa";
+"common.general.income" = "Rendimento";
+"common.general.optional" = "Opcional";
+"common.general.cancel" = "Cancelar";
+"common.general.received" = "Recebido";
+"common.general.expected" = "Expectável";
+"common.general.cancelled" = "Cancelado";
+"common.general.disable" = "Desativar";
+
+/* Onboarding */
+"onboarding.offline.title" = "Concebido para funcionar offline";
+"onboarding.offline.description" = "Sem necessidade de registo. Podes utilizar todas as funcionalidades de forma segura e offline.";
+"onboarding.trackSpending.title" = "Tracking de despesas";
+"onboarding.trackSpending.description" = "Percebe onde vai o teu dinheiro todos os meses ou anos";
+"onboarding.personalizeCategories.title" = "Personaliza com categorias";
+"onboarding.personalizeCategories.description" = "Cria categorias e atribui-lhe cores que definam o teu estilo.";
+"onboarding.trackReimbursements.title" = "Tracking de reembolsos";
+"onboarding.trackReimbursements.description" = "Matém despesas partilhadas sobre controlo. Regista reembolsos que automaticamente reflitam quanto realmente gastaste.";
+"onboarding.multipleVaults.title" = "Múltiplos Cofres";
+"onboarding.multipleVaults.description" = "Organiza o dinheiro em diferentes Cofres";
+"onboarding.saveSmarter.title" = "Poupa de forma mais inteligente";
+"onboarding.saveSmarter.description" = "Obtém informações relevantes sobre os hábitos de consumo e progresso financeiro";
+"onboarding.cta.title" = "Criar Cofre";
+
+/* Vaults */
+"vaults.page.title" = "Lista de Cofres";
+"vaults.page.subtitle" = "Escolhe um Cofre";
+"vaults.action.favorite" = "Favorito";
+"vaults.action.export" = "Exportar";
+"vaults.error.fetchingVaults" = "Ocorreu um erro ao procurar os cofres. Por favor, tente novamente.";
+"vaults.error.deletingVault" = "Ocorreu um erro ao eliminar o Cofre. Por favor, tente novamente.";
+"vaults.error.exportingVault" = "Ocorreu um erro ao exportar o Cofre. Por favor, tente novamente.";
+
+/* Create Vault */
+"vault.create.page.title" = "Criar Cofre";
+"vault.create.page.subtitle" = "";
+"vault.create.field.name" = "Nome";
+"vault.create.field.enterName" = "Introduza o nome";
+"vault.create.field.initialAmount" = "Montante inicial";
+"vault.create.field.setupInitialAmount" = "Configurar montante inicial";
+"vault.create.field.enterInitialAmount" = "Introduza o montante";
+"vault.create.field.importOperations" = "Importar operações";
+"vault.create.field.importFromCsv" = "Importar de CSV";
+"vault.create.field.csvFile" = "Ficheiro CSV";
+"vault.create.validation.nameRequired" = "Nome não pode estar vazio";
+"vault.create.validation.initialAmountRequired" = "Montante não pode estar vazio";
+"vault.create.validation.fileRequired" = "Ficheiro não pode estar vazio";
+"vault.create.error.nameAlreadyExists" = "Um Cofre com este nome já existe.";
+"vault.create.error.creatingVault" = "Ocorreu um erro ao criar o Cofre. Por favor, tente novamente.";
+
+/* Edit Vault */
+"vault.edit.page.title" = "Editar Cofre";
+"vault.edit.error.nameAlreadyExists" = "Um Cofre com este nome já existe.";
+"vault.edit.error.updatingVault" = "Ocorreu um erro ao atualizar o Cofre. Por favor, tente novamente.";
+
+/* Overview */
+"dashboard.overview.page.title" = "Visão Geral";
+"dashboard.overview.customizeDashboard" = "Customizar Visão Geral";
+"dashboard.overview.mode.yearly" = "Anualmente";
+"dashboard.overview.mode.monthly" = "Mensalmente";
+"dashboard.overview.emptyData.description" = "Não existem dados para calcular métricas. Podes adicionar dados financeiros em Operações";
+"dashboard.overview.emptyWidget.title" = "Não existem Widgets";
+"dashboard.overview.emptyWidget.description" = "Escolhe a informação que queres ver na Visão Geral.";
+"dashboard.overview.error.fetchingConfiguration" = "Ocorreu um erro ao procurar configurações dos Widgets. Por favor, tente novamente.";
+"dashboard.overview.yourIncome" = "Os teus rendimentos";
+"dashboard.overview.keyMetrics" = "Métricas chave";
+"dashboard.overview.averageIncome" = "Média de rendimentos";
+"dashboard.overview.averageSpent" = "Média de gastos";
+"dashboard.overview.totalSaved" = "Total poupado";
+"dashboard.overview.savingEfficiency" = "Eficiência de poupança";
+"dashboard.overview.totalIncome" = "Total de rendimentos";
+"dashboard.overview.totalExpenses" = "Total de despesas";
+"dashboard.overview.mainIncome" = "Rendimento principal";
+"dashboard.overview.otherIncome" = "Outros rendimentos";
+"dashboard.overview.yourExpenses" = "As tuas despesas";
+"dashboard.overview.spendingBreakdown" = "Detalhe dos gastos";
+"dashboard.overview.incomeBreakdown" = "Detalhe dos rendimentos";
+"dashboard.overview.pendingReimbursements.title" = "Reembolsos pendentes";
+"dashboard.overview.pendingReimbursements.body" = "Neste momento, esperas reembolsos no total de %@";
+"dashboard.overview.spendingDistribution" = "Onde foi o teu dinheiro";
+"dashboard.overview.incomeDistribution" = "De onde veio o teu dinheiro";
+
+/* Customize Dashboard */
+"dashboard.customize.page.title" = "Customizar Visão Geral";
+"dashboard.customize.totalIncomeAndSpending.title" = "Total de rendimentos e gastos";
+"dashboard.customize.totalIncomeAndSpending.description" = "Um cartão com a totalidade de rendimentos e gastos.";
+"dashboard.customize.mainAndOtherIncome.title" = "Outros rendimentos e rendimento principal";
+"dashboard.customize.mainAndOtherIncome.description" = "Um cartão com o valor de rendimentos principais e secundários.";
+"dashboard.customize.pieChartSpendingCategories.title" = "Gráfico pizza de despesas";
+"dashboard.customize.pieChartSpendingCategories.description" = "Um gráfico de pizza com todas as despesas.";
+"dashboard.customize.pieChartIncomeCategories.title" = "Gráfico pizza de rendimentos";
+"dashboard.customize.pieChartIncomeCategories.description" = "Um gráfico de pizza com todos os rendimentos.";
+"dashboard.customize.barChartSpendingCategories.title" = "Gráfico de barras de despesas";
+"dashboard.customize.barChartSpendingCategories.description" = "Um gráfico de barras com todas as despesas.";
+"dashboard.customize.barChartIncomeCategories.title" = "Gráfico de barras de rendimentos";
+"dashboard.customize.barChartIncomeCategories.description" = "Um gráfico de barras com todos rendimentos.";
+"dashboard.customize.keyMetrics.title" = "Métricas chave";
+"dashboard.customize.keyMetrics.description" = "Um cartão com diferentes métricas, como média e eficiência de poupança.";
+"dashboard.customize.incomeBreakdown.title" = "Detalhe de rendimentos";
+"dashboard.customize.incomeBreakdown.description" = "Detalhe de todos os rendimentos.";
+"dashboard.customize.spendingBreakdown.title" = "Detalhe de gastos";
+"dashboard.customize.spendingBreakdown.description" = "Detalhe de todos os gastos.";
+"dashboard.customize.unknownTitle" = "Desconhecido";
+"dashboard.customize.error.fetchingWidgets" = "Ocorreu um erro ao procurar os widgets. Por favor, tente novamente.";
+"dashboard.customize.error.updatingWidgetVisibility" = "Ocorreu um erro ao atualizar a visibilidade do widget. Por favor, tente novamente.";
+
+/* Breakdown */
+"dashboard.breakdown.income.page.title" = "Rendimento";
+"dashboard.breakdown.spending.page.title" = "Despesas";
+"dashboard.breakdown.title" = "Detalhe";
+"dashboard.breakdown.mainIncome" = "Rendimento principal";
+"dashboard.breakdown.otherIncome" = "Outros rendimentos";
+
+/* Feedback */
+"feedback.page.title" = "Fornece feedback";
+"feedback.page.subtitle" = "Abana o teu telemóvel para fornecer o teu feedback, sugestões ou reportar problemas.";
+
+/* Operations */
+"operations.page.title" = "Operações";
+"operations.action.fromCamera" = "Pela câmera";
+"operations.empty.title" = "Não existem operações";
+"operations.empty.message" = "Podes adicionar operações financeiras no botão mais.";
+"operations.error.fetchingOperations" = "Ocorreu um erro ao procurar operações. Por favor, tenta novamente.";
+"operations.error.deletingOperation" = "Ocorreu um erro ao eliminar a operação. Por favor, tenta novamente.";
+
+/* Operation Detail */
+"operation.detail.page.title" = "";
+"operation.detail.page.subtitle" = "";
+"operation.detail.type" = "Tipo";
+"operation.detail.notes" = "Notas";
+"operation.detail.amount" = "Montante";
+"operation.detail.totalReimbursed" = "Total reembolsado";
+"operation.detail.remaining" = "Restante";
+"operation.detail.operationDetail" = "Detalhe da operação";
+"operation.detail.reimbursements" = "Reembolsos";
+"operation.detail.summary" = "Sumário";
+"operation.detail.error.updatingReimbursementStatus" = "Ocorreu um erro ao atualizar o estado do reembolso. Por favor, tenta novamente.";
+"operation.detail.error.deletingOperation" = "Ocorreu um erro ao eliminar a operação. Por favor, tenta novamente.";
+
+/* Add Operation */
+"operation.add.page.title" = "Adicionar operação";
+"operation.add.review.title" = "Revê os dados";
+"operation.add.review.message" = "A informação da operação foi automaticamente populada através do recibo. Revê os dados antes de guardar.";
+"operation.add.type" = "Tipo";
+"operation.add.category" = "Categoria";
+"operation.add.amount" = "Montante";
+"operation.add.enterAmount" = "Introduz o montante";
+"operation.add.description" = "Descrição";
+"operation.add.enterDescription" = "Introduz a descrição";
+"operation.add.date" = "Data";
+"operation.add.reimbursement" = "Reembolso";
+"operation.add.isSplitBill" = "É uma despesa partilhada";
+"operation.add.categoryRequired" = "Categoria não pode estar vazia";
+"operation.add.amountRequired" = "Montante não pode estar vazio";
+"operation.add.amountInvalid" = "Montante inválido";
+"operation.add.descriptionRequired" = "Descrição não pode estar vazia";
+"operation.add.removeReimbursementToEditAmount" = "Remove os reembolsos para editar o montante";
+"operation.add.addReimbursement" = "Adicionar reembolso";
+"operation.add.error.fetchingCategories" = "Ocorreu um erro a procurar categorias. Por favor, tenta novamente.";
+"operation.add.error.updatingReimbursementStatus" = "Ocorreu um erro ao atualizar o estado do reembolso. Por favor, tenta novamente.";
+"operation.add.error.creatingOperation" = "Ocorreu um erro ao criar a operação. Por favor, tenta novamente.";
+
+/* Edit Operation */
+"operation.edit.page.title" = "Editar operação";
+"operation.edit.error.updatingOperation" = "Ocorreu um erro ao editar a operação. Por favor, tenta novamente.";
+"operation.edit.error.deletingReimbursement" = "Ocorreu um erro ao eliminar o reembolso. Por favor, tenta novamente.";
+
+/* Add Reimbursement */
+"reimbursement.add.page.title" = "Adicionar reembolso";
+"reimbursement.add.page.subtitle" = "";
+"reimbursement.add.maximumTitle" = "Máximo reembolso permitido";
+"reimbursement.add.maximumMessage" = "Podes adicionar um reembolso até %@";
+"reimbursement.add.status" = "Estado";
+"reimbursement.add.amount" = "Montante do reembolso";
+"reimbursement.add.enterAmount" = "Introduz o montante";
+"reimbursement.add.title" = "Título";
+"reimbursement.add.enterTitle" = "Introduz o título";
+"reimbursement.add.depositVault" = "Cofre de depósito";
+"reimbursement.add.chooseDepositVault" = "Escolhe o Cofre de depósito";
+"reimbursement.add.depositVaultFeedback.title" = "Cofre de depósito é diferente do Cofre original";
+"reimbursement.add.depositVaultFeedback.message" = "Selecionaste um Cofre diferente para o depósito. Vai ser registada uma operação de tipo rendimento no Cofre selecionado.";
+"reimbursement.add.depositIncomeCategory" = "Categoria de rendimento no deposito";
+"reimbursement.add.chooseDepositCategory" = "Escolhe uma categoria";
+"reimbursement.add.amountRequired" = "Montante não pode estar vazio";
+"reimbursement.add.amountGreaterThanZero" = "Montante deve ser superior a zero";
+"reimbursement.add.amountInferiorOrEqual" = "Montante deve ser inferior ou igual ao montante máximo permitido";
+"reimbursement.add.depositVaultRequired" = "Cofre de depósito não pode estar vazio";
+"reimbursement.add.depositCategoryRequired" = "Categoria de depósito não pode estar vazia";
+"reimbursement.add.error.fetchingVaults" = "Ocorreu um erro ao procurar os Cofres. Por favor, tenta novamente";
+"reimbursement.add.error.fetchingVaultCategories" = "Ocorreu um erro ao procurar as categorias do Cofre %@. Por favor, tenta novamente.";
+"reimbursement.add.error.savingReimbursement" = "Ocorreu um erro ao guardar o reembolso. Por favor, tenta novamente";
+
+/* Edit Reimbursement */
+"reimbursement.edit.page.title" = "Editar reembolso";
+"reimbursement.edit.page.subtitle" = "";
+
+/* OCR */
+"ocr.page.title" = "";
+"ocr.page.subtitle" = "";
+
+/* Categories */
+"categories.page.title" = "Categorias";
+"categories.sort.ascending" = "Ascendente";
+"categories.sort.descending" = "Descendente";
+"categories.sort.type" = "Tipo";
+"categories.numberOfOperations" = "%@ • %d operações";
+"categories.error.fetchingCategories" = "Ocorreu um erro ao procurar as categorias. Por favor, tenta novamente";
+"categories.error.deletingCategory" = "Ocorreu um erro ao eliminar a categoria. Por favor, tenta novamente";
+"categories.empty.title" = "Não existem categorias";
+"categories.empty.description" = "Podes adicionar categorias no botão mais.";
+
+/* Add Category */
+"category.add.page.title" = "Adicionar categoria";
+"category.add.type" = "Tipo";
+"category.add.emoji" = "Emoji";
+"category.add.enterEmoji" = "Introduz um emoji ou caracter";
+"category.add.name" = "Nome da categoria";
+"category.add.enterName" = "Introduz o nome da categoria";
+"category.add.color" = "Cor";
+"category.add.colorDescription" = "Cor da categoria";
+"category.add.plotting" = "Gráfico";
+"category.add.showInPlot" = "Mostrar no gráfico";
+"category.add.mainIncome" = "Rendimento principal";
+"category.add.isMainSourceOfIncome" = "É a principal fonte de rendimento";
+"category.add.validation.nameRequired" = "Categoria não pode estar vazia.";
+"category.add.error.addingCategory" = "Ocorreu um erro ao adicionar a categoria. Por favor, tenta novamente.";
+"category.add.error.alreadyExists" = "Categoria com o nome %@ já existe.";
+
+/* Edit Category */
+"category.edit.page.title" = "Editar categoria";
+"category.edit.error.updatingCategory" = "Ocorreu um erro ao editar a categoria. Por favor, tenta novamente.";
+"category.edit.error.alreadyExists" = "Categoria com o nome %@ já existe.";
+
+/* Category Detail */
+"category.detail.page.title" = "";
+"category.detail.page.subtitle" = "";
+"category.detail.type" = "Tipo";
+"category.detail.notes" = "Notas";
+"category.detail.operationsCount" = "Contagem de operações";
+"category.detail.error.deletingCategory" = "Ocorreu um erro ao eliminar a categoria. Por favor, tenta novamente.";
+
+/* Settings */
+"settings.page.title" = "Definições";
+"settings.page.subtitle" = "";
+"settings.settings.vaultsOption.title" = "Cofres";
+"settings.settings.vaultsOption.description" = "Gere os teus Cofres";
+"settings.settings.securityOption.title" = "Segurança";
+"settings.settings.securityOption.description" = "PIN and autenticação biométrica";
+"settings.settings.backupOption.title" = "Backup";
+"settings.settings.backupOption.description" = "Backup de dados com iCloud";
+"settings.settings.aboutOption.title" = "Sobre";
+"settings.settings.aboutOption.description" = "Versão da aplicação e informações";
+"settings.settings.deleteInformation" = "Eliminar dados";
+"settings.settings.deleteInformationDisclaimer" = "Todos os dados relacionados com os Cofres, operações e categorias serão eliminados.";
+"settings.settings.error.deletingData" = "Ocorreu um erro ao eliminar os dados. Por favor, tente novamente";
+
+/* Security */
+"security.page.title" = "Segurança";
+"security.page.subtitle" = "";
+"security.disablePin" = "Desativar o PIN";
+"security.disablePinMessage" = "Ao desativar o PIN vais remover qualquer tipo de autenticação ao aceder ao Cofre.";
+"security.pinOption.title" = "PIN";
+"security.pinOption.description" = "Autenticação por PIN quando a aplicação inicia";
+"security.biometricOption.title" = "Dados biométricos";
+"security.biometricOption.description" = "Utilizar dados biométricos para desbloquear";
+"security.options" = "Opções";
+"security.autoLockOption.title" = "Bloqueio automático";
+"security.immediately" = "Imediatamente";
+"security.never" = "Nunca";
+"security.requiresAuthenticationOption.title" = "Requer autenticação";
+"security.requiresAuthenticationOption.description" = "Pedir sempre autenticação quando a aplicação inicia";
+"security.authentication" = "Autenticação";
+"security.option" = "Opção";
+
+/* Create PIN */
+"security.pin.create.page.title" = "Criar PIN";
+"security.pin.create.numberOfDigits" = "Introduza um PIN de 4 digitos";
+
+/* About */
+"about.page.title" = "Sobre";
+"about.page.subtitle" = "";
+"about.privacyOption.title" = "Privacidade e Dados";
+"about.privacyOption.description" = "Descobre como são armazenados os teus dados";
+"about.dashboardOption.title" = "Visão geral";
+"about.dashboardOption.description" = "Métricas e dados análises";
+"about.vaultsOption.title" = "Cofres";
+"about.vaultsOption.description" = "Configura e gere os teus Cofres";
+"about.categoriesOption.title" = "Categorias";
+"about.categoriesOption.description" = "Criar a gerir categorias";
+"about.operationsOption.title" = "Operações";
+"about.operationsOption.description" = "Registar e gerir operações";
+"about.versionOption.title" = "Versão";
+"about.general" = "Geral";
+"about.features" = "Funcionalidades";
+"about.info" = "Informação";
+"about.pageFooter" = "Construído com ❤️ em Portugal";
+
+/* Chat */
+"chat.page.title" = "Assistente";
+"chat.page.subtitle" = "";
+"chat.firstMessage" = "Olá! Eu sou o assistente financeiro do Cofre. Construído com privacidade em foco: tudo funciona no teu dispositivo. Sou ótimo para insights rápidos e questões financeiras do dia-a-dia.";
+"chat.askVault" = "Pergunta ao Cofre";
+"chat.send" = "Enviar";
+
+/* Tab */
+"tab.overview" = "Visão Geral";
+"tab.operations" = "Operações";
+"tab.categories" = "Categorias";
+"tab.settings" = "Definições";
+"tab.demo" = "Demo";

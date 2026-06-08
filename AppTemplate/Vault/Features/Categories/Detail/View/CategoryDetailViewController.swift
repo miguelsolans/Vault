@@ -77,7 +77,7 @@ final class CategoryDetailViewController: VaultBaseViewController {
         viewModel.onError = { [weak self] message in
             guard let self = self else { return }
             
-            self.presentAlert(with: "Error", and: message)
+            self.presentAlert(with: L10n.Common.error, and: message)
             self.notifyFeedback(.error)
         }
     }
@@ -98,7 +98,7 @@ extension CategoryDetailViewController {
         var actions: [UIAction] = []
         
         if viewModel.canEdit {
-            let action = UIAction(title: "Edit", image: UIImage(systemName: "pencil"), handler: { [weak self] _ in
+            let action = UIAction(title: L10n.Common.edit, image: UIImage(systemName: "pencil"), handler: { [weak self] _ in
                 guard let self = self else { return }
                 self.viewModel.didTapEdit()
             })
@@ -108,7 +108,7 @@ extension CategoryDetailViewController {
         
         if viewModel.canDelete {
             let action = makeConfirmedMenuAction(
-                title: "Delete",
+                title: L10n.Common.delete,
                 image: UIImage(systemName: "trash")
             ) { [weak self] in
                 guard let self = self else { return }
