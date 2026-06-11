@@ -7,6 +7,7 @@
 
 /* Common */
 "common.general.vault" = "Cofre";
+"common.general.vaults" = "Cofres";
 "common.general.error" = "Erro";
 "common.general.success" = "Sucesso";
 "common.general.noData" = "Não há dados";
@@ -23,6 +24,30 @@
 "common.general.expected" = "Expectável";
 "common.general.cancelled" = "Cancelado";
 "common.general.disable" = "Desativar";
+"common.general.type" = "Tipo";
+"common.general.categories" = "Categorias";
+"common.general.mainIncome" = "Principal rendimento";
+"common.general.operations" = "Operações";
+"common.general.about" = "Sobre";
+"common.general.addReimbursement" = "Adicionar reembolso";
+"common.general.createVault" = "Criar Cofre";
+"common.general.customizeDashboard" = "Customizar Visão Geral";
+"common.general.amount" = "Montante";
+"common.general.enterAmount" = "Introduz o montante";
+"common.general.amountRequired" = "Montante não pode estar vazio";
+"common.general.incomeBreakdown" = "Detalhe de rendimentos";
+"common.general.keyMetrics" = "Métricas";
+"common.general.notes" = "Notas";
+"common.general.otherIncome" = "Outros rendimentos";
+"common.general.overview" = "Visão Geral";
+"common.general.security" = "Segurança";
+"common.general.settings" = "Definições";
+"common.general.spendingBreakdown" = "Detalhe de gastos";
+"common.general.category" = "Categoria";
+"common.general.total" = "Total";
+
+"common.confirmation.title" = "Eliminar item?";
+"common.confirmation.message" = "Esta ação não pode ser desfeita";
 
 /* Onboarding */
 "onboarding.offline.title" = "Concebido para funcionar offline";
@@ -37,19 +62,18 @@
 "onboarding.multipleVaults.description" = "Organiza o dinheiro em diferentes Cofres";
 "onboarding.saveSmarter.title" = "Poupa de forma mais inteligente";
 "onboarding.saveSmarter.description" = "Obtém informações relevantes sobre os hábitos de consumo e progresso financeiro";
-"onboarding.cta.title" = "Criar Cofre";
 
 /* Vaults */
 "vaults.page.title" = "Lista de Cofres";
 "vaults.page.subtitle" = "Escolhe um Cofre";
 "vaults.action.favorite" = "Favorito";
 "vaults.action.export" = "Exportar";
+"vaults.initialBalance.title" = "Saldo inicial: %@";
 "vaults.error.fetchingVaults" = "Ocorreu um erro ao procurar os cofres. Por favor, tente novamente.";
 "vaults.error.deletingVault" = "Ocorreu um erro ao eliminar o Cofre. Por favor, tente novamente.";
 "vaults.error.exportingVault" = "Ocorreu um erro ao exportar o Cofre. Por favor, tente novamente.";
 
 /* Create Vault */
-"vault.create.page.title" = "Criar Cofre";
 "vault.create.page.subtitle" = "";
 "vault.create.field.name" = "Nome";
 "vault.create.field.enterName" = "Introduza o nome";
@@ -60,7 +84,6 @@
 "vault.create.field.importFromCsv" = "Importar de CSV";
 "vault.create.field.csvFile" = "Ficheiro CSV";
 "vault.create.validation.nameRequired" = "Nome não pode estar vazio";
-"vault.create.validation.initialAmountRequired" = "Montante não pode estar vazio";
 "vault.create.validation.fileRequired" = "Ficheiro não pode estar vazio";
 "vault.create.error.nameAlreadyExists" = "Um Cofre com este nome já existe.";
 "vault.create.error.creatingVault" = "Ocorreu um erro ao criar o Cofre. Por favor, tente novamente.";
@@ -71,8 +94,6 @@
 "vault.edit.error.updatingVault" = "Ocorreu um erro ao atualizar o Cofre. Por favor, tente novamente.";
 
 /* Overview */
-"dashboard.overview.page.title" = "Visão Geral";
-"dashboard.overview.customizeDashboard" = "Customizar Visão Geral";
 "dashboard.overview.mode.yearly" = "Anualmente";
 "dashboard.overview.mode.monthly" = "Mensalmente";
 "dashboard.overview.emptyData.description" = "Não existem dados para calcular métricas. Podes adicionar dados financeiros em Operações";
@@ -80,25 +101,19 @@
 "dashboard.overview.emptyWidget.description" = "Escolhe a informação que queres ver na Visão Geral.";
 "dashboard.overview.error.fetchingConfiguration" = "Ocorreu um erro ao procurar configurações dos Widgets. Por favor, tente novamente.";
 "dashboard.overview.yourIncome" = "Os teus rendimentos";
-"dashboard.overview.keyMetrics" = "Métricas chave";
 "dashboard.overview.averageIncome" = "Média de rendimentos";
 "dashboard.overview.averageSpent" = "Média de gastos";
 "dashboard.overview.totalSaved" = "Total poupado";
 "dashboard.overview.savingEfficiency" = "Eficiência de poupança";
 "dashboard.overview.totalIncome" = "Total de rendimentos";
 "dashboard.overview.totalExpenses" = "Total de despesas";
-"dashboard.overview.mainIncome" = "Rendimento principal";
-"dashboard.overview.otherIncome" = "Outros rendimentos";
 "dashboard.overview.yourExpenses" = "As tuas despesas";
-"dashboard.overview.spendingBreakdown" = "Detalhe dos gastos";
-"dashboard.overview.incomeBreakdown" = "Detalhe dos rendimentos";
 "dashboard.overview.pendingReimbursements.title" = "Reembolsos pendentes";
 "dashboard.overview.pendingReimbursements.body" = "Neste momento, esperas reembolsos no total de %@";
 "dashboard.overview.spendingDistribution" = "Onde foi o teu dinheiro";
 "dashboard.overview.incomeDistribution" = "De onde veio o teu dinheiro";
 
 /* Customize Dashboard */
-"dashboard.customize.page.title" = "Customizar Visão Geral";
 "dashboard.customize.totalIncomeAndSpending.title" = "Total de rendimentos e gastos";
 "dashboard.customize.totalIncomeAndSpending.description" = "Um cartão com a totalidade de rendimentos e gastos.";
 "dashboard.customize.mainAndOtherIncome.title" = "Outros rendimentos e rendimento principal";
@@ -111,40 +126,32 @@
 "dashboard.customize.barChartSpendingCategories.description" = "Um gráfico de barras com todas as despesas.";
 "dashboard.customize.barChartIncomeCategories.title" = "Gráfico de barras de rendimentos";
 "dashboard.customize.barChartIncomeCategories.description" = "Um gráfico de barras com todos rendimentos.";
-"dashboard.customize.keyMetrics.title" = "Métricas chave";
 "dashboard.customize.keyMetrics.description" = "Um cartão com diferentes métricas, como média e eficiência de poupança.";
-"dashboard.customize.incomeBreakdown.title" = "Detalhe de rendimentos";
 "dashboard.customize.incomeBreakdown.description" = "Detalhe de todos os rendimentos.";
-"dashboard.customize.spendingBreakdown.title" = "Detalhe de gastos";
 "dashboard.customize.spendingBreakdown.description" = "Detalhe de todos os gastos.";
 "dashboard.customize.unknownTitle" = "Desconhecido";
 "dashboard.customize.error.fetchingWidgets" = "Ocorreu um erro ao procurar os widgets. Por favor, tente novamente.";
 "dashboard.customize.error.updatingWidgetVisibility" = "Ocorreu um erro ao atualizar a visibilidade do widget. Por favor, tente novamente.";
 
 /* Breakdown */
-"dashboard.breakdown.income.page.title" = "Rendimento";
 "dashboard.breakdown.spending.page.title" = "Despesas";
 "dashboard.breakdown.title" = "Detalhe";
-"dashboard.breakdown.mainIncome" = "Rendimento principal";
-"dashboard.breakdown.otherIncome" = "Outros rendimentos";
 
 /* Feedback */
 "feedback.page.title" = "Fornece feedback";
 "feedback.page.subtitle" = "Abana o teu telemóvel para fornecer o teu feedback, sugestões ou reportar problemas.";
 
 /* Operations */
-"operations.page.title" = "Operações";
 "operations.action.fromCamera" = "Pela câmera";
 "operations.empty.title" = "Não existem operações";
 "operations.empty.message" = "Podes adicionar operações financeiras no botão mais.";
 "operations.error.fetchingOperations" = "Ocorreu um erro ao procurar operações. Por favor, tenta novamente.";
 "operations.error.deletingOperation" = "Ocorreu um erro ao eliminar a operação. Por favor, tenta novamente.";
+"operations.numberOfReimbursements" = "%d reembolso%@";
 
 /* Operation Detail */
 "operation.detail.page.title" = "";
 "operation.detail.page.subtitle" = "";
-"operation.detail.type" = "Tipo";
-"operation.detail.notes" = "Notas";
 "operation.detail.amount" = "Montante";
 "operation.detail.totalReimbursed" = "Total reembolsado";
 "operation.detail.remaining" = "Restante";
@@ -158,21 +165,15 @@
 "operation.add.page.title" = "Adicionar operação";
 "operation.add.review.title" = "Revê os dados";
 "operation.add.review.message" = "A informação da operação foi automaticamente populada através do recibo. Revê os dados antes de guardar.";
-"operation.add.type" = "Tipo";
-"operation.add.category" = "Categoria";
-"operation.add.amount" = "Montante";
-"operation.add.enterAmount" = "Introduz o montante";
 "operation.add.description" = "Descrição";
 "operation.add.enterDescription" = "Introduz a descrição";
 "operation.add.date" = "Data";
 "operation.add.reimbursement" = "Reembolso";
 "operation.add.isSplitBill" = "É uma despesa partilhada";
 "operation.add.categoryRequired" = "Categoria não pode estar vazia";
-"operation.add.amountRequired" = "Montante não pode estar vazio";
 "operation.add.amountInvalid" = "Montante inválido";
 "operation.add.descriptionRequired" = "Descrição não pode estar vazia";
 "operation.add.removeReimbursementToEditAmount" = "Remove os reembolsos para editar o montante";
-"operation.add.addReimbursement" = "Adicionar reembolso";
 "operation.add.error.fetchingCategories" = "Ocorreu um erro a procurar categorias. Por favor, tenta novamente.";
 "operation.add.error.updatingReimbursementStatus" = "Ocorreu um erro ao atualizar o estado do reembolso. Por favor, tenta novamente.";
 "operation.add.error.creatingOperation" = "Ocorreu um erro ao criar a operação. Por favor, tenta novamente.";
@@ -183,13 +184,10 @@
 "operation.edit.error.deletingReimbursement" = "Ocorreu um erro ao eliminar o reembolso. Por favor, tenta novamente.";
 
 /* Add Reimbursement */
-"reimbursement.add.page.title" = "Adicionar reembolso";
 "reimbursement.add.page.subtitle" = "";
 "reimbursement.add.maximumTitle" = "Máximo reembolso permitido";
 "reimbursement.add.maximumMessage" = "Podes adicionar um reembolso até %@";
 "reimbursement.add.status" = "Estado";
-"reimbursement.add.amount" = "Montante do reembolso";
-"reimbursement.add.enterAmount" = "Introduz o montante";
 "reimbursement.add.title" = "Título";
 "reimbursement.add.enterTitle" = "Introduz o título";
 "reimbursement.add.depositVault" = "Cofre de depósito";
@@ -198,7 +196,6 @@
 "reimbursement.add.depositVaultFeedback.message" = "Selecionaste um Cofre diferente para o depósito. Vai ser registada uma operação de tipo rendimento no Cofre selecionado.";
 "reimbursement.add.depositIncomeCategory" = "Categoria de rendimento no deposito";
 "reimbursement.add.chooseDepositCategory" = "Escolhe uma categoria";
-"reimbursement.add.amountRequired" = "Montante não pode estar vazio";
 "reimbursement.add.amountGreaterThanZero" = "Montante deve ser superior a zero";
 "reimbursement.add.amountInferiorOrEqual" = "Montante deve ser inferior ou igual ao montante máximo permitido";
 "reimbursement.add.depositVaultRequired" = "Cofre de depósito não pode estar vazio";
@@ -216,10 +213,8 @@
 "ocr.page.subtitle" = "";
 
 /* Categories */
-"categories.page.title" = "Categorias";
 "categories.sort.ascending" = "Ascendente";
 "categories.sort.descending" = "Descendente";
-"categories.sort.type" = "Tipo";
 "categories.numberOfOperations" = "%@ • %d operações";
 "categories.error.fetchingCategories" = "Ocorreu um erro ao procurar as categorias. Por favor, tenta novamente";
 "categories.error.deletingCategory" = "Ocorreu um erro ao eliminar a categoria. Por favor, tenta novamente";
@@ -228,7 +223,6 @@
 
 /* Add Category */
 "category.add.page.title" = "Adicionar categoria";
-"category.add.type" = "Tipo";
 "category.add.emoji" = "Emoji";
 "category.add.enterEmoji" = "Introduz um emoji ou caracter";
 "category.add.name" = "Nome da categoria";
@@ -237,7 +231,6 @@
 "category.add.colorDescription" = "Cor da categoria";
 "category.add.plotting" = "Gráfico";
 "category.add.showInPlot" = "Mostrar no gráfico";
-"category.add.mainIncome" = "Rendimento principal";
 "category.add.isMainSourceOfIncome" = "É a principal fonte de rendimento";
 "category.add.validation.nameRequired" = "Categoria não pode estar vazia.";
 "category.add.error.addingCategory" = "Ocorreu um erro ao adicionar a categoria. Por favor, tenta novamente.";
@@ -251,28 +244,21 @@
 /* Category Detail */
 "category.detail.page.title" = "";
 "category.detail.page.subtitle" = "";
-"category.detail.type" = "Tipo";
-"category.detail.notes" = "Notas";
 "category.detail.operationsCount" = "Contagem de operações";
 "category.detail.error.deletingCategory" = "Ocorreu um erro ao eliminar a categoria. Por favor, tenta novamente.";
 
 /* Settings */
-"settings.page.title" = "Definições";
 "settings.page.subtitle" = "";
-"settings.settings.vaultsOption.title" = "Cofres";
 "settings.settings.vaultsOption.description" = "Gere os teus Cofres";
-"settings.settings.securityOption.title" = "Segurança";
 "settings.settings.securityOption.description" = "PIN and autenticação biométrica";
 "settings.settings.backupOption.title" = "Backup";
 "settings.settings.backupOption.description" = "Backup de dados com iCloud";
-"settings.settings.aboutOption.title" = "Sobre";
 "settings.settings.aboutOption.description" = "Versão da aplicação e informações";
 "settings.settings.deleteInformation" = "Eliminar dados";
 "settings.settings.deleteInformationDisclaimer" = "Todos os dados relacionados com os Cofres, operações e categorias serão eliminados.";
 "settings.settings.error.deletingData" = "Ocorreu um erro ao eliminar os dados. Por favor, tente novamente";
 
 /* Security */
-"security.page.title" = "Segurança";
 "security.page.subtitle" = "";
 "security.disablePin" = "Desativar o PIN";
 "security.disablePinMessage" = "Ao desativar o PIN vais remover qualquer tipo de autenticação ao aceder ao Cofre.";
@@ -294,18 +280,16 @@
 "security.pin.create.numberOfDigits" = "Introduza um PIN de 4 digitos";
 
 /* About */
-"about.page.title" = "Sobre";
 "about.page.subtitle" = "";
 "about.privacyOption.title" = "Privacidade e Dados";
 "about.privacyOption.description" = "Descobre como são armazenados os teus dados";
 "about.dashboardOption.title" = "Visão geral";
 "about.dashboardOption.description" = "Métricas e dados análises";
-"about.vaultsOption.title" = "Cofres";
 "about.vaultsOption.description" = "Configura e gere os teus Cofres";
-"about.categoriesOption.title" = "Categorias";
 "about.categoriesOption.description" = "Criar a gerir categorias";
-"about.operationsOption.title" = "Operações";
 "about.operationsOption.description" = "Registar e gerir operações";
+"about.siriShortcuts.title" = "Siri e Atalhos";
+"about.siriShortcuts.description" = "Tirar partido da Siri e Atalhos";
 "about.versionOption.title" = "Versão";
 "about.general" = "Geral";
 "about.features" = "Funcionalidades";
@@ -320,8 +304,38 @@
 "chat.send" = "Enviar";
 
 /* Tab */
-"tab.overview" = "Visão Geral";
-"tab.operations" = "Operações";
-"tab.categories" = "Categorias";
-"tab.settings" = "Definições";
 "tab.demo" = "Demo";
+
+/* Shortcuts */
+"shortcuts.noFavoriteVault.error" = "Deves definir um Vault favorito em Definições > Vault.";
+
+"shortcut.addExpense.shortTitle" = "Registar despesa";
+"shortcut.addExpense.description" = "Adicionar uma despesa ao Vault";
+"shortcut.addExpense.resultSuccess" = "Foi adicionada uma despesa de %@ ao Vault favorito.";
+"shortcut.addExpense.resultError" = "Ocorreu um erro ao criar a despesa. Tenta novamente ou utiliza a aplicação.";
+
+"shortcut.addIncome.shortTitle" = "Registar rendimento";
+"shortcut.addIncome.description" = "Adicionar um rendimento ao Vault";
+"shortcut.addIncome.resultSuccess" = "Foi adicionado um rendimento de %@ ao Vault favorito.";
+"shortcut.addIncome.resultError" = "Ocorreu um erro ao criar o rendimento. Tenta novamente ou utiliza a aplicação.";
+
+"shortcut.pendingReimbursements.shortTitle" = "Reembolsos pendentes";
+"shortcut.pendingReimbursements.description" = "Ver os reembolsos pendentes no Vault";
+"shortcut.pendingReimbursements.notExpecting.resultSuccess" = "Não estás à espera de receber dinheiro. Até agora, já recebeste %@.";
+"shortcut.pendingReimbursements.expecting.resultSuccess" = "Estás à espera de receber %@. Até agora, já recebeste %@.";
+"shortcut.pendingReimbursements.resultError" = "Ocorreu um erro ao procurar as reembolsos pendentes. Tenta novamente ou utiliza a aplicação.";
+
+"shortcut.checkBalance.shortTitle" = "Consultar saldo";
+"shortcut.checkBalance.description" = "Ver o saldo do Vault";
+"shortcut.balance.resultSuccess" = "O saldo de %@ é de %@";
+"shortcut.checkBalance.resultError" = "Ocorreu um erro ao obter o saldo. Tenta novamente ou utiliza a aplicação.";
+
+"shortcut.savedThisMonth.shortTitle" = "Poupado este mês";
+"shortcut.savedThisMonth.description" = "Quanto foi poupado este mês";
+"shortcut.savedThisMonth.resultSuccess" = "Este mês, poupaste %@";
+"shortcut.savedThisMonth.resultError" = "Ocorreu um erro ao procurar as poupanças deste mês. Tenta novamente ou utiliza a aplicação.";
+
+"shortcut.spentThisMonth.shortTitle" = "Gasto este mês";
+"shortcut.spentThisMonth.description" = "Quanto foi gasto este mês";
+"shortcut.spentThisMonth.resultSuccess" = "Este mês, gastaste %@";
+"shortcut.spentThisMonth.resultError" = "Ocorreu um erro ao procurar as despesas deste mês. Tenta novamente ou utiliza a aplicação.";

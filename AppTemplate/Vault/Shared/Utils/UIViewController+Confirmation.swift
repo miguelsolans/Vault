@@ -15,10 +15,10 @@ struct ConfirmationDialog {
     let confirmStyle: UIAlertAction.Style
 
     static func delete(
-        title: String = "Delete item?",
-        message: String? = "This action cannot be undone.",
-        confirmTitle: String = "Delete",
-        cancelTitle: String = "Cancel"
+        title: String = L10n.Common.deleteItemTitle,
+        message: String? = L10n.Common.deleteItemMessage,
+        confirmTitle: String = L10n.Common.delete,
+        cancelTitle: String = L10n.Common.cancel
     ) -> ConfirmationDialog {
         ConfirmationDialog(
             title: title,

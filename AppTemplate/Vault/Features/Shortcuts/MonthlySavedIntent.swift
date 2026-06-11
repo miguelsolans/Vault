@@ -11,14 +11,14 @@ import AppUIKit
 
 struct MonthlySavedIntent: AppIntent {
     
-    static var title: LocalizedStringResource = "Saved this month"
+    static var title: LocalizedStringResource = "shortcut.savedThisMonth.shortTitle"
     
-    static var description = IntentDescription("How much has been saved this month")
+    static var description = IntentDescription("shortcut.savedThisMonth.description")
     
     static var authenticationPolicy: IntentAuthenticationPolicy = .requiresAuthentication
 
     static var parameterSummary: some ParameterSummary {
-        Summary("Monthly Saved")
+        Summary("shortcut.savedThisMonth.shortTitle")
     }
     
     func perform() async throws -> some IntentResult & ProvidesDialog {
@@ -30,7 +30,7 @@ struct MonthlySavedIntent: AppIntent {
         guard let vault = userDefaults.favoriteVault,
                 let vaultID = UUID(uuidString: vault) else {
             return .result(
-                dialog: IntentDialog("No favourite Vault has been configured.")
+                dialog: IntentDialog(L10n.Shortcuts.noFavoriteVaultError)
             )
         }
         
@@ -44,18 +44,21 @@ struct MonthlySavedIntent: AppIntent {
             
             let response = try useCase.execute(request)
             
-            let currencyFormatter = LocalizedDecimalFormatter(numberStyle: .currency)
+            let amount = response.metrics.netSpending.savings
             
-            let formattedAmount = currencyFormatter
-                .string(from: response.metrics.netSpending.savings) ?? "\(response.metrics.netSpending.savings)"
+            let text = String(
+                format: L10n.Shortcuts.MonthlySaved.resultSuccess,
+                LocalizedDecimalFormatter(numberStyle: .currency)
+                    .string(from: amount) ?? "\(amount)"
+            )
             
             return .result(
-                dialog: IntentDialog(stringLiteral: "This month, you saved \(formattedAmount)")
+                dialog: IntentDialog(stringLiteral: text)
             )
             
         } catch {
             return .result(
-                dialog: IntentDialog("Failed to fetch information from Vault.")
+                dialog: IntentDialog(L10n.Shortcuts.MonthlySaved.resultError)
             )
         }
     }

@@ -23,6 +23,32 @@
 		8B078C262F7DDACA00075CC1 /* CategoryFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B078C252F7DDAC900075CC1 /* CategoryFormViewController.swift */; };
 		8B078C282F7DDAFC00075CC1 /* CategoryFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B078C272F7DDAFC00075CC1 /* CategoryFormViewModel.swift */; };
 		8B0A024C2FD6CDA3005E31B1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8B0A024A2FD6CDA3005E31B1 /* Localizable.strings */; };
+		8B0A02562FD71ABF005E31B1 /* L10+Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A02552FD71ABF005E31B1 /* L10+Common.swift */; };
+		8B0A02582FD71AD0005E31B1 /* L10+Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A02572FD71AD0005E31B1 /* L10+Onboarding.swift */; };
+		8B0A025A2FD71AE5005E31B1 /* L10n+Vaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A02592FD71AE5005E31B1 /* L10n+Vaults.swift */; };
+		8B0A025C2FD71AF2005E31B1 /* L10+CreateVault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A025B2FD71AF2005E31B1 /* L10+CreateVault.swift */; };
+		8B0A025E2FD71AFC005E31B1 /* L10n+EditVault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A025D2FD71AFC005E31B1 /* L10n+EditVault.swift */; };
+		8B0A02602FD71B0B005E31B1 /* L10n+Overview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A025F2FD71B0B005E31B1 /* L10n+Overview.swift */; };
+		8B0A02622FD71B1E005E31B1 /* L10n+CustomizeDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A02612FD71B1E005E31B1 /* L10n+CustomizeDashboard.swift */; };
+		8B0A02642FD71B52005E31B1 /* L10n+Breakdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A02632FD71B52005E31B1 /* L10n+Breakdown.swift */; };
+		8B0A02662FD71B5A005E31B1 /* L10n+Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A02652FD71B5A005E31B1 /* L10n+Feedback.swift */; };
+		8B0A02682FD71B61005E31B1 /* L10n+Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A02672FD71B61005E31B1 /* L10n+Operations.swift */; };
+		8B0A026A2FD71B6D005E31B1 /* L10n+OperationDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A02692FD71B6D005E31B1 /* L10n+OperationDetail.swift */; };
+		8B0A026C2FD71B79005E31B1 /* L10n+AddOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A026B2FD71B79005E31B1 /* L10n+AddOperation.swift */; };
+		8B0A026E2FD71B82005E31B1 /* L10n+EditOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A026D2FD71B82005E31B1 /* L10n+EditOperation.swift */; };
+		8B0A02702FD71B8C005E31B1 /* L10n+AddReimbursement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A026F2FD71B8C005E31B1 /* L10n+AddReimbursement.swift */; };
+		8B0A02722FD71B98005E31B1 /* L10n+EditReimbursement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A02712FD71B98005E31B1 /* L10n+EditReimbursement.swift */; };
+		8B0A02742FD71BA4005E31B1 /* L10n+OCR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A02732FD71BA4005E31B1 /* L10n+OCR.swift */; };
+		8B0A02762FD71BAE005E31B1 /* L10n+Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A02752FD71BAE005E31B1 /* L10n+Categories.swift */; };
+		8B0A02782FD71BB8005E31B1 /* L10n+AddCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A02772FD71BB8005E31B1 /* L10n+AddCategory.swift */; };
+		8B0A027A2FD71BC5005E31B1 /* L10n+EditCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A02792FD71BC5005E31B1 /* L10n+EditCategory.swift */; };
+		8B0A027C2FD71BD0005E31B1 /* L10n+CategoryDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A027B2FD71BD0005E31B1 /* L10n+CategoryDetail.swift */; };
+		8B0A02802FD71BE9005E31B1 /* L10n+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A027F2FD71BE9005E31B1 /* L10n+Settings.swift */; };
+		8B0A02822FD71BF3005E31B1 /* L10n+Security.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A02812FD71BF3005E31B1 /* L10n+Security.swift */; };
+		8B0A02842FD71C00005E31B1 /* L10n+CreatePIN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A02832FD71C00005E31B1 /* L10n+CreatePIN.swift */; };
+		8B0A02862FD71C08005E31B1 /* L10n+About.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A02852FD71C08005E31B1 /* L10n+About.swift */; };
+		8B0A02882FD71C10005E31B1 /* L10n+Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A02872FD71C10005E31B1 /* L10n+Chat.swift */; };
+		8B0A028A2FD71C19005E31B1 /* L10n+Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A02892FD71C19005E31B1 /* L10n+Tab.swift */; };
 		8B1123132F816DDB00A2AF28 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1123122F816DDB00A2AF28 /* LoginCoordinator.swift */; };
 		8B1123152F816DEA00A2AF28 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1123142F816DEA00A2AF28 /* LoginViewController.swift */; };
 		8B1123172F816DFC00A2AF28 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1123162F816DFC00A2AF28 /* LoginViewModel.swift */; };
@@ -142,6 +168,8 @@
 		8BDD8FF12FC8F7F500DA9917 /* FeedbackFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDD8FF02FC8F7F500DA9917 /* FeedbackFormViewModel.swift */; };
 		8BDD8FF32FC8F9A000DA9917 /* FeedbackCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDD8FF22FC8F9A000DA9917 /* FeedbackCoordinator.swift */; };
 		8BE035CC2C07FB03006958EA /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE035CB2C07FB03006958EA /* TabBar.swift */; };
+		8BE6324C2FD8742E000A744A /* AppShortcuts.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 8BE6324B2FD8742E000A744A /* AppShortcuts.xcstrings */; };
+		8BE6324E2FD884F2000A744A /* L10n+Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE6324D2FD884F2000A744A /* L10n+Shortcuts.swift */; };
 		8BEFE4432F8EA72400A9D1DD /* ChartCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEFE4422F8EA72400A9D1DD /* ChartCardView.swift */; };
 		8BEFE4452F8EA77B00A9D1DD /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEFE4442F8EA77B00A9D1DD /* ChartViewModel.swift */; };
 		8BEFE44D2F90005D00A9D1DD /* ChatCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEFE44C2F90005D00A9D1DD /* ChatCoordinator.swift */; };
@@ -179,6 +207,34 @@
 		8B0A024B2FD6CDA3005E31B1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8B0A024D2FD6D16C005E31B1 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		8B0A024E2FD6D16C005E31B1 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		8B0A02552FD71ABF005E31B1 /* L10+Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "L10+Common.swift"; sourceTree = "<group>"; };
+		8B0A02572FD71AD0005E31B1 /* L10+Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "L10+Onboarding.swift"; sourceTree = "<group>"; };
+		8B0A02592FD71AE5005E31B1 /* L10n+Vaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "L10n+Vaults.swift"; sourceTree = "<group>"; };
+		8B0A025B2FD71AF2005E31B1 /* L10+CreateVault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "L10+CreateVault.swift"; sourceTree = "<group>"; };
+		8B0A025D2FD71AFC005E31B1 /* L10n+EditVault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "L10n+EditVault.swift"; sourceTree = "<group>"; };
+		8B0A025F2FD71B0B005E31B1 /* L10n+Overview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "L10n+Overview.swift"; sourceTree = "<group>"; };
+		8B0A02612FD71B1E005E31B1 /* L10n+CustomizeDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "L10n+CustomizeDashboard.swift"; sourceTree = "<group>"; };
+		8B0A02632FD71B52005E31B1 /* L10n+Breakdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "L10n+Breakdown.swift"; sourceTree = "<group>"; };
+		8B0A02652FD71B5A005E31B1 /* L10n+Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "L10n+Feedback.swift"; sourceTree = "<group>"; };
+		8B0A02672FD71B61005E31B1 /* L10n+Operations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "L10n+Operations.swift"; sourceTree = "<group>"; };
+		8B0A02692FD71B6D005E31B1 /* L10n+OperationDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "L10n+OperationDetail.swift"; sourceTree = "<group>"; };
+		8B0A026B2FD71B79005E31B1 /* L10n+AddOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "L10n+AddOperation.swift"; sourceTree = "<group>"; };
+		8B0A026D2FD71B82005E31B1 /* L10n+EditOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "L10n+EditOperation.swift"; sourceTree = "<group>"; };
+		8B0A026F2FD71B8C005E31B1 /* L10n+AddReimbursement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "L10n+AddReimbursement.swift"; sourceTree = "<group>"; };
+		8B0A02712FD71B98005E31B1 /* L10n+EditReimbursement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "L10n+EditReimbursement.swift"; sourceTree = "<group>"; };
+		8B0A02732FD71BA4005E31B1 /* L10n+OCR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "L10n+OCR.swift"; sourceTree = "<group>"; };
+		8B0A02752FD71BAE005E31B1 /* L10n+Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "L10n+Categories.swift"; sourceTree = "<group>"; };
+		8B0A02772FD71BB8005E31B1 /* L10n+AddCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "L10n+AddCategory.swift"; sourceTree = "<group>"; };
+		8B0A02792FD71BC5005E31B1 /* L10n+EditCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "L10n+EditCategory.swift"; sourceTree = "<group>"; };
+		8B0A027B2FD71BD0005E31B1 /* L10n+CategoryDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "L10n+CategoryDetail.swift"; sourceTree = "<group>"; };
+		8B0A027F2FD71BE9005E31B1 /* L10n+Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "L10n+Settings.swift"; sourceTree = "<group>"; };
+		8B0A02812FD71BF3005E31B1 /* L10n+Security.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "L10n+Security.swift"; sourceTree = "<group>"; };
+		8B0A02832FD71C00005E31B1 /* L10n+CreatePIN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "L10n+CreatePIN.swift"; sourceTree = "<group>"; };
+		8B0A02852FD71C08005E31B1 /* L10n+About.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "L10n+About.swift"; sourceTree = "<group>"; };
+		8B0A02872FD71C10005E31B1 /* L10n+Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "L10n+Chat.swift"; sourceTree = "<group>"; };
+		8B0A02892FD71C19005E31B1 /* L10n+Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "L10n+Tab.swift"; sourceTree = "<group>"; };
+		8B0A028B2FD76868005E31B1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		8B0A028C2FD76868005E31B1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8B1123122F816DDB00A2AF28 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		8B1123142F816DEA00A2AF28 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8B1123162F816DFC00A2AF28 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -297,6 +353,8 @@
 		8BDD8FF02FC8F7F500DA9917 /* FeedbackFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackFormViewModel.swift; sourceTree = "<group>"; };
 		8BDD8FF22FC8F9A000DA9917 /* FeedbackCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackCoordinator.swift; sourceTree = "<group>"; };
 		8BE035CB2C07FB03006958EA /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		8BE6324B2FD8742E000A744A /* AppShortcuts.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = AppShortcuts.xcstrings; sourceTree = "<group>"; };
+		8BE6324D2FD884F2000A744A /* L10n+Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "L10n+Shortcuts.swift"; sourceTree = "<group>"; };
 		8BEFE4422F8EA72400A9D1DD /* ChartCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartCardView.swift; sourceTree = "<group>"; };
 		8BEFE4442F8EA77B00A9D1DD /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
 		8BEFE44C2F90005D00A9D1DD /* ChatCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCoordinator.swift; sourceTree = "<group>"; };
@@ -491,6 +549,43 @@
 				8B078C252F7DDAC900075CC1 /* CategoryFormViewController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		8B0A02542FD71AA7005E31B1 /* L10n */ = {
+			isa = PBXGroup;
+			children = (
+				8BE6324B2FD8742E000A744A /* AppShortcuts.xcstrings */,
+				8B0A024A2FD6CDA3005E31B1 /* Localizable.strings */,
+				8B8873172FD4608C0016BD71 /* L10n.swift */,
+				8B0A02552FD71ABF005E31B1 /* L10+Common.swift */,
+				8B0A02572FD71AD0005E31B1 /* L10+Onboarding.swift */,
+				8B0A02592FD71AE5005E31B1 /* L10n+Vaults.swift */,
+				8B0A025B2FD71AF2005E31B1 /* L10+CreateVault.swift */,
+				8B0A025D2FD71AFC005E31B1 /* L10n+EditVault.swift */,
+				8B0A025F2FD71B0B005E31B1 /* L10n+Overview.swift */,
+				8B0A02612FD71B1E005E31B1 /* L10n+CustomizeDashboard.swift */,
+				8B0A02632FD71B52005E31B1 /* L10n+Breakdown.swift */,
+				8B0A02652FD71B5A005E31B1 /* L10n+Feedback.swift */,
+				8B0A02672FD71B61005E31B1 /* L10n+Operations.swift */,
+				8B0A02692FD71B6D005E31B1 /* L10n+OperationDetail.swift */,
+				8B0A026B2FD71B79005E31B1 /* L10n+AddOperation.swift */,
+				8B0A026D2FD71B82005E31B1 /* L10n+EditOperation.swift */,
+				8B0A026F2FD71B8C005E31B1 /* L10n+AddReimbursement.swift */,
+				8B0A02712FD71B98005E31B1 /* L10n+EditReimbursement.swift */,
+				8B0A02732FD71BA4005E31B1 /* L10n+OCR.swift */,
+				8B0A02752FD71BAE005E31B1 /* L10n+Categories.swift */,
+				8B0A02772FD71BB8005E31B1 /* L10n+AddCategory.swift */,
+				8B0A02792FD71BC5005E31B1 /* L10n+EditCategory.swift */,
+				8B0A027B2FD71BD0005E31B1 /* L10n+CategoryDetail.swift */,
+				8B0A027F2FD71BE9005E31B1 /* L10n+Settings.swift */,
+				8B0A02812FD71BF3005E31B1 /* L10n+Security.swift */,
+				8B0A02832FD71C00005E31B1 /* L10n+CreatePIN.swift */,
+				8B0A02852FD71C08005E31B1 /* L10n+About.swift */,
+				8B0A02872FD71C10005E31B1 /* L10n+Chat.swift */,
+				8B0A02892FD71C19005E31B1 /* L10n+Tab.swift */,
+				8BE6324D2FD884F2000A744A /* L10n+Shortcuts.swift */,
+			);
+			path = L10n;
 			sourceTree = "<group>";
 		};
 		8B11230E2F816DB100A2AF28 /* Login */ = {
@@ -1244,6 +1339,7 @@
 				8B03A5EA2FCF1D5300478564 /* Vault.entitlements */,
 				8B2F23DB2FC99BCF0041350E /* Firebase */,
 				8BC2E5182BFD3864007FAF4C /* App */,
+				8B0A02542FD71AA7005E31B1 /* L10n */,
 				8BC2E5202BFD38E7007FAF4C /* Features */,
 				8BD0F78C2F945A1A007C2E59 /* Shared */,
 				8BC2E51F2BFD38DD007FAF4C /* Resources */,
@@ -1264,8 +1360,6 @@
 				8B11232F2F81B50A00A2AF28 /* AppCoordinator+Private.swift */,
 				8B2C30E52F86756600126BA8 /* AppCoordinator+Sample.swift */,
 				8BCF15F52F82D8F400B483BD /* DependenciesContainer.swift */,
-				8B8873172FD4608C0016BD71 /* L10n.swift */,
-				8B0A024A2FD6CDA3005E31B1 /* Localizable.strings */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -1610,6 +1704,7 @@
 				en,
 				Base,
 				"pt-PT",
+				fr,
 			);
 			mainGroup = 8BC2E4F52BFD3841007FAF4C;
 			packageReferences = (
@@ -1634,6 +1729,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BC2E50E2BFD3842007FAF4C /* Assets.xcassets in Resources */,
+				8BE6324C2FD8742E000A744A /* AppShortcuts.xcstrings in Resources */,
 				8B0A024C2FD6CDA3005E31B1 /* Localizable.strings in Resources */,
 				8B2F23DF2FC99CE50041350E /* GoogleService-Info-Dev.plist in Resources */,
 				8BC2E5222BFD390A007FAF4C /* Colors.xcassets in Resources */,
@@ -1695,17 +1791,23 @@
 			files = (
 				8B7D6FEC2FABA577004866D8 /* AmountCardSectionView.swift in Sources */,
 				8B81F1E22FB1194A00ECA9F4 /* CategoryDetailViewModel.swift in Sources */,
+				8B0A02562FD71ABF005E31B1 /* L10+Common.swift in Sources */,
 				8B1123322F81C3B600A2AF28 /* InputStyles.swift in Sources */,
 				8B539C822F7C14A800977A6C /* TabBarViewModel.swift in Sources */,
+				8B0A02862FD71C08005E31B1 /* L10n+About.swift in Sources */,
+				8B0A02662FD71B5A005E31B1 /* L10n+Feedback.swift in Sources */,
 				8B61853F2F7F1701008986A8 /* MenuOptionTableViewCell.swift in Sources */,
 				8B9B09B92F83F4B60042840E /* ImportOperationsViewController.swift in Sources */,
 				8B539C732F7BFD1400977A6C /* MarketingViewController.swift in Sources */,
+				8B0A02782FD71BB8005E31B1 /* L10n+AddCategory.swift in Sources */,
+				8B0A02682FD71B61005E31B1 /* L10n+Operations.swift in Sources */,
 				8B539C052F7B2A3A00977A6C /* OperationTableViewCell.swift in Sources */,
 				8BF3B9112FACCC8B00DAFA1D /* FoundationModelAvailability.swift in Sources */,
 				8BF3B9122FACCC8B00DAFA1D /* FinanceAssistant.swift in Sources */,
 				8BF3B9132FACCC8B00DAFA1D /* InitialDepositOfVault.swift in Sources */,
 				8BF3B9142FACCC8B00DAFA1D /* ReceiptAssistant.swift in Sources */,
 				8BDB394E2FCDE64C0013661D /* AboutViewModel.swift in Sources */,
+				8B0A02722FD71B98005E31B1 /* L10n+EditReimbursement.swift in Sources */,
 				8BF3B9152FACCC8B00DAFA1D /* OperationMetricsTool.swift in Sources */,
 				8B078BD12F7D1F3600075CC1 /* DashboardViewController.swift in Sources */,
 				8BD0F73B2F92F782007C2E59 /* OCRTextRecognitionService.swift in Sources */,
@@ -1714,6 +1816,8 @@
 				8BDD8FD12FC6DDB700DA9917 /* CheckBalanceIntent.swift in Sources */,
 				8B9B09B52F83F48D0042840E /* ImportOperationsCoordinator.swift in Sources */,
 				8B6185672F7F318E008986A8 /* SecurityOptionTableViewModel.swift in Sources */,
+				8B0A025E2FD71AFC005E31B1 /* L10n+EditVault.swift in Sources */,
+				8B0A02702FD71B8C005E31B1 /* L10n+AddReimbursement.swift in Sources */,
 				8B1123152F816DEA00A2AF28 /* LoginViewController.swift in Sources */,
 				8B1123242F81AF3D00A2AF28 /* LoginPinCoordinator.swift in Sources */,
 				8B7D6FB82FAA36ED004866D8 /* OperationDetailHeaderViewModel.swift in Sources */,
@@ -1723,9 +1827,13 @@
 				8B11232E2F81B4D200A2AF28 /* AppCoordinator+Login.swift in Sources */,
 				8B2C30FA2F87000C00126BA8 /* CreateVaultCoordinator.swift in Sources */,
 				8B7436EA2F80033200E2760E /* PinViewController.swift in Sources */,
+				8B0A02822FD71BF3005E31B1 /* L10n+Security.swift in Sources */,
 				8BEFE44D2F90005D00A9D1DD /* ChatCoordinator.swift in Sources */,
 				8B7D6FE82FAB8DD3004866D8 /* ActionableCardBaseView.swift in Sources */,
 				8BC2E51A2BFD3886007FAF4C /* AppCoordinator.swift in Sources */,
+				8B0A026A2FD71B6D005E31B1 /* L10n+OperationDetail.swift in Sources */,
+				8B0A028A2FD71C19005E31B1 /* L10n+Tab.swift in Sources */,
+				8B0A02602FD71B0B005E31B1 /* L10n+Overview.swift in Sources */,
 				8B7D6F832FA7F67E004866D8 /* FormValidator.swift in Sources */,
 				8B8873182FD4608C0016BD71 /* L10n.swift in Sources */,
 				8B539CC12F7C710600977A6C /* MonthSelectorView.swift in Sources */,
@@ -1733,6 +1841,7 @@
 				8B539C752F7BFD3C00977A6C /* MarketingViewModel.swift in Sources */,
 				8BDB394C2FCDE63C0013661D /* AboutCoordinator.swift in Sources */,
 				8B078C222F7DDA7B00075CC1 /* ListCategoriesViewModel.swift in Sources */,
+				8B0A027C2FD71BD0005E31B1 /* L10n+CategoryDetail.swift in Sources */,
 				8B5365642C09379400B3144C /* Constants.swift in Sources */,
 				8B078C262F7DDACA00075CC1 /* CategoryFormViewController.swift in Sources */,
 				8B078BD32F7D224C00075CC1 /* DashboardViewModel.swift in Sources */,
@@ -1747,35 +1856,46 @@
 				8B539C672F7BE7D400977A6C /* OnboardingCoordinator.swift in Sources */,
 				8B7D6FB22FAA0A74004866D8 /* ReimbursementTableViewCell.swift in Sources */,
 				8B03A6102FD10C9600478564 /* CustomizeDashboardViewModel.swift in Sources */,
+				8B0A02802FD71BE9005E31B1 /* L10n+Settings.swift in Sources */,
 				8B6185712F7F3F96008986A8 /* SecurityCoordinator.swift in Sources */,
 				8B7436E42F8001E400E2760E /* PinViewModel.swift in Sources */,
+				8B0A026E2FD71B82005E31B1 /* L10n+EditOperation.swift in Sources */,
 				8B539BE52F7ADBF600977A6C /* SampleViewController.swift in Sources */,
 				8BEFE4452F8EA77B00A9D1DD /* ChartViewModel.swift in Sources */,
 				8B81F1D12FAE444500ECA9F4 /* CashflowBreakdownViewModel.swift in Sources */,
 				8BABC0012FA2000000D00101 /* OperationDetailViewController.swift in Sources */,
+				8B0A027A2FD71BC5005E31B1 /* L10n+EditCategory.swift in Sources */,
 				8BABC0032FA2000000D00101 /* OperationDetailViewModel.swift in Sources */,
 				8BABC0102FA300000D00101 /* TransferMoneyTableViewCell.swift in Sources */,
 				8B36E0F72FA412E1007D0E07 /* OperationFormCoordinator.swift in Sources */,
 				8BABC0122FA300000D00101 /* TransferMoneyTableViewModel.swift in Sources */,
+				8B0A025C2FD71AF2005E31B1 /* L10+CreateVault.swift in Sources */,
 				8B078C202F7DDA6400075CC1 /* ListCategoriesViewController.swift in Sources */,
 				8B539CBC2F7C286F00977A6C /* OperationFormViewController.swift in Sources */,
 				8B6185412F7F1715008986A8 /* MenuOptionTableViewModel.swift in Sources */,
 				8B7D6FB62FAA36DD004866D8 /* OperationDetailHeaderView.swift in Sources */,
 				8BEFE4432F8EA72400A9D1DD /* ChartCardView.swift in Sources */,
+				8B0A02762FD71BAE005E31B1 /* L10n+Categories.swift in Sources */,
 				8BDB39502FCDE6700013661D /* AboutViewController.swift in Sources */,
 				8B1123172F816DFC00A2AF28 /* LoginViewModel.swift in Sources */,
+				8BE6324E2FD884F2000A744A /* L10n+Shortcuts.swift in Sources */,
+				8B0A02622FD71B1E005E31B1 /* L10n+CustomizeDashboard.swift in Sources */,
 				8B88731A2FD632320016BD71 /* OperationType+Localized.swift in Sources */,
 				8BEFE4572F91309800A9D1DD /* CategoryTableViewCell.swift in Sources */,
 				8B1123302F81B50A00A2AF28 /* AppCoordinator+Private.swift in Sources */,
 				8B00F3442F8D301F008C8777 /* ChatBubbleTableViewCell.swift in Sources */,
 				8B7D6FEA2FABA567004866D8 /* AmountCardItemView.swift in Sources */,
 				8BD0F7362F92D72D007C2E59 /* OCRViewModel.swift in Sources */,
+				8B0A026C2FD71B79005E31B1 /* L10n+AddOperation.swift in Sources */,
 				8B00F3452F8D301F008C8777 /* ChatMessage.swift in Sources */,
 				8B00F3462F8D301F008C8777 /* ChatViewController.swift in Sources */,
 				8B03A60E2FD10C8800478564 /* CustomizeDashboardViewController.swift in Sources */,
 				8BDD8FCF2FC60EA500DA9917 /* ExpectedReimbursementsIntent.swift in Sources */,
+				8B0A02742FD71BA4005E31B1 /* L10n+OCR.swift in Sources */,
+				8B0A025A2FD71AE5005E31B1 /* L10n+Vaults.swift in Sources */,
 				8BC2E5042BFD3841007FAF4C /* SceneDelegate.swift in Sources */,
 				8B81F1E02FB1190000ECA9F4 /* CategoryDetailViewController.swift in Sources */,
+				8B0A02842FD71C00005E31B1 /* L10n+CreatePIN.swift in Sources */,
 				8B9B09B72F83F49B0042840E /* ImportOperationsViewModel.swift in Sources */,
 				8B7D6FE62FAB8CFE004866D8 /* ActionableCardBaseViewModel.swift in Sources */,
 				8B539BFD2F7B258300977A6C /* ListOperationsViewController.swift in Sources */,
@@ -1792,6 +1912,7 @@
 				8B8873162FD32F930016BD71 /* VaultBaseViewController+Alert.swift in Sources */,
 				8BD0F7382F92D73F007C2E59 /* OCRCoordinator.swift in Sources */,
 				8B539BFB2F7B251B00977A6C /* OperationsCoordinator.swift in Sources */,
+				8B0A02882FD71C10005E31B1 /* L10n+Chat.swift in Sources */,
 				8B539C782F7C015E00977A6C /* MarketingItemViewModel.swift in Sources */,
 				8B2C30F72F86F54600126BA8 /* VaultTableViewCell.swift in Sources */,
 				8B81F1D72FAF7EAB00ECA9F4 /* AmountStatusHeaderView.swift in Sources */,
@@ -1813,12 +1934,14 @@
 				8BF3B9062FACCC8100DAFA1D /* VaultShortcuts.swift in Sources */,
 				8BF3B9072FACCC8100DAFA1D /* AddIncomeIntent.swift in Sources */,
 				8BF3B9082FACCC8100DAFA1D /* AddExpenseIntent.swift in Sources */,
+				8B0A02582FD71AD0005E31B1 /* L10+Onboarding.swift in Sources */,
 				8B7436EC2F80037300E2760E /* CreatePinViewModel.swift in Sources */,
 				8B11232A2F81B15500A2AF28 /* LoginPinViewModel.swift in Sources */,
 				8BA170B42FAAD00100CAC30 /* UIViewController+Confirmation.swift in Sources */,
 				8BCF15F62F82D8F400B483BD /* DependenciesContainer.swift in Sources */,
 				8BDD8FD32FC6F6A900DA9917 /* MonthlySavedIntent.swift in Sources */,
 				8BD0F7342F92D6E7007C2E59 /* OCRViewController.swift in Sources */,
+				8B0A02642FD71B52005E31B1 /* L10n+Breakdown.swift in Sources */,
 				8BEFE4592F9130A800A9D1DD /* CategoryTableViewModel.swift in Sources */,
 				8B2C30F22F86D11B00126BA8 /* ListVaultCoordinator.swift in Sources */,
 				8B2C30E62F86756600126BA8 /* AppCoordinator+Sample.swift in Sources */,
@@ -1840,6 +1963,7 @@
 			children = (
 				8B0A024B2FD6CDA3005E31B1 /* en */,
 				8B0A024E2FD6D16C005E31B1 /* pt-PT */,
+				8B0A028C2FD76868005E31B1 /* fr */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1849,6 +1973,7 @@
 			children = (
 				8BC2E5102BFD3842007FAF4C /* Base */,
 				8B0A024D2FD6D16C005E31B1 /* pt-PT */,
+				8B0A028B2FD76868005E31B1 /* fr */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

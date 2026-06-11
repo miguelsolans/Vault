@@ -169,7 +169,7 @@ extension OperationTableViewCell {
             return
         }
         
-        let text = "\(count) reimbursement\(count == 1 ? "" : "s")"
+        let text = String(format: L10n.Operations.reimbursementCount, count, count == 1 ? "" : "s")
         
         totalReimbursementsLabel.setTextWithSystemImage(
             systemName: "arrow.turn.down.right",
@@ -186,7 +186,7 @@ extension OperationTableViewCell {
             return
         }
         
-        let text = "Expecting \(count) reimbursement\(count == 1 ? "" : "s")"
+        let text = String(format: L10n.Operations.expectingReimbursements, count, count == 1 ? "" : "s")
         
         expectedReimbursementsLabel.setTextWithSystemImage(
             systemName: "exclamationmark.triangle",

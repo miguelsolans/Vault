@@ -12,7 +12,7 @@ final class AboutViewModel: NSObject {
     
     public var title: String = L10n.About.pageTitle;
     
-    public var subtitle: String = L10n.About.pageTitle
+    public var subtitle: String = L10n.About.pageSubtitle
     
     // MARK: - UI State
     
@@ -54,6 +54,13 @@ final class AboutViewModel: NSObject {
                     title: L10n.About.operationsOptionTitle,
                     subtitle: L10n.About.operationsOptionDescription,
                     imageName: "list.bullet",
+                    style: .disabled
+                ),
+                .init(
+                    option: .about,
+                    title: L10n.About.siriShortcutsOptionTitle,
+                    subtitle: L10n.About.siriShortcutsOptionDescription,
+                    imageName: "siri",
                     style: .disabled
                 )
             ], [

@@ -7,6 +7,7 @@
 
 import AppIntents
 import VaultCore
+import AppUIKit
 
 struct CategoryExpenseIntentEntity: AppEntity, Identifiable{
     
@@ -20,7 +21,7 @@ struct CategoryExpenseIntentEntity: AppEntity, Identifiable{
         DisplayRepresentation(title: "\(title)")
     }
     
-    static var typeDisplayRepresentation: TypeDisplayRepresentation = "Category"
+    static var typeDisplayRepresentation: TypeDisplayRepresentation = "common.general.category"
     
     static var defaultQuery = CategoryExpenseIntentQuery()
     
@@ -78,21 +79,21 @@ struct CategoryExpenseIntentQuery: EntityQuery {
 
 struct AddExpenseIntent: AppIntent {
     
-    static var title: LocalizedStringResource = "Add Expense"
+    static var title: LocalizedStringResource = "shortcut.addExpense.shortTitle"
     
-    static var description = IntentDescription("Adds a new expense to Vault.")
+    static var description = IntentDescription("shortcut.addExpense.description")
 
-    @Parameter(title: "Expense amount")
+    @Parameter(title: "common.general.amount")
     var amount: Double
     
-    @Parameter(title: "Description")
+    @Parameter(title: "operation.add.description")
     var description: String
     
-    @Parameter(title: "Category")
+    @Parameter(title: "common.general.category")
     var category: CategoryExpenseIntentEntity
     
     static var parameterSummary: some ParameterSummary {
-        Summary("Add an expense to Vault")
+        Summary("shortcut.addExpense.shortTitle")
     }
     
     func perform() async throws -> some IntentResult & ProvidesDialog {
@@ -103,7 +104,7 @@ struct AddExpenseIntent: AppIntent {
         
         guard let _ = userDefaults.favoriteVault else {
             return .result(
-                dialog: IntentDialog("There is no default Vault to add the expense to.")
+                dialog: IntentDialog(L10n.Shortcuts.noFavoriteVaultError)
             )
         }
         
@@ -121,15 +122,20 @@ struct AddExpenseIntent: AppIntent {
             
             let _ = try useCase.execute(request)
             
+            let text = String(
+                format: L10n.Shortcuts.AddExpense.resultSuccess,
+                LocalizedDecimalFormatter(numberStyle: .currency)
+                    .string(from: amount) ?? "\(amount)"
+            )
+            
             return .result(
-                dialog: IntentDialog("An expense of \(amount, format: .number) has been added to Vault.")
+                dialog: IntentDialog(stringLiteral: text)
             )
             
         } catch {
             return .result(
-                dialog: IntentDialog("Failed to add the expense of \(amount, format: .number) to Vault.")
+                dialog: IntentDialog(L10n.Shortcuts.noFavoriteVaultError)
             )
         }
-        
     }
 }

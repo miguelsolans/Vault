@@ -27,7 +27,6 @@ class OCRViewController: VaultBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        localizationTableName = "OCR"
         setupUI()
         setupBindings()
     }

@@ -159,8 +159,8 @@ struct BarMarkChartView: View {
     var body: some View {
         Chart(viewModel.items) { item in
             BarMark(
-                x: .value(NSLocalizedString("dashboard_category", tableName: "Dashboard", comment: ""), item.title),
-                y: .value(NSLocalizedString("dashboard_value", tableName: "Dashboard", comment: ""), item.amount)
+                x: .value(L10n.Common.category, item.title),
+                y: .value(L10n.Common.amount, item.amount)
             )
             .foregroundStyle(Color(hexString: item.hexColor))
             .annotation(position: .top) {
@@ -211,7 +211,7 @@ struct CategoryPieChartView: View {
                 angularInset: 2
             )
             .cornerRadius(5)
-            .foregroundStyle(by: .value("Category", item.title))
+            .foregroundStyle(by: .value(L10n.Common.category, item.title))
             .opacity(selectedItem?.title == item.title ? 1.0 : 0.5)
         }
         .chartForegroundStyleScale(
@@ -248,7 +248,7 @@ struct CategoryPieChartView: View {
                     .font(.headline)
                     .multilineTextAlignment(.center)
             } else {
-                Text("Total")
+                Text(L10n.Common.total)
                     .font(.caption)
                     .multilineTextAlignment(.center)
                 Text(viewModel.subtitle)

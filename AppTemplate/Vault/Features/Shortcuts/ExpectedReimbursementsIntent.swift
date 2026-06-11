@@ -11,12 +11,12 @@ import AppUIKit
 
 struct ExpectedReimbursementsIntent: AppIntent {
     
-    static var title: LocalizedStringResource = "Expected reimbursement"
+    static var title: LocalizedStringResource = "shortcut.pendingReimbursements.shortTitle"
     
-    static var description = IntentDescription("Check if there are any pending reimbursements in Vault.")
+    static var description = IntentDescription("shortcut.pendingReimbursements.description")
 
     static var parameterSummary: some ParameterSummary {
-        Summary("Expecting reimbursements")
+        Summary("shortcut.pendingReimbursements.shortTitle")
     }
     
     func perform() async throws -> some IntentResult & ProvidesDialog {
@@ -28,7 +28,7 @@ struct ExpectedReimbursementsIntent: AppIntent {
         guard let vault = userDefaults.favoriteVault,
                 let vaultID = UUID(uuidString: vault) else {
             return .result(
-                dialog: IntentDialog("No favourite Vault has been configured.")
+                dialog: IntentDialog(L10n.Shortcuts.noFavoriteVaultError)
             )
         }
         
@@ -44,10 +44,15 @@ struct ExpectedReimbursementsIntent: AppIntent {
             var message: String = ""
             
             if reimbursements.expected <= 0 && reimbursements.sameVaultReceived > 0 {
+                
                 let formattedAmount = LocalizedDecimalFormatter(numberStyle: .currency)
                     .string(from: reimbursements.sameVaultReceived) ?? "\(reimbursements.sameVaultReceived)"
                 
-                message = "You are not expecting any money. So far, you've received \(formattedAmount)."
+                message = String(
+                    format: L10n.Shortcuts.PendingReimbursements.notExpectingResultSuccess,
+                    formattedAmount
+                )
+                
             } else if reimbursements.expected > 0 {
                 
                 let expectingFormatted = LocalizedDecimalFormatter(numberStyle: .currency)
@@ -56,7 +61,11 @@ struct ExpectedReimbursementsIntent: AppIntent {
                 let receivedFormatted = LocalizedDecimalFormatter(numberStyle: .currency)
                     .string(from: reimbursements.sameVaultReceived) ?? "\(reimbursements.sameVaultReceived)"
                 
-                message = "You are expecting \(expectingFormatted). So far, you've received \(receivedFormatted)."
+                message = String(
+                    format: L10n.Shortcuts.PendingReimbursements.expectingResultSuccess,
+                    expectingFormatted,
+                    receivedFormatted
+                )
             }
             
             return .result(
@@ -65,7 +74,7 @@ struct ExpectedReimbursementsIntent: AppIntent {
             
         } catch {
             return .result(
-                dialog: IntentDialog("Failed to fetch information from Vault.")
+                dialog: IntentDialog(L10n.Shortcuts.PendingReimbursements.resultError)
             )
         }
         

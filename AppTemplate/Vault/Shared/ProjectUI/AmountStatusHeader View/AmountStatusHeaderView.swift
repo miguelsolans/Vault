@@ -25,7 +25,7 @@ final class AmountStatusHeaderView: UIView {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         
-        label.text = "Total"
+        label.text = L10n.Common.total
         label.font = AppFonts.rowTitle
         label.textColor = .secondaryLabel
         label.translatesAutoresizingMaskIntoConstraints = false

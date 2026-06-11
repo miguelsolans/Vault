@@ -11,14 +11,14 @@ import AppUIKit
 
 struct CheckBalanceIntent: AppIntent {
     
-    static var title: LocalizedStringResource = "Check balance"
+    static var title: LocalizedStringResource = "shortcut.checkBalance.shortTitle"
     
-    static var description = IntentDescription("Check the balance of favorite Vault.")
+    static var description = IntentDescription("shortcut.checkBalance.description")
     
     static var authenticationPolicy: IntentAuthenticationPolicy = .requiresAuthentication
 
     static var parameterSummary: some ParameterSummary {
-        Summary("Check balance")
+        Summary("shortcut.checkBalance.shortTitle")
     }
     
     func perform() async throws -> some IntentResult & ProvidesDialog {
@@ -30,7 +30,7 @@ struct CheckBalanceIntent: AppIntent {
         guard let vault = userDefaults.favoriteVault,
                 let vaultID = UUID(uuidString: vault) else {
             return .result(
-                dialog: IntentDialog("No favourite Vault has been configured.")
+                dialog: IntentDialog(L10n.Shortcuts.noFavoriteVaultError)
             )
         }
         
@@ -42,18 +42,22 @@ struct CheckBalanceIntent: AppIntent {
             
             let response = try useCase.execute(request)
             
-            let formattedBalance = LocalizedDecimalFormatter(numberStyle: .currency)
-                .string(from: response.metrics.balance.currentBalance) ?? "\(response.metrics.balance.currentBalance)"
+            let amount = response.metrics.balance.currentBalance
             
-            let message: String = "The current balance of Vault \(response.vault) is \(formattedBalance)"
+            let text = String(
+                format: L10n.Shortcuts.Balance.resultSuccess,
+                response.vault,
+                LocalizedDecimalFormatter(numberStyle: .currency)
+                    .string(from: amount) ?? "\(amount)"
+            )
             
             return .result(
-                dialog: IntentDialog(stringLiteral: message)
+                dialog: IntentDialog(stringLiteral: text)
             )
             
         } catch {
             return .result(
-                dialog: IntentDialog("Failed to fetch information from Vault.")
+                dialog: IntentDialog(L10n.Shortcuts.Balance.resultError)
             )
         }
     }

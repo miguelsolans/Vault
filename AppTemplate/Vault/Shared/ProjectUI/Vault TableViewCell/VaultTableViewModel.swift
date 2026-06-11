@@ -28,13 +28,15 @@ class VaultTableViewModel: NSObject {
     }
     
     var initialDepositText: String {
-        "Started with \(formattedInitialDeposit)"
+        String(format: L10n.Vaults.startedWith, formattedInitialDeposit)
     }
     
-    init(title: String,
-         initialDeposit: Double,
-         currentBalance: Double,
-         isFavorite: Bool = false) {
+    init(
+        title: String,
+        initialDeposit: Double,
+        currentBalance: Double,
+        isFavorite: Bool = false
+    ) {
         self.title = title
         self.initialDeposit = initialDeposit
         self.currentBalance = currentBalance

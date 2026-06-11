@@ -1,0 +1,142 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Add an expense to ${applicationName}" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringSet" : {
+            "state" : "new",
+            "values" : [
+              "Add an expense to ${applicationName}",
+              "Register an expense on ${applicationName}"
+            ]
+          }
+        },
+        "pt-PT" : {
+          "stringSet" : {
+            "state" : "translated",
+            "values" : [
+              "Regista uma despesa no ${applicationName}"
+            ]
+          }
+        }
+      }
+    },
+    "Add an income to ${applicationName}" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringSet" : {
+            "state" : "new",
+            "values" : [
+              "Add an income to ${applicationName}",
+              "Register an income on ${applicationName}"
+            ]
+          }
+        },
+        "pt-PT" : {
+          "stringSet" : {
+            "state" : "translated",
+            "values" : [
+              "Regista um rendimento no ${applicationName}"
+            ]
+          }
+        }
+      }
+    },
+    "Am I expecting any reimbursement in ${applicationName}" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringSet" : {
+            "state" : "new",
+            "values" : [
+              "Am I expecting any reimbursement in ${applicationName}",
+              "Do I have any pending reimbursement in ${applicationName}",
+              "Am I expecting any money in ${applicationName}"
+            ]
+          }
+        },
+        "pt-PT" : {
+          "stringSet" : {
+            "state" : "translated",
+            "values" : [
+              "Estou à espera de algum reembolso no ${applicationName}",
+              "Tenho algum reembolso pendente no ${applicationName}",
+              "Estou à espera de receber dinheiro no ${applicationName}"
+            ]
+          }
+        }
+      }
+    },
+    "How much did I save this month in ${applicationName}" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringSet" : {
+            "state" : "new",
+            "values" : [
+              "How much did I save this month in ${applicationName}"
+            ]
+          }
+        },
+        "pt-PT" : {
+          "stringSet" : {
+            "state" : "translated",
+            "values" : [
+              "Quando dinheiro é que poupei este mês no ${applicationName}"
+            ]
+          }
+        }
+      }
+    },
+    "How much did I spend this month in ${applicationName}" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringSet" : {
+            "state" : "new",
+            "values" : [
+              "How much did I spend this month in ${applicationName}"
+            ]
+          }
+        },
+        "pt-PT" : {
+          "stringSet" : {
+            "state" : "translated",
+            "values" : [
+              "Quando dinheiro é que gastei este mês no ${applicationName}"
+            ]
+          }
+        }
+      }
+    },
+    "What's my current balance in ${applicationName}" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringSet" : {
+            "state" : "new",
+            "values" : [
+              "What's my current balance in ${applicationName}",
+              "How much money do I have in ${applicationName}",
+              "Check my balance in ${applicationName}"
+            ]
+          }
+        },
+        "pt-PT" : {
+          "stringSet" : {
+            "state" : "translated",
+            "values" : [
+              "Qual é o meu saldo no ${applicationName}",
+              "Quanto dinheiro tenho no ${applicationName}",
+              "Verifica o meu saldo no ${applicationName}"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.2"
+}

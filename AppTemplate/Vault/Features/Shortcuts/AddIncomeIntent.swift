@@ -7,6 +7,7 @@
 
 import AppIntents
 import VaultCore
+import AppUIKit
 
 struct CategoryIncomeIntentEntity: AppEntity, Identifiable{
     
@@ -20,7 +21,7 @@ struct CategoryIncomeIntentEntity: AppEntity, Identifiable{
         DisplayRepresentation(title: "\(title)")
     }
     
-    static var typeDisplayRepresentation: TypeDisplayRepresentation = "Category"
+    static var typeDisplayRepresentation: TypeDisplayRepresentation = "common.general.category"
     
     static var defaultQuery = CategoryIncomeIntentQuery()
     
@@ -78,21 +79,21 @@ struct CategoryIncomeIntentQuery: EntityQuery {
 
 struct AddIncomeIntent: AppIntent {
     
-    static var title: LocalizedStringResource = "Add Income"
+    static var title: LocalizedStringResource = "shortcut.addIncome.shortTitle"
     
-    static var description = IntentDescription("Adds a new income to Vault.")
+    static var description = IntentDescription("shortcut.addIncome.description")
 
-    @Parameter(title: "Income amount")
+    @Parameter(title: "common.general.amount")
     var amount: Double
     
-    @Parameter(title: "Description")
+    @Parameter(title: "operation.add.description")
     var description: String
     
-    @Parameter(title: "Category")
+    @Parameter(title: "common.general.category")
     var category: CategoryIncomeIntentEntity
     
     static var parameterSummary: some ParameterSummary {
-        Summary("Add an income to Vault")
+        Summary("shortcut.addIncome.shortTitle")
     }
     
     func perform() async throws -> some IntentResult & ProvidesDialog {
@@ -103,7 +104,7 @@ struct AddIncomeIntent: AppIntent {
         
         guard let _ = userDefaults.favoriteVault else {
             return .result(
-                dialog: IntentDialog("There is no default Vault to add the income to.")
+                dialog: IntentDialog(L10n.Shortcuts.noFavoriteVaultError)
             )
         }
         
@@ -121,15 +122,20 @@ struct AddIncomeIntent: AppIntent {
             
             let _ = try useCase.execute(request)
             
+            let text = String(
+                format: L10n.Shortcuts.AddIncome.resultSuccess,
+                LocalizedDecimalFormatter(numberStyle: .currency)
+                    .string(from: amount) ?? "\(amount)"
+            )
+            
             return .result(
-                dialog: IntentDialog("An expense of \(amount, format: .number) has been added to Vault.")
+                dialog: IntentDialog(stringLiteral: text)
             )
             
         } catch {
             return .result(
-                dialog: IntentDialog("Failed to add the expense of \(amount, format: .number) to Vault.")
+                dialog: IntentDialog(L10n.Shortcuts.AddIncome.resultError)
             )
         }
-        
     }
 }
