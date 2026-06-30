@@ -164,15 +164,24 @@ extension DashboardCoordinator: DashboardViewModelDelegate {
     }
     
     func didTapCustomize(_ viewModel: DashboardViewModel) {
-        navigateToCustomizeDashboard(with: viewModel.vault)
+        Task { [weak self] in
+            guard let self else { return }
+
+            let hasPremiumAccess = await PremiumAccessChecker.hasAccess()
+
+            await MainActor.run {
+                if hasPremiumAccess {
+                    self.navigateToCustomizeDashboard(with: viewModel.vault)
+                } else {
+                    self.presentPremiumPaywall()
+                }
+            }
+        }
     }
     
     func presentMarketing(_ viewModel: DashboardViewModel) {
         marketingViewController.modalPresentationStyle = .pageSheet
-        
-        navigationController.present(marketingViewController, animated: true) {
-            
-        }
+        navigationController.present(marketingViewController, animated: true)
     }
 }
 
@@ -207,8 +216,27 @@ extension DashboardCoordinator: MarketingViewModelDelegate {
             dependencies.getUserDefaultsManager()
                 .feedbackDismissed = true
             
-            marketingViewController.dismiss(animated: true, completion: nil)
+            navigationController.presentedViewController?.dismiss(animated: true, completion: nil)
+            return
         }
+
+        if action == .appFeature(.dismissPaywall) {
+            navigationController.presentedViewController?.dismiss(animated: true, completion: nil)
+        }
+    }
+}
+
+extension DashboardCoordinator {
+    private func presentPremiumPaywall() {
+        let configuration = PremiumPaywallFactory.makeConfiguration()
+        let viewModel = dependencies.getMarketingViewModel(configuration: configuration)
+
+        viewModel.delegate = self
+
+        let viewController = MarketingViewController(viewModel: viewModel)
+        viewController.modalPresentationStyle = .pageSheet
+
+        navigationController.present(viewController, animated: true)
     }
 }
 

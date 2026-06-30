@@ -9,6 +9,7 @@ import UIKit
 
 enum AppFeatureAction: Equatable {
     case createVault
+    case dismissPaywall
 }
 
 enum MarketingAction: Equatable {

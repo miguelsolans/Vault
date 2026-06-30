@@ -124,6 +124,13 @@ final class CategoryFormViewController: VaultBaseViewController {
         super.viewDidLoad()
         setupUI()
         setupBindings()
+        setupPremiumGating()
+        refreshPremiumAccess()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        refreshPremiumAccess()
     }
 
     override func setupUI() {
@@ -181,6 +188,50 @@ final class CategoryFormViewController: VaultBaseViewController {
         }
     }
     
+}
+
+extension CategoryFormViewController {
+    private func setupPremiumGating() {
+        viewModel.colorInputViewModel.onBeginChoosing = { [weak self] in
+            guard let self else { return }
+
+            if !self.viewModel.colorInputViewModel.isEditable {
+                self.presentPremiumPaywall()
+            }
+        }
+    }
+
+    private func refreshPremiumAccess() {
+        Task { [weak self] in
+            guard let self else { return }
+
+            let hasPremiumAccess = await PremiumAccessChecker.hasAccess()
+
+            await MainActor.run {
+                self.viewModel.colorInputViewModel.isEditable = hasPremiumAccess
+                self.colorInputView.updateUI()
+            }
+        }
+    }
+
+    private func presentPremiumPaywall() {
+        let configuration = PremiumPaywallFactory.makeConfiguration()
+        let marketingViewModel = MarketingViewModel(configuration: configuration)
+        let viewController = MarketingViewController(viewModel: marketingViewModel)
+
+        marketingViewModel.delegate = self
+
+        viewController.modalPresentationStyle = .pageSheet
+        self.present(viewController, animated: true)
+    }
+}
+
+extension CategoryFormViewController: MarketingViewModelDelegate {
+    func didTapPrimaryAction(_ viewModel: MarketingViewModel, action: MarketingAction) {
+        if action == .appFeature(.dismissPaywall) {
+            dismiss(animated: true)
+        }
+    }
 }
 
 extension CategoryFormViewController {

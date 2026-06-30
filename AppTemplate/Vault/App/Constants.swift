@@ -6,6 +6,7 @@
 //
 
 import CoreKit
+import StoreKit
 import UIKit
 
 public enum Storyboard: String {
@@ -63,5 +64,52 @@ struct AppConfig {
     
     static var systemVersion: String {
         return UIDevice.current.systemVersion
+    }
+}
+
+enum PremiumAccessChecker {
+    private static let premiumProductIDs: Set<String> = [
+        "com.vault.subscription.monthly",
+        "com.vault.subscription.yearly",
+        "com.vault.premium.lifetime"
+    ]
+
+    static func hasAccess() async -> Bool {
+        for await entitlement in Transaction.currentEntitlements {
+            guard case .verified(let transaction) = entitlement else { continue }
+
+            if premiumProductIDs.contains(transaction.productID) {
+                return true
+            }
+        }
+
+        return false
+    }
+}
+
+enum PremiumPaywallFactory {
+    static func makeConfiguration() -> MarketingConfiguration {
+        MarketingConfiguration(
+            pageTitle: "Vault Premium",
+            pageSubtitle: "Unlock advanced customization and power features.",
+            primaryAction: .init(title: "Continue", action: .appFeature(.dismissPaywall)),
+            items: [
+                .init(
+                    imageName: "onboarding_monthly_statistics",
+                    title: "Customize Dashboard Widgets",
+                    subtitle: "Choose exactly what appears in your dashboard overview."
+                ),
+                .init(
+                    imageName: "onboarding_list_categories",
+                    title: "Unlock Category Colors",
+                    subtitle: "Personalize categories with colors to scan your data faster."
+                ),
+                .init(
+                    imageName: "onboarding_reimbursements",
+                    title: "Multiple Reimbursements",
+                    subtitle: "Track more reimbursement flows with premium limits."
+                )
+            ]
+        )
     }
 }
